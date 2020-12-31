@@ -9,22 +9,22 @@ import helpers from '@/helper';
 @Component
 export default class AdmProveedoresComponent extends Vue {
 	private headers: any[] = [
-		{ text: 'CodigoProveedor', align: 'left', sortable: true, value: 'codigoproveedor', width: '15%' },
-		{ text: 'iddocumentoidentidad', align: 'left', sortable: false, value: 'iddocumentoidentidad', width: '15%' },
-		{ text: 'numerodocumento', align: 'left', sortable: false, value: 'numerodocumento', width: '15%' },
-		{ text: 'razonsocial', align: 'left', sortable: false, value: 'razonsocial', width: '15%' },
-		{ text: 'direccion', align: 'left', sortable: false, value: 'direccion', width: '15%' },
-		{ text: 'idpais', align: 'left', sortable: false, value: 'idpais', width: '15%' },
-		{ text: 'idciudad', align: 'left', sortable: false, value: 'idciudad', width: '15%' },
-		{ text: 'idmoneda', align: 'left', sortable: false, value: 'idmoneda', width: '15%' },
-		{ text: 'contacto', align: 'left', sortable: false, value: 'contacto', width: '15%' },
-		{ text: 'telefonos', align: 'left', sortable: false, value: 'telefonos', width: '15%' },
-		{ text: 'fax', align: 'left', sortable: false, value: 'fax', width: '15%' },
-		{ text: 'cuenta', align: 'left', sortable: false, value: 'cuenta', width: '15%' },
-		{ text: 'idtipoproveedor', align: 'left', sortable: false, value: 'idtipoproveedor', width: '15%' },
-		{ text: 'fechacreacion', align: 'left', sortable: false, value: 'fechacreacion', width: '15%' },
-		{ text: 'codaduana', align: 'left', sortable: false, value: 'codaduana', width: '15%' },
-		{ text: 'Operaciones', align: 'center', sortable: false, value: 'action', width: '20%' },
+		{ text: 'CodigoProveedor', align: 'left', sortable: true, value: 'codigoproveedor', width: '5%' },
+		{ text: 'iddocumentoidentidad', align: 'left', sortable: false, value: 'iddocumentoidentidad', width: '5%' },
+		{ text: 'numerodocumento', align: 'left', sortable: false, value: 'numerodocumento', width: '5%' },
+		{ text: 'razonsocial', align: 'left', sortable: false, value: 'razonsocial', width: '5%' },
+		{ text: 'direccion', align: 'left', sortable: false, value: 'direccion', width: '5%' },
+		{ text: 'idpais', align: 'left', sortable: false, value: 'idpais', width: '5%' },
+		{ text: 'idciudad', align: 'left', sortable: false, value: 'idciudad', width: '5%' },
+		{ text: 'idmoneda', align: 'left', sortable: false, value: 'idmoneda', width: '5%' },
+		{ text: 'contacto', align: 'left', sortable: false, value: 'contacto', width: '5%' },
+		{ text: 'telefonos', align: 'left', sortable: false, value: 'telefonos', width: '5%' },
+		{ text: 'fax', align: 'left', sortable: false, value: 'fax', width: '5%' },
+		{ text: 'cuenta', align: 'left', sortable: false, value: 'cuenta', width: '5%' },
+		{ text: 'idtipoproveedor', align: 'left', sortable: false, value: 'idtipoproveedor', width: '5%' },
+		{ text: 'fechacreacion', align: 'left', sortable: false, value: 'fechacreacion', width: '5%' },
+		{ text: 'codaduana', align: 'left', sortable: false, value: 'codaduana', width: '5%' },
+		{ text: 'Operaciones', align: 'left', sortable: false, value: 'action', width: '10%' },
 	];
 	// tslint:disable-next-line: variable-name
 	private menu_fechacreacion: boolean = false;
@@ -37,6 +37,11 @@ export default class AdmProveedoresComponent extends Vue {
 	private operacion = '';
 	private helper: helpers = new helpers();
 	private popup = new popup.Swal();
+	private activo = false;
+	validacion = [
+		(v: any) => !!v || 'El campo es requerido',
+    (v: any) => !/^\s*$/.test(v) || 'No se permite espacios vacios',
+  ];
 	private FormatDate(data: any) {
 		return moment(data).format('YYYY-MM-DD');
 	}
@@ -126,7 +131,7 @@ export default class AdmProveedoresComponent extends Vue {
 	private Eliminar(data: services.clase_proveedores): void {
 		swal.fire({
 			title: 'Esta seguro de esta operacion?',
-			text: 'Eliminacion de Registro' + data.codigoproveedor,
+			text: 'Eliminacion de Registro ' +'Proveedor '+ data.codigoproveedor,
 			type: 'warning',
 			showCancelButton: true,
 			confirmButtonColor: 'green',
