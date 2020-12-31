@@ -12,7 +12,7 @@ export default class AdmAperturayCierreGestionComponent extends Vue {
 		{ text: 'Gestion', align: 'left', sortable: true, value: 'gestion', width: '15%' },
 		{ text: 'Mes', align: 'left', sortable: true, value: 'mes', width: '15%' },
 		{ text: 'abierta', align: 'left', sortable: false, value: 'abierta', width: '15%' },
-		{ text: 'Operaciones', align: 'center', sortable: false, value: 'action', width: '20%' },
+		{ text: 'Operaciones', align: 'left', sortable: false, value: 'action', width: '20%' },
 	];
 	private WebApi = new services.Endpoints();
 
@@ -23,6 +23,11 @@ export default class AdmAperturayCierreGestionComponent extends Vue {
 	private operacion = '';
 	private helper: helpers = new helpers();
 	private popup = new popup.Swal();
+	private activo = false;
+	validacion = [
+		(v: any) => !!v || 'El campo es requerido',
+    (v: any) => !/^\s*$/.test(v) || 'No se permite espacios vacios',
+  ];
 	private FormatDate(data: any) {
 		return moment(data).format('YYYY-MM-DD');
 	}
@@ -110,7 +115,7 @@ export default class AdmAperturayCierreGestionComponent extends Vue {
 	private Eliminar(data: services.clase_aperturaycierregestion): void {
 		swal.fire({
 			title: 'Esta seguro de esta operacion?',
-			text: 'Eliminacion de Registro' + data.gestion + data.mes,
+			text: 'Eliminacion de Registro ' + data.gestion +'/'+ data.mes,
 			type: 'warning',
 			showCancelButton: true,
 			confirmButtonColor: 'green',
