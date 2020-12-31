@@ -11,7 +11,7 @@ export default class AdmCtasPresupComponent extends Vue {
 	
 	private headers: any[] = [
 		
-		{ text: 'CuentaPresup', align: 'left', sortable: true, value: 'cuentapresup', width: '15%' },
+		{ text: 'CuentaPresup', align: 'left', sortable: true, value: 'cuentapresup', width: '10%' },
 		{ text: 'nombrecuentapresup', align: 'left', sortable: false, value: 'nombrecuentapresup', width: '10%' },
 		{ text: 'idmoneda', align: 'left', sortable: false, value: 'idmoneda', width: '10%' },
 		{ text: 'nivel', align: 'left', sortable: false, value: 'nivel', width: '10%' },
