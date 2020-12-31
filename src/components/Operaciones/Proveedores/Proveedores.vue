@@ -45,13 +45,13 @@
 							<template v-slot:activator="{ on }">
 								<v-btn color="success" v-on="on" fab small dark  @click="Actualizar(props.item)"><v-icon>edit</v-icon></v-btn>
 							</template>
-							<span>Modificar Registro de Demo</span>
+							<span>Modificar Registro de Proveedor</span>
 						</v-tooltip>
 						<v-tooltip style="padding-left:10px" bottom>
 							<template v-slot:activator="{ on }" >
 								<v-btn color="error" v-on="on" fab small dark  @click="Eliminar(props.item)"><v-icon>delete</v-icon></v-btn>
 							</template>
-							<span>Eliminar Registro de Demo</span>
+							<span>Eliminar Registro de Proveedor</span>
 						</v-tooltip>
 					</td>
 				</tr>
@@ -61,7 +61,7 @@
 					<template v-slot:activator="{ on }">
 						<v-btn color="accent" v-on="on" @click="Insertar()">Adicionar Nuevo Registro de Proveedores</v-btn>
 					</template>
-					<span>Adicionar nuevo registro de cliente</span>
+					<span>Adicionar nuevo registro de Proveedor</span>
 				</v-tooltip>
 			</template>
 			<template v-slot:no-data>
@@ -76,7 +76,7 @@
 					<v-toolbar-title>Datos de Proveedores</v-toolbar-title>
 				</v-toolbar>
 				<v-divider></v-divider>
-				<v-form ref="form" style="padding:10px">
+				<v-form ref="form" style="padding:10px" v-model="activo">
 					<v-card-text>
 						<v-layout wrap>
 							<template v-if="operacion == 'Insert'">
@@ -88,6 +88,7 @@
 												clearable
 												persistent-hint
 												required
+												:rules="validacion"
 												@input="proveedores.codigoproveedor = updateText(proveedores.codigoproveedor)">
 									</v-text-field>
 								</v-flex>
@@ -110,6 +111,7 @@
 											clearable
 											persistent-hint
 											required
+											:rules="validacion"
 											@input="proveedores.iddocumentoidentidad = updateText(proveedores.iddocumentoidentidad)">
 								</v-text-field>
 							</v-flex>
@@ -121,6 +123,7 @@
 											clearable
 											persistent-hint
 											required
+											:rules="validacion"
 											@input="proveedores.numerodocumento = updateText(proveedores.numerodocumento)">
 								</v-text-field>
 							</v-flex>
@@ -132,6 +135,7 @@
 											clearable
 											persistent-hint
 											required
+											:rules="validacion"
 											@input="proveedores.razonsocial = updateText(proveedores.razonsocial)">
 								</v-text-field>
 							</v-flex>
@@ -143,6 +147,7 @@
 											clearable
 											persistent-hint
 											required
+											:rules="validacion"
 											@input="proveedores.direccion = updateText(proveedores.direccion)">
 								</v-text-field>
 							</v-flex>
@@ -154,6 +159,7 @@
 											clearable
 											persistent-hint
 											required
+											:rules="validacion"
 											@input="proveedores.idpais = updateText(proveedores.idpais)">
 								</v-text-field>
 							</v-flex>
@@ -165,6 +171,7 @@
 											clearable
 											persistent-hint
 											required
+											:rules="validacion"
 											@input="proveedores.idciudad = updateText(proveedores.idciudad)">
 								</v-text-field>
 							</v-flex>
@@ -176,6 +183,7 @@
 											clearable
 											persistent-hint
 											required
+											:rules="validacion"
 											@input="proveedores.idmoneda = updateText(proveedores.idmoneda)">
 								</v-text-field>
 							</v-flex>
@@ -187,6 +195,7 @@
 											clearable
 											persistent-hint
 											required
+											:rules="validacion"
 											@input="proveedores.contacto = updateText(proveedores.contacto)">
 								</v-text-field>
 							</v-flex>
@@ -198,6 +207,7 @@
 											clearable
 											persistent-hint
 											required
+											:rules="validacion"
 											@input="proveedores.telefonos = updateText(proveedores.telefonos)">
 								</v-text-field>
 							</v-flex>
@@ -209,6 +219,7 @@
 											clearable
 											persistent-hint
 											required
+											:rules="validacion"
 											@input="proveedores.fax = updateText(proveedores.fax)">
 								</v-text-field>
 							</v-flex>
@@ -220,6 +231,7 @@
 											clearable
 											persistent-hint
 											required
+											:rules="validacion"
 											@input="proveedores.cuenta = updateText(proveedores.cuenta)">
 								</v-text-field>
 							</v-flex>
@@ -231,6 +243,7 @@
 											clearable
 											persistent-hint
 											required
+											:rules="validacion"
 											@input="proveedores.idtipoproveedor = updateText(proveedores.idtipoproveedor)">
 								</v-text-field>
 							</v-flex>
@@ -265,6 +278,7 @@
 											clearable
 											persistent-hint
 											required
+											:rules="validacion"
 											@input="proveedores.codaduana = updateText(proveedores.codaduana)">
 								</v-text-field>
 							</v-flex>
@@ -273,7 +287,7 @@
 				</v-form>
 				<v-divider></v-divider>
 				<v-card-actions style="justify-content: center;padding:10px">
-					<v-btn color="success" dark style="width: 50%" @click="Grabar()">Grabar</v-btn>
+					<v-btn color="success" dark style="width: 50%" :disabled="!activo" @click="Grabar()">Grabar</v-btn>
 					<v-btn color="error" dark style="width: 50%" @click="Cancelar()">Cancelar</v-btn>
 				</v-card-actions>
 			</v-card>
