@@ -15,7 +15,7 @@ export default class AdmCuentasBancosComponent extends Vue {
 		{ text: 'saldoactual', align: 'left', sortable: false, value: 'saldoactual', width: '15%' },
 		{ text: 'cuentacontable', align: 'left', sortable: false, value: 'cuentacontable', width: '15%' },
 		{ text: 'fechaapertura', align: 'left', sortable: false, value: 'fechaapertura', width: '15%' },
-		{ text: 'Operaciones', align: 'center', sortable: false, value: 'action', width: '20%' },
+		{ text: 'Operaciones', align: 'left', sortable: false, value: 'action', width: '20%' },
 	];
 	// tslint:disable-next-line: variable-name
 	private menu_fechaapertura: boolean = false;
@@ -28,6 +28,11 @@ export default class AdmCuentasBancosComponent extends Vue {
 	private operacion = '';
 	private helper: helpers = new helpers();
 	private popup = new popup.Swal();
+	private activo = false;
+	validacion = [
+		(v: any) => !!v || 'El campo es requerido',
+    (v: any) => !/^\s*$/.test(v) || 'No se permite espacios vacios',
+  ];
 	private FormatDate(data: any) {
 		return moment(data).format('YYYY-MM-DD');
 	}
@@ -117,7 +122,7 @@ export default class AdmCuentasBancosComponent extends Vue {
 	private Eliminar(data: services.clase_cuentasbancos): void {
 		swal.fire({
 			title: 'Esta seguro de esta operacion?',
-			text: 'Eliminacion de Registro' + data.idbanco + data.nrocuenta,
+			text: 'Eliminacion de Registro ' + data.idbanco +'/'+ data.nrocuenta,
 			type: 'warning',
 			showCancelButton: true,
 			confirmButtonColor: 'green',
