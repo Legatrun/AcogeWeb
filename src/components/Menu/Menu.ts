@@ -41,6 +41,12 @@ export default class MenuComponent extends Vue {
         new MenuItem('Sucursales', 'exit_to_app', '/Sucursales'), 
         new MenuItem('TipodePagos', 'exit_to_app', '/TipodePagos'), 
         new MenuItem('UnidadDeManejo', 'exit_to_app', '/UnidadDeManejo'), 
+        new MenuItem('TipoDocumentosIdentidad', 'exit_to_app', '/TipoDocumentosIdentidad'), 
+        new MenuItem('TipoMovimientoInventario', 'exit_to_app', '/TipoMovimientoInventario'), 
+        new MenuItem('TiposCliente', 'exit_to_app', '/TiposCliente'), 
+        new MenuItem('TiposItems', 'exit_to_app', '/TiposItems'), 
+        new MenuItem('TiposProveedor', 'exit_to_app', '/TiposProveedor'), 
+        new MenuItem('Zonas', 'exit_to_app', '/Zonas'), 
     ];
 
     public menuSalir: MenuItem[] = [
