@@ -9,23 +9,23 @@ import helpers from '@/helper';
 @Component
 export default class AdmClientesComponent extends Vue {
 	private headers: any[] = [
-		{ text: 'CodigoCliente', align: 'left', sortable: true, value: 'codigocliente', width: '15%' },
-		{ text: 'codigoclienteprincipal', align: 'left', sortable: false, value: 'codigoclienteprincipal', width: '15%' },
-		{ text: 'iddocumentoidentidad', align: 'left', sortable: false, value: 'iddocumentoidentidad', width: '15%' },
-		{ text: 'numerodocumento', align: 'left', sortable: false, value: 'numerodocumento', width: '15%' },
-		{ text: 'razonsocial', align: 'left', sortable: false, value: 'razonsocial', width: '15%' },
-		{ text: 'idpais', align: 'left', sortable: false, value: 'idpais', width: '15%' },
-		{ text: 'idciudad', align: 'left', sortable: false, value: 'idciudad', width: '15%' },
-		{ text: 'idzona', align: 'left', sortable: false, value: 'idzona', width: '15%' },
-		{ text: 'idtipocliente', align: 'left', sortable: false, value: 'idtipocliente', width: '15%' },
-		{ text: 'descripciondireccion', align: 'left', sortable: false, value: 'descripciondireccion', width: '15%' },
-		{ text: 'telefono', align: 'left', sortable: false, value: 'telefono', width: '15%' },
-		{ text: 'correoelectronico', align: 'left', sortable: false, value: 'correoelectronico', width: '15%' },
-		{ text: 'casillacorreo', align: 'left', sortable: false, value: 'casillacorreo', width: '15%' },
-		{ text: 'cuentacontable', align: 'left', sortable: false, value: 'cuentacontable', width: '15%' },
-		{ text: 'cuentacontableanticipos', align: 'left', sortable: false, value: 'cuentacontableanticipos', width: '15%' },
-		{ text: 'activo', align: 'left', sortable: false, value: 'activo', width: '15%' },
-		{ text: 'Operaciones', align: 'center', sortable: false, value: 'action', width: '20%' },
+		{ text: 'CodigoCliente', align: 'left', sortable: true, value: 'codigocliente', width: '5%' },
+		{ text: 'codigoclienteprincipal', align: 'left', sortable: false, value: 'codigoclienteprincipal', width: '5%' },
+		{ text: 'iddocumentoidentidad', align: 'left', sortable: false, value: 'iddocumentoidentidad', width: '5%' },
+		{ text: 'numerodocumento', align: 'left', sortable: false, value: 'numerodocumento', width: '5%' },
+		{ text: 'razonsocial', align: 'left', sortable: false, value: 'razonsocial', width: '5%' },
+		{ text: 'idpais', align: 'left', sortable: false, value: 'idpais', width: '5%' },
+		{ text: 'idciudad', align: 'left', sortable: false, value: 'idciudad', width: '5%' },
+		{ text: 'idzona', align: 'left', sortable: false, value: 'idzona', width: '5%' },
+		{ text: 'idtipocliente', align: 'left', sortable: false, value: 'idtipocliente', width: '5%' },
+		{ text: 'descripciondireccion', align: 'left', sortable: false, value: 'descripciondireccion', width: '5%' },
+		{ text: 'telefono', align: 'left', sortable: false, value: 'telefono', width: '5%' },
+		{ text: 'correoelectronico', align: 'left', sortable: false, value: 'correoelectronico', width: '5%' },
+		{ text: 'casillacorreo', align: 'left', sortable: false, value: 'casillacorreo', width: '5%' },
+		{ text: 'cuentacontable', align: 'left', sortable: false, value: 'cuentacontable', width: '5%' },
+		{ text: 'cuentacontableanticipos', align: 'left', sortable: false, value: 'cuentacontableanticipos', width: '5%' },
+		{ text: 'activo', align: 'left', sortable: false, value: 'activo', width: '5%' },
+		{ text: 'Operaciones', align: 'left', sortable: false, value: 'action', width: '5%' },
 	];
 	private WebApi = new services.Endpoints();
 
@@ -36,6 +36,11 @@ export default class AdmClientesComponent extends Vue {
 	private operacion = '';
 	private helper: helpers = new helpers();
 	private popup = new popup.Swal();
+	private activo = false;
+	validacion = [
+		(v: any) => !!v || 'El campo es requerido',
+    (v: any) => !/^\s*$/.test(v) || 'No se permite espacios vacios',
+  ];
 	private FormatDate(data: any) {
 		return moment(data).format('YYYY-MM-DD');
 	}
@@ -123,7 +128,7 @@ export default class AdmClientesComponent extends Vue {
 	private Eliminar(data: services.clase_clientes): void {
 		swal.fire({
 			title: 'Esta seguro de esta operacion?',
-			text: 'Eliminacion de Registro' + data.codigocliente,
+			text: 'Eliminacion de Registro ' + data.codigocliente,
 			type: 'warning',
 			showCancelButton: true,
 			confirmButtonColor: 'green',
