@@ -25,6 +25,7 @@
 			<template slot="item" slot-scope="props">
 				<tr>
 					<!--<td>{{ helper.showDataDescription(props.item.cuentapresup,lstCtasPresup, id, descripcion)  }}</td>// Ejemplo de Uso de Helper Para obtener la Descripcion de una Tabla por medio de su Id-->
+					
 					<td>{{ props.item.cuentapresup }}</td>
 					<td>{{ props.item.nombrecuentapresup }}</td>
 					<td>{{ props.item.idmoneda }}</td>
@@ -39,13 +40,13 @@
 							<template v-slot:activator="{ on }">
 								<v-btn color="success" v-on="on" fab small dark  @click="Actualizar(props.item)"><v-icon>edit</v-icon></v-btn>
 							</template>
-							<span>Modificar Registro de Demo</span>
+							<span>Modificar Registro</span>
 						</v-tooltip>
 						<v-tooltip style="padding-left:10px" bottom>
 							<template v-slot:activator="{ on }" >
 								<v-btn color="error" v-on="on" fab small dark  @click="Eliminar(props.item)"><v-icon>delete</v-icon></v-btn>
 							</template>
-							<span>Eliminar Registro de Demo</span>
+							<span>Eliminar Registro</span>
 						</v-tooltip>
 					</td>
 				</tr>
@@ -55,7 +56,7 @@
 					<template v-slot:activator="{ on }">
 						<v-btn color="accent" v-on="on" @click="Insertar()">Adicionar Nuevo Registro de CtasPresup</v-btn>
 					</template>
-					<span>Adicionar nuevo registro de cliente</span>
+					<span>Adicionar nuevo registro de Cita Presupuestada</span>
 				</v-tooltip>
 			</template>
 			<template v-slot:no-data>
@@ -70,7 +71,7 @@
 					<v-toolbar-title>Datos de CtasPresup</v-toolbar-title>
 				</v-toolbar>
 				<v-divider></v-divider>
-				<v-form ref="form" style="padding:10px">
+				<v-form ref="form" style="padding:10px" v-model="activo">
 					<v-card-text>
 						<v-layout wrap>
 							<template v-if="operacion == 'Insert'">
@@ -82,6 +83,7 @@
 												clearable
 												persistent-hint
 												required
+												:rules="validacion"
 												@input="ctaspresup.cuentapresup = updateText(ctaspresup.cuentapresup)">
 									</v-text-field>
 								</v-flex>
@@ -104,6 +106,7 @@
 											clearable
 											persistent-hint
 											required
+											:rules="validacion"
 											@input="ctaspresup.nombrecuentapresup = updateText(ctaspresup.nombrecuentapresup)">
 								</v-text-field>
 							</v-flex>
@@ -115,6 +118,7 @@
 											clearable
 											persistent-hint
 											required
+											:rules="validacion"
 											@input="ctaspresup.idmoneda = updateText(ctaspresup.idmoneda)">
 								</v-text-field>
 							</v-flex>
@@ -126,6 +130,7 @@
 											clearable
 											persistent-hint
 											required
+											:rules="validacion"
 											@input="ctaspresup.nivel = updateText(ctaspresup.nivel)">
 								</v-text-field>
 							</v-flex>
@@ -201,7 +206,7 @@
 				</v-form>
 				<v-divider></v-divider>
 				<v-card-actions style="justify-content: center;padding:10px">
-					<v-btn color="success" dark style="width: 50%" @click="Grabar()">Grabar</v-btn>
+					<v-btn color="success" dark style="width: 50%" :disabled="!activo" @click="Grabar()">Grabar</v-btn>
 					<v-btn color="error" dark style="width: 50%" @click="Cancelar()">Cancelar</v-btn>
 				</v-card-actions>
 			</v-card>
