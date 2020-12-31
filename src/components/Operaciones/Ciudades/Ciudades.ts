@@ -14,7 +14,7 @@ export default class AdmCiudadesComponent extends Vue {
 		{ text: 'descripcion', align: 'left', sortable: false, value: 'descripcion', width: '15%' },
 		{ text: 'sigla', align: 'left', sortable: false, value: 'sigla', width: '15%' },
 		{ text: 'idmoneda', align: 'left', sortable: false, value: 'idmoneda', width: '15%' },
-		{ text: 'Operaciones', align: 'center', sortable: false, value: 'action', width: '20%' },
+		{ text: 'Operaciones', align: 'left', sortable: false, value: 'action', width: '20%' },
 	];
 	private WebApi = new services.Endpoints();
 
@@ -25,6 +25,11 @@ export default class AdmCiudadesComponent extends Vue {
 	private operacion = '';
 	private helper: helpers = new helpers();
 	private popup = new popup.Swal();
+	private activo = false;
+	validacion = [
+		(v: any) => !!v || 'El campo es requerido',
+    (v: any) => !/^\s*$/.test(v) || 'No se permite espacios vacios',
+  ];
 	private FormatDate(data: any) {
 		return moment(data).format('YYYY-MM-DD');
 	}
@@ -112,7 +117,7 @@ export default class AdmCiudadesComponent extends Vue {
 	private Eliminar(data: services.clase_ciudades): void {
 		swal.fire({
 			title: 'Esta seguro de esta operacion?',
-			text: 'Eliminacion de Registro' + data.idciudad,
+			text: 'Eliminacion de Registro ' + data.descripcion,
 			type: 'warning',
 			showCancelButton: true,
 			confirmButtonColor: 'green',
