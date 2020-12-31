@@ -9,16 +9,16 @@ import helpers from '@/helper';
 @Component
 export default class AdmSucursalesComponent extends Vue {
 	private headers: any[] = [
-		{ text: 'IDSucursal', align: 'left', sortable: true, value: 'idsucursal', width: '15%' },
-		{ text: 'idempresa', align: 'left', sortable: false, value: 'idempresa', width: '15%' },
-		{ text: 'idzona', align: 'left', sortable: false, value: 'idzona', width: '15%' },
-		{ text: 'nombre', align: 'left', sortable: false, value: 'nombre', width: '15%' },
-		{ text: 'direccion', align: 'left', sortable: false, value: 'direccion', width: '15%' },
-		{ text: 'numero', align: 'left', sortable: false, value: 'numero', width: '15%' },
-		{ text: 'telefonos', align: 'left', sortable: false, value: 'telefonos', width: '15%' },
-		{ text: 'email', align: 'left', sortable: false, value: 'email', width: '15%' },
-		{ text: 'codigopostal', align: 'left', sortable: false, value: 'codigopostal', width: '15%' },
-		{ text: 'Operaciones', align: 'center', sortable: false, value: 'action', width: '20%' },
+		{ text: 'IDSucursal', align: 'left', sortable: true, value: 'idsucursal', width: '10%' },
+		{ text: 'idempresa', align: 'left', sortable: false, value: 'idempresa', width: '10%' },
+		{ text: 'idzona', align: 'left', sortable: false, value: 'idzona', width: '10%' },
+		{ text: 'nombre', align: 'left', sortable: false, value: 'nombre', width: '10%' },
+		{ text: 'direccion', align: 'left', sortable: false, value: 'direccion', width: '10%' },
+		{ text: 'numero', align: 'left', sortable: false, value: 'numero', width: '10%' },
+		{ text: 'telefonos', align: 'left', sortable: false, value: 'telefonos', width: '10%' },
+		{ text: 'email', align: 'left', sortable: false, value: 'email', width: '10%' },
+		{ text: 'codigopostal', align: 'left', sortable: false, value: 'codigopostal', width: '10%' },
+		{ text: 'Operaciones', align: 'left', sortable: false, value: 'action', width: '10%' },
 	];
 	private WebApi = new services.Endpoints();
 
@@ -29,6 +29,11 @@ export default class AdmSucursalesComponent extends Vue {
 	private operacion = '';
 	private helper: helpers = new helpers();
 	private popup = new popup.Swal();
+	private activo = false;
+	validacion = [
+		(v: any) => !!v || 'El campo es requerido',
+    (v: any) => !/^\s*$/.test(v) || 'No se permite espacios vacios',
+  ];
 	private FormatDate(data: any) {
 		return moment(data).format('YYYY-MM-DD');
 	}
@@ -116,7 +121,7 @@ export default class AdmSucursalesComponent extends Vue {
 	private Eliminar(data: services.clase_sucursales): void {
 		swal.fire({
 			title: 'Esta seguro de esta operacion?',
-			text: 'Eliminacion de Registro' + data.idsucursal,
+			text: 'Eliminacion de Registro ' + data.nombre,
 			type: 'warning',
 			showCancelButton: true,
 			confirmButtonColor: 'green',
