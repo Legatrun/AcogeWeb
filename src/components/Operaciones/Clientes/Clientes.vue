@@ -46,13 +46,13 @@
 							<template v-slot:activator="{ on }">
 								<v-btn color="success" v-on="on" fab small dark  @click="Actualizar(props.item)"><v-icon>edit</v-icon></v-btn>
 							</template>
-							<span>Modificar Registro de Demo</span>
+							<span>Modificar Registro del Cliente</span>
 						</v-tooltip>
 						<v-tooltip style="padding-left:10px" bottom>
 							<template v-slot:activator="{ on }" >
 								<v-btn color="error" v-on="on" fab small dark  @click="Eliminar(props.item)"><v-icon>delete</v-icon></v-btn>
 							</template>
-							<span>Eliminar Registro de Demo</span>
+							<span>Eliminar Registro del Cliente</span>
 						</v-tooltip>
 					</td>
 				</tr>
@@ -77,7 +77,7 @@
 					<v-toolbar-title>Datos de Clientes</v-toolbar-title>
 				</v-toolbar>
 				<v-divider></v-divider>
-				<v-form ref="form" style="padding:10px">
+				<v-form ref="form" style="padding:10px" v-model="activo">
 					<v-card-text>
 						<v-layout wrap>
 							<template v-if="operacion == 'Insert'">
@@ -89,6 +89,7 @@
 												clearable
 												persistent-hint
 												required
+												:rules="validacion"
 												@input="clientes.codigocliente = updateText(clientes.codigocliente)">
 									</v-text-field>
 								</v-flex>
@@ -111,6 +112,7 @@
 											clearable
 											persistent-hint
 											required
+											:rules="validacion"
 											@input="clientes.codigoclienteprincipal = updateText(clientes.codigoclienteprincipal)">
 								</v-text-field>
 							</v-flex>
@@ -122,6 +124,7 @@
 											clearable
 											persistent-hint
 											required
+											:rules="validacion"
 											@input="clientes.iddocumentoidentidad = updateText(clientes.iddocumentoidentidad)">
 								</v-text-field>
 							</v-flex>
@@ -133,6 +136,7 @@
 											clearable
 											persistent-hint
 											required
+											:rules="validacion"
 											@input="clientes.numerodocumento = updateText(clientes.numerodocumento)">
 								</v-text-field>
 							</v-flex>
@@ -144,6 +148,7 @@
 											clearable
 											persistent-hint
 											required
+											:rules="validacion"
 											@input="clientes.razonsocial = updateText(clientes.razonsocial)">
 								</v-text-field>
 							</v-flex>
@@ -155,6 +160,7 @@
 											clearable
 											persistent-hint
 											required
+											:rules="validacion"
 											@input="clientes.idpais = updateText(clientes.idpais)">
 								</v-text-field>
 							</v-flex>
@@ -166,6 +172,7 @@
 											clearable
 											persistent-hint
 											required
+											:rules="validacion"
 											@input="clientes.idciudad = updateText(clientes.idciudad)">
 								</v-text-field>
 							</v-flex>
@@ -177,6 +184,7 @@
 											clearable
 											persistent-hint
 											required
+											:rules="validacion"
 											@input="clientes.idzona = updateText(clientes.idzona)">
 								</v-text-field>
 							</v-flex>
@@ -188,6 +196,7 @@
 											clearable
 											persistent-hint
 											required
+											:rules="validacion"
 											@input="clientes.idtipocliente = updateText(clientes.idtipocliente)">
 								</v-text-field>
 							</v-flex>
@@ -199,6 +208,7 @@
 											clearable
 											persistent-hint
 											required
+											:rules="validacion"
 											@input="clientes.descripciondireccion = updateText(clientes.descripciondireccion)">
 								</v-text-field>
 							</v-flex>
@@ -210,6 +220,7 @@
 											clearable
 											persistent-hint
 											required
+											:rules="validacion"
 											@input="clientes.telefono = updateText(clientes.telefono)">
 								</v-text-field>
 							</v-flex>
@@ -221,6 +232,7 @@
 											clearable
 											persistent-hint
 											required
+											:rules="validacion"
 											@input="clientes.correoelectronico = updateText(clientes.correoelectronico)">
 								</v-text-field>
 							</v-flex>
@@ -232,6 +244,7 @@
 											clearable
 											persistent-hint
 											required
+											:rules="validacion"
 											@input="clientes.casillacorreo = updateText(clientes.casillacorreo)">
 								</v-text-field>
 							</v-flex>
@@ -243,6 +256,7 @@
 											clearable
 											persistent-hint
 											required
+											:rules="validacion"
 											@input="clientes.cuentacontable = updateText(clientes.cuentacontable)">
 								</v-text-field>
 							</v-flex>
@@ -254,6 +268,7 @@
 											clearable
 											persistent-hint
 											required
+											:rules="validacion"
 											@input="clientes.cuentacontableanticipos = updateText(clientes.cuentacontableanticipos)">
 								</v-text-field>
 							</v-flex>
@@ -269,7 +284,7 @@
 				</v-form>
 				<v-divider></v-divider>
 				<v-card-actions style="justify-content: center;padding:10px">
-					<v-btn color="success" dark style="width: 50%" @click="Grabar()">Grabar</v-btn>
+					<v-btn color="success" dark style="width: 50%" :disabled="!activo" @click="Grabar()">Grabar</v-btn>
 					<v-btn color="error" dark style="width: 50%" @click="Cancelar()">Cancelar</v-btn>
 				</v-card-actions>
 			</v-card>
