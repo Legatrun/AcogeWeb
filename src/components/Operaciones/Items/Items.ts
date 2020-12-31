@@ -9,22 +9,22 @@ import helpers from '@/helper';
 @Component
 export default class AdmItemsComponent extends Vue {
 	private headers: any[] = [
-		{ text: 'CodigoItem', align: 'left', sortable: true, value: 'codigoitem', width: '15%' },
-		{ text: 'modelonroparte', align: 'left', sortable: false, value: 'modelonroparte', width: '15%' },
-		{ text: 'descripcion', align: 'left', sortable: false, value: 'descripcion', width: '15%' },
-		{ text: 'fechacreacion', align: 'left', sortable: false, value: 'fechacreacion', width: '15%' },
-		{ text: 'fechaultimomovimiento', align: 'left', sortable: false, value: 'fechaultimomovimiento', width: '15%' },
-		{ text: 'costoinicial', align: 'left', sortable: false, value: 'costoinicial', width: '15%' },
-		{ text: 'costoactual', align: 'left', sortable: false, value: 'costoactual', width: '15%' },
-		{ text: 'saldoinicial', align: 'left', sortable: false, value: 'saldoinicial', width: '15%' },
-		{ text: 'saldoactual', align: 'left', sortable: false, value: 'saldoactual', width: '15%' },
-		{ text: 'idclase', align: 'left', sortable: false, value: 'idclase', width: '15%' },
-		{ text: 'idtipoitem', align: 'left', sortable: false, value: 'idtipoitem', width: '15%' },
-		{ text: 'idunidadmanejo', align: 'left', sortable: false, value: 'idunidadmanejo', width: '15%' },
-		{ text: 'codigoitemsup', align: 'left', sortable: false, value: 'codigoitemsup', width: '15%' },
-		{ text: 'cantidadminima', align: 'left', sortable: false, value: 'cantidadminima', width: '15%' },
-		{ text: 'cantidadmaxima', align: 'left', sortable: false, value: 'cantidadmaxima', width: '15%' },
-		{ text: 'Operaciones', align: 'center', sortable: false, value: 'action', width: '20%' },
+		{ text: 'CodigoItem', align: 'left', sortable: true, value: 'codigoitem', width: '5%' },
+		{ text: 'modelonroparte', align: 'left', sortable: false, value: 'modelonroparte', width: '5%' },
+		{ text: 'descripcion', align: 'left', sortable: false, value: 'descripcion', width: '5%' },
+		{ text: 'fechacreacion', align: 'left', sortable: false, value: 'fechacreacion', width: '10%' },
+		{ text: 'fechaultimomovimiento', align: 'left', sortable: false, value: 'fechaultimomovimiento', width: '10%' },
+		{ text: 'costoinicial', align: 'left', sortable: false, value: 'costoinicial', width: '5%' },
+		{ text: 'costoactual', align: 'left', sortable: false, value: 'costoactual', width: '5%' },
+		{ text: 'saldoinicial', align: 'left', sortable: false, value: 'saldoinicial', width: '5%' },
+		{ text: 'saldoactual', align: 'left', sortable: false, value: 'saldoactual', width: '5%' },
+		{ text: 'idclase', align: 'left', sortable: false, value: 'idclase', width: '5%' },
+		{ text: 'idtipoitem', align: 'left', sortable: false, value: 'idtipoitem', width: '5%' },
+		{ text: 'idunidadmanejo', align: 'left', sortable: false, value: 'idunidadmanejo', width: '5%' },
+		{ text: 'codigoitemsup', align: 'left', sortable: false, value: 'codigoitemsup', width: '5%' },
+		{ text: 'cantidadminima', align: 'left', sortable: false, value: 'cantidadminima', width: '5%' },
+		{ text: 'cantidadmaxima', align: 'left', sortable: false, value: 'cantidadmaxima', width: '5%' },
+		{ text: 'Operaciones', align: 'left', sortable: false, value: 'action', width: '10%' },
 	];
 	// tslint:disable-next-line: variable-name
 	private menu_fechacreacion: boolean = false;
@@ -39,6 +39,11 @@ export default class AdmItemsComponent extends Vue {
 	private operacion = '';
 	private helper: helpers = new helpers();
 	private popup = new popup.Swal();
+	private activo = false;
+	validacion = [
+		(v: any) => !!v || 'El campo es requerido',
+    (v: any) => !/^\s*$/.test(v) || 'No se permite espacios vacios',
+  ];
 	private FormatDate(data: any) {
 		return moment(data).format('YYYY-MM-DD');
 	}
@@ -130,7 +135,7 @@ export default class AdmItemsComponent extends Vue {
 	private Eliminar(data: services.clase_items): void {
 		swal.fire({
 			title: 'Esta seguro de esta operacion?',
-			text: 'Eliminacion de Registro' + data.codigoitem,
+			text: 'Eliminacion de Registro ' + data.descripcion,
 			type: 'warning',
 			showCancelButton: true,
 			confirmButtonColor: 'green',
