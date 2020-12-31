@@ -11,12 +11,12 @@ export default class AdmCuentasComponent extends Vue {
 	private headers: any[] = [
 		{ text: 'Cuenta', align: 'left', sortable: true, value: 'cuenta', width: '15%' },
 		{ text: 'nombrecuenta', align: 'left', sortable: false, value: 'nombrecuenta', width: '15%' },
-		{ text: 'idmoneda', align: 'left', sortable: false, value: 'idmoneda', width: '15%' },
-		{ text: 'nivel', align: 'left', sortable: false, value: 'nivel', width: '15%' },
+		{ text: 'idmoneda', align: 'left', sortable: false, value: 'idmoneda', width: '10%' },
+		{ text: 'nivel', align: 'left', sortable: false, value: 'nivel', width: '10%' },
 		{ text: 'cuentaasiento', align: 'left', sortable: false, value: 'cuentaasiento', width: '15%' },
 		{ text: 'cuentasumar', align: 'left', sortable: false, value: 'cuentasumar', width: '15%' },
-		{ text: 'activopasivo', align: 'left', sortable: false, value: 'activopasivo', width: '15%' },
-		{ text: 'Operaciones', align: 'center', sortable: false, value: 'action', width: '20%' },
+		{ text: 'activopasivo', align: 'left', sortable: false, value: 'activopasivo', width: '10%' },
+		{ text: 'Operaciones', align: 'left', sortable: false, value: 'action', width: '10%' },
 	];
 	private WebApi = new services.Endpoints();
 
@@ -27,6 +27,11 @@ export default class AdmCuentasComponent extends Vue {
 	private operacion = '';
 	private helper: helpers = new helpers();
 	private popup = new popup.Swal();
+	private activo = false;
+	validacion = [
+		(v: any) => !!v || 'El campo es requerido',
+    (v: any) => !/^\s*$/.test(v) || 'No se permite espacios vacios',
+  ];
 	private FormatDate(data: any) {
 		return moment(data).format('YYYY-MM-DD');
 	}
@@ -114,7 +119,7 @@ export default class AdmCuentasComponent extends Vue {
 	private Eliminar(data: services.clase_cuentas): void {
 		swal.fire({
 			title: 'Esta seguro de esta operacion?',
-			text: 'Eliminacion de Registro' + data.cuenta,
+			text: 'Eliminacion de Registro ' + data.cuenta +'/'+ data.nombrecuenta,
 			type: 'warning',
 			showCancelButton: true,
 			confirmButtonColor: 'green',
