@@ -14,7 +14,7 @@ export default class AdmCajasComponent extends Vue {
 		{ text: 'cuenta', align: 'left', sortable: false, value: 'cuenta', width: '15%' },
 		{ text: 'monto', align: 'left', sortable: false, value: 'monto', width: '15%' },
 		{ text: 'idmoneda', align: 'left', sortable: false, value: 'idmoneda', width: '15%' },
-		{ text: 'Operaciones', align: 'center', sortable: false, value: 'action', width: '20%' },
+		{ text: 'Operaciones', align: 'left', sortable: false, value: 'action', width: '20%' },
 	];
 	private WebApi = new services.Endpoints();
 
