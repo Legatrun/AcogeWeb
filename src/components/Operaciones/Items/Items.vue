@@ -45,13 +45,13 @@
 							<template v-slot:activator="{ on }">
 								<v-btn color="success" v-on="on" fab small dark  @click="Actualizar(props.item)"><v-icon>edit</v-icon></v-btn>
 							</template>
-							<span>Modificar Registro de Demo</span>
+							<span>Modificar Registro Item</span>
 						</v-tooltip>
 						<v-tooltip style="padding-left:10px" bottom>
 							<template v-slot:activator="{ on }" >
 								<v-btn color="error" v-on="on" fab small dark  @click="Eliminar(props.item)"><v-icon>delete</v-icon></v-btn>
 							</template>
-							<span>Eliminar Registro de Demo</span>
+							<span>Eliminar Registro Item</span>
 						</v-tooltip>
 					</td>
 				</tr>
@@ -61,7 +61,7 @@
 					<template v-slot:activator="{ on }">
 						<v-btn color="accent" v-on="on" @click="Insertar()">Adicionar Nuevo Registro de Items</v-btn>
 					</template>
-					<span>Adicionar nuevo registro de cliente</span>
+					<span>Adicionar nuevo registro de Item</span>
 				</v-tooltip>
 			</template>
 			<template v-slot:no-data>
@@ -76,7 +76,7 @@
 					<v-toolbar-title>Datos de Items</v-toolbar-title>
 				</v-toolbar>
 				<v-divider></v-divider>
-				<v-form ref="form" style="padding:10px">
+				<v-form ref="form" style="padding:10px" v-model="activo">
 					<v-card-text>
 						<v-layout wrap>
 							<template v-if="operacion == 'Insert'">
@@ -88,6 +88,7 @@
 												clearable
 												persistent-hint
 												required
+												:rules="validacion"
 												@input="items.codigoitem = updateText(items.codigoitem)">
 									</v-text-field>
 								</v-flex>
@@ -110,6 +111,7 @@
 											clearable
 											persistent-hint
 											required
+											:rules="validacion"
 											@input="items.modelonroparte = updateText(items.modelonroparte)">
 								</v-text-field>
 							</v-flex>
@@ -121,6 +123,7 @@
 											clearable
 											persistent-hint
 											required
+											:rules="validacion"
 											@input="items.descripcion = updateText(items.descripcion)">
 								</v-text-field>
 							</v-flex>
@@ -178,6 +181,7 @@
 											clearable
 											persistent-hint
 											required
+											:rules="validacion"
 											@input="items.costoinicial = updateText(items.costoinicial)">
 								</v-text-field>
 							</v-flex>
@@ -189,6 +193,7 @@
 											clearable
 											persistent-hint
 											required
+											:rules="validacion"
 											@input="items.costoactual = updateText(items.costoactual)">
 								</v-text-field>
 							</v-flex>
@@ -200,6 +205,7 @@
 											clearable
 											persistent-hint
 											required
+											:rules="validacion"
 											@input="items.saldoinicial = updateText(items.saldoinicial)">
 								</v-text-field>
 							</v-flex>
@@ -211,6 +217,7 @@
 											clearable
 											persistent-hint
 											required
+											:rules="validacion"
 											@input="items.saldoactual = updateText(items.saldoactual)">
 								</v-text-field>
 							</v-flex>
@@ -222,6 +229,7 @@
 											clearable
 											persistent-hint
 											required
+											:rules="validacion"
 											@input="items.idclase = updateText(items.idclase)">
 								</v-text-field>
 							</v-flex>
@@ -233,6 +241,7 @@
 											clearable
 											persistent-hint
 											required
+											:rules="validacion"
 											@input="items.idtipoitem = updateText(items.idtipoitem)">
 								</v-text-field>
 							</v-flex>
@@ -244,6 +253,7 @@
 											clearable
 											persistent-hint
 											required
+											:rules="validacion"
 											@input="items.idunidadmanejo = updateText(items.idunidadmanejo)">
 								</v-text-field>
 							</v-flex>
@@ -255,6 +265,7 @@
 											clearable
 											persistent-hint
 											required
+											:rules="validacion"
 											@input="items.codigoitemsup = updateText(items.codigoitemsup)">
 								</v-text-field>
 							</v-flex>
@@ -266,6 +277,7 @@
 											clearable
 											persistent-hint
 											required
+											:rules="validacion"
 											@input="items.cantidadminima = updateText(items.cantidadminima)">
 								</v-text-field>
 							</v-flex>
@@ -277,6 +289,7 @@
 											clearable
 											persistent-hint
 											required
+											:rules="validacion"
 											@input="items.cantidadmaxima = updateText(items.cantidadmaxima)">
 								</v-text-field>
 							</v-flex>
@@ -285,7 +298,7 @@
 				</v-form>
 				<v-divider></v-divider>
 				<v-card-actions style="justify-content: center;padding:10px">
-					<v-btn color="success" dark style="width: 50%" @click="Grabar()">Grabar</v-btn>
+					<v-btn color="success" dark style="width: 50%" :disabled="!activo" @click="Grabar()">Grabar</v-btn>
 					<v-btn color="error" dark style="width: 50%" @click="Cancelar()">Cancelar</v-btn>
 				</v-card-actions>
 			</v-card>
