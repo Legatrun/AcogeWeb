@@ -14,7 +14,7 @@ export default class AdmAlmacenesComponent extends Vue {
 		{ text: 'idtipomovimiento', align: 'left', sortable: false, value: 'idtipomovimiento', width: '15%' },
 		{ text: 'idciudad', align: 'left', sortable: false, value: 'idciudad', width: '15%' },
 		{ text: 'virtual', align: 'left', sortable: false, value: 'virtual', width: '15%' },
-		{ text: 'Operaciones', align: 'center', sortable: false, value: 'action', width: '20%' },
+		{ text: 'Operaciones', align: 'left', sortable: false, value: 'action', width: '20%' },
 	];
 	private WebApi = new services.Endpoints();
 
@@ -25,7 +25,12 @@ export default class AdmAlmacenesComponent extends Vue {
 	private operacion = '';
 	private helper: helpers = new helpers();
 	private popup = new popup.Swal();
-	private FormatDate(data: any) {
+	private activo = false;
+	validacion = [
+		(v: any) => !!v || 'El campo es requerido',
+    (v: any) => !/^\s*$/.test(v) || 'No se permite espacios vacios',
+  ];
+	  private FormatDate(data: any) {
 		return moment(data).format('YYYY-MM-DD');
 	}
 	private FormatBoolean(data: any) {
@@ -112,7 +117,7 @@ export default class AdmAlmacenesComponent extends Vue {
 	private Eliminar(data: services.clase_almacenes): void {
 		swal.fire({
 			title: 'Esta seguro de esta operacion?',
-			text: 'Eliminacion de Registro' + data.codigoalmacen,
+			text: 'Eliminacion de Registro ' + data.descripcion,
 			type: 'warning',
 			showCancelButton: true,
 			confirmButtonColor: 'green',
