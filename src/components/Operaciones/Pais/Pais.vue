@@ -33,13 +33,13 @@
 							<template v-slot:activator="{ on }">
 								<v-btn color="success" v-on="on" fab small dark  @click="Actualizar(props.item)"><v-icon>edit</v-icon></v-btn>
 							</template>
-							<span>Modificar Registro de Demo</span>
+							<span>Modificar Registro de País</span>
 						</v-tooltip>
 						<v-tooltip style="padding-left:10px" bottom>
 							<template v-slot:activator="{ on }" >
 								<v-btn color="error" v-on="on" fab small dark  @click="Eliminar(props.item)"><v-icon>delete</v-icon></v-btn>
 							</template>
-							<span>Eliminar Registro de Demo</span>
+							<span>Eliminar Registro de País</span>
 						</v-tooltip>
 					</td>
 				</tr>
@@ -49,7 +49,7 @@
 					<template v-slot:activator="{ on }">
 						<v-btn color="accent" v-on="on" @click="Insertar()">Adicionar Nuevo Registro de Pais</v-btn>
 					</template>
-					<span>Adicionar nuevo registro de cliente</span>
+					<span>Adicionar nuevo registro de País</span>
 				</v-tooltip>
 			</template>
 			<template v-slot:no-data>
@@ -64,7 +64,7 @@
 					<v-toolbar-title>Datos de Pais</v-toolbar-title>
 				</v-toolbar>
 				<v-divider></v-divider>
-				<v-form ref="form" style="padding:10px">
+				<v-form ref="form" style="padding:10px" v-model="activo">
 					<v-card-text>
 						<v-layout wrap>
 							<template v-if="operacion == 'Insert'">
@@ -76,6 +76,7 @@
 												clearable
 												persistent-hint
 												required
+												:rules="validacion"
 												@input="pais.idpais = updateText(pais.idpais)">
 									</v-text-field>
 								</v-flex>
@@ -98,6 +99,7 @@
 											clearable
 											persistent-hint
 											required
+											:rules="validacion"
 											@input="pais.descripcion = updateText(pais.descripcion)">
 								</v-text-field>
 							</v-flex>
@@ -109,6 +111,7 @@
 											clearable
 											persistent-hint
 											required
+											:rules="validacion"
 											@input="pais.sigla = updateText(pais.sigla)">
 								</v-text-field>
 							</v-flex>
@@ -117,7 +120,7 @@
 				</v-form>
 				<v-divider></v-divider>
 				<v-card-actions style="justify-content: center;padding:10px">
-					<v-btn color="success" dark style="width: 50%" @click="Grabar()">Grabar</v-btn>
+					<v-btn color="success" dark style="width: 50%" :disabled="!activo" @click="Grabar()">Grabar</v-btn>
 					<v-btn color="error" dark style="width: 50%" @click="Cancelar()">Cancelar</v-btn>
 				</v-card-actions>
 			</v-card>
