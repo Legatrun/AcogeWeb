@@ -12,7 +12,7 @@
 		</v-toolbar>
 		<v-data-table 	style="padding: 5px"
 						:headers="headers" 
-						:items="lstsucursales" 
+						:items="lstsucursalesformateados" 
 						:items-per-page="30"
 						:search = "buscarsucursales" 
 						:footer-props="{
@@ -109,18 +109,20 @@
 											@input="sucursales.idempresa = updateText(sucursales.idempresa)">
 								</v-text-field>
 							</v-flex>
-							<v-flex sm12 style="padding: 5px">
-								<v-text-field v-model="sucursales.idzona"
-											label="IDZona"
-											hint="Ingrese IDZona"
-											placeholder="IDZona"
-											clearable
-											persistent-hint
-											required
-											:rules="validacion"
-											@input="sucursales.idzona = updateText(sucursales.idzona)">
-								</v-text-field>
-							</v-flex>
+							<v-col cols="5" sm="4" class="pa-2">
+								<v-autocomplete
+								v-model="sucursales.idzona"
+								label="Zona"
+								:items="lstzonas"
+								item-text="descripcion"
+								item-value="idzona"
+								:rules="validacion"
+								outlined
+								autocomplete="off"
+								color="#1A237E"
+								@input="sucursales.idzona = updateText(sucursales.idzona)"
+								></v-autocomplete>
+							</v-col>
 							<v-flex sm12 style="padding: 5px">
 								<v-text-field v-model="sucursales.nombre"
 											label="Nombre"

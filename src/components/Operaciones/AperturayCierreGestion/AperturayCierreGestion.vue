@@ -12,7 +12,7 @@
 		</v-toolbar>
 		<v-data-table 	style="padding: 5px"
 						:headers="headers" 
-						:items="lstaperturaycierregestion" 
+						:items="lstaperturaformateados" 
 						:items-per-page="30"
 						:search = "buscaraperturaycierregestion" 
 						:footer-props="{
@@ -26,7 +26,7 @@
 				<tr>
 					<!--<td>{{ helper.showDataDescription(props.item.mes,lstAperturayCierreGestion, id, descripcion)  }}</td>// Ejemplo de Uso de Helper Para obtener la Descripcion de una Tabla por medio de su Id-->
 					<td>{{ props.item.gestion }}</td>
-					<td>{{ props.item.mes }}</td>
+					<td>{{ props.item.mesformat }}</td>
 					<td>{{ FormatBoolean(props.item.abierta) }}</td>
 					<td>
 						<v-tooltip bottom>
@@ -80,21 +80,20 @@
 												@input="aperturaycierregestion.gestion = updateText(aperturaycierregestion.gestion)">
 									</v-text-field>
 								</v-flex>
-								<v-flex sm12 style="padding: 5px">
-									<v-text-field v-model="aperturaycierregestion.mes"
-												label="Mes"
-												hint="Ingrese Mes"
-												placeholder="Mes"
-												clearable
-												persistent-hint
-												required
+								<v-col cols="5" sm="4" class="pa-2">	
+										<v-autocomplete v-model="aperturaycierregestion.mes"
 												:rules="validacion"
-												@input="aperturaycierregestion.mes = updateText(aperturaycierregestion.mes)">
-									</v-text-field>
-								</v-flex>
+												:items="lstMeses"
+												label="Mes"
+												outlined
+												autocomplete="off"
+												color="#1A237E">
+										</v-autocomplete>
+							</v-col>
 							</template>
 							<template v-else>
-								<v-flex sm12 style="padding: 5px">
+							<!--  Se comentan estos 2 campos ya que el Procedimiento almacenado así esta diseñado, para actualizar solo el campo Booleano  -->
+							<!--	<v-flex sm12 style="padding: 5px">
 									<v-text-field v-model="aperturaycierregestion.gestion"
 												label="Gestion"
 												placeholder="Gestion"
@@ -102,14 +101,16 @@
 												persistent-hint>
 									</v-text-field>
 								</v-flex>
-								<v-flex sm12 style="padding: 5px">
-									<v-text-field v-model="aperturaycierregestion.mes"
+								<v-col cols="5" sm="4" class="pa-2">	
+										<v-autocomplete v-model="aperturaycierregestion.mes"
+												:rules="validacion"
+												:items="lstMeses"
 												label="Mes"
-												placeholder="Mes"
-												readonly
-												persistent-hint>
-									</v-text-field>
-								</v-flex>
+												outlined
+												autocomplete="off"
+												color="#1A237E">
+										</v-autocomplete>
+							</v-col> -->
 							</template>
 							<v-flex sm4 style="padding: 5px">
 								<h4 class="mb-0">Abierta:</h4>

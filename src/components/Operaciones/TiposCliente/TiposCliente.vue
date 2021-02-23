@@ -67,28 +67,10 @@
 					<v-card-text>
 						<v-layout wrap>
 							<template v-if="operacion == 'Insert'">
-								<v-flex sm12 style="padding: 5px">
-									<v-text-field v-model="tiposcliente.idtipocliente"
-												label="IDTipoCliente"
-												hint="Ingrese IDTipoCliente"
-												placeholder="IDTipoCliente"
-												clearable
-												persistent-hint
-												required
-												:rules="validacion"
-												@input="tiposcliente.idtipocliente = updateText(tiposcliente.idtipocliente)">
-									</v-text-field>
-								</v-flex>
+							
 							</template>
 							<template v-else>
-								<v-flex sm12 style="padding: 5px">
-									<v-text-field v-model="tiposcliente.idtipocliente"
-												label="IDTipoCliente"
-												placeholder="IDTipoCliente"
-												readonly
-												persistent-hint>
-									</v-text-field>
-								</v-flex>
+								
 							</template>
 							<v-flex sm12 style="padding: 5px">
 								<v-text-field v-model="tiposcliente.descripcion"

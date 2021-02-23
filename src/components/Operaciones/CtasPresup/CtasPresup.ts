@@ -32,6 +32,8 @@ export default class AdmCtasPresupComponent extends Vue {
 	private lstctaspresup: services.clase_ctaspresup[] = [];
 	private buscarctaspresup = '';
 	private dialog = false;
+	private monedas = new services.clase_monedas();
+	private lstmonedas: services.clase_monedas[] = [];
 	private operacion = '';
 	private helper: helpers = new helpers();
 	private popup = new popup.Swal();
@@ -71,6 +73,20 @@ export default class AdmCtasPresupComponent extends Vue {
 					this.dialog = false;
 				} else {
 					this.popup.error('Consultar', resctaspresup.data._error.descripcion);
+				}
+			}).catch((error) => {
+					this.popup.error('Consultar', 'Error Inesperado: ' + error);
+			});
+			this.cargarMonedas();
+	}
+	private cargarMonedas(){
+		new services.Operaciones().Consultar(this.WebApi.ws_monedas_Consultar)
+			.then((resmonedas) => {
+				if (resmonedas.data._error.error === 0) {
+					this.lstmonedas = resmonedas.data._data;
+					this.dialog = false;
+				} else {
+					this.popup.error('Consultar', resmonedas.data._error.descripcion);
 				}
 			}).catch((error) => {
 					this.popup.error('Consultar', 'Error Inesperado: ' + error);
@@ -171,5 +187,30 @@ export default class AdmCtasPresupComponent extends Vue {
 			});
 		}
 		});
+	}
+////////////////////////////////////////////terminar
+	get lstctaspresupformateados(){
+		return this.lstctaspresup.map((ctaspresup : services.clase_ctaspresup)=>{
+			return{
+				cuentapresup: ctaspresup.cuentapresup,
+				nombrecuentapresup: ctaspresup.nombrecuentapresup,
+				idmoneda: this.formatearMoneda(ctaspresup.idmoneda),
+				nivel:ctaspresup.nombrecuentapresup,
+				fechacreacion: ctaspresup.fechacreacion,
+				fechamodificacion:ctaspresup.fechamodificacion,
+				balancecuenta:ctaspresup.balancecuenta,
+				cuentaasiento:ctaspresup.cuentaasiento,
+				grabado:ctaspresup.grabado
+			}
+		})
+	}
+	private formatearMoneda(idmoneda: Number){
+		let monedaLiteral: string = '';
+			this.lstmonedas.forEach(function(value){
+				if(value.idmoneda == idmoneda){
+					monedaLiteral = value.descripcion;
+				}
+			});
+		return monedaLiteral;	
 	}
 }

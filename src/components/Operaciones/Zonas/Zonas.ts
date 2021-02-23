@@ -20,6 +20,10 @@ export default class AdmZonasComponent extends Vue {
 	private zonas = new services.clase_zonas();
 	private lstzonas: services.clase_zonas[] = [];
 	private buscarzonas = '';
+	private pais = new services.clase_pais();
+	private lstpais: services.clase_pais[] = [];
+	private ciudades = new services.clase_ciudades();
+	private lstciudades: services.clase_ciudades[] = [];
 	private dialog = false;
 	private operacion = '';
 	private helper: helpers = new helpers();
@@ -60,6 +64,34 @@ export default class AdmZonasComponent extends Vue {
 					this.dialog = false;
 				} else {
 					this.popup.error('Consultar', reszonas.data._error.descripcion);
+				}
+			}).catch((error) => {
+					this.popup.error('Consultar', 'Error Inesperado: ' + error);
+			});
+		this.cargarPais();
+		this.cargarCiudad();
+	}
+	private cargarPais(){
+		new services.Operaciones().Consultar(this.WebApi.ws_pais_Consultar)
+			.then((respais) => {
+				if (respais.data._error.error === 0) {
+					this.lstpais = respais.data._data;
+					this.dialog = false;
+				} else {
+					this.popup.error('Consultar', respais.data._error.descripcion);
+				}
+			}).catch((error) => {
+					this.popup.error('Consultar', 'Error Inesperado: ' + error);
+			});
+	}
+	private cargarCiudad(){
+		new services.Operaciones().Consultar(this.WebApi.ws_ciudades_Consultar)
+			.then((resciudades) => {
+				if (resciudades.data._error.error === 0) {
+					this.lstciudades = resciudades.data._data;
+					this.dialog = false;
+				} else {
+					this.popup.error('Consultar', resciudades.data._error.descripcion);
 				}
 			}).catch((error) => {
 					this.popup.error('Consultar', 'Error Inesperado: ' + error);
@@ -156,5 +188,24 @@ export default class AdmZonasComponent extends Vue {
 			});
 		}
 		});
+	}
+	get lstzonasformateados(){
+		return this.lstzonas.map((zonas : services.clase_zonas)=>{
+			return{
+				idzona: zonas.idzona,
+				idpais: this.formatearpais(zonas.idpais),
+				idciudad: zonas.idciudad,
+				descripcion: zonas.descripcion
+			}
+		})
+	}
+	private formatearpais(idpais : Number){
+		let paisLiteral: string = '';
+			this.lstpais.forEach(function(value){
+				if(value.idpais == idpais){
+					paisLiteral = value.descripcion;
+				}
+			});
+		return paisLiteral;	
 	}
 }

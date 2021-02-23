@@ -21,6 +21,10 @@ export default class AdmCiudadesComponent extends Vue {
 	private ciudades = new services.clase_ciudades();
 	private lstciudades: services.clase_ciudades[] = [];
 	private buscarciudades = '';
+	private monedas = new services.clase_monedas();
+	private lstmonedas: services.clase_monedas[] = [];
+	private pais = new services.clase_pais();
+	private lstpais: services.clase_pais[] = [];
 	private dialog = false;
 	private operacion = '';
 	private helper: helpers = new helpers();
@@ -61,6 +65,34 @@ export default class AdmCiudadesComponent extends Vue {
 					this.dialog = false;
 				} else {
 					this.popup.error('Consultar', resciudades.data._error.descripcion);
+				}
+			}).catch((error) => {
+					this.popup.error('Consultar', 'Error Inesperado: ' + error);
+			});
+			this.cargarMonedas();
+			this.cargarPais();
+	}
+	private cargarMonedas(){
+		new services.Operaciones().Consultar(this.WebApi.ws_monedas_Consultar)
+			.then((resmonedas) => {
+				if (resmonedas.data._error.error === 0) {
+					this.lstmonedas = resmonedas.data._data;
+					this.dialog = false;
+				} else {
+					this.popup.error('Consultar', resmonedas.data._error.descripcion);
+				}
+			}).catch((error) => {
+					this.popup.error('Consultar', 'Error Inesperado: ' + error);
+			});
+	}
+	private cargarPais(){
+		new services.Operaciones().Consultar(this.WebApi.ws_pais_Consultar)
+			.then((respais) => {
+				if (respais.data._error.error === 0) {
+					this.lstpais = respais.data._data;
+					this.dialog = false;
+				} else {
+					this.popup.error('Consultar', respais.data._error.descripcion);
 				}
 			}).catch((error) => {
 					this.popup.error('Consultar', 'Error Inesperado: ' + error);
@@ -157,5 +189,35 @@ export default class AdmCiudadesComponent extends Vue {
 			});
 		}
 		});
+	}
+	get lstciudadesformateados(){
+		return this.lstciudades.map((ciudades : services.clase_ciudades)=>{
+			return{
+				idpais: this.formatearpais(ciudades.idpais),
+				idciudad: ciudades.idciudad,
+				descripcion: ciudades.descripcion,
+				sigla: ciudades.sigla,
+				idmoneda: this.formatearMoneda(ciudades.idmoneda)
+				
+			}
+		})
+	}
+	private formatearpais(idpais : Number){
+		let paisLiteral: string = '';
+			this.lstpais.forEach(function(value){
+				if(value.idpais == idpais){
+					paisLiteral = value.descripcion;
+				}
+			});
+		return paisLiteral;	
+	}
+	private formatearMoneda(idmoneda: Number){
+		let monedaLiteral: string = '';
+			this.lstmonedas.forEach(function(value){
+				if(value.idmoneda == idmoneda){
+					monedaLiteral = value.descripcion;
+				}
+			});
+		return monedaLiteral;	
 	}
 }

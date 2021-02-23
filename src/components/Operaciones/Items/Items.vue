@@ -12,7 +12,7 @@
 		</v-toolbar>
 		<v-data-table 	style="padding: 5px"
 						:headers="headers" 
-						:items="lstitems" 
+						:items="lstItemformateados" 
 						:items-per-page="30"
 						:search = "buscaritems" 
 						:footer-props="{
@@ -221,42 +221,48 @@
 											@input="items.saldoactual = updateText(items.saldoactual)">
 								</v-text-field>
 							</v-flex>
-							<v-flex sm12 style="padding: 5px">
-								<v-text-field v-model="items.idclase"
-											label="IDClase"
-											hint="Ingrese IDClase"
-											placeholder="IDClase"
-											clearable
-											persistent-hint
-											required
-											:rules="validacion"
-											@input="items.idclase = updateText(items.idclase)">
-								</v-text-field>
-							</v-flex>
-							<v-flex sm12 style="padding: 5px">
-								<v-text-field v-model="items.idtipoitem"
-											label="IDTipoItem"
-											hint="Ingrese IDTipoItem"
-											placeholder="IDTipoItem"
-											clearable
-											persistent-hint
-											required
-											:rules="validacion"
-											@input="items.idtipoitem = updateText(items.idtipoitem)">
-								</v-text-field>
-							</v-flex>
-							<v-flex sm12 style="padding: 5px">
-								<v-text-field v-model="items.idunidadmanejo"
-											label="IDUnidadManejo"
-											hint="Ingrese IDUnidadManejo"
-											placeholder="IDUnidadManejo"
-											clearable
-											persistent-hint
-											required
-											:rules="validacion"
-											@input="items.idunidadmanejo = updateText(items.idunidadmanejo)">
-								</v-text-field>
-							</v-flex>
+							<v-col cols="5" sm="4" class="pa-2">
+								<v-autocomplete
+								v-model="items.idclase"
+								label="Clase"
+								:items="lstclaseitems"
+								item-text="descripcion"
+								item-value="idclase"
+								:rules="validacion"
+								outlined
+								autocomplete="off"
+								color="#1A237E"
+								@input="items.idclase = updateText(items.idclase)"
+								></v-autocomplete>
+							</v-col>
+							<v-col cols="5" sm="4" class="pa-2">
+								<v-autocomplete
+								v-model="items.idtipoitem"
+								label="Tipo Item"
+								:items="lsttipositems"
+								item-text="descripcion"
+								item-value="idtipoitem"
+								:rules="validacion"
+								outlined
+								autocomplete="off"
+								color="#1A237E"
+								@input="items.idtipoitem = updateText(items.idtipoitem)"
+								></v-autocomplete>
+							</v-col>
+							<v-col cols="5" sm="4" class="pa-2">
+								<v-autocomplete
+								v-model="items.idunidadmanejo"
+								label="Unidad Manejo"
+								:items="lstunidaddemanejo"
+								item-text="descripcion"
+								item-value="idunidadmanejo"
+								:rules="validacion"
+								outlined
+								autocomplete="off"
+								color="#1A237E"
+								@input="items.idunidadmanejo = updateText(items.idunidadmanejo)"
+								></v-autocomplete>
+							</v-col>
 							<v-flex sm12 style="padding: 5px">
 								<v-text-field v-model="items.codigoitemsup"
 											label="CodigoItemSup"

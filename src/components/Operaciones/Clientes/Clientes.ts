@@ -32,11 +32,22 @@ export default class AdmClientesComponent extends Vue {
 	private clientes = new services.clase_clientes();
 	private lstclientes: services.clase_clientes[] = [];
 	private buscarclientes = '';
+	private tipodocumentosidentidad = new services.clase_tipodocumentosidentidad();
+	private lsttipodocumentosidentidad: services.clase_tipodocumentosidentidad[] = [];
+	private tiposcliente = new services.clase_tiposcliente();
+	private lsttiposcliente: services.clase_tiposcliente[] = [];
+	private pais = new services.clase_pais();
+	private lstpais: services.clase_pais[] = [];
+	private ciudades = new services.clase_ciudades();
+	private lstciudades: services.clase_ciudades[] = [];
+	private zonas = new services.clase_zonas();
+	private lstzonas: services.clase_zonas[] = [];
 	private dialog = false;
 	private operacion = '';
 	private helper: helpers = new helpers();
 	private popup = new popup.Swal();
 	private activo = false;
+	private dialogPrueba = true;
 	validacion = [
 		(v: any) => !!v || 'El campo es requerido',
     (v: any) => !/^\s*$/.test(v) || 'No se permite espacios vacios',
@@ -72,6 +83,76 @@ export default class AdmClientesComponent extends Vue {
 					this.dialog = false;
 				} else {
 					this.popup.error('Consultar', resclientes.data._error.descripcion);
+				}
+			}).catch((error) => {
+					this.popup.error('Consultar', 'Error Inesperado: ' + error);
+			});
+			this.cargarDocumentoIdentidad();
+			this.cargarPais();
+			this.cargarCiudad();
+			this.cargarZona();
+			this.cargarTipoCliente();
+	}
+	private cargarPais(){
+		new services.Operaciones().Consultar(this.WebApi.ws_pais_Consultar)
+			.then((respais) => {
+				if (respais.data._error.error === 0) {
+					this.lstpais = respais.data._data;
+					this.dialog = false;
+				} else {
+					this.popup.error('Consultar', respais.data._error.descripcion);
+				}
+			}).catch((error) => {
+					this.popup.error('Consultar', 'Error Inesperado: ' + error);
+			});
+	}
+	private cargarCiudad(){
+		new services.Operaciones().Consultar(this.WebApi.ws_ciudades_Consultar)
+			.then((resciudades) => {
+				if (resciudades.data._error.error === 0) {
+					this.lstciudades = resciudades.data._data;
+					this.dialog = false;
+				} else {
+					this.popup.error('Consultar', resciudades.data._error.descripcion);
+				}
+			}).catch((error) => {
+					this.popup.error('Consultar', 'Error Inesperado: ' + error);
+			});
+	}
+	private cargarZona(){
+		new services.Operaciones().Consultar(this.WebApi.ws_zonas_Consultar)
+			.then((reszonas) => {
+				if (reszonas.data._error.error === 0) {
+					this.lstzonas = reszonas.data._data;
+					this.dialog = false;
+				} else {
+					this.popup.error('Consultar', reszonas.data._error.descripcion);
+				}
+			}).catch((error) => {
+					this.popup.error('Consultar', 'Error Inesperado: ' + error);
+			});
+	}
+	private cargarDocumentoIdentidad(){
+		new services.Operaciones().Consultar(this.WebApi.ws_tipodocumentosidentidad_Consultar)
+			.then((restipodocumentosidentidad) => {
+				if (restipodocumentosidentidad.data._error.error === 0) {
+					this.lsttipodocumentosidentidad = restipodocumentosidentidad.data._data;
+					this.dialog = false;
+				} else {
+					this.popup.error('Consultar', restipodocumentosidentidad.data._error.descripcion);
+				}
+			}).catch((error) => {
+					this.popup.error('Consultar', 'Error Inesperado: ' + error);
+			});
+	}
+	private cargarTipoCliente(){
+		new services.Operaciones().Consultar(this.WebApi.ws_tiposcliente_Consultar)
+			.then((restiposcliente) => {
+				if (restiposcliente.data._error.error === 0) {
+					this.lsttiposcliente = restiposcliente.data._data;
+					this.dialog = false;
+				} else {
+					this.popup.error('Consultar', restiposcliente.data._error.descripcion);
 				}
 			}).catch((error) => {
 					this.popup.error('Consultar', 'Error Inesperado: ' + error);
@@ -168,5 +249,63 @@ export default class AdmClientesComponent extends Vue {
 			});
 		}
 		});
+	}
+	get lstclientesformateados(){
+		return this.lstclientes.map((clientes : services.clase_clientes)=>{
+			return{
+				codigocliente:clientes.codigocliente,
+				codigoclienteprincipal:clientes.codigoclienteprincipal,
+				iddocumentoidentidad:clientes.iddocumentoidentidad,
+				numerodocumento:clientes.numerodocumento,
+				razonsocial:clientes.razonsocial,
+				idpais:this.formatearpais(clientes.idpais),
+				idciudad:this.formatearCiudad(clientes.idciudad),
+				idzona:this.formatearzona(clientes.idzona),
+				idtipocliente:this.formateartipocliente(clientes.idtipocliente),
+				descripciondireccion:clientes.descripciondireccion,
+				telefono:clientes.telefono,
+				correoelectronico:clientes.correoelectronico,
+				casillacorreo:clientes.casillacorreo,
+				cuentacontable:clientes.cuentacontable,
+				cuentacontableanticipos:clientes.cuentacontableanticipos,
+				activo: clientes.activo
+			}
+		})
+	}
+	private formatearpais(idpais : Number){
+		let paisLiteral: string = '';
+			this.lstpais.forEach(function(value){
+				if(value.idpais == idpais){
+					paisLiteral = value.descripcion;
+				}
+			});
+		return paisLiteral;	
+	}
+	private formatearCiudad(idciudad : Number){
+		let ciudadLiteral: string = '';
+			this.lstciudades.forEach(function(value){
+				if(value.idciudad == idciudad){
+					ciudadLiteral = value.descripcion;
+				}
+			});
+		return ciudadLiteral;	
+	}
+	private formatearzona(idzona : Number){
+		let zonaLiteral: string = '';
+			this.lstzonas.forEach(function(value){
+				if(value.idzona == idzona){
+					zonaLiteral = value.descripcion;
+				}
+			});
+		return zonaLiteral;	
+	}
+	private formateartipocliente(idtipocliente : Number){
+		let tipoclienteLiteral: string = '';
+			this.lsttiposcliente.forEach(function(value){
+				if(value.idtipocliente == idtipocliente){
+					tipoclienteLiteral = value.descripcion;
+				}
+			});
+		return tipoclienteLiteral;	
 	}
 }

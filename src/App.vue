@@ -25,7 +25,7 @@
         </v-app-bar>
         <main class="body-background">
             <v-content>
-                <v-container grid-list-xl>
+                <v-container grid-list-xl fluid style="width:'100%'  " >
                     <router-view></router-view>
                 </v-container>
             </v-content>

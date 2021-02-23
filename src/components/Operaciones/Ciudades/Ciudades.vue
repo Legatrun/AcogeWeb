@@ -12,7 +12,7 @@
 		</v-toolbar>
 		<v-data-table 	style="padding: 5px"
 						:headers="headers" 
-						:items="lstciudades" 
+						:items="lstciudadesformateados" 
 						:items-per-page="30"
 						:search = "buscarciudades" 
 						:footer-props="{
@@ -70,7 +70,7 @@
 					<v-card-text>
 						<v-layout wrap>
 							<template v-if="operacion == 'Insert'">
-								<v-flex sm12 style="padding: 5px">
+							<!--	<v-flex sm12 style="padding: 5px">
 									<v-text-field v-model="ciudades.idciudad"
 												label="IDCiudad"
 												hint="Ingrese IDCiudad"
@@ -81,30 +81,32 @@
 												:rules="validacion"
 												@input="ciudades.idciudad = updateText(ciudades.idciudad)">
 									</v-text-field>
-								</v-flex>
+								</v-flex>-->
 							</template>
 							<template v-else>
-								<v-flex sm12 style="padding: 5px">
+								<!--<v-flex sm12 style="padding: 5px">
 									<v-text-field v-model="ciudades.idciudad"
 												label="IDCiudad"
 												placeholder="IDCiudad"
 												readonly
 												persistent-hint>
 									</v-text-field>
-								</v-flex>
+								</v-flex>-->
 							</template>
-							<v-flex sm12 style="padding: 5px">
-								<v-text-field v-model="ciudades.idpais"
-											label="IDPais"
-											hint="Ingrese IDPais"
-											placeholder="IDPais"
-											clearable
-											persistent-hint
-											required
-											:rules="validacion"
-											@input="ciudades.idpais = updateText(ciudades.idpais)">
-								</v-text-field>
-							</v-flex>
+							<v-col cols="5" sm="12" class="pa-2">
+								<v-autocomplete
+								v-model="ciudades.idpais"
+								label="Pais"
+								:items="lstpais"
+								item-text="descripcion"
+								item-value="idpais"
+								:rules="validacion"
+								outlined
+								autocomplete="off"
+								color="#1A237E"
+								@input="ciudades.idpais = updateText(ciudades.idpais)"
+								></v-autocomplete>
+							</v-col>
 							<v-flex sm12 style="padding: 5px">
 								<v-text-field v-model="ciudades.descripcion"
 											label="Descripcion"
@@ -129,18 +131,20 @@
 											@input="ciudades.sigla = updateText(ciudades.sigla)">
 								</v-text-field>
 							</v-flex>
-							<v-flex sm12 style="padding: 5px">
-								<v-text-field v-model="ciudades.idmoneda"
-											label="IDMoneda"
-											hint="Ingrese IDMoneda"
-											placeholder="IDMoneda"
-											clearable
-											persistent-hint
-											required
-											:rules="validacion"
-											@input="ciudades.idmoneda = updateText(ciudades.idmoneda)">
-								</v-text-field>
-							</v-flex>
+							<v-col cols="5" sm="12" class="pa-2">
+								<v-autocomplete
+								v-model="ciudades.idmoneda"
+								label="Moneda"
+								:items="lstmonedas"
+								item-text="descripcion"
+								item-value="idmoneda"
+								:rules="validacion"
+								outlined
+								autocomplete="off"
+								color="#1A237E"
+								@input="ciudades.idmoneda = updateText(ciudades.idmoneda)"
+								></v-autocomplete>
+							</v-col>
 						</v-layout>
 					</v-card-text>
 				</v-form>

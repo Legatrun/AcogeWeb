@@ -73,7 +73,8 @@ export default class LoginComponent extends Vue {
                     this.popup.error('Error en la Autenticación', 'Sin conexión al Dominio');
                     return;
                 }
-                if (res.data._error.error === 0) {
+                if (res.data.error === 0) {
+                    
                     if (res.data.length !== 0
                         && this.login.usuario.trim() !== '' && this.login.password.trim() !== '') {
                         this.loginResponse = res.data;
@@ -84,7 +85,7 @@ export default class LoginComponent extends Vue {
                         this.$store.commit('logout', true);
                     }
                 } else {
-                    this.popup.error('Error en la Autenticación', res.data._error.descripcion);
+                    this.popup.error('Error en la Autenticación', res.data.error.descripcion);
                 }
             })
             .catch((err) => {

@@ -21,6 +21,8 @@ export default class AdmCajasComponent extends Vue {
 	private cajas = new services.clase_cajas();
 	private lstcajas: services.clase_cajas[] = [];
 	private buscarcajas = '';
+	private monedas = new services.clase_monedas();
+	private lstmonedas: services.clase_monedas[] = [];
 	private dialog = false;
 	private operacion = '';
 	private helper: helpers = new helpers();
@@ -61,6 +63,20 @@ export default class AdmCajasComponent extends Vue {
 					this.dialog = false;
 				} else {
 					this.popup.error('Consultar', rescajas.data._error.descripcion);
+				}
+			}).catch((error) => {
+					this.popup.error('Consultar', 'Error Inesperado: ' + error);
+			});
+			this.cargarMonedas();
+	}
+	private cargarMonedas(){
+		new services.Operaciones().Consultar(this.WebApi.ws_monedas_Consultar)
+			.then((resmonedas) => {
+				if (resmonedas.data._error.error === 0) {
+					this.lstmonedas = resmonedas.data._data;
+					this.dialog = false;
+				} else {
+					this.popup.error('Consultar', resmonedas.data._error.descripcion);
 				}
 			}).catch((error) => {
 					this.popup.error('Consultar', 'Error Inesperado: ' + error);
@@ -157,5 +173,25 @@ export default class AdmCajasComponent extends Vue {
 			});
 		}
 		});
+	}
+	get lstcajasformateados(){
+		return this.lstcajas.map((cajas : services.clase_cajas)=>{
+			return{
+				idcaja: cajas.idcaja,
+				descripcion: cajas.descripcion,
+				cuenta: cajas.cuenta,
+				monto: cajas.monto,
+				idmoneda: this.formatearMoneda(cajas.idmoneda)
+			}
+		})
+	}
+	private formatearMoneda(idmoneda: Number){
+		let monedaLiteral: string = '';
+			this.lstmonedas.forEach(function(value){
+				if(value.idmoneda == idmoneda){
+					monedaLiteral = value.descripcion;
+				}
+			});
+		return monedaLiteral;	
 	}
 }

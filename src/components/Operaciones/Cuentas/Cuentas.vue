@@ -12,7 +12,7 @@
 		</v-toolbar>
 		<v-data-table 	style="padding: 5px"
 						:headers="headers" 
-						:items="lstcuentas" 
+						:items="lstcuentasformateados" 
 						:items-per-page="30"
 						:search = "buscarcuentas" 
 						:footer-props="{
@@ -107,18 +107,20 @@
 											@input="cuentas.nombrecuenta = updateText(cuentas.nombrecuenta)">
 								</v-text-field>
 							</v-flex>
-							<v-flex sm12 style="padding: 5px">
-								<v-text-field v-model="cuentas.idmoneda"
-											label="IDMoneda"
-											hint="Ingrese IDMoneda"
-											placeholder="IDMoneda"
-											clearable
-											persistent-hint
-											required
-											:rules="validacion"
-											@input="cuentas.idmoneda = updateText(cuentas.idmoneda)">
-								</v-text-field>
-							</v-flex>
+							<v-col cols="5" sm="12" class="pa-2">
+								<v-autocomplete
+								v-model="cuentas.idmoneda"
+								label="Moneda"
+								:items="lstmonedas"
+								item-text="descripcion"
+								item-value="idmoneda"
+								:rules="validacion"
+								outlined
+								autocomplete="off"
+								color="#1A237E"
+								@input="cuentas.idmoneda = updateText(cuentas.idmoneda)"
+								></v-autocomplete>
+							</v-col>
 							<v-flex sm12 style="padding: 5px">
 								<v-text-field v-model="cuentas.nivel"
 											label="Nivel"

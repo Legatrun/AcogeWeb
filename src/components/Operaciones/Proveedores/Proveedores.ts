@@ -29,10 +29,19 @@ export default class AdmProveedoresComponent extends Vue {
 	// tslint:disable-next-line: variable-name
 	private menu_fechacreacion: boolean = false;
 	private WebApi = new services.Endpoints();
-
 	private proveedores = new services.clase_proveedores();
 	private lstproveedores: services.clase_proveedores[] = [];
 	private buscarproveedores = '';
+	private pais = new services.clase_pais();
+	private lstpais: services.clase_pais[] = [];
+	private tipodocumentosidentidad = new services.clase_tipodocumentosidentidad();
+	private lsttipodocumentosidentidad: services.clase_tipodocumentosidentidad[] = [];
+	private ciudades = new services.clase_ciudades();
+	private lstciudades: services.clase_ciudades[] = [];
+	private monedas = new services.clase_monedas();
+	private lstmonedas: services.clase_monedas[] = [];
+	private tiposproveedor = new services.clase_tiposproveedor();
+	private lsttiposproveedor: services.clase_tiposproveedor[] = [];
 	private dialog = false;
 	private operacion = '';
 	private helper: helpers = new helpers();
@@ -77,6 +86,76 @@ export default class AdmProveedoresComponent extends Vue {
 			}).catch((error) => {
 					this.popup.error('Consultar', 'Error Inesperado: ' + error);
 			});
+			this.cargartipoDocumentoIdentidad();
+			this.cargarPais();
+			this.cargarMoneda();
+			this.cargarTipoProveedor();
+			this.cargarCiudad();
+	}
+	private cargartipoDocumentoIdentidad(){
+		new services.Operaciones().Consultar(this.WebApi.ws_tipodocumentosidentidad_Consultar)
+			.then((restipodocumentosidentidad) => {
+				if (restipodocumentosidentidad.data._error.error === 0) {
+					this.lsttipodocumentosidentidad = restipodocumentosidentidad.data._data;
+					this.dialog = false;
+				} else {
+					this.popup.error('Consultar', restipodocumentosidentidad.data._error.descripcion);
+				}
+			}).catch((error) => {
+					this.popup.error('Consultar', 'Error Inesperado: ' + error);
+			});
+	}
+	private cargarPais(){
+		new services.Operaciones().Consultar(this.WebApi.ws_pais_Consultar)
+			.then((respais) => {
+				if (respais.data._error.error === 0) {
+					this.lstpais = respais.data._data;
+					this.dialog = false;
+				} else {
+					this.popup.error('Consultar', respais.data._error.descripcion);
+				}
+			}).catch((error) => {
+					this.popup.error('Consultar', 'Error Inesperado: ' + error);
+			});
+	}
+	private cargarMoneda(){
+		new services.Operaciones().Consultar(this.WebApi.ws_monedas_Consultar)
+			.then((resmonedas) => {
+				if (resmonedas.data._error.error === 0) {
+					this.lstmonedas = resmonedas.data._data;
+					this.dialog = false;
+				} else {
+					this.popup.error('Consultar', resmonedas.data._error.descripcion);
+				}
+			}).catch((error) => {
+					this.popup.error('Consultar', 'Error Inesperado: ' + error);
+			});
+	}
+	private cargarTipoProveedor(){
+		new services.Operaciones().Consultar(this.WebApi.ws_tiposproveedor_Consultar)
+			.then((restiposproveedor) => {
+				if (restiposproveedor.data._error.error === 0) {
+					this.lsttiposproveedor = restiposproveedor.data._data;
+					this.dialog = false;
+				} else {
+					this.popup.error('Consultar', restiposproveedor.data._error.descripcion);
+				}
+			}).catch((error) => {
+					this.popup.error('Consultar', 'Error Inesperado: ' + error);
+			});
+	}
+	private cargarCiudad(){
+		new services.Operaciones().Consultar(this.WebApi.ws_ciudades_Consultar)
+		.then((resciudades) => {
+			if (resciudades.data._error.error === 0) {
+				this.lstciudades = resciudades.data._data;
+				this.dialog = false;
+			} else {
+				this.popup.error('Consultar', resciudades.data._error.descripcion);
+			}
+		}).catch((error) => {
+				this.popup.error('Consultar', 'Error Inesperado: ' + error);
+		});
 	}
 	private Insertar(): void {
 		this.proveedores = new services.clase_proveedores();
@@ -171,5 +250,71 @@ export default class AdmProveedoresComponent extends Vue {
 			});
 		}
 		});
+	}
+	get lstproveedoresformateados(){
+		return this.lstproveedores.map((proveedores : services.clase_proveedores)=>{
+			return{
+				codigoproveedor: proveedores.codigoproveedor,
+				iddocumentoidentidad: this.formatearTipoProveedor(proveedores.iddocumentoidentidad),
+				numerodocumento: proveedores.numerodocumento,
+				razonsocial: proveedores.razonsocial,
+				direccion: proveedores.direccion,
+				idpais: this.formatearpais(proveedores.idpais),
+				idciudad: this.formatearCiudad(proveedores.idciudad),
+				idmoneda: this.formatearMoneda(proveedores.idmoneda),
+				contacto: proveedores.contacto,
+				telefonos: proveedores.telefonos,
+				fax: proveedores.fax,
+				cuenta: proveedores.cuenta,
+				idtipoproveedor: this.formatearTipoProveedor(proveedores.idtipoproveedor),
+				fechacreacion:proveedores.fechacreacion,
+				codaduana: proveedores.codaduana
+			}
+		})
+	}
+	private formatearpais(idpais : Number){
+		let paisLiteral: string = '';
+			this.lstpais.forEach(function(value){
+				if(value.idpais == idpais){
+					paisLiteral = value.descripcion;
+				}
+			});
+		return paisLiteral;	
+	}
+	private formatearMoneda(idmoneda: Number){
+		let monedaLiteral: string = '';
+			this.lstmonedas.forEach(function(value){
+				if(value.idmoneda == idmoneda){
+					monedaLiteral = value.descripcion;
+				}
+			});
+		return monedaLiteral;	
+	}
+	private formatearCiudad(idciudad: Number){
+		let ciudadLiteral: string = '';
+			this.lstciudades.forEach(function(value){
+				if(value.idciudad == idciudad){
+					ciudadLiteral = value.descripcion;
+				}
+			});
+		return ciudadLiteral;	
+	}
+	private formatearTipoProveedor(idtipoproveedor: Number){
+		let tipoproveedorLiteral: string = '';
+			this.lsttiposproveedor.forEach(function(value){
+				if(value.idtipoproveedor == idtipoproveedor){
+					tipoproveedorLiteral = value.descripcion;
+				}
+			});
+		return tipoproveedorLiteral;	
+	}
+	private formatearDocumentoIdentidad(iddocumentoidentidad: Number){
+		let documentoidentidadLiteral: string = '';
+			this.lsttipodocumentosidentidad.forEach(function(value){
+				if(value.iddocumentoidentidad == iddocumentoidentidad){
+					documentoidentidadLiteral = value.descripcion;
+				}
+			});
+		return documentoidentidadLiteral;	
 	}
 }

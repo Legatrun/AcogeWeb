@@ -31,9 +31,14 @@ export default class AdmItemsComponent extends Vue {
 	// tslint:disable-next-line: variable-name
 	private menu_fechaultimomovimiento: boolean = false;
 	private WebApi = new services.Endpoints();
-
 	private items = new services.clase_items();
 	private lstitems: services.clase_items[] = [];
+	private claseitems = new services.clase_claseitems();
+	private lstclaseitems: services.clase_claseitems[] = [];
+	private tipositems = new services.clase_tipositems();
+	private lsttipositems: services.clase_tipositems[] = [];
+	private unidaddemanejo = new services.clase_unidaddemanejo();
+	private lstunidaddemanejo: services.clase_unidaddemanejo[] = [];
 	private buscaritems = '';
 	private dialog = false;
 	private operacion = '';
@@ -75,6 +80,48 @@ export default class AdmItemsComponent extends Vue {
 					this.dialog = false;
 				} else {
 					this.popup.error('Consultar', resitems.data._error.descripcion);
+				}
+			}).catch((error) => {
+					this.popup.error('Consultar', 'Error Inesperado: ' + error);
+			});
+			this.cargarClaseItem();
+			this.cargarUnidadManejo();
+			this.cargartipoItem();
+	}
+	private cargarClaseItem(){
+		new services.Operaciones().Consultar(this.WebApi.ws_claseitems_Consultar)
+			.then((resclaseitems) => {
+				if (resclaseitems.data._error.error === 0) {
+					this.lstclaseitems = resclaseitems.data._data;
+					this.dialog = false;
+				} else {
+					this.popup.error('Consultar', resclaseitems.data._error.descripcion);
+				}
+			}).catch((error) => {
+					this.popup.error('Consultar', 'Error Inesperado: ' + error);
+			});
+	}
+	private cargartipoItem(){
+		new services.Operaciones().Consultar(this.WebApi.ws_tipositems_Consultar)
+			.then((restipositems) => {
+				if (restipositems.data._error.error === 0) {
+					this.lsttipositems = restipositems.data._data;
+					this.dialog = false;
+				} else {
+					this.popup.error('Consultar', restipositems.data._error.descripcion);
+				}
+			}).catch((error) => {
+					this.popup.error('Consultar', 'Error Inesperado: ' + error);
+			});
+	}
+	private cargarUnidadManejo(){
+		new services.Operaciones().Consultar(this.WebApi.ws_unidaddemanejo_Consultar)
+			.then((resunidaddemanejo) => {
+				if (resunidaddemanejo.data._error.error === 0) {
+					this.lstunidaddemanejo = resunidaddemanejo.data._data;
+					this.dialog = false;
+				} else {
+					this.popup.error('Consultar', resunidaddemanejo.data._error.descripcion);
 				}
 			}).catch((error) => {
 					this.popup.error('Consultar', 'Error Inesperado: ' + error);
@@ -175,5 +222,53 @@ export default class AdmItemsComponent extends Vue {
 			});
 		}
 		});
+	}
+	get lstItemformateados(){
+		return this.lstitems.map((item : services.clase_items)=>{
+			return{
+				codigoitem: item.codigoitem,
+				modelonroparte: item.modelonroparte,
+				descripcion: item.descripcion,
+				fechacreacion: item.fechacreacion,
+				fechaultimomovimiento: item.fechaultimomovimiento,
+				costoinicial: item.costoinicial,
+				costoactual: item.costoactual,
+				saldoinicial: item.saldoinicial,
+				saldoactual: item.saldoactual,
+				idclase: this.formatearclase(item.idclase),
+				idtipoitem: this.formateartipoitem(item.idtipoitem),
+				idunidadmanejo: this.formatearuniddmanejo(item.idunidadmanejo),
+				codigoitemsup: item.codigoitemsup,
+				cantidadminima: item.cantidadminima,
+				cantidadmaxima: item.cantidadmaxima
+			}
+		})
+	}
+	private formatearclase(idclase : Number){
+		let claseLiteral: string = '';
+			this.lstclaseitems.forEach(function(value){
+				if(value.idclase == idclase){
+					claseLiteral = value.descripcion;
+				}
+			});
+		return claseLiteral;	
+	}
+	private formateartipoitem(idtipoitem : Number){
+		let tipoitemLiteral: string = '';
+			this.lsttipositems.forEach(function(value){
+				if(value.idtipoitem == idtipoitem){
+					tipoitemLiteral = value.descripcion;
+				}
+			});
+		return tipoitemLiteral;	
+	}a
+	private formatearuniddmanejo(idunidadmanejo : Number){
+		let unidadmanejoliteral: string = '';
+			this.lstunidaddemanejo.forEach(function(value){
+				if(value.idunidadmanejo == idunidadmanejo){
+					unidadmanejoliteral = value.descripcion;
+				}
+			});
+		return unidadmanejoliteral;	
 	}
 }

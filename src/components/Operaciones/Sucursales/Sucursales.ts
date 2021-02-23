@@ -25,6 +25,8 @@ export default class AdmSucursalesComponent extends Vue {
 	private sucursales = new services.clase_sucursales();
 	private lstsucursales: services.clase_sucursales[] = [];
 	private buscarsucursales = '';
+	private zonas = new services.clase_zonas();
+	private lstzonas: services.clase_zonas[] = [];
 	private dialog = false;
 	private operacion = '';
 	private helper: helpers = new helpers();
@@ -65,6 +67,20 @@ export default class AdmSucursalesComponent extends Vue {
 					this.dialog = false;
 				} else {
 					this.popup.error('Consultar', ressucursales.data._error.descripcion);
+				}
+			}).catch((error) => {
+					this.popup.error('Consultar', 'Error Inesperado: ' + error);
+			});
+			this.cargarZona();
+	}
+	private cargarZona(){
+		new services.Operaciones().Consultar(this.WebApi.ws_zonas_Consultar)
+			.then((reszonas) => {
+				if (reszonas.data._error.error === 0) {
+					this.lstzonas = reszonas.data._data;
+					this.dialog = false;
+				} else {
+					this.popup.error('Consultar', reszonas.data._error.descripcion);
 				}
 			}).catch((error) => {
 					this.popup.error('Consultar', 'Error Inesperado: ' + error);
@@ -161,5 +177,29 @@ export default class AdmSucursalesComponent extends Vue {
 			});
 		}
 		});
+	}
+	get lstsucursalesformateados(){
+		return this.lstsucursales.map((sucursales : services.clase_sucursales)=>{
+			return{
+				idsucursal: sucursales.idsucursal,
+				idempresa: sucursales.idempresa,
+				idzona: this.formatearzona(sucursales.idzona),
+				nombre: sucursales.nombre,
+				direccion: sucursales.direccion,
+				numero: sucursales.numero,
+				telefonos: sucursales.telefonos,
+				email: sucursales.email,
+				codigopostal: sucursales.codigopostal
+			}
+		})
+	}
+	private formatearzona(idzona : Number){
+		let zonaLiteral: string = '';
+			this.lstzonas.forEach(function(value){
+				if(value.idzona == idzona){
+					zonaLiteral = value.descripcion;
+				}
+			});
+		return zonaLiteral;	
 	}
 }

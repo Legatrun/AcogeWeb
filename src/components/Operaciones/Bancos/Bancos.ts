@@ -22,6 +22,10 @@ export default class AdmBancosComponent extends Vue {
 	private bancos = new services.clase_bancos();
 	private lstbancos: services.clase_bancos[] = [];
 	private buscarbancos = '';
+	private pais = new services.clase_pais();
+	private lstpais: services.clase_pais[] = [];
+	private ciudades = new services.clase_ciudades();
+	private lstciudades: services.clase_ciudades[] = [];
 	private dialog = false;
 	private operacion = '';
 	private helper: helpers = new helpers();
@@ -62,6 +66,34 @@ export default class AdmBancosComponent extends Vue {
 					this.dialog = false;
 				} else {
 					this.popup.error('Consultar', resbancos.data._error.descripcion);
+				}
+			}).catch((error) => {
+					this.popup.error('Consultar', 'Error Inesperado: ' + error);
+			});
+		this.cargarPais();
+		this.cargarCiudad();
+	}
+	private cargarPais(){
+		new services.Operaciones().Consultar(this.WebApi.ws_pais_Consultar)
+			.then((respais) => {
+				if (respais.data._error.error === 0) {
+					this.lstpais = respais.data._data;
+					this.dialog = false;
+				} else {
+					this.popup.error('Consultar', respais.data._error.descripcion);
+				}
+			}).catch((error) => {
+					this.popup.error('Consultar', 'Error Inesperado: ' + error);
+			});
+	}
+	private cargarCiudad(){
+		new services.Operaciones().Consultar(this.WebApi.ws_ciudades_Consultar)
+			.then((resciudades) => {
+				if (resciudades.data._error.error === 0) {
+					this.lstciudades = resciudades.data._data;
+					this.dialog = false;
+				} else {
+					this.popup.error('Consultar', resciudades.data._error.descripcion);
 				}
 			}).catch((error) => {
 					this.popup.error('Consultar', 'Error Inesperado: ' + error);
@@ -158,5 +190,35 @@ export default class AdmBancosComponent extends Vue {
 			});
 		}
 		});
+	}
+	get lstbancosormateados(){
+		return this.lstbancos.map((bancos : services.clase_bancos)=>{
+			return{
+				idbanco:bancos.idbanco,
+				nit:bancos.nit,
+				descripcion: bancos.descripcion,
+				bancopropio: bancos.bancopropio,
+				idpais: this.formatearPais(bancos.idpais),
+				idciudad: this.formatearCiudad(bancos.idciudad)
+			}
+		})
+	}
+	private formatearCiudad(idciudad : Number){
+		let ciudadLiteral: string = '';
+			this.lstciudades.forEach(function(value){
+				if(value.idciudad == idciudad){
+					ciudadLiteral = value.descripcion;
+				}
+			});
+		return ciudadLiteral;	
+	}
+	private formatearPais(idpais: Number){
+		let paisLiteral: string = '';
+			this.lstpais.forEach(function(value){
+				if(value.idpais== idpais){
+					paisLiteral = value.descripcion;
+				}
+			});
+		return paisLiteral;	
 	}
 }

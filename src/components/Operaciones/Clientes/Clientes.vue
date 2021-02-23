@@ -1,4 +1,5 @@
 <template>
+
 	<v-card>
 		<v-toolbar color="primary" style="color:white">
 			<v-toolbar-title>Datos de Clientes</v-toolbar-title>
@@ -12,7 +13,7 @@
 		</v-toolbar>
 		<v-data-table 	style="padding: 5px"
 						:headers="headers" 
-						:items="lstclientes" 
+						:items="lstclientesformateados" 
 						:items-per-page="30"
 						:search = "buscarclientes" 
 						:footer-props="{
@@ -116,18 +117,21 @@
 											@input="clientes.codigoclienteprincipal = updateText(clientes.codigoclienteprincipal)">
 								</v-text-field>
 							</v-flex>
-							<v-flex sm12 style="padding: 5px">
-								<v-text-field v-model="clientes.iddocumentoidentidad"
-											label="IDDocumentoIdentidad"
-											hint="Ingrese IDDocumentoIdentidad"
-											placeholder="IDDocumentoIdentidad"
-											clearable
-											persistent-hint
-											required
-											:rules="validacion"
-											@input="clientes.iddocumentoidentidad = updateText(clientes.iddocumentoidentidad)">
-								</v-text-field>
-							</v-flex>
+							
+							<v-col cols="5" sm="4" class="pa-2">
+								<v-autocomplete
+								v-model="clientes.iddocumentoidentidad"
+								label="Documento de Identidad"
+								:items="lsttipodocumentosidentidad"
+								item-text="descripcion"
+								item-value="iddocumentoidentidad"
+								:rules="validacion"
+								outlined
+								autocomplete="off"
+								color="#1A237E"
+								@input="clientes.iddocumentoidentidad = updateText(clientes.iddocumentoidentidad)"
+								></v-autocomplete>
+							</v-col>
 							<v-flex sm12 style="padding: 5px">
 								<v-text-field v-model="clientes.numerodocumento"
 											label="NumeroDocumento"
@@ -152,54 +156,66 @@
 											@input="clientes.razonsocial = updateText(clientes.razonsocial)">
 								</v-text-field>
 							</v-flex>
-							<v-flex sm12 style="padding: 5px">
-								<v-text-field v-model="clientes.idpais"
-											label="IDPais"
-											hint="Ingrese IDPais"
-											placeholder="IDPais"
-											clearable
-											persistent-hint
-											required
-											:rules="validacion"
-											@input="clientes.idpais = updateText(clientes.idpais)">
-								</v-text-field>
-							</v-flex>
-							<v-flex sm12 style="padding: 5px">
-								<v-text-field v-model="clientes.idciudad"
-											label="IDCiudad"
-											hint="Ingrese IDCiudad"
-											placeholder="IDCiudad"
-											clearable
-											persistent-hint
-											required
-											:rules="validacion"
-											@input="clientes.idciudad = updateText(clientes.idciudad)">
-								</v-text-field>
-							</v-flex>
-							<v-flex sm12 style="padding: 5px">
-								<v-text-field v-model="clientes.idzona"
-											label="IDZona"
-											hint="Ingrese IDZona"
-											placeholder="IDZona"
-											clearable
-											persistent-hint
-											required
-											:rules="validacion"
-											@input="clientes.idzona = updateText(clientes.idzona)">
-								</v-text-field>
-							</v-flex>
-							<v-flex sm12 style="padding: 5px">
-								<v-text-field v-model="clientes.idtipocliente"
-											label="IDTipoCliente"
-											hint="Ingrese IDTipoCliente"
-											placeholder="IDTipoCliente"
-											clearable
-											persistent-hint
-											required
-											:rules="validacion"
-											@input="clientes.idtipocliente = updateText(clientes.idtipocliente)">
-								</v-text-field>
-							</v-flex>
+							
+							<v-col cols="5" sm="4" class="pa-2">
+								<v-autocomplete
+								v-model="clientes.idpais"
+								label="Pais"
+								:items="lstpais"
+								item-text="descripcion"
+								item-value="idpais"
+								:rules="validacion"
+								outlined
+								autocomplete="off"
+								color="#1A237E"
+								@input="clientes.idpais = updateText(clientes.idpais)"
+								></v-autocomplete>
+							</v-col>
+						
+							<v-col cols="5" sm="4" class="pa-2">
+								<v-autocomplete
+								v-model="clientes.idciudad"
+								label="Ciudad"
+								:items="lstciudades"
+								item-text="descripcion"
+								item-value="idciudad"
+								:rules="validacion"
+								outlined
+								autocomplete="off"
+								color="#1A237E"
+								@input="clientes.idciudad = updateText(clientes.idciudad)"
+								></v-autocomplete>
+							</v-col>
+							
+							<v-col cols="5" sm="4" class="pa-2">
+								<v-autocomplete
+								v-model="clientes.idzona"
+								label="Zona"
+								:items="lstzonas"
+								item-text="descripcion"
+								item-value="idzona"
+								:rules="validacion"
+								outlined
+								autocomplete="off"
+								color="#1A237E"
+								@input="clientes.idzona = updateText(clientes.idzona)"
+								></v-autocomplete>
+							</v-col>
+							
+								<v-col cols="5" sm="4" class="pa-2">
+								<v-autocomplete
+								v-model="clientes.idtipocliente"
+								label="Tipo Cliente"
+								:items="lsttiposcliente"
+								item-text="descripcion"
+								item-value="idtipocliente"
+								:rules="validacion"
+								outlined
+								autocomplete="off"
+								color="#1A237E"
+								@input="clientes.idtipocliente = updateText(clientes.idtipocliente)"
+								></v-autocomplete>
+							</v-col>
 							<v-flex sm12 style="padding: 5px">
 								<v-text-field v-model="clientes.descripciondireccion"
 											label="DescripcionDireccion"

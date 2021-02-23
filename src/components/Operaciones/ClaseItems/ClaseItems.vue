@@ -73,7 +73,7 @@
 					<v-card-text>
 						<v-layout wrap>
 							<template v-if="operacion == 'Insert'">
-								<v-flex sm12 style="padding: 5px">
+								<!--<v-flex sm12 style="padding: 5px">
 									<v-text-field v-model="claseitems.idclase"
 												label="IDClase"
 												hint="Ingrese IDClase"
@@ -84,17 +84,17 @@
 												:rules="validacion"
 												@input="claseitems.idclase = updateText(claseitems.idclase)">
 									</v-text-field>
-								</v-flex>
+								</v-flex>-->
 							</template>
 							<template v-else>
-								<v-flex sm12 style="padding: 5px">
+								<!--<v-flex sm12 style="padding: 5px">
 									<v-text-field v-model="claseitems.idclase"
 												label="IDClase"
 												placeholder="IDClase"
 												readonly
 												persistent-hint>
 									</v-text-field>
-								</v-flex>
+								</v-flex>-->
 							</template>
 							<v-flex sm12 style="padding: 5px">
 								<v-text-field v-model="claseitems.descripcion"

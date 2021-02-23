@@ -24,6 +24,10 @@ export default class AdmCuentasBancosComponent extends Vue {
 	private cuentasbancos = new services.clase_cuentasbancos();
 	private lstcuentasbancos: services.clase_cuentasbancos[] = [];
 	private buscarcuentasbancos = '';
+	private bancos = new services.clase_bancos();
+	private lstbancos: services.clase_bancos[] = [];
+	private monedas = new services.clase_monedas();
+	private lstmonedas: services.clase_monedas[] = [];
 	private dialog = false;
 	private operacion = '';
 	private helper: helpers = new helpers();
@@ -64,6 +68,34 @@ export default class AdmCuentasBancosComponent extends Vue {
 					this.dialog = false;
 				} else {
 					this.popup.error('Consultar', rescuentasbancos.data._error.descripcion);
+				}
+			}).catch((error) => {
+					this.popup.error('Consultar', 'Error Inesperado: ' + error);
+			});
+			this.cargarMonedas();
+			this.cargarBanco();
+	}
+	private cargarMonedas(){
+		new services.Operaciones().Consultar(this.WebApi.ws_monedas_Consultar)
+			.then((resmonedas) => {
+				if (resmonedas.data._error.error === 0) {
+					this.lstmonedas = resmonedas.data._data;
+					this.dialog = false;
+				} else {
+					this.popup.error('Consultar', resmonedas.data._error.descripcion);
+				}
+			}).catch((error) => {
+					this.popup.error('Consultar', 'Error Inesperado: ' + error);
+			});
+	}
+	private cargarBanco(){
+		new services.Operaciones().Consultar(this.WebApi.ws_bancos_Consultar)
+			.then((resbancos) => {
+				if (resbancos.data._error.error === 0) {
+					this.lstbancos = resbancos.data._data;
+					this.dialog = false;
+				} else {
+					this.popup.error('Consultar', resbancos.data._error.descripcion);
 				}
 			}).catch((error) => {
 					this.popup.error('Consultar', 'Error Inesperado: ' + error);
@@ -162,5 +194,35 @@ export default class AdmCuentasBancosComponent extends Vue {
 			});
 		}
 		});
+	}
+	get lstcuentasbancosformateados(){
+		return this.lstcuentasbancos.map((cuentabancos : services.clase_cuentasbancos)=>{
+			return{
+				idbanco: this.formatearbanco(cuentabancos.idbanco),
+				nrocuenta: cuentabancos.nrocuenta,
+				idmoneda: this.formatearMoneda(cuentabancos.idmoneda),
+				saldoactual:cuentabancos.saldoactual,
+				cuentacontable: cuentabancos.cuentacontable,
+				fechaapertura:cuentabancos.fechaapertura
+			}
+		})
+	}
+	private formatearbanco(idbanco : Number){
+		let bancoLiteral: string = '';
+			this.lstbancos.forEach(function(value){
+				if(value.idbanco == idbanco){
+					bancoLiteral = value.descripcion;
+				}
+			});
+		return bancoLiteral;	
+	}
+	private formatearMoneda(idmoneda: Number){
+		let monedaLiteral: string = '';
+			this.lstmonedas.forEach(function(value){
+				if(value.idmoneda == idmoneda){
+					monedaLiteral = value.descripcion;
+				}
+			});
+		return monedaLiteral;	
 	}
 }

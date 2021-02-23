@@ -12,7 +12,7 @@
 		</v-toolbar>
 		<v-data-table 	style="padding: 5px"
 						:headers="headers" 
-						:items="lstbancos" 
+						:items="lstbancosormateados" 
 						:items-per-page="30"
 						:search = "buscarbancos" 
 						:footer-props="{
@@ -71,7 +71,7 @@
 					<v-card-text>
 						<v-layout wrap>
 							<template v-if="operacion == 'Insert'">
-								<v-flex sm12 style="padding: 5px">
+							<!--	<v-flex sm12 style="padding: 5px">
 									<v-text-field v-model="bancos.idbanco"
 												label="IDBanco"
 												hint="Ingrese IDBanco"
@@ -82,17 +82,17 @@
 												:rules="validacion"
 												@input="bancos.idbanco = updateText(bancos.idbanco)">
 									</v-text-field>
-								</v-flex>
+								</v-flex>-->
 							</template>
 							<template v-else>
-								<v-flex sm12 style="padding: 5px">
+								<!--<v-flex sm12 style="padding: 5px">
 									<v-text-field v-model="bancos.idbanco"
 												label="IDBanco"
 												placeholder="IDBanco"
 												readonly
 												persistent-hint>
 									</v-text-field>
-								</v-flex>
+								</v-flex>-->
 							</template>
 							<v-flex sm12 style="padding: 5px">
 								<v-text-field v-model="bancos.nit"
@@ -125,30 +125,34 @@
 									hint="Seleccione BancoPropio"
 									label="bancos.BancoPropio"></v-switch>
 							</v-flex>
-							<v-flex sm12 style="padding: 5px">
-								<v-text-field v-model="bancos.idpais"
-											label="IDPais"
-											hint="Ingrese IDPais"
-											placeholder="IDPais"
-											clearable
-											persistent-hint
-											required
-											:rules="validacion"
-											@input="bancos.idpais = updateText(bancos.idpais)">
-								</v-text-field>
-							</v-flex>
-							<v-flex sm12 style="padding: 5px">
-								<v-text-field v-model="bancos.idciudad"
-											label="IDCiudad"
-											hint="Ingrese IDCiudad"
-											placeholder="IDCiudad"
-											clearable
-											persistent-hint
-											required
-											:rules="validacion"
-											@input="bancos.idciudad = updateText(bancos.idciudad)">
-								</v-text-field>
-							</v-flex>
+							<v-col cols="5" sm="4" class="pa-2">
+								<v-autocomplete
+								v-model="bancos.idpais"
+								label="Pais"
+								:items="lstpais"
+								item-text="descripcion"
+								item-value="idpais"
+								:rules="validacion"
+								outlined
+								autocomplete="off"
+								color="#1A237E"
+								@input="bancos.idpais = updateText(bancos.idpais)"
+								></v-autocomplete>
+							</v-col>
+							<v-col cols="5" sm="4" class="pa-2">
+								<v-autocomplete
+								v-model="bancos.idciudad"
+								label="Ciudad"
+								:items="lstciudades"
+								item-text="descripcion"
+								item-value="idciudad"
+								:rules="validacion"
+								outlined
+								autocomplete="off"
+								color="#1A237E"
+								@input="bancos.idciudad = updateText(bancos.idciudad)"
+								></v-autocomplete>
+							</v-col>
 						</v-layout>
 					</v-card-text>
 				</v-form>

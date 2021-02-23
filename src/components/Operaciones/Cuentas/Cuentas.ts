@@ -22,6 +22,8 @@ export default class AdmCuentasComponent extends Vue {
 
 	private cuentas = new services.clase_cuentas();
 	private lstcuentas: services.clase_cuentas[] = [];
+	private monedas = new services.clase_monedas();
+	private lstmonedas: services.clase_monedas[] = [];
 	private buscarcuentas = '';
 	private dialog = false;
 	private operacion = '';
@@ -63,6 +65,20 @@ export default class AdmCuentasComponent extends Vue {
 					this.dialog = false;
 				} else {
 					this.popup.error('Consultar', rescuentas.data._error.descripcion);
+				}
+			}).catch((error) => {
+					this.popup.error('Consultar', 'Error Inesperado: ' + error);
+			});
+		this.cargarMonedas();
+	}
+	private cargarMonedas(){
+		new services.Operaciones().Consultar(this.WebApi.ws_monedas_Consultar)
+			.then((resmonedas) => {
+				if (resmonedas.data._error.error === 0) {
+					this.lstmonedas = resmonedas.data._data;
+					this.dialog = false;
+				} else {
+					this.popup.error('Consultar', resmonedas.data._error.descripcion);
 				}
 			}).catch((error) => {
 					this.popup.error('Consultar', 'Error Inesperado: ' + error);
@@ -159,5 +175,27 @@ export default class AdmCuentasComponent extends Vue {
 			});
 		}
 		});
+	}
+	get lstcuentasformateados(){
+		return this.lstcuentas.map((cuentas : services.clase_cuentas)=>{
+			return{
+				cuenta: cuentas.cuenta,
+				nombrecuenta: cuentas.nombrecuenta,
+				idmoneda: this.formatearMoneda(cuentas.idmoneda),
+				nivel: cuentas.nivel,
+				cuentaasiento: cuentas.cuentaasiento,
+				cuentasumar : cuentas.cuentasumar,
+				activopasivo : cuentas.activopasivo
+			}
+		})
+	}
+	private formatearMoneda(idmoneda: Number){
+		let monedaLiteral: string = '';
+			this.lstmonedas.forEach(function(value){
+				if(value.idmoneda == idmoneda){
+					monedaLiteral = value.descripcion;
+				}
+			});
+		return monedaLiteral;	
 	}
 }

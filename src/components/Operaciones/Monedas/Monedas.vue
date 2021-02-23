@@ -69,28 +69,10 @@
 					<v-card-text>
 						<v-layout wrap>
 							<template v-if="operacion == 'Insert'">
-								<v-flex sm12 style="padding: 5px">
-									<v-text-field v-model="monedas.idmoneda"
-												label="IDMoneda"
-												hint="Ingrese IDMoneda"
-												placeholder="IDMoneda"
-												clearable
-												persistent-hint
-												required
-												:rules="validacion"
-												@input="monedas.idmoneda = updateText(monedas.idmoneda)">
-									</v-text-field>
-								</v-flex>
+								
 							</template>
 							<template v-else>
-								<v-flex sm12 style="padding: 5px">
-									<v-text-field v-model="monedas.idmoneda"
-												label="IDMoneda"
-												placeholder="IDMoneda"
-												readonly
-												persistent-hint>
-									</v-text-field>
-								</v-flex>
+								
 							</template>
 							<v-flex sm12 style="padding: 5px">
 								<v-text-field v-model="monedas.descripcion"

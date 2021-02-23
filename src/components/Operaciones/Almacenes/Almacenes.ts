@@ -21,6 +21,10 @@ export default class AdmAlmacenesComponent extends Vue {
 	private almacenes = new services.clase_almacenes();
 	private lstalmacenes: services.clase_almacenes[] = [];
 	private buscaralmacenes = '';
+	private tipomovimientoinventario = new services.clase_tipomovimientoinventario();
+	private lsttipomovimientoinventario: services.clase_tipomovimientoinventario[] = [];
+	private ciudades = new services.clase_ciudades();
+	private lstciudades: services.clase_ciudades[] = [];
 	private dialog = false;
 	private operacion = '';
 	private helper: helpers = new helpers();
@@ -61,6 +65,34 @@ export default class AdmAlmacenesComponent extends Vue {
 					this.dialog = false;
 				} else {
 					this.popup.error('Consultar', resalmacenes.data._error.descripcion);
+				}
+			}).catch((error) => {
+					this.popup.error('Consultar', 'Error Inesperado: ' + error);
+			});
+			this.cargarTipoMovimientoInventario();
+			this.cargarCiudades();
+	}
+	private cargarTipoMovimientoInventario(){
+		new services.Operaciones().Consultar(this.WebApi.ws_tipomovimientoinventario_Consultar)
+			.then((restipomovimientoinventario) => {
+				if (restipomovimientoinventario.data._error.error === 0) {
+					this.lsttipomovimientoinventario = restipomovimientoinventario.data._data;
+					this.dialog = false;
+				} else {
+					this.popup.error('Consultar', restipomovimientoinventario.data._error.descripcion);
+				}
+			}).catch((error) => {
+					this.popup.error('Consultar', 'Error Inesperado: ' + error);
+			});
+	}
+	private cargarCiudades(){
+		new services.Operaciones().Consultar(this.WebApi.ws_ciudades_Consultar)
+			.then((resciudades) => {
+				if (resciudades.data._error.error === 0) {
+					this.lstciudades = resciudades.data._data;
+					this.dialog = false;
+				} else {
+					this.popup.error('Consultar', resciudades.data._error.descripcion);
 				}
 			}).catch((error) => {
 					this.popup.error('Consultar', 'Error Inesperado: ' + error);
@@ -157,5 +189,35 @@ export default class AdmAlmacenesComponent extends Vue {
 			});
 		}
 		});
+	}
+	//FORMATEO DE LOS ID POR LITERALES EN LISTA PRINCIPAL
+	get lstalmacenesformateados(){
+		return this.lstalmacenes.map((almacenes : services.clase_almacenes)=>{
+			return{
+				codigoalmacen: almacenes.codigoalmacen,
+				descripcion: almacenes.descripcion,
+				idtipomovimientoformat: this.formatearTipoMovimiento(almacenes.idtipomovimiento),
+				idciudadFormat: this.formatearCiudad(almacenes.idciudad),
+				virtual: almacenes.virtual
+			}
+		})
+	}
+	private formatearCiudad(idciudad : Number){
+		let ciudadLiteral: string = '';
+			this.lstciudades.forEach(function(value){
+				if(value.idciudad == idciudad){
+					ciudadLiteral = value.descripcion;
+				}
+			});
+		return ciudadLiteral;	
+	}
+	private formatearTipoMovimiento(idtipomovimiento : Number){
+		let idtipomovimientoLiteral: string = '';
+			this.lsttipomovimientoinventario.forEach(function(value){
+				if(value.idtipomovimiento == idtipomovimiento){
+					idtipomovimientoLiteral = value.descripcion;
+				}
+			});
+		return idtipomovimientoLiteral;	
 	}
 }

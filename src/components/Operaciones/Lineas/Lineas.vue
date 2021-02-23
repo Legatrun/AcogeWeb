@@ -68,28 +68,9 @@
 					<v-card-text>
 						<v-layout wrap>
 							<template v-if="operacion == 'Insert'">
-								<v-flex sm12 style="padding: 5px">
-									<v-text-field v-model="lineas.idlinea"
-												label="IDLinea"
-												hint="Ingrese IDLinea"
-												placeholder="IDLinea"
-												clearable
-												persistent-hint
-												required
-												:rules="validacion"
-												@input="lineas.idlinea = updateText(lineas.idlinea)">
-									</v-text-field>
-								</v-flex>
 							</template>
 							<template v-else>
-								<v-flex sm12 style="padding: 5px">
-									<v-text-field v-model="lineas.idlinea"
-												label="IDLinea"
-												placeholder="IDLinea"
-												readonly
-												persistent-hint>
-									</v-text-field>
-								</v-flex>
+								
 							</template>
 							<v-flex sm12 style="padding: 5px">
 								<v-text-field v-model="lineas.descripcion"

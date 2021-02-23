@@ -12,7 +12,7 @@
 		</v-toolbar>
 		<v-data-table 	style="padding: 5px"
 						:headers="headers" 
-						:items="lstalmacenes" 
+						:items="lstalmacenesformateados" 
 						:items-per-page="30"
 						:search = "buscaralmacenes" 
 						:footer-props="{
@@ -27,8 +27,8 @@
 					<!--<td>{{ helper.showDataDescription(props.item.codigoalmacen,lstAlmacenes, id, descripcion)  }}</td>// Ejemplo de Uso de Helper Para obtener la Descripcion de una Tabla por medio de su Id-->
 					<td>{{ props.item.codigoalmacen }}</td>
 					<td>{{ props.item.descripcion }}</td>
-					<td>{{ props.item.idtipomovimiento }}</td>
-					<td>{{ props.item.idciudad }}</td>
+					<td>{{ props.item.idtipomovimientoformat }}</td>
+					<td>{{ props.item.idciudadFormat }}</td>
 					<td>{{ FormatBoolean(props.item.virtual) }}</td>
 					<td>
 						<v-tooltip bottom>
@@ -79,7 +79,6 @@
 												persistent-hint
 												required
 												:rules="validacion"
-												
 												@input="almacenes.codigoalmacen = updateText(almacenes.codigoalmacen)">
 												
 									</v-text-field>
@@ -108,31 +107,34 @@
 											@input="almacenes.descripcion = updateText(almacenes.descripcion)">
 								</v-text-field>
 							</v-flex>
-							<v-flex sm12 style="padding: 5px">
-								<v-text-field v-model="almacenes.idtipomovimiento"
-											label="IDTipoMovimiento"
-											hint="Ingrese IDTipoMovimiento"
-											placeholder="IDTipoMovimiento"
-											clearable
-											persistent-hint
-											required
-											:rules="validacion"
-											@input="almacenes.idtipomovimiento = updateText(almacenes.idtipomovimiento)">
-								</v-text-field>
-							</v-flex>
-							<v-flex sm12 style="padding: 5px">
-								<v-text-field v-model="almacenes.idciudad"
-											label="IDCiudad"
-											hint="Ingrese IDCiudad"
-											placeholder="IDCiudad"
-											clearable
-											persistent-hint
-											required
-											:rules="validacion"
-											
-											@input="almacenes.idciudad = updateText(almacenes.idciudad)">
-								</v-text-field>
-							</v-flex>
+
+							<v-col cols="5" sm="4" class="pa-2">	
+										<v-autocomplete v-model="almacenes.idtipomovimiento"
+												:rules="validacion"
+												:items="lsttipomovimientoinventario"
+												item-text="descripcion"
+												item-value="idtipomovimiento"
+												label="Tipo Movimiento"
+												outlined
+												autocomplete="off"
+												color="#1A237E"
+												@input="almacenes.idtipomovimiento = updateText(almacenes.idtipomovimiento)">
+										</v-autocomplete>
+							</v-col>
+
+							<v-col cols="5" sm="4" class="pa-2">	
+										<v-autocomplete v-model="almacenes.idciudad"
+												:rules="validacion"
+												:items="lstciudades"
+												item-text="descripcion"
+												item-value="idciudad"
+												label="Ciudad"
+												outlined
+												autocomplete="off"
+												color="#1A237E"
+												@input="almacenes.idciudad = updateText(almacenes.idciudad)">
+										</v-autocomplete>
+							</v-col>
 							<v-flex sm4 style="padding: 5px">
 								<h4 class="mb-0">Virtual:</h4>
 								<v-switch v-model="almacenes.virtual"

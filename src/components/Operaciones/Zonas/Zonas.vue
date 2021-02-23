@@ -12,7 +12,7 @@
 		</v-toolbar>
 		<v-data-table 	style="padding: 5px"
 						:headers="headers" 
-						:items="lstzonas" 
+						:items="lstzonasformateados" 
 						:items-per-page="30"
 						:search = "buscarzonas" 
 						:footer-props="{
@@ -68,54 +68,36 @@
 				<v-form ref="form" style="padding:10px" v-model="activo">
 					<v-card-text>
 						<v-layout wrap>
-							<template v-if="operacion == 'Insert'">
-								<v-flex sm12 style="padding: 5px">
-									<v-text-field v-model="zonas.idzona"
-												label="IDZona"
-												hint="Ingrese IDZona"
-												placeholder="IDZona"
-												clearable
-												persistent-hint
-												required
-												:rules="validacion"
-												@input="zonas.idzona = updateText(zonas.idzona)">
-									</v-text-field>
-								</v-flex>
-							</template>
-							<template v-else>
-								<v-flex sm12 style="padding: 5px">
-									<v-text-field v-model="zonas.idzona"
-												label="IDZona"
-												placeholder="IDZona"
-												readonly
-												persistent-hint>
-									</v-text-field>
-								</v-flex>
-							</template>
-							<v-flex sm12 style="padding: 5px">
-								<v-text-field v-model="zonas.idpais"
-											label="IDPais"
-											hint="Ingrese IDPais"
-											placeholder="IDPais"
-											clearable
-											persistent-hint
-											required
-											:rules="validacion"
-											@input="zonas.idpais = updateText(zonas.idpais)">
-								</v-text-field>
-							</v-flex>
-							<v-flex sm12 style="padding: 5px">
-								<v-text-field v-model="zonas.idciudad"
-											label="IDCiudad"
-											hint="Ingrese IDCiudad"
-											placeholder="IDCiudad"
-											clearable
-											persistent-hint
-											required
-											:rules="validacion"
-											@input="zonas.idciudad = updateText(zonas.idciudad)">
-								</v-text-field>
-							</v-flex>
+						
+							<v-col cols="5" sm="4" class="pa-2">
+								<v-autocomplete
+								v-model="zonas.idpais"
+								label="Pais"
+								:items="lstpais"
+								item-text="descripcion"
+								item-value="idpais"
+								:rules="validacion"
+								outlined
+								autocomplete="off"
+								color="#1A237E"
+								@input="zonas.idpais = updateText(zonas.idpais)"
+								></v-autocomplete>
+							</v-col>
+						
+							<v-col cols="5" sm="4" class="pa-2">
+								<v-autocomplete
+								v-model="zonas.idciudad"
+								label="Ciudad"
+								:items="lstciudades"
+								item-text="descripcion"
+								item-value="idciudad"
+								:rules="validacion"
+								outlined
+								autocomplete="off"
+								color="#1A237E"
+								@input="zonas.idciudad = updateText(zonas.idciudad)"
+								></v-autocomplete>
+							</v-col>
 							<v-flex sm12 style="padding: 5px">
 								<v-text-field v-model="zonas.descripcion"
 											label="Descripcion"

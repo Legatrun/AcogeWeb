@@ -12,7 +12,7 @@
 		</v-toolbar>
 		<v-data-table 	style="padding: 5px"
 						:headers="headers" 
-						:items="lstcuentasbancos" 
+						:items="lstcuentasbancosformateados" 
 						:items-per-page="30"
 						:search = "buscarcuentasbancos" 
 						:footer-props="{
@@ -71,18 +71,20 @@
 					<v-card-text>
 						<v-layout wrap>
 							<template v-if="operacion == 'Insert'">
-								<v-flex sm12 style="padding: 5px">
-									<v-text-field v-model="cuentasbancos.idbanco"
-												label="IDBanco"
-												hint="Ingrese IDBanco"
-												placeholder="IDBanco"
-												clearable
-												persistent-hint
-												required
-												:rules="validacion"
-												@input="cuentasbancos.idbanco = updateText(cuentasbancos.idbanco)">
-									</v-text-field>
-								</v-flex>
+								
+								<v-col cols="5" sm="12" class="pa-2">
+								<v-autocomplete
+								v-model="cuentasbancos.idbanco"
+								label="Banco"
+								:items="lstbancos"
+								item-text="descripcion"
+								item-value="idbanco"
+								:rules="validacion"
+								outlined
+								autocomplete="off"
+								color="#1A237E"
+								@input="cuentasbancos.idbanco = updateText(cuentasbancos.idbanco)"></v-autocomplete>
+							</v-col>
 								<v-flex sm12 style="padding: 5px">
 									<v-text-field v-model="cuentasbancos.nrocuenta"
 												label="NroCuenta"
@@ -97,14 +99,19 @@
 								</v-flex>
 							</template>
 							<template v-else>
-								<v-flex sm12 style="padding: 5px">
-									<v-text-field v-model="cuentasbancos.idbanco"
-												label="IDBanco"
-												placeholder="IDBanco"
-												readonly
-												persistent-hint>
-									</v-text-field>
-								</v-flex>
+								<v-col cols="5" sm="12" class="pa-2">
+								<v-autocomplete
+								v-model="cuentasbancos.idbanco"
+								label="Banco"
+								:items="lstbancos"
+								item-text="descripcion"
+								item-value="idbanco"
+								:rules="validacion"
+								outlined
+								autocomplete="off"
+								color="#1A237E"
+								@input="cuentasbancos.idbanco = updateText(cuentasbancos.idbanco)"></v-autocomplete>
+							</v-col>
 								<v-flex sm12 style="padding: 5px">
 									<v-text-field v-model="cuentasbancos.nrocuenta"
 												label="NroCuenta"
@@ -114,18 +121,20 @@
 									</v-text-field>
 								</v-flex>
 							</template>
-							<v-flex sm12 style="padding: 5px">
-								<v-text-field v-model="cuentasbancos.idmoneda"
-											label="IDMoneda"
-											hint="Ingrese IDMoneda"
-											placeholder="IDMoneda"
-											clearable
-											persistent-hint
-											required
-											:rules="validacion"
-											@input="cuentasbancos.idmoneda = updateText(cuentasbancos.idmoneda)">
-								</v-text-field>
-							</v-flex>
+							<v-col cols="5" sm="12" class="pa-2">
+								<v-autocomplete
+								v-model="cuentasbancos.idmoneda"
+								label="Moneda"
+								:items="lstmonedas"
+								item-text="descripcion"
+								item-value="idmoneda"
+								:rules="validacion"
+								outlined
+								autocomplete="off"
+								color="#1A237E"
+								@input="cuentasbancos.idmoneda = updateText(cuentasbancos.idmoneda)"
+								></v-autocomplete>
+							</v-col>
 							<v-flex sm12 style="padding: 5px">
 								<v-text-field v-model="cuentasbancos.saldoactual"
 											label="SaldoActual"
