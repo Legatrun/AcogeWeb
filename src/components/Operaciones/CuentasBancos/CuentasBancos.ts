@@ -23,6 +23,7 @@ export default class AdmCuentasBancosComponent extends Vue {
 
 	private cuentasbancos = new services.clase_cuentasbancos();
 	private lstcuentasbancos: services.clase_cuentasbancos[] = [];
+	private lstcuentasbancoscargar: services.clase_cuentasbancos[] = [];
 	private buscarcuentasbancos = '';
 	private bancos = new services.clase_bancos();
 	private lstbancos: services.clase_bancos[] = [];
@@ -107,6 +108,17 @@ export default class AdmCuentasBancosComponent extends Vue {
 		this.operacion = 'Insert';
 		this.dialog = true;
 	}
+	private Actualizar(data: services.clase_cuentasbancos): void {
+		new services.Operaciones().Buscar(this.WebApi.ws_cuentasbancos_Buscar, data )
+		.then((resCuentasBancosCargar) => {	
+				this.lstcuentasbancoscargar= resCuentasBancosCargar.data._data;
+				this.cuentasbancos = this.lstcuentasbancoscargar[0];
+			}).catch((err) => {   
+		   });
+		//this.cuentasbancos.fechaapertura = this.FormatDate(Date.now());
+		this.operacion = 'Update';
+		this.dialog = true;
+	}
 	private Grabar() {
 		if (this.operacion === 'Update') {
 			new services.Operaciones().Actualizar(this.WebApi.ws_cuentasbancos_Actualizar, this.cuentasbancos)
@@ -142,12 +154,7 @@ export default class AdmCuentasBancosComponent extends Vue {
 		this.cargar_data();
 		this.dialog = false;
 	}
-	private Actualizar(data: services.clase_cuentasbancos): void {
-		this.cuentasbancos = data;
-		this.cuentasbancos.fechaapertura = this.FormatDate(Date.now());
-		this.operacion = 'Update';
-		this.dialog = true;
-	}
+	
 	private select_fecha(fecha: string) {
 		return fecha.substr(0, 10);
 	}
@@ -163,6 +170,7 @@ export default class AdmCuentasBancosComponent extends Vue {
 			confirmButtonText: 'Eliminar!',
 		}).then((resultOfQuestion) => {
 			if (resultOfQuestion.value) {
+				
 			new services.Operaciones().Eliminar(this.WebApi.ws_cuentasbancos_Eliminar, data)
 				.then((result) => {
 				if (result.data.error === 0) {
@@ -198,7 +206,8 @@ export default class AdmCuentasBancosComponent extends Vue {
 	get lstcuentasbancosformateados(){
 		return this.lstcuentasbancos.map((cuentabancos : services.clase_cuentasbancos)=>{
 			return{
-				idbanco: this.formatearbanco(cuentabancos.idbanco),
+				idbanco:cuentabancos.idbanco,
+				idbancoliteral: this.formatearbanco(cuentabancos.idbanco),
 				nrocuenta: cuentabancos.nrocuenta,
 				idmoneda: this.formatearMoneda(cuentabancos.idmoneda),
 				saldoactual:cuentabancos.saldoactual,

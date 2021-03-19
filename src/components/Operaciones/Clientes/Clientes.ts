@@ -31,6 +31,7 @@ export default class AdmClientesComponent extends Vue {
 
 	private clientes = new services.clase_clientes();
 	private lstclientes: services.clase_clientes[] = [];
+	private lstclientescargar: services.clase_clientes[] = [];
 	private buscarclientes = '';
 	private tipodocumentosidentidad = new services.clase_tipodocumentosidentidad();
 	private lsttipodocumentosidentidad: services.clase_tipodocumentosidentidad[] = [];
@@ -52,6 +53,9 @@ export default class AdmClientesComponent extends Vue {
 		(v: any) => !!v || 'El campo es requerido',
     (v: any) => !/^\s*$/.test(v) || 'No se permite espacios vacios',
   ];
+	correosRules = [
+		(v: any) => /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(v) || "Ingrese un correo valido",
+	];
 	private FormatDate(data: any) {
 		return moment(data).format('YYYY-MM-DD');
 	}
@@ -164,6 +168,7 @@ export default class AdmClientesComponent extends Vue {
 		this.dialog = true;
 	}
 	private Grabar() {
+		this.clientes.activo = true;
 		if (this.operacion === 'Update') {
 			new services.Operaciones().Actualizar(this.WebApi.ws_clientes_Actualizar, this.clientes)
 			.then((result) => {
@@ -199,7 +204,12 @@ export default class AdmClientesComponent extends Vue {
 		this.dialog = false;
 	}
 	private Actualizar(data: services.clase_clientes): void {
-		this.clientes = data;
+		new services.Operaciones().Buscar(this.WebApi.ws_clientes_Buscar, data )
+			 .then((resClientes) => {	
+					 this.lstclientescargar= resClientes.data._data;
+					 this.clientes = this.lstclientescargar[0];
+				 }).catch((err) => {   
+				});
 		this.operacion = 'Update';
 		this.dialog = true;
 	}
@@ -250,6 +260,20 @@ export default class AdmClientesComponent extends Vue {
 		}
 		});
 	}
+	
+	private newCiudad(){
+		this.$router.push({​​​​ path: '/Ciudades' }​​​​);​​​​
+	}
+	private newPais(){
+		this.$router.push({​​​​ path: '/Pais' }​​​​);​​​​
+	}
+	private newZona(){
+		this.$router.push({​​​​ path: '/Zonas' }​​​​);​​​​
+	}
+	private newTipocliente(){
+		this.$router.push({​​​​ path: '/TiposCliente' }​​​​);​​​​
+	}
+
 	get lstclientesformateados(){
 		return this.lstclientes.map((clientes : services.clase_clientes)=>{
 			return{

@@ -25,7 +25,7 @@
 			<template slot="item" slot-scope="props">
 				<tr>
 					<!--<td>{{ helper.showDataDescription(props.item.idtipomovimiento,lstTipoMovimientoInventario, id, descripcion)  }}</td>// Ejemplo de Uso de Helper Para obtener la Descripcion de una Tabla por medio de su Id-->
-					<td>{{ props.item.idtipomovimiento }}</td>
+					<!-- <td>{{ props.item.idtipomovimiento }}</td> -->
 					<td>{{ props.item.descripcion }}</td>
 					<td>
 						<v-tooltip bottom>
@@ -67,7 +67,7 @@
 					<v-card-text>
 						<v-layout wrap>
 							<template v-if="operacion == 'Insert'">
-								<v-flex sm12 style="padding: 5px">
+								<!-- <v-flex sm12 style="padding: 5px">
 									<v-text-field v-model="tipomovimientoinventario.idtipomovimiento"
 												label="IDTipoMovimiento"
 												hint="Ingrese IDTipoMovimiento"
@@ -78,17 +78,17 @@
 												:rules="validacion"
 												@input="tipomovimientoinventario.idtipomovimiento = updateText(tipomovimientoinventario.idtipomovimiento)">
 									</v-text-field>
-								</v-flex>
+								</v-flex> -->
 							</template>
 							<template v-else>
-								<v-flex sm12 style="padding: 5px">
+								<!-- <v-flex sm12 style="padding: 5px">
 									<v-text-field v-model="tipomovimientoinventario.idtipomovimiento"
 												label="IDTipoMovimiento"
 												placeholder="IDTipoMovimiento"
 												readonly
 												persistent-hint>
 									</v-text-field>
-								</v-flex>
+								</v-flex> -->
 							</template>
 							<v-flex sm12 style="padding: 5px">
 								<v-text-field v-model="tipomovimientoinventario.descripcion"

@@ -9,7 +9,7 @@ import helpers from '@/helper';
 @Component
 export default class AdmPaisComponent extends Vue {
 	private headers: any[] = [
-		{ text: 'IDPais', align: 'left', sortable: true, value: 'idpais', width: '15%' },
+		//{ text: 'IDPais', align: 'left', sortable: true, value: 'idpais', width: '15%' },
 		{ text: 'descripcion', align: 'left', sortable: false, value: 'descripcion', width: '15%' },
 		{ text: 'sigla', align: 'left', sortable: false, value: 'sigla', width: '15%' },
 		{ text: 'Operaciones', align: 'left', sortable: false, value: 'action', width: '20%' },
@@ -28,6 +28,11 @@ export default class AdmPaisComponent extends Vue {
 		(v: any) => !!v || 'El campo es requerido',
     (v: any) => !/^\s*$/.test(v) || 'No se permite espacios vacios',
   ];
+  siglarules = [
+	(v: any) => !!v || 'El campo es requerido',
+	(v: any) => (/^[a-zA-Z-0-9]*$/.test(v)) || 'No se permite espacios vacios ni caracteres especiales',
+];
+  
 	private FormatDate(data: any) {
 		return moment(data).format('YYYY-MM-DD');
 	}
@@ -115,7 +120,7 @@ export default class AdmPaisComponent extends Vue {
 	private Eliminar(data: services.clase_pais): void {
 		swal.fire({
 			title: 'Esta seguro de esta operacion?',
-			text: 'Eliminacion de Registro ' + data.idpais +'/'+ data.descripcion,
+			text: 'Eliminacion de Registro ' + data.descripcion,
 			type: 'warning',
 			showCancelButton: true,
 			confirmButtonColor: 'green',

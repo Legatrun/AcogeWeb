@@ -9,7 +9,7 @@ import helpers from '@/helper';
 @Component
 export default class AdmTipodePagosComponent extends Vue {
 	private headers: any[] = [
-		{ text: 'IDTipoPago', align: 'left', sortable: true, value: 'idtipopago', width: '15%' },
+		//{ text: 'IDTipoPago', align: 'left', sortable: true, value: 'idtipopago', width: '15%' },
 		{ text: 'descripcion', align: 'left', sortable: false, value: 'descripcion', width: '15%' },
 		{ text: 'Operaciones', align: 'left', sortable: false, value: 'action', width: '20%' },
 	];
@@ -114,7 +114,7 @@ export default class AdmTipodePagosComponent extends Vue {
 	private Eliminar(data: services.clase_tipodepagos): void {
 		swal.fire({
 			title: 'Esta seguro de esta operacion?',
-			text: 'Eliminacion de Registro ' + data.idtipopago+'/'+data.descripcion,
+			text: 'Eliminacion de Registro ' +data.descripcion,
 			type: 'warning',
 			showCancelButton: true,
 			confirmButtonColor: 'green',

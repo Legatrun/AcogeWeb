@@ -9,7 +9,7 @@ import helpers from '@/helper';
 @Component
 export default class AdmBancosComponent extends Vue {
 	private headers: any[] = [
-		{ text: 'IDBanco', align: 'left', sortable: true, value: 'idbanco', width: '15%' },
+		//{ text: 'IDBanco', align: 'left', sortable: true, value: 'idbanco', width: '15%' },
 		{ text: 'nit', align: 'left', sortable: false, value: 'nit', width: '15%' },
 		{ text: 'descripcion', align: 'left', sortable: false, value: 'descripcion', width: '15%' },
 		{ text: 'bancopropio', align: 'left', sortable: false, value: 'bancopropio', width: '15%' },
@@ -21,6 +21,7 @@ export default class AdmBancosComponent extends Vue {
 
 	private bancos = new services.clase_bancos();
 	private lstbancos: services.clase_bancos[] = [];
+	private lstbancosCargar: services.clase_bancos[] = [];
 	private buscarbancos = '';
 	private pais = new services.clase_pais();
 	private lstpais: services.clase_pais[] = [];
@@ -31,10 +32,15 @@ export default class AdmBancosComponent extends Vue {
 	private helper: helpers = new helpers();
 	private popup = new popup.Swal();
 	private activo = false;
+	private BancoPropio = false;
 	validacion = [
-		(v: any) => !!v || 'El campo es requerido',
+	(v: any) => !!v || 'El campo es requerido',
     (v: any) => !/^\s*$/.test(v) || 'No se permite espacios vacios',
   ];
+  validacionNIT = [
+	(v: any) => !!v || 'El campo es requerido',
+	(v: any) => !(!/^[0-9, -]*$/.test(v)) || "El campo sólo permite '-' como caracter especial",
+];
 	private FormatDate(data: any) {
 		return moment(data).format('YYYY-MM-DD');
 	}
@@ -105,6 +111,7 @@ export default class AdmBancosComponent extends Vue {
 		this.dialog = true;
 	}
 	private Grabar() {
+		this.bancos.bancopropio = this.BancoPropio;
 		if (this.operacion === 'Update') {
 			new services.Operaciones().Actualizar(this.WebApi.ws_bancos_Actualizar, this.bancos)
 			.then((result) => {
@@ -140,7 +147,12 @@ export default class AdmBancosComponent extends Vue {
 		this.dialog = false;
 	}
 	private Actualizar(data: services.clase_bancos): void {
-		this.bancos = data;
+		new services.Operaciones().Buscar(this.WebApi.ws_bancos_Buscar, data )
+			 .then((resBanco) => {	
+					 this.lstbancosCargar= resBanco.data._data;
+					 this.bancos = this.lstbancosCargar[0];
+				 }).catch((err) => {   
+				});
 		this.operacion = 'Update';
 		this.dialog = true;
 	}
@@ -190,6 +202,12 @@ export default class AdmBancosComponent extends Vue {
 			});
 		}
 		});
+	}
+	private newPais(){
+		this.$router.push({​​​​ path: '/Pais' }​​​​);​​​​
+	}
+	private newCiudad(){
+		this.$router.push({​​​​ path: '/Ciudades' }​​​​);​​​​
 	}
 	get lstbancosormateados(){
 		return this.lstbancos.map((bancos : services.clase_bancos)=>{

@@ -30,6 +30,7 @@ export default class AdmCtasPresupComponent extends Vue {
 
 	private ctaspresup = new services.clase_ctaspresup();
 	private lstctaspresup: services.clase_ctaspresup[] = [];
+	private lstctaspresupcargar: services.clase_ctaspresup[] = [];
 	private buscarctaspresup = '';
 	private dialog = false;
 	private monedas = new services.clase_monedas();
@@ -135,9 +136,12 @@ export default class AdmCtasPresupComponent extends Vue {
 		this.dialog = false;
 	}
 	private Actualizar(data: services.clase_ctaspresup): void {
-		this.ctaspresup = data;
-		this.ctaspresup.fechacreacion = this.FormatDate(Date.now());
-		this.ctaspresup.fechamodificacion = this.FormatDate(Date.now());
+		new services.Operaciones().Buscar(this.WebApi.ws_ctaspresup_Buscar, data )
+		.then((resCtasPresup) => {	
+				this.lstctaspresupcargar= resCtasPresup.data._data;
+				this.ctaspresup = this.lstctaspresupcargar[0];
+			}).catch((err) => {   
+		});
 		this.operacion = 'Update';
 		this.dialog = true;
 	}

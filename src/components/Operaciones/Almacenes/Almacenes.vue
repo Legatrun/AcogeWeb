@@ -10,7 +10,7 @@
 					solo
 					hide-details></v-text-field>
 		</v-toolbar>
-		<v-data-table 	style="padding: 5px"
+<v-data-table 	style="padding: 5px"
 						:headers="headers" 
 						:items="lstalmacenesformateados" 
 						:items-per-page="30"
@@ -24,8 +24,6 @@
 						class="elevation-1">
 			<template slot="item" slot-scope="props">
 				<tr>
-					<!--<td>{{ helper.showDataDescription(props.item.codigoalmacen,lstAlmacenes, id, descripcion)  }}</td>// Ejemplo de Uso de Helper Para obtener la Descripcion de una Tabla por medio de su Id-->
-					<td>{{ props.item.codigoalmacen }}</td>
 					<td>{{ props.item.descripcion }}</td>
 					<td>{{ props.item.idtipomovimientoformat }}</td>
 					<td>{{ props.item.idciudadFormat }}</td>
@@ -35,13 +33,13 @@
 							<template v-slot:activator="{ on }">
 								<v-btn color="success" v-on="on" fab small dark  @click="Actualizar(props.item)"><v-icon>edit</v-icon></v-btn>
 							</template>
-							<span>Modificar Registro de Almacén</span>
+							<span>Modificar Registro </span>
 						</v-tooltip>
 						<v-tooltip style="padding-left:10px" bottom>
 							<template v-slot:activator="{ on }" >
 								<v-btn color="error" v-on="on" fab small dark  @click="Eliminar(props.item)"><v-icon>delete</v-icon></v-btn>
 							</template>
-							<span>Eliminar Registro</span>
+							<span>Eliminar Registro </span>
 						</v-tooltip>
 					</td>
 				</tr>
@@ -49,9 +47,15 @@
 			<template v-slot:top>
 				<v-tooltip bottom>
 					<template v-slot:activator="{ on }">
-						<v-btn color="accent" v-on="on" @click="Insertar()">Adicionar Nuevo Registro de Almacenes</v-btn>
+						<v-btn color="gray" v-on="on" @click="Insertar()">Adicionar Nuevo Registro de Almacenes</v-btn> 
 					</template>
-					<span>Adicionar nuevo registro de Almacén</span>
+					<span>Adicionar nuevo registro de cliente</span>
+				</v-tooltip>
+				<v-tooltip bottom>
+					<template v-slot:activator="{ on }">
+						<v-btn color="accent" v-on="on" @click="newCiudad()">Adicionar Nueva ciudad</v-btn>
+					</template>
+					<span>Adicionar nuevo registro de cliente</span>
 				</v-tooltip>
 			</template>
 			<template v-slot:no-data>
@@ -60,6 +64,9 @@
 				</v-alert>
 			</template>
 		</v-data-table>
+
+
+
 		<v-dialog v-model="dialog" persistent max-width="50%">
 			<v-card>
 				<v-toolbar style="padding:10px" dark class="primary">
@@ -135,13 +142,8 @@
 												@input="almacenes.idciudad = updateText(almacenes.idciudad)">
 										</v-autocomplete>
 							</v-col>
-							<v-flex sm4 style="padding: 5px">
-								<h4 class="mb-0">Virtual:</h4>
-								<v-switch v-model="almacenes.virtual"
-									color="indigo"
-									hint="Seleccione Virtual"
-									label="almacenes.Virtual"></v-switch>
-							</v-flex>
+						
+							<p class="text-sm-left"><b>Virtual: </b></p> <v-switch  v-model="almacenes.virtual" color="custom"  :label="`Estado: ${almacenes.virtual ? 'Virtual' : 'No Virtual'}`"> </v-switch>
 						</v-layout>
 					</v-card-text>
 				</v-form>

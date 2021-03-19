@@ -25,7 +25,7 @@
 			<template slot="item" slot-scope="props">
 				<tr>
 					<!--<td>{{ helper.showDataDescription(props.item.idbanco,lstBancos, id, descripcion)  }}</td>// Ejemplo de Uso de Helper Para obtener la Descripcion de una Tabla por medio de su Id-->
-					<td>{{ props.item.idbanco }}</td>
+					<!-- <td>{{ props.item.idbanco }}</td> -->
 					<td>{{ props.item.nit }}</td>
 					<td>{{ props.item.descripcion }}</td>
 					<td>{{ FormatBoolean(props.item.bancopropio) }}</td>
@@ -51,6 +51,8 @@
 				<v-tooltip bottom>
 					<template v-slot:activator="{ on }">
 						<v-btn color="accent" v-on="on" @click="Insertar()">Adicionar Nuevo Registro de Bancos</v-btn>
+						<v-btn color="accent" v-on="on" @click="newPais()">Adicionar Nuevo Registro de Pais</v-btn>
+						<v-btn color="accent" v-on="on" @click="newCiudad()">Adicionar Nueva ciudad</v-btn>
 					</template>
 					<span>Adicionar nuevo registro de Banco</span>
 				</v-tooltip>
@@ -94,7 +96,7 @@
 									</v-text-field>
 								</v-flex>-->
 							</template>
-							<v-flex sm12 style="padding: 5px">
+							<v-flex sm6 style="padding: 5px">
 								<v-text-field v-model="bancos.nit"
 											label="NIT"
 											hint="Ingrese NIT"
@@ -102,11 +104,12 @@
 											clearable
 											persistent-hint
 											required
-											:rules="validacion"
-											@input="bancos.nit = updateText(bancos.nit)">
+											maxlength="10"
+											counter
+											:rules="validacionNIT">
 								</v-text-field>
 							</v-flex>
-							<v-flex sm12 style="padding: 5px">
+							<v-flex sm6 style="padding: 5px">
 								<v-text-field v-model="bancos.descripcion"
 											label="Descripcion"
 											hint="Ingrese Descripcion"
@@ -118,14 +121,8 @@
 											@input="bancos.descripcion = updateText(bancos.descripcion)">
 								</v-text-field>
 							</v-flex>
-							<v-flex sm4 style="padding: 5px">
-								<h4 class="mb-0">BancoPropio:</h4>
-								<v-switch v-model="bancos.bancopropio"
-									color="indigo"
-									hint="Seleccione BancoPropio"
-									label="bancos.BancoPropio"></v-switch>
-							</v-flex>
-							<v-col cols="5" sm="4" class="pa-2">
+							
+							<v-col cols="6" sm="4" class="pa-2">
 								<v-autocomplete
 								v-model="bancos.idpais"
 								label="Pais"
@@ -136,10 +133,9 @@
 								outlined
 								autocomplete="off"
 								color="#1A237E"
-								@input="bancos.idpais = updateText(bancos.idpais)"
 								></v-autocomplete>
 							</v-col>
-							<v-col cols="5" sm="4" class="pa-2">
+							<v-col cols="6" sm="4" class="pa-2">
 								<v-autocomplete
 								v-model="bancos.idciudad"
 								label="Ciudad"
@@ -150,9 +146,13 @@
 								outlined
 								autocomplete="off"
 								color="#1A237E"
-								@input="bancos.idciudad = updateText(bancos.idciudad)"
 								></v-autocomplete>
 							</v-col>
+							<v-flex sm12 style="padding: 5px">
+								<v-col cols="7" sm="5">
+									<p class="text-sm-left"><b>Banco Propio: </b></p> <v-switch  v-model="BancoPropio" color="custom"  :label="`Estado: ${BancoPropio ? 'Si' : 'No'}`"> </v-switch>
+									</v-col>
+							</v-flex>
 						</v-layout>
 					</v-card-text>
 				</v-form>

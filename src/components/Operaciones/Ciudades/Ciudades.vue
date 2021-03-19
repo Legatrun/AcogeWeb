@@ -25,7 +25,7 @@
 			<template slot="item" slot-scope="props">
 				<tr>
 					<!--<td>{{ helper.showDataDescription(props.item.idciudad,lstCiudades, id, descripcion)  }}</td>// Ejemplo de Uso de Helper Para obtener la Descripcion de una Tabla por medio de su Id-->
-					<td>{{ props.item.idciudad }}</td>
+					<!-- <td>{{ props.item.idciudad }}</td> -->
 					<td>{{ props.item.idpais }}</td>
 					<td>{{ props.item.descripcion }}</td>
 					<td>{{ props.item.sigla }}</td>
@@ -50,6 +50,7 @@
 				<v-tooltip bottom>
 					<template v-slot:activator="{ on }">
 						<v-btn color="accent" v-on="on" @click="Insertar()">Adicionar Nuevo Registro de Ciudades</v-btn>
+						<v-btn color="accent" v-on="on" @click="newMoneda()">Adicionar Nuevo Registro Monedas</v-btn>
 					</template>
 					<span>Adicionar nuevo registro de Ciudad</span>
 				</v-tooltip>
@@ -93,7 +94,7 @@
 									</v-text-field>
 								</v-flex>-->
 							</template>
-							<v-col cols="5" sm="12" class="pa-2">
+							<v-col cols="5" sm="6" class="pa-2">
 								<v-autocomplete
 								v-model="ciudades.idpais"
 								label="Pais"
@@ -107,11 +108,11 @@
 								@input="ciudades.idpais = updateText(ciudades.idpais)"
 								></v-autocomplete>
 							</v-col>
-							<v-flex sm12 style="padding: 5px">
+							<v-flex sm6 style="padding: 5px">
 								<v-text-field v-model="ciudades.descripcion"
-											label="Descripcion"
-											hint="Ingrese Descripcion"
-											placeholder="Descripcion"
+											label="Nombre de la Ciudad"
+											hint="Ingrese Nombre de la ciudad"
+											placeholder="Nombre de la Ciudad"
 											clearable
 											persistent-hint
 											required
@@ -119,7 +120,7 @@
 											@input="ciudades.descripcion = updateText(ciudades.descripcion)">
 								</v-text-field>
 							</v-flex>
-							<v-flex sm12 style="padding: 5px">
+							<v-flex sm6 style="padding: 5px">
 								<v-text-field v-model="ciudades.sigla"
 											label="Sigla"
 											hint="Ingrese Sigla"
@@ -131,7 +132,7 @@
 											@input="ciudades.sigla = updateText(ciudades.sigla)">
 								</v-text-field>
 							</v-flex>
-							<v-col cols="5" sm="12" class="pa-2">
+							<v-col cols="5" sm="6" class="pa-2">
 								<v-autocomplete
 								v-model="ciudades.idmoneda"
 								label="Moneda"

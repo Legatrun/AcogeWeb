@@ -12,7 +12,7 @@
 		</v-toolbar>
 		<v-data-table 	style="padding: 5px"
 						:headers="headers" 
-						:items="lstsucursalesformateados" 
+						:items="lstSucursalesFormat" 
 						:items-per-page="30"
 						:search = "buscarsucursales" 
 						:footer-props="{
@@ -25,7 +25,7 @@
 			<template slot="item" slot-scope="props">
 				<tr>
 					<!--<td>{{ helper.showDataDescription(props.item.idsucursal,lstSucursales, id, descripcion)  }}</td>// Ejemplo de Uso de Helper Para obtener la Descripcion de una Tabla por medio de su Id-->
-					<td>{{ props.item.idsucursal }}</td>
+					<!-- <td>{{ props.item.idsucursal }}</td> -->
 					<td>{{ props.item.idempresa }}</td>
 					<td>{{ props.item.idzona }}</td>
 					<td>{{ props.item.nombre }}</td>
@@ -74,7 +74,7 @@
 					<v-card-text>
 						<v-layout wrap>
 							<template v-if="operacion == 'Insert'">
-								<v-flex sm12 style="padding: 5px">
+								<v-flex sm6 style="padding: 5px">
 									<v-text-field v-model="sucursales.idsucursal"
 												label="IDSucursal"
 												hint="Ingrese IDSucursal"
@@ -88,7 +88,7 @@
 								</v-flex>
 							</template>
 							<template v-else>
-								<v-flex sm12 style="padding: 5px">
+								<v-flex sm6 style="padding: 5px">
 									<v-text-field v-model="sucursales.idsucursal"
 												label="IDSucursal"
 												placeholder="IDSucursal"
@@ -97,19 +97,32 @@
 									</v-text-field>
 								</v-flex>
 							</template>
-							<v-flex sm12 style="padding: 5px">
-								<v-text-field v-model="sucursales.idempresa"
-											label="IDEmpresa"
-											hint="Ingrese IDEmpresa"
-											placeholder="IDEmpresa"
+							<v-flex sm6 style="padding: 5px">
+								<v-text-field v-model="sucursales.nombre"
+											label="Nombre"
+											hint="Ingrese Nombre"
+											placeholder="Nombre"
 											clearable
 											persistent-hint
 											required
 											:rules="validacion"
-											@input="sucursales.idempresa = updateText(sucursales.idempresa)">
+											@input="sucursales.nombre = updateText(sucursales.nombre)">
 								</v-text-field>
 							</v-flex>
-							<v-col cols="5" sm="4" class="pa-2">
+							<v-col cols="5" sm="6" class="pa-2">
+								<v-autocomplete
+								v-model="sucursales.idempresa"
+								label="Empresa"
+								:items="lstempresa"
+								item-text="descripcion"
+								item-value="idempresa"
+								:rules="validacion"
+								outlined
+								autocomplete="off"
+								color="#1A237E"
+								></v-autocomplete>
+							</v-col>
+							<v-col cols="5" sm="6" class="pa-2">
 								<v-autocomplete
 								v-model="sucursales.idzona"
 								label="Zona"
@@ -123,19 +136,8 @@
 								@input="sucursales.idzona = updateText(sucursales.idzona)"
 								></v-autocomplete>
 							</v-col>
-							<v-flex sm12 style="padding: 5px">
-								<v-text-field v-model="sucursales.nombre"
-											label="Nombre"
-											hint="Ingrese Nombre"
-											placeholder="Nombre"
-											clearable
-											persistent-hint
-											required
-											:rules="validacion"
-											@input="sucursales.nombre = updateText(sucursales.nombre)">
-								</v-text-field>
-							</v-flex>
-							<v-flex sm12 style="padding: 5px">
+							
+							<v-flex sm6 style="padding: 5px">
 								<v-text-field v-model="sucursales.direccion"
 											label="Direccion"
 											hint="Ingrese Direccion"
@@ -147,7 +149,7 @@
 											@input="sucursales.direccion = updateText(sucursales.direccion)">
 								</v-text-field>
 							</v-flex>
-							<v-flex sm12 style="padding: 5px">
+							<v-flex sm6 style="padding: 5px">
 								<v-text-field v-model="sucursales.numero"
 											label="Numero"
 											hint="Ingrese Numero"
@@ -159,7 +161,7 @@
 											@input="sucursales.numero = updateText(sucursales.numero)">
 								</v-text-field>
 							</v-flex>
-							<v-flex sm12 style="padding: 5px">
+							<v-flex sm6 style="padding: 5px">
 								<v-text-field v-model="sucursales.telefonos"
 											label="Telefonos"
 											hint="Ingrese Telefonos"
@@ -171,7 +173,7 @@
 											@input="sucursales.telefonos = updateText(sucursales.telefonos)">
 								</v-text-field>
 							</v-flex>
-							<v-flex sm12 style="padding: 5px">
+							<v-flex sm6 style="padding: 5px">
 								<v-text-field v-model="sucursales.email"
 											label="Email"
 											hint="Ingrese Email"
@@ -179,15 +181,15 @@
 											clearable
 											persistent-hint
 											required
-											:rules="validacion"
+											:rules="correosRules"
 											>
 								</v-text-field>
 							</v-flex>
-							<v-flex sm12 style="padding: 5px">
+							<v-flex sm6 style="padding: 5px">
 								<v-text-field v-model="sucursales.codigopostal"
-											label="CodigoPostal"
-											hint="Ingrese CodigoPostal"
-											placeholder="CodigoPostal"
+											label="Codigo de Postal"
+											hint="Ingrese Codigo de Postal"
+											placeholder="Codigo de Postal"
 											clearable
 											persistent-hint
 											required

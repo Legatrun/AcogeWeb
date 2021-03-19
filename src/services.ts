@@ -123,6 +123,7 @@ export class Endpoints {
 	public ws_zonas_Insertar: string = $store.state.server + 'Api/zonas/Insertar';
 	public ws_zonas_Actualizar: string = $store.state.server + 'Api/zonas/Actualizar';
 	public ws_zonas_Eliminar: string = $store.state.server + 'Api/zonas/Eliminar';
+	public ws_empresa_Consultar: string = $store.state.server + 'Api/Empresa/consultar';
 }
 
 // tslint:disable-next-line: max-classes-per-file class-name
@@ -146,6 +147,7 @@ export class clase_aperturaycierregestion {
 	public gestion!: string;
 	public mes!: number;
 	public abierta!: boolean;
+	public mesformat!: string;
 }
 
 // tslint:disable-next-line: max-classes-per-file class-name
@@ -366,6 +368,17 @@ export class clase_zonas {
 	public idpais!: number;
 	public idciudad!: number;
 	public descripcion!: string;
+}
+
+export class clase_empresa {
+	public idempresa !: number;
+	public idpais !: number;
+	public idciudad!: number;
+	public descripcion !: string;
+	public logo !: string;
+	public NIT !: string;
+	public patronal !: string;
+	public estado !: boolean;
 }
 
 // tslint:disable-next-line: max-classes-per-file class-name

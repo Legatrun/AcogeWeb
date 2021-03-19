@@ -25,7 +25,7 @@
 			<template slot="item" slot-scope="props">
 				<tr>
 					<!--<td>{{ helper.showDataDescription(props.item.idzona,lstZonas, id, descripcion)  }}</td>// Ejemplo de Uso de Helper Para obtener la Descripcion de una Tabla por medio de su Id-->
-					<td>{{ props.item.idzona }}</td>
+					<!-- <td>{{ props.item.idzona }}</td> -->
 					<td>{{ props.item.idpais }}</td>
 					<td>{{ props.item.idciudad }}</td>
 					<td>{{ props.item.descripcion }}</td>

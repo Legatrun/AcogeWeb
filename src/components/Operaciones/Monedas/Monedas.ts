@@ -9,7 +9,7 @@ import helpers from '@/helper';
 @Component
 export default class AdmMonedasComponent extends Vue {
 	private headers: any[] = [
-		{ text: 'IDMoneda', align: 'left', sortable: true, value: 'idmoneda', width: '15%' },
+		//{ text: 'IDMoneda', align: 'left', sortable: true, value: 'idmoneda', width: '15%' },
 		{ text: 'descripcion', align: 'left', sortable: false, value: 'descripcion', width: '15%' },
 		{ text: 'sigla', align: 'left', sortable: false, value: 'sigla', width: '15%' },
 		{ text: 'monedalocal', align: 'left', sortable: false, value: 'monedalocal', width: '15%' },
@@ -28,7 +28,11 @@ export default class AdmMonedasComponent extends Vue {
 	validacion = [
 		(v: any) => !!v || 'El campo es requerido',
     (v: any) => !/^\s*$/.test(v) || 'No se permite espacios vacios',
-  ];
+	];
+  siglarules = [
+	(v: any) => !!v || 'El campo es requerido',
+	(v: any) => (/^[a-zA-Z-0-9]*$/.test(v)) || 'No se permite espacios vacios ni caracteres especiales',
+	];
 	private FormatDate(data: any) {
 		return moment(data).format('YYYY-MM-DD');
 	}
@@ -71,6 +75,7 @@ export default class AdmMonedasComponent extends Vue {
 		this.dialog = true;
 	}
 	private Grabar() {
+		this.monedas.sigla = this.monedas.sigla.trim();
 		if (this.operacion === 'Update') {
 			new services.Operaciones().Actualizar(this.WebApi.ws_monedas_Actualizar, this.monedas)
 			.then((result) => {

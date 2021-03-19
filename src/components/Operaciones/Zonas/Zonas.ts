@@ -9,7 +9,7 @@ import helpers from '@/helper';
 @Component
 export default class AdmZonasComponent extends Vue {
 	private headers: any[] = [
-		{ text: 'IDZona', align: 'left', sortable: true, value: 'idzona', width: '15%' },
+		//{ text: 'IDZona', align: 'left', sortable: true, value: 'idzona', width: '15%' },
 		{ text: 'idpais', align: 'left', sortable: false, value: 'idpais', width: '15%' },
 		{ text: 'idciudad', align: 'left', sortable: false, value: 'idciudad', width: '15%' },
 		{ text: 'descripcion', align: 'left', sortable: false, value: 'descripcion', width: '15%' },
@@ -19,6 +19,7 @@ export default class AdmZonasComponent extends Vue {
 
 	private zonas = new services.clase_zonas();
 	private lstzonas: services.clase_zonas[] = [];
+	private lstzonascargar: services.clase_zonas[] = [];
 	private buscarzonas = '';
 	private pais = new services.clase_pais();
 	private lstpais: services.clase_pais[] = [];
@@ -138,7 +139,12 @@ export default class AdmZonasComponent extends Vue {
 		this.dialog = false;
 	}
 	private Actualizar(data: services.clase_zonas): void {
-		this.zonas = data;
+		new services.Operaciones().Buscar(this.WebApi.ws_zonas_Buscar, data )
+			 .then((resZonas) => {	
+					 this.lstzonascargar= resZonas.data._data;
+					 this.zonas = this.lstzonascargar[0];
+				 }).catch((err) => {   
+				});
 		this.operacion = 'Update';
 		this.dialog = true;
 	}
@@ -148,7 +154,7 @@ export default class AdmZonasComponent extends Vue {
 	private Eliminar(data: services.clase_zonas): void {
 		swal.fire({
 			title: 'Esta seguro de esta operacion?',
-			text: 'Eliminacion de Registro ' + data.idzona+'/'+data.descripcion,
+			text: 'Eliminacion de Registro ' +data.descripcion,
 			type: 'warning',
 			showCancelButton: true,
 			confirmButtonColor: 'green',
@@ -194,7 +200,7 @@ export default class AdmZonasComponent extends Vue {
 			return{
 				idzona: zonas.idzona,
 				idpais: this.formatearpais(zonas.idpais),
-				idciudad: zonas.idciudad,
+				idciudad: this.formatearciudad(zonas.idciudad),
 				descripcion: zonas.descripcion
 			}
 		})
@@ -207,5 +213,14 @@ export default class AdmZonasComponent extends Vue {
 				}
 			});
 		return paisLiteral;	
+	}
+	private formatearciudad(idciudad : Number){
+		let ciudadLiteral: string = '';
+			this.lstciudades.forEach(function(value){
+				if(value.idciudad == idciudad){
+					ciudadLiteral = value.descripcion;
+				}
+			});
+		return ciudadLiteral;	
 	}
 }

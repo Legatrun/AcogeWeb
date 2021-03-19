@@ -9,7 +9,7 @@ import helpers from '@/helper';
 @Component
 export default class AdmClaseItemsComponent extends Vue {
 	private headers: any[] = [
-		{ text: 'IDClase', align: 'left', sortable: true, value: 'idclase', width: '10%' },
+		//{ text: 'IDClase', align: 'left', sortable: true, value: 'idclase', width: '10%' },
 		{ text: 'descripcion', align: 'left', sortable: false, value: 'descripcion', width: '10%' },
 		{ text: 'sigla', align: 'left', sortable: false, value: 'sigla', width: '10%' },
 		{ text: 'cuentaventa', align: 'left', sortable: false, value: 'cuentaventa', width: '10%' },
@@ -33,6 +33,10 @@ export default class AdmClaseItemsComponent extends Vue {
 		(v: any) => !!v || 'El campo es requerido',
     (v: any) => !/^\s*$/.test(v) || 'No se permite espacios vacios',
   ];
+  CuentasRules = [
+	(v: any) => !!v || "El campo es requerido",
+	(v: any) => !(!/^[0-9, -]*$/.test(v)) || "El campo sólo permite números y '-' como caracter especial",
+];
 	private FormatDate(data: any) {
 		return moment(data).format('YYYY-MM-DD');
 	}

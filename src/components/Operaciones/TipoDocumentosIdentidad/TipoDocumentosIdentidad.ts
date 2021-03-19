@@ -9,7 +9,7 @@ import helpers from '@/helper';
 @Component
 export default class AdmTipoDocumentosIdentidadComponent extends Vue {
 	private headers: any[] = [
-		{ text: 'IDDocumentoIdentidad', align: 'left', sortable: true, value: 'iddocumentoidentidad', width: '15%' },
+		//{ text: 'IDDocumentoIdentidad', align: 'left', sortable: true, value: 'iddocumentoidentidad', width: '15%' },
 		{ text: 'descripcion', align: 'left', sortable: false, value: 'descripcion', width: '15%' },
 		{ text: 'sigla', align: 'left', sortable: false, value: 'sigla', width: '15%' },
 		{ text: 'Operaciones', align: 'left', sortable: false, value: 'action', width: '20%' },
@@ -115,7 +115,7 @@ export default class AdmTipoDocumentosIdentidadComponent extends Vue {
 	private Eliminar(data: services.clase_tipodocumentosidentidad): void {
 		swal.fire({
 			title: 'Esta seguro de esta operacion?',
-			text: 'Eliminacion de Registro ' + data.iddocumentoidentidad+'/'+ data.descripcion,
+			text: 'Eliminacion de Registro ' + data.descripcion,
 			type: 'warning',
 			showCancelButton: true,
 			confirmButtonColor: 'green',

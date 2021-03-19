@@ -31,6 +31,7 @@ export default class AdmProveedoresComponent extends Vue {
 	private WebApi = new services.Endpoints();
 	private proveedores = new services.clase_proveedores();
 	private lstproveedores: services.clase_proveedores[] = [];
+	private lstproveedorescargar: services.clase_proveedores[] = [];
 	private buscarproveedores = '';
 	private pais = new services.clase_pais();
 	private lstpais: services.clase_pais[] = [];
@@ -199,10 +200,16 @@ export default class AdmProveedoresComponent extends Vue {
 		this.dialog = false;
 	}
 	private Actualizar(data: services.clase_proveedores): void {
-		this.proveedores = data;
-		this.proveedores.fechacreacion = this.FormatDate(Date.now());
+		new services.Operaciones().Buscar(this.WebApi.ws_proveedores_Buscar, data )
+			 .then((resProveedores) => {	
+					 this.lstproveedorescargar= resProveedores.data._data;
+					 this.proveedores = this.lstproveedorescargar[0];
+				 }).catch((err) => {   
+				});
 		this.operacion = 'Update';
 		this.dialog = true;
+		// this.proveedores.fechacreacion = this.FormatDate(Date.now());
+
 	}
 	private select_fecha(fecha: string) {
 		return fecha.substr(0, 10);
@@ -255,7 +262,7 @@ export default class AdmProveedoresComponent extends Vue {
 		return this.lstproveedores.map((proveedores : services.clase_proveedores)=>{
 			return{
 				codigoproveedor: proveedores.codigoproveedor,
-				iddocumentoidentidad: this.formatearTipoProveedor(proveedores.iddocumentoidentidad),
+				iddocumentoidentidad: this.formatearDocumentoIdentidad(proveedores.iddocumentoidentidad),
 				numerodocumento: proveedores.numerodocumento,
 				razonsocial: proveedores.razonsocial,
 				direccion: proveedores.direccion,

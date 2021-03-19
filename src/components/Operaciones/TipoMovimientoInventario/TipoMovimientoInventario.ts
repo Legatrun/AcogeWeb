@@ -9,7 +9,7 @@ import helpers from '@/helper';
 @Component
 export default class AdmTipoMovimientoInventarioComponent extends Vue {
 	private headers: any[] = [
-		{ text: 'IDTipoMovimiento', align: 'left', sortable: true, value: 'idtipomovimiento', width: '15%' },
+		//{ text: 'IDTipoMovimiento', align: 'left', sortable: true, value: 'idtipomovimiento', width: '15%' },
 		{ text: 'descripcion', align: 'left', sortable: false, value: 'descripcion', width: '15%' },
 		{ text: 'Operaciones', align: 'left', sortable: false, value: 'action', width: '20%' },
 	];
@@ -114,7 +114,7 @@ export default class AdmTipoMovimientoInventarioComponent extends Vue {
 	private Eliminar(data: services.clase_tipomovimientoinventario): void {
 		swal.fire({
 			title: 'Esta seguro de esta operacion?',
-			text: 'Eliminacion de Registro ' + data.idtipomovimiento+'/'+data.descripcion,
+			text: 'Eliminacion de Registro ' +data.descripcion,
 			type: 'warning',
 			showCancelButton: true,
 			confirmButtonColor: 'green',

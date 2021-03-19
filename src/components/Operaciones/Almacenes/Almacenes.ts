@@ -9,17 +9,17 @@ import helpers from '@/helper';
 @Component
 export default class AdmAlmacenesComponent extends Vue {
 	private headers: any[] = [
-		{ text: 'CodigoAlmacen', align: 'left', sortable: true, value: 'codigoalmacen', width: '15%' },
-		{ text: 'descripcion', align: 'left', sortable: false, value: 'descripcion', width: '15%' },
-		{ text: 'idtipomovimiento', align: 'left', sortable: false, value: 'idtipomovimiento', width: '15%' },
-		{ text: 'idciudad', align: 'left', sortable: false, value: 'idciudad', width: '15%' },
-		{ text: 'virtual', align: 'left', sortable: false, value: 'virtual', width: '15%' },
-		{ text: 'Operaciones', align: 'left', sortable: false, value: 'action', width: '20%' },
+		{ text: 'Descripcion', align: 'left', sortable: false, value: 'descripcion', width: '15%' },
+		{ text: 'IDTipoMovimiento', align: 'left', sortable: false, value: 'idtipomovimientoformat', width: '15%' },
+		{ text: 'IDCiudad', align: 'left', sortable: false, value: 'idciudadFormat', width: '15%' },
+		{ text: 'Virtual', align: 'left', sortable: false, value: 'virtual', width: '15%' },
+		{ text: 'Operaciones', align: 'center', sortable: false, value: 'action', width: '20%' },
 	];
 	private WebApi = new services.Endpoints();
 
 	private almacenes = new services.clase_almacenes();
 	private lstalmacenes: services.clase_almacenes[] = [];
+	private lstalmacenesCargar: services.clase_almacenes[] = [];
 	private buscaralmacenes = '';
 	private tipomovimientoinventario = new services.clase_tipomovimientoinventario();
 	private lsttipomovimientoinventario: services.clase_tipomovimientoinventario[] = [];
@@ -36,6 +36,9 @@ export default class AdmAlmacenesComponent extends Vue {
   ];
 	  private FormatDate(data: any) {
 		return moment(data).format('YYYY-MM-DD');
+	}
+	private FormatDatetime(data: any) {
+		return moment(data).format('DD-MM-YYYY HH:mm');
 	}
 	private FormatBoolean(data: any) {
 		if (data) {
@@ -63,6 +66,7 @@ export default class AdmAlmacenesComponent extends Vue {
 				if (resalmacenes.data._error.error === 0) {
 					this.lstalmacenes = resalmacenes.data._data;
 					this.dialog = false;
+					console.log(this.lstalmacenes)
 				} else {
 					this.popup.error('Consultar', resalmacenes.data._error.descripcion);
 				}
@@ -139,7 +143,13 @@ export default class AdmAlmacenesComponent extends Vue {
 		this.dialog = false;
 	}
 	private Actualizar(data: services.clase_almacenes): void {
-		this.almacenes = data;
+		new services.Operaciones().Buscar(this.WebApi.ws_almacenes_Buscar, data )
+		.then((resAlmacenes) => {	
+				this.lstalmacenesCargar= resAlmacenes.data._data;
+				this.almacenes = this.lstalmacenesCargar[0];
+				console.log(this.almacenes)
+			}).catch((err) => {   
+		   });
 		this.operacion = 'Update';
 		this.dialog = true;
 	}
@@ -190,6 +200,12 @@ export default class AdmAlmacenesComponent extends Vue {
 		}
 		});
 	}
+	private newtipoMovimiento(){
+		this.$router.push({​​​​ path: '/TipoMovimientoInventario' }​​​​);​​​​
+	}
+	private newCiudad(){
+		this.$router.push({​​​​ path: '/Ciudades' }​​​​);​​​​
+	}
 	//FORMATEO DE LOS ID POR LITERALES EN LISTA PRINCIPAL
 	get lstalmacenesformateados(){
 		return this.lstalmacenes.map((almacenes : services.clase_almacenes)=>{
@@ -198,7 +214,7 @@ export default class AdmAlmacenesComponent extends Vue {
 				descripcion: almacenes.descripcion,
 				idtipomovimientoformat: this.formatearTipoMovimiento(almacenes.idtipomovimiento),
 				idciudadFormat: this.formatearCiudad(almacenes.idciudad),
-				virtual: almacenes.virtual
+				virtual: almacenes.virtual,
 			}
 		})
 	}

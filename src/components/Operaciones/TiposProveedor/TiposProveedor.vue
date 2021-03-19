@@ -25,7 +25,7 @@
 			<template slot="item" slot-scope="props">
 				<tr>
 					<!--<td>{{ helper.showDataDescription(props.item.idtipoproveedor,lstTiposProveedor, id, descripcion)  }}</td>// Ejemplo de Uso de Helper Para obtener la Descripcion de una Tabla por medio de su Id-->
-					<td>{{ props.item.idtipoproveedor }}</td>
+					<!-- <td>{{ props.item.idtipoproveedor }}</td> -->
 					<td>{{ props.item.descripcion }}</td>
 					<td>
 						<v-tooltip bottom>

@@ -25,7 +25,7 @@
 			<template slot="item" slot-scope="props">
 				<tr>
 					<!--<td>{{ helper.showDataDescription(props.item.idmoneda,lstMonedas, id, descripcion)  }}</td>// Ejemplo de Uso de Helper Para obtener la Descripcion de una Tabla por medio de su Id-->
-					<td>{{ props.item.idmoneda }}</td>
+					<!-- <td>{{ props.item.idmoneda }}</td> -->
 					<td>{{ props.item.descripcion }}</td>
 					<td>{{ props.item.sigla }}</td>
 					<td>{{ FormatBoolean(props.item.monedalocal) }}</td>
@@ -94,16 +94,15 @@
 											clearable
 											persistent-hint
 											required
-											:rules="validacion"
+											:rules="siglarules"
 											@input="monedas.sigla = updateText(monedas.sigla)">
 								</v-text-field>
 							</v-flex>
-							<v-flex sm4 style="padding: 5px">
-								<h4 class="mb-0">MonedaLocal:</h4>
-								<v-switch v-model="monedas.monedalocal"
-									color="indigo"
-									hint="Seleccione MonedaLocal"
-									label="monedas.MonedaLocal"></v-switch>
+							
+							<v-flex sm6 style="padding: 5px">
+								<v-col cols="7" sm="5">
+									<p class="text-sm-left"><b>Moneda Local: </b></p> <v-switch  v-model="monedas.monedalocal" color="custom"  :label="`Estado: ${monedas.monedalocal ? 'Si' : 'No'}`"> </v-switch>
+									</v-col>
 							</v-flex>
 						</v-layout>
 					</v-card-text>

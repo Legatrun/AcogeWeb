@@ -68,18 +68,18 @@
 		<v-dialog v-model="dialog" persistent max-width="50%">
 			<v-card>
 				<v-toolbar style="padding:10px" dark class="primary">
-					<v-toolbar-title>Datos de CtasPresup</v-toolbar-title>
+					<v-toolbar-title>Datos de Cuentas Presupuesto</v-toolbar-title>
 				</v-toolbar>
 				<v-divider></v-divider>
 				<v-form ref="form" style="padding:10px" v-model="activo">
 					<v-card-text>
 						<v-layout wrap>
 							<template v-if="operacion == 'Insert'">
-								<v-flex sm12 style="padding: 5px">
+								<v-flex sm6 style="padding: 5px">
 									<v-text-field v-model="ctaspresup.cuentapresup"
 												label="CuentaPresup"
-												hint="Ingrese CuentaPresup"
-												placeholder="CuentaPresup"
+												hint="Ingrese Cuenta Presupuesto"
+												placeholder="Cuenta Presupuesto"
 												clearable
 												persistent-hint
 												required
@@ -89,20 +89,20 @@
 								</v-flex>
 							</template>
 							<template v-else>
-								<v-flex sm12 style="padding: 5px">
+								<v-flex sm6 style="padding: 5px">
 									<v-text-field v-model="ctaspresup.cuentapresup"
-												label="CuentaPresup"
-												placeholder="CuentaPresup"
+												label="Cuenta Presupuesto"
+												placeholder="Cuenta Presupuesto"
 												readonly
 												persistent-hint>
 									</v-text-field>
 								</v-flex>
 							</template>
-							<v-flex sm12 style="padding: 5px">
+							<v-flex sm6 style="padding: 5px">
 								<v-text-field v-model="ctaspresup.nombrecuentapresup"
-											label="NombreCuentaPresup"
-											hint="Ingrese NombreCuentaPresup"
-											placeholder="NombreCuentaPresup"
+											label="Nombre de Cuenta Presupuesto"
+											hint="Ingrese Nombre Cuenta Presupuesto"
+											placeholder="Nombre Cuenta Presupuesto"
 											clearable
 											persistent-hint
 											required
@@ -111,7 +111,7 @@
 								</v-text-field>
 							</v-flex>
 							
-							<v-col cols="5" sm="12" class="pa-2">
+							<v-col cols="5" sm="6" class="pa-2">
 								<v-autocomplete
 								v-model="ctaspresup.idmoneda"
 								label="Moneda"
@@ -125,7 +125,7 @@
 								@input="ctaspresup.idmoneda = updateText(ctaspresup.idmoneda)"
 								></v-autocomplete>
 							</v-col>
-							<v-flex sm12 style="padding: 5px">
+							<v-flex sm6 style="padding: 5px">
 								<v-text-field v-model="ctaspresup.nivel"
 											label="Nivel"
 											hint="Ingrese Nivel"
@@ -150,8 +150,8 @@
 									<template v-slot:activator="{ on }">
 										<v-text-field
 											v-model="ctaspresup.fechacreacion"
-											label="Ingrese fechacreacion"
-											hint="Ingrese fechacreacion"
+											label="Ingrese fecha de creacion"
+											hint="Ingrese fecha de creacion"
 											persistent-hint
 											prepend-icon="event"
 											v-on="on">
@@ -173,8 +173,8 @@
 									<template v-slot:activator="{ on }">
 										<v-text-field
 											v-model="ctaspresup.fechamodificacion"
-											label="Ingrese fechamodificacion"
-											hint="Ingrese fechamodificacion"
+											label="Ingrese fecha de modificacion"
+											hint="Ingrese fecha de modificacion"
 											persistent-hint
 											prepend-icon="event"
 											v-on="on">
@@ -183,26 +183,23 @@
 									<v-date-picker v-model="ctaspresup.fechamodificacion" no-title @input="menu_fechamodificacion = false"></v-date-picker>
 								</v-menu>
 							</v-flex>
-							<v-flex sm4 style="padding: 5px">
-								<h4 class="mb-0">BalanceCuenta:</h4>
-								<v-switch v-model="ctaspresup.balancecuenta"
-									color="indigo"
-									hint="Seleccione BalanceCuenta"
-									label="ctaspresup.BalanceCuenta"></v-switch>
+							
+							<v-flex sm6 style="padding: 3px">
+								<v-col cols="4" sm="5">
+									<p class="text-sm-left"><b>Balance de Cuenta: </b></p> <v-switch  v-model="ctaspresup.balancecuenta" color="custom"  :label="`Estado: ${ctaspresup.balancecuenta ? 'Si' : 'No'}`"> </v-switch>
+									</v-col>
 							</v-flex>
-							<v-flex sm4 style="padding: 5px">
-								<h4 class="mb-0">CuentaAsiento:</h4>
-								<v-switch v-model="ctaspresup.cuentaasiento"
-									color="indigo"
-									hint="Seleccione CuentaAsiento"
-									label="ctaspresup.CuentaAsiento"></v-switch>
+							
+							<v-flex sm6 style="padding: 3px">
+								<v-col cols="4" sm="5">
+									<p class="text-sm-left"><b>Cuenta de Asiento: </b></p> <v-switch  v-model="ctaspresup.cuentaasiento" color="custom"  :label="`Estado: ${ctaspresup.cuentaasiento ? 'Si' : 'No'}`"> </v-switch>
+									</v-col>
 							</v-flex>
-							<v-flex sm4 style="padding: 5px">
-								<h4 class="mb-0">Grabado:</h4>
-								<v-switch v-model="ctaspresup.grabado"
-									color="indigo"
-									hint="Seleccione Grabado"
-									label="ctaspresup.Grabado"></v-switch>
+							
+							<v-flex sm6 style="padding: 3px">
+								<v-col cols="4" sm="5">
+									<p class="text-sm-left"><b>Grabado: </b></p> <v-switch  v-model="ctaspresup.grabado" color="custom"  :label="`Estado: ${ctaspresup.grabado ? 'Si' : 'No'}`"> </v-switch>
+									</v-col>
 							</v-flex>
 						</v-layout>
 					</v-card-text>

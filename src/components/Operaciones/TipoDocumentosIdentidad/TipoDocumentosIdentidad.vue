@@ -25,7 +25,7 @@
 			<template slot="item" slot-scope="props">
 				<tr>
 					<!--<td>{{ helper.showDataDescription(props.item.iddocumentoidentidad,lstTipoDocumentosIdentidad, id, descripcion)  }}</td>// Ejemplo de Uso de Helper Para obtener la Descripcion de una Tabla por medio de su Id-->
-					<td>{{ props.item.iddocumentoidentidad }}</td>
+					<!-- <td>{{ props.item.iddocumentoidentidad }}</td> -->
 					<td>{{ props.item.descripcion }}</td>
 					<td>{{ props.item.sigla }}</td>
 					<td>

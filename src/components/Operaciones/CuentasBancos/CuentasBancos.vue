@@ -25,7 +25,7 @@
 			<template slot="item" slot-scope="props">
 				<tr>
 					<!--<td>{{ helper.showDataDescription(props.item.nrocuenta,lstCuentasBancos, id, descripcion)  }}</td>// Ejemplo de Uso de Helper Para obtener la Descripcion de una Tabla por medio de su Id-->
-					<td>{{ props.item.idbanco }}</td>
+					<td>{{ props.item.idbancoliteral }}</td>
 					<td>{{ props.item.nrocuenta }}</td>
 					<td>{{ props.item.idmoneda }}</td>
 					<td>{{ props.item.saldoactual }}</td>
@@ -64,7 +64,7 @@
 		<v-dialog v-model="dialog" persistent max-width="50%">
 			<v-card>
 				<v-toolbar style="padding:10px" dark class="primary">
-					<v-toolbar-title>Datos de CuentasBancos</v-toolbar-title>
+					<v-toolbar-title>Datos de Cuentas de Bancos</v-toolbar-title>
 				</v-toolbar>
 				<v-divider></v-divider>
 				<v-form ref="form" style="padding:10px" v-model="activo">
@@ -72,7 +72,7 @@
 						<v-layout wrap>
 							<template v-if="operacion == 'Insert'">
 								
-								<v-col cols="5" sm="12" class="pa-2">
+								<v-col cols="5" sm="6" class="pa-2">
 								<v-autocomplete
 								v-model="cuentasbancos.idbanco"
 								label="Banco"
@@ -83,9 +83,9 @@
 								outlined
 								autocomplete="off"
 								color="#1A237E"
-								@input="cuentasbancos.idbanco = updateText(cuentasbancos.idbanco)"></v-autocomplete>
+								></v-autocomplete> 
 							</v-col>
-								<v-flex sm12 style="padding: 5px">
+								<v-flex sm6 style="padding: 5px">
 									<v-text-field v-model="cuentasbancos.nrocuenta"
 												label="NroCuenta"
 												hint="Ingrese NroCuenta"
@@ -99,7 +99,7 @@
 								</v-flex>
 							</template>
 							<template v-else>
-								<v-col cols="5" sm="12" class="pa-2">
+								<v-col cols="5" sm="6" class="pa-2">
 								<v-autocomplete
 								v-model="cuentasbancos.idbanco"
 								label="Banco"
@@ -110,18 +110,18 @@
 								outlined
 								autocomplete="off"
 								color="#1A237E"
-								@input="cuentasbancos.idbanco = updateText(cuentasbancos.idbanco)"></v-autocomplete>
+								></v-autocomplete>
 							</v-col>
-								<v-flex sm12 style="padding: 5px">
+								<v-flex sm6 style="padding: 5px">
 									<v-text-field v-model="cuentasbancos.nrocuenta"
-												label="NroCuenta"
-												placeholder="NroCuenta"
+												label="Nro de Cuenta"
+												placeholder="Nro de Cuenta"
 												readonly
 												persistent-hint>
 									</v-text-field>
 								</v-flex>
 							</template>
-							<v-col cols="5" sm="12" class="pa-2">
+							<v-col cols="5" sm="6" class="pa-2">
 								<v-autocomplete
 								v-model="cuentasbancos.idmoneda"
 								label="Moneda"
@@ -132,31 +132,30 @@
 								outlined
 								autocomplete="off"
 								color="#1A237E"
-								@input="cuentasbancos.idmoneda = updateText(cuentasbancos.idmoneda)"
 								></v-autocomplete>
 							</v-col>
-							<v-flex sm12 style="padding: 5px">
+							<v-flex sm6 style="padding: 5px">
 								<v-text-field v-model="cuentasbancos.saldoactual"
-											label="SaldoActual"
-											hint="Ingrese SaldoActual"
-											placeholder="SaldoActual"
+											label="Saldo Actual"
+											hint="Ingrese Saldo Actual"
+											placeholder="Saldo Actual"
 											clearable
 											persistent-hint
 											required
 											:rules="validacion"
-											@input="cuentasbancos.saldoactual = updateText(cuentasbancos.saldoactual)">
+											>
 								</v-text-field>
 							</v-flex>
-							<v-flex sm12 style="padding: 5px">
+							<v-flex sm6 style="padding: 5px">
 								<v-text-field v-model="cuentasbancos.cuentacontable"
-											label="CuentaContable"
-											hint="Ingrese CuentaContable"
-											placeholder="CuentaContable"
+											label="Cuenta Contable"
+											hint="Ingrese Cuenta Contable"
+											placeholder="Cuenta Contable"
 											clearable
 											persistent-hint
 											required
 											:rules="validacion"
-											@input="cuentasbancos.cuentacontable = updateText(cuentasbancos.cuentacontable)">
+											>
 								</v-text-field>
 							</v-flex>
 							<v-flex sm4 class="hidden-xs-only" style="padding: 5px">
@@ -172,8 +171,8 @@
 									<template v-slot:activator="{ on }">
 										<v-text-field
 											v-model="cuentasbancos.fechaapertura"
-											label="Ingrese fechaapertura"
-											hint="Ingrese fechaapertura"
+											label="Ingrese fecha apertura"
+											hint="Ingrese fecha apertura"
 											persistent-hint
 											prepend-icon="event"
 											v-on="on">

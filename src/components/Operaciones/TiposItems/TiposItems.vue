@@ -25,7 +25,7 @@
 			<template slot="item" slot-scope="props">
 				<tr>
 					<!--<td>{{ helper.showDataDescription(props.item.idtipoitem,lstTiposItems, id, descripcion)  }}</td>// Ejemplo de Uso de Helper Para obtener la Descripcion de una Tabla por medio de su Id-->
-					<td>{{ props.item.idtipoitem }}</td>
+					<!-- <td>{{ props.item.idtipoitem }}</td> -->
 					<td>{{ props.item.descripcion }}</td>
 					<td>{{ props.item.sigla }}</td>
 					<td>{{ FormatBoolean(props.item.ingresainventario) }}</td>
@@ -74,7 +74,7 @@
 							<template v-else>
 								
 							</template>
-							<v-flex sm12 style="padding: 5px">
+							<v-flex sm6 style="padding: 5px">
 								<v-text-field v-model="tipositems.descripcion"
 											label="Descripcion"
 											hint="Ingrese Descripcion"
@@ -86,7 +86,7 @@
 											@input="tipositems.descripcion = updateText(tipositems.descripcion)">
 								</v-text-field>
 							</v-flex>
-							<v-flex sm12 style="padding: 5px">
+							<v-flex sm6 style="padding: 5px">
 								<v-text-field v-model="tipositems.sigla"
 											label="Sigla"
 											hint="Ingrese Sigla"
@@ -98,12 +98,11 @@
 											@input="tipositems.sigla = updateText(tipositems.sigla)">
 								</v-text-field>
 							</v-flex>
-							<v-flex sm4 style="padding: 5px">
-								<h4 class="mb-0">IngresaInventario:</h4>
-								<v-switch v-model="tipositems.ingresainventario"
-									color="indigo"
-									hint="Seleccione IngresaInventario"
-									label="tipositems.IngresaInventario"></v-switch>
+							
+							<v-flex sm6 style="padding: 5px">
+								<v-col cols="7" sm="5">
+									<p class="text-sm-left"><b>Ingresa Inventario: </b></p> <v-switch  v-model="tipositems.ingresainventario" color="custom"  :label="`Estado: ${tipositems.ingresainventario ? 'Si' : 'No'}`"> </v-switch>
+									</v-col>
 							</v-flex>
 						</v-layout>
 					</v-card-text>

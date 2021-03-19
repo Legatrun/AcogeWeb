@@ -52,6 +52,7 @@
 				<v-tooltip bottom>
 					<template v-slot:activator="{ on }">
 						<v-btn color="accent" v-on="on" @click="Insertar()">Adicionar Nuevo Registro de Cuentas</v-btn>
+						<v-btn color="accent" v-on="on" @click="newMoneda()">Adicionar Nuevo Registro Monedas</v-btn>
 					</template>
 					<span>Adicionar nueva Cuenta</span>
 				</v-tooltip>

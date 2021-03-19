@@ -80,11 +80,11 @@
 					<v-card-text>
 						<v-layout wrap>
 							<template v-if="operacion == 'Insert'">
-								<v-flex sm12 style="padding: 5px">
+								<v-flex sm6 style="padding: 5px">
 									<v-text-field v-model="items.codigoitem"
-												label="CodigoItem"
-												hint="Ingrese CodigoItem"
-												placeholder="CodigoItem"
+												label="Codigo de Item"
+												hint="Ingrese Codigo de Item"
+												placeholder="Codigo de Item"
 												clearable
 												persistent-hint
 												required
@@ -94,20 +94,20 @@
 								</v-flex>
 							</template>
 							<template v-else>
-								<v-flex sm12 style="padding: 5px">
+								<v-flex sm6 style="padding: 5px">
 									<v-text-field v-model="items.codigoitem"
-												label="CodigoItem"
-												placeholder="CodigoItem"
+												label="Codigo de Item"
+												placeholder="Codigo de Item"
 												readonly
 												persistent-hint>
 									</v-text-field>
 								</v-flex>
 							</template>
-							<v-flex sm12 style="padding: 5px">
+							<v-flex sm6 style="padding: 5px">
 								<v-text-field v-model="items.modelonroparte"
-											label="ModeloNroParte"
-											hint="Ingrese ModeloNroParte"
-											placeholder="ModeloNroParte"
+											label="Modelo Nro Parte"
+											hint="Ingrese Modelo Nro Parte"
+											placeholder="Modelo Nro Parte"
 											clearable
 											persistent-hint
 											required
@@ -140,8 +140,8 @@
 									<template v-slot:activator="{ on }">
 										<v-text-field
 											v-model="items.fechacreacion"
-											label="Ingrese fechacreacion"
-											hint="Ingrese fechacreacion"
+											label="Ingrese fecha de creacion"
+											hint="Ingrese fecha de creacion"
 											persistent-hint
 											prepend-icon="event"
 											v-on="on">
@@ -163,8 +163,8 @@
 									<template v-slot:activator="{ on }">
 										<v-text-field
 											v-model="items.fechaultimomovimiento"
-											label="Ingrese fechaultimomovimiento"
-											hint="Ingrese fechaultimomovimiento"
+											label="Ingrese fecha ultimo movimiento"
+											hint="Ingrese fecha ultimo movimiento"
 											persistent-hint
 											prepend-icon="event"
 											v-on="on">
@@ -173,11 +173,11 @@
 									<v-date-picker v-model="items.fechaultimomovimiento" no-title @input="menu_fechaultimomovimiento = false"></v-date-picker>
 								</v-menu>
 							</v-flex>
-							<v-flex sm12 style="padding: 5px">
+							<v-flex sm6 style="padding: 5px">
 								<v-text-field v-model="items.costoinicial"
-											label="CostoInicial"
-											hint="Ingrese CostoInicial"
-											placeholder="CostoInicial"
+											label="Costo Inicial"
+											hint="Ingrese Costo Inicial"
+											placeholder="Costo Inicial"
 											clearable
 											persistent-hint
 											required
@@ -185,11 +185,11 @@
 											@input="items.costoinicial = updateText(items.costoinicial)">
 								</v-text-field>
 							</v-flex>
-							<v-flex sm12 style="padding: 5px">
+							<v-flex sm6 style="padding: 5px">
 								<v-text-field v-model="items.costoactual"
-											label="CostoActual"
-											hint="Ingrese CostoActual"
-											placeholder="CostoActual"
+											label="Costo Actual"
+											hint="Ingrese Costo Actual"
+											placeholder="Costo Actual"
 											clearable
 											persistent-hint
 											required
@@ -197,11 +197,11 @@
 											@input="items.costoactual = updateText(items.costoactual)">
 								</v-text-field>
 							</v-flex>
-							<v-flex sm12 style="padding: 5px">
+							<v-flex sm6 style="padding: 5px">
 								<v-text-field v-model="items.saldoinicial"
-											label="SaldoInicial"
-											hint="Ingrese SaldoInicial"
-											placeholder="SaldoInicial"
+											label="Saldo Inicial"
+											hint="Ingrese Saldo Inicial"
+											placeholder="Saldo Inicial"
 											clearable
 											persistent-hint
 											required
@@ -209,11 +209,11 @@
 											@input="items.saldoinicial = updateText(items.saldoinicial)">
 								</v-text-field>
 							</v-flex>
-							<v-flex sm12 style="padding: 5px">
+							<v-flex sm6 style="padding: 5px">
 								<v-text-field v-model="items.saldoactual"
-											label="SaldoActual"
-											hint="Ingrese SaldoActual"
-											placeholder="SaldoActual"
+											label="Saldo Actual"
+											hint="Ingrese Saldo Actual"
+											placeholder="Saldo Actual"
 											clearable
 											persistent-hint
 											required
@@ -221,7 +221,7 @@
 											@input="items.saldoactual = updateText(items.saldoactual)">
 								</v-text-field>
 							</v-flex>
-							<v-col cols="5" sm="4" class="pa-2">
+							<v-col cols="5" sm="6" class="pa-2">
 								<v-autocomplete
 								v-model="items.idclase"
 								label="Clase"
@@ -235,7 +235,7 @@
 								@input="items.idclase = updateText(items.idclase)"
 								></v-autocomplete>
 							</v-col>
-							<v-col cols="5" sm="4" class="pa-2">
+							<v-col cols="5" sm="6" class="pa-2">
 								<v-autocomplete
 								v-model="items.idtipoitem"
 								label="Tipo Item"
@@ -249,7 +249,7 @@
 								@input="items.idtipoitem = updateText(items.idtipoitem)"
 								></v-autocomplete>
 							</v-col>
-							<v-col cols="5" sm="4" class="pa-2">
+							<v-col cols="5" sm="6" class="pa-2">
 								<v-autocomplete
 								v-model="items.idunidadmanejo"
 								label="Unidad Manejo"
@@ -263,23 +263,24 @@
 								@input="items.idunidadmanejo = updateText(items.idunidadmanejo)"
 								></v-autocomplete>
 							</v-col>
-							<v-flex sm12 style="padding: 5px">
-								<v-text-field v-model="items.codigoitemsup"
-											label="CodigoItemSup"
-											hint="Ingrese CodigoItemSup"
-											placeholder="CodigoItemSup"
-											clearable
-											persistent-hint
-											required
-											:rules="validacion"
-											@input="items.codigoitemsup = updateText(items.codigoitemsup)">
-								</v-text-field>
-							</v-flex>
-							<v-flex sm12 style="padding: 5px">
+							
+							<v-col cols="5" sm="6" class="pa-2">
+								<v-autocomplete
+								v-model="items.codigoitemsup"
+								label="Codigo Item Sup"
+								:items="lstitems"
+								item-text="descripcion"
+								item-value="codigoitemsup"
+								outlined
+								autocomplete="off"
+								color="#1A237E"
+								></v-autocomplete>
+							</v-col>
+							<v-flex sm6 style="padding: 5px">
 								<v-text-field v-model="items.cantidadminima"
-											label="CantidadMinima"
-											hint="Ingrese CantidadMinima"
-											placeholder="CantidadMinima"
+											label="Cantidad Minima"
+											hint="Ingrese Cantidad Minima"
+											placeholder="Cantidad Minima"
 											clearable
 											persistent-hint
 											required
@@ -287,11 +288,11 @@
 											@input="items.cantidadminima = updateText(items.cantidadminima)">
 								</v-text-field>
 							</v-flex>
-							<v-flex sm12 style="padding: 5px">
+							<v-flex sm6 style="padding: 5px">
 								<v-text-field v-model="items.cantidadmaxima"
 											label="CantidadMaxima"
-											hint="Ingrese CantidadMaxima"
-											placeholder="CantidadMaxima"
+											hint="Ingrese Cantidad Maxima"
+											placeholder="Cantidad Maxima"
 											clearable
 											persistent-hint
 											required

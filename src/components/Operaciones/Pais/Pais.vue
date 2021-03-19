@@ -25,7 +25,7 @@
 			<template slot="item" slot-scope="props">
 				<tr>
 					<!--<td>{{ helper.showDataDescription(props.item.idpais,lstPais, id, descripcion)  }}</td>// Ejemplo de Uso de Helper Para obtener la Descripcion de una Tabla por medio de su Id-->
-					<td>{{ props.item.idpais }}</td>
+					<!-- <td>{{ props.item.idpais }}</td> -->
 					<td>{{ props.item.descripcion }}</td>
 					<td>{{ props.item.sigla }}</td>
 					<td>
@@ -93,7 +93,7 @@
 											clearable
 											persistent-hint
 											required
-											:rules="validacion"
+											:rules="siglarules"
 											@input="pais.sigla = updateText(pais.sigla)">
 								</v-text-field>
 							</v-flex>

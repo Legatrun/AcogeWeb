@@ -25,7 +25,7 @@
 			<template slot="item" slot-scope="props">
 				<tr>
 					<!--<td>{{ helper.showDataDescription(props.item.idclase,lstClaseItems, id, descripcion)  }}</td>// Ejemplo de Uso de Helper Para obtener la Descripcion de una Tabla por medio de su Id-->
-					<td>{{ props.item.idclase }}</td>
+					<!-- <td>{{ props.item.idclase }}</td> -->
 					<td>{{ props.item.descripcion }}</td>
 					<td>{{ props.item.sigla }}</td>
 					<td>{{ props.item.cuentaventa }}</td>
@@ -96,7 +96,7 @@
 									</v-text-field>
 								</v-flex>-->
 							</template>
-							<v-flex sm12 style="padding: 5px">
+							<v-flex sm6 style="padding: 5px">
 								<v-text-field v-model="claseitems.descripcion"
 											label="Descripcion"
 											hint="Ingrese Descripcion"
@@ -108,7 +108,7 @@
 											@input="claseitems.descripcion = updateText(claseitems.descripcion)">
 								</v-text-field>
 							</v-flex>
-							<v-flex sm12 style="padding: 5px">
+							<v-flex sm6 style="padding: 5px">
 								<v-text-field v-model="claseitems.sigla"
 											label="Sigla"
 											hint="Ingrese Sigla"
@@ -120,7 +120,7 @@
 											@input="claseitems.sigla = updateText(claseitems.sigla)">
 								</v-text-field>
 							</v-flex>
-							<v-flex sm12 style="padding: 5px">
+							<v-flex sm6 style="padding: 5px">
 								<v-text-field v-model="claseitems.cuentaventa"
 											label="CuentaVenta"
 											hint="Ingrese CuentaVenta"
@@ -128,11 +128,13 @@
 											clearable
 											persistent-hint
 											required
-											:rules="validacion"
+											maxlength="17"
+											counter
+											:rules="CuentasRules"
 											@input="claseitems.cuentaventa = updateText(claseitems.cuentaventa)">
 								</v-text-field>
 							</v-flex>
-							<v-flex sm12 style="padding: 5px">
+							<v-flex sm6 style="padding: 5px">
 								<v-text-field v-model="claseitems.cuentacosto"
 											label="CuentaCosto"
 											hint="Ingrese CuentaCosto"
@@ -140,11 +142,13 @@
 											clearable
 											persistent-hint
 											required
-											:rules="validacion"
+											maxlength="17"
+											counter
+											:rules="CuentasRules"
 											@input="claseitems.cuentacosto = updateText(claseitems.cuentacosto)">
 								</v-text-field>
 							</v-flex>
-							<v-flex sm12 style="padding: 5px">
+							<v-flex sm6 style="padding: 5px">
 								<v-text-field v-model="claseitems.cuentagasto"
 											label="CuentaGasto"
 											hint="Ingrese CuentaGasto"
@@ -152,11 +156,13 @@
 											clearable
 											persistent-hint
 											required
-											:rules="validacion"
+											maxlength="17"
+											counter
+											:rules="CuentasRules"
 											@input="claseitems.cuentagasto = updateText(claseitems.cuentagasto)">
 								</v-text-field>
 							</v-flex>
-							<v-flex sm12 style="padding: 5px">
+							<v-flex sm6 style="padding: 5px">
 								<v-text-field v-model="claseitems.cuentainventario"
 											label="CuentaInventario"
 											hint="Ingrese CuentaInventario"
@@ -164,16 +170,17 @@
 											clearable
 											persistent-hint
 											required
-											:rules="validacion"
+											maxlength="17"
+											counter
+											:rules="CuentasRules"
 											@input="claseitems.cuentainventario = updateText(claseitems.cuentainventario)">
 								</v-text-field>
 							</v-flex>
-							<v-flex sm4 style="padding: 5px">
-								<h4 class="mb-0">IngresaInventario:</h4>
-								<v-switch v-model="claseitems.ingresainventario"
-									color="indigo"
-									hint="Seleccione IngresaInventario"
-									label="claseitems.IngresaInventario"></v-switch>
+							
+							<v-flex sm12 style="padding: 5px">
+								<v-col cols="7" sm="5">
+									<p class="text-sm-left"><b>Ingresa Inventario: </b></p> <v-switch  v-model="claseitems.ingresainventario" color="custom"  :label="`Estado: ${claseitems.ingresainventario ? 'Si' : 'No'}`"> </v-switch>
+									</v-col>
 							</v-flex>
 						</v-layout>
 					</v-card-text>

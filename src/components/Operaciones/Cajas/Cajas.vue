@@ -25,7 +25,7 @@
 			<template slot="item" slot-scope="props">
 				<tr>
 					<!--<td>{{ helper.showDataDescription(props.item.idcaja,lstCajas, id, descripcion)  }}</td>// Ejemplo de Uso de Helper Para obtener la Descripcion de una Tabla por medio de su Id-->
-					<td>{{ props.item.idcaja }}</td>
+					<!-- <td>{{ props.item.idcaja }}</td> -->
 					<td>{{ props.item.descripcion }}</td>
 					<td>{{ props.item.cuenta }}</td>
 					<td>{{ props.item.monto }}</td>
@@ -50,6 +50,7 @@
 				<v-tooltip bottom>
 					<template v-slot:activator="{ on }">
 						<v-btn color="accent" v-on="on" @click="Insertar()">Adicionar Nuevo Registro de Cajas</v-btn>
+						<v-btn color="accent" v-on="on" @click="newMoneda()">Adicionar Nuevo Registro Monedas</v-btn>
 					</template>
 					<span>Adicionar nuevo registro de Caja</span>
 				</v-tooltip>
@@ -93,7 +94,7 @@
 									</v-text-field>
 								</v-flex>-->
 							</template>
-							<v-flex sm12 style="padding: 5px">
+							<v-flex sm6 style="padding: 5px">
 								<v-text-field v-model="cajas.descripcion"
 											label="Descripcion"
 											hint="Ingrese Descripcion"
@@ -105,7 +106,7 @@
 											@input="cajas.descripcion = updateText(cajas.descripcion)">
 								</v-text-field>
 							</v-flex>
-							<v-flex sm12 style="padding: 5px">
+							<v-flex sm6 style="padding: 5px">
 								<v-text-field v-model="cajas.cuenta"
 											label="Cuenta"
 											hint="Ingrese Cuenta"
@@ -117,7 +118,7 @@
 											@input="cajas.cuenta = updateText(cajas.cuenta)">
 								</v-text-field>
 							</v-flex>
-							<v-flex sm12 style="padding: 5px">
+							<v-flex sm6 style="padding: 5px">
 								<v-text-field v-model="cajas.monto"
 											label="Monto"
 											hint="Ingrese Monto"
@@ -125,7 +126,9 @@
 											clearable
 											persistent-hint
 											required
-											:rules="validacion"
+											maxlength="10"
+											counter
+											:rules="MontosRules"
 											@input="cajas.monto = updateText(cajas.monto)">
 								</v-text-field>
 							</v-flex>
@@ -140,7 +143,7 @@
 								outlined
 								autocomplete="off"
 								color="#1A237E"
-								@input="cajas.idmoneda = updateText(cajas.idmoneda)"
+								
 								></v-autocomplete>
 							</v-col>
 						</v-layout>

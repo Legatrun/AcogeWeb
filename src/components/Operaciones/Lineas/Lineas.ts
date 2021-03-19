@@ -9,7 +9,7 @@ import helpers from '@/helper';
 @Component
 export default class AdmLineasComponent extends Vue {
 	private headers: any[] = [
-		{ text: 'IDLinea', align: 'left', sortable: true, value: 'idlinea', width: '15%' },
+		//{ text: 'IDLinea', align: 'left', sortable: true, value: 'idlinea', width: '15%' },
 		{ text: 'descripcion', align: 'left', sortable: false, value: 'descripcion', width: '15%' },
 		{ text: 'cuenta', align: 'left', sortable: false, value: 'cuenta', width: '15%' },
 		{ text: 'Operaciones', align: 'left', sortable: false, value: 'action', width: '20%' },

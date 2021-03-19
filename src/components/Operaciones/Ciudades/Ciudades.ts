@@ -9,7 +9,7 @@ import helpers from '@/helper';
 @Component
 export default class AdmCiudadesComponent extends Vue {
 	private headers: any[] = [
-		{ text: 'IDCiudad', align: 'left', sortable: true, value: 'idciudad', width: '15%' },
+		//{ text: 'IDCiudad', align: 'left', sortable: true, value: 'idciudad', width: '15%' },
 		{ text: 'idpais', align: 'left', sortable: false, value: 'idpais', width: '15%' },
 		{ text: 'descripcion', align: 'left', sortable: false, value: 'descripcion', width: '15%' },
 		{ text: 'sigla', align: 'left', sortable: false, value: 'sigla', width: '15%' },
@@ -20,6 +20,7 @@ export default class AdmCiudadesComponent extends Vue {
 
 	private ciudades = new services.clase_ciudades();
 	private lstciudades: services.clase_ciudades[] = [];
+	private lstciudadesCargar: services.clase_ciudades[] = [];
 	private buscarciudades = '';
 	private monedas = new services.clase_monedas();
 	private lstmonedas: services.clase_monedas[] = [];
@@ -32,7 +33,7 @@ export default class AdmCiudadesComponent extends Vue {
 	private activo = false;
 	validacion = [
 		(v: any) => !!v || 'El campo es requerido',
-    (v: any) => !/^\s*$/.test(v) || 'No se permite espacios vacios',
+    	(v: any) => !/^\s*$/.test(v) || 'No se permiten espacios vacios',
   ];
 	private FormatDate(data: any) {
 		return moment(data).format('YYYY-MM-DD');
@@ -139,7 +140,12 @@ export default class AdmCiudadesComponent extends Vue {
 		this.dialog = false;
 	}
 	private Actualizar(data: services.clase_ciudades): void {
-		this.ciudades = data;
+		new services.Operaciones().Buscar(this.WebApi.ws_ciudades_Buscar, data )
+		.then((resCiudades) => {	
+				this.lstciudadesCargar= resCiudades.data._data;
+				this.ciudades = this.lstciudadesCargar[0];
+			}).catch((err) => {   
+		   });
 		this.operacion = 'Update';
 		this.dialog = true;
 	}
@@ -189,6 +195,9 @@ export default class AdmCiudadesComponent extends Vue {
 			});
 		}
 		});
+	}
+	private newMoneda(){
+		this.$router.push({​​​​ path: '/Monedas' }​​​​);​​​​
 	}
 	get lstciudadesformateados(){
 		return this.lstciudades.map((ciudades : services.clase_ciudades)=>{

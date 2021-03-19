@@ -9,7 +9,7 @@ import helpers from '@/helper';
 @Component
 export default class AdmCajasComponent extends Vue {
 	private headers: any[] = [
-		{ text: 'IDCaja', align: 'left', sortable: true, value: 'idcaja', width: '15%' },
+		//{ text: 'IDCaja', align: 'left', sortable: true, value: 'idcaja', width: '15%' },
 		{ text: 'descripcion', align: 'left', sortable: false, value: 'descripcion', width: '15%' },
 		{ text: 'cuenta', align: 'left', sortable: false, value: 'cuenta', width: '15%' },
 		{ text: 'monto', align: 'left', sortable: false, value: 'monto', width: '15%' },
@@ -20,6 +20,7 @@ export default class AdmCajasComponent extends Vue {
 
 	private cajas = new services.clase_cajas();
 	private lstcajas: services.clase_cajas[] = [];
+	private lstcajasCargar: services.clase_cajas[] = [];
 	private buscarcajas = '';
 	private monedas = new services.clase_monedas();
 	private lstmonedas: services.clase_monedas[] = [];
@@ -32,6 +33,14 @@ export default class AdmCajasComponent extends Vue {
 		(v: any) => !!v || 'El campo es requerido',
     (v: any) => !/^\s*$/.test(v) || 'No se permite espacios vacios',
   ];
+  MontoRules = [
+	//(v: any) => !!v || "El campo es requerido",
+	(v: any) => !(!/^[0-9]*$/.test(v)) || "El campo sólo permite números, hasta 10 dígitos",
+];
+MontosRules = [
+	(v: any) => !!v || "El campo es requerido",
+	(v: any) => !(!/^[0-9, .]*$/.test(v)) || "El campo sólo permite números",
+];
 	private FormatDate(data: any) {
 		return moment(data).format('YYYY-MM-DD');
 	}
@@ -123,9 +132,14 @@ export default class AdmCajasComponent extends Vue {
 		this.dialog = false;
 	}
 	private Actualizar(data: services.clase_cajas): void {
-		this.cajas = data;
-		this.operacion = 'Update';
-		this.dialog = true;
+		new services.Operaciones().Buscar(this.WebApi.ws_cajas_Buscar, data )
+		.then((resCajas) => {	
+				this.lstcajasCargar= resCajas.data._data;
+				this.cajas = this.lstcajasCargar[0];
+			}).catch((err) => {   
+		   });
+   this.operacion = 'Update';
+   this.dialog = true;
 	}
 	private select_fecha(fecha: string) {
 		return fecha.substr(0, 10);
@@ -173,6 +187,9 @@ export default class AdmCajasComponent extends Vue {
 			});
 		}
 		});
+	}
+	private newMoneda(){
+		this.$router.push({​​​​ path: '/Monedas' }​​​​);​​​​
 	}
 	get lstcajasformateados(){
 		return this.lstcajas.map((cajas : services.clase_cajas)=>{

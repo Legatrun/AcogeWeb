@@ -35,6 +35,7 @@ export default class AdmItemsComponent extends Vue {
 	private lstitems: services.clase_items[] = [];
 	private claseitems = new services.clase_claseitems();
 	private lstclaseitems: services.clase_claseitems[] = [];
+	private lstclaseitemscargar: services.clase_items[] = [];
 	private tipositems = new services.clase_tipositems();
 	private lsttipositems: services.clase_tipositems[] = [];
 	private unidaddemanejo = new services.clase_unidaddemanejo();
@@ -170,7 +171,15 @@ export default class AdmItemsComponent extends Vue {
 		this.dialog = false;
 	}
 	private Actualizar(data: services.clase_items): void {
-		this.items = data;
+
+		new services.Operaciones().Buscar(this.WebApi.ws_items_Buscar, data )
+			 .then((resBanco) => {	
+					 this.lstclaseitemscargar= resBanco.data._data;
+					 this.items = this.lstclaseitemscargar[0];
+				 }).catch((err) => {   
+				});
+		this.operacion = 'Update';
+		this.dialog = true;
 		this.items.fechacreacion = this.FormatDate(Date.now());
 		this.items.fechaultimomovimiento = this.FormatDate(Date.now());
 		this.operacion = 'Update';
@@ -261,7 +270,7 @@ export default class AdmItemsComponent extends Vue {
 				}
 			});
 		return tipoitemLiteral;	
-	}a
+	}
 	private formatearuniddmanejo(idunidadmanejo : Number){
 		let unidadmanejoliteral: string = '';
 			this.lstunidaddemanejo.forEach(function(value){

@@ -22,6 +22,7 @@ export default class AdmCuentasComponent extends Vue {
 
 	private cuentas = new services.clase_cuentas();
 	private lstcuentas: services.clase_cuentas[] = [];
+	private lstcuentascargar: services.clase_cuentas[] = [];
 	private monedas = new services.clase_monedas();
 	private lstmonedas: services.clase_monedas[] = [];
 	private buscarcuentas = '';
@@ -125,7 +126,12 @@ export default class AdmCuentasComponent extends Vue {
 		this.dialog = false;
 	}
 	private Actualizar(data: services.clase_cuentas): void {
-		this.cuentas = data;
+		new services.Operaciones().Buscar(this.WebApi.ws_cuentas_Buscar, data )
+		.then((resCuentasCargar) => {	
+				this.lstcuentascargar= resCuentasCargar.data._data;
+				this.cuentas = this.lstcuentascargar[0];
+			}).catch((err) => {   
+		   });
 		this.operacion = 'Update';
 		this.dialog = true;
 	}
@@ -175,6 +181,9 @@ export default class AdmCuentasComponent extends Vue {
 			});
 		}
 		});
+	}
+	private newMoneda(){
+		this.$router.push({​​​​ path: '/Monedas' }​​​​);​​​​
 	}
 	get lstcuentasformateados(){
 		return this.lstcuentas.map((cuentas : services.clase_cuentas)=>{

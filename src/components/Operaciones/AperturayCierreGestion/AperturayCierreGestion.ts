@@ -18,6 +18,7 @@ export default class AdmAperturayCierreGestionComponent extends Vue {
 
 	private aperturaycierregestion = new services.clase_aperturaycierregestion();
 	private lstaperturaycierregestion: services.clase_aperturaycierregestion[] = [];
+	private lstaperturaycierregestioncargar: services.clase_aperturaycierregestion[] = [];
 	private buscaraperturaycierregestion = '';
 	private lstMeses =['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre']
 	private dialog = false;
@@ -108,6 +109,7 @@ export default class AdmAperturayCierreGestionComponent extends Vue {
 			this.aperturaycierregestion.mes = 12
 		}
 		if (this.operacion === 'Update') {
+			console.log(this.aperturaycierregestion)
 			new services.Operaciones().Actualizar(this.WebApi.ws_aperturaycierregestion_Actualizar, this.aperturaycierregestion)
 			.then((result) => {
 				if (result.data.error === 0) {
@@ -142,7 +144,39 @@ export default class AdmAperturayCierreGestionComponent extends Vue {
 		this.dialog = false;
 	}
 	private Actualizar(data: services.clase_aperturaycierregestion): void {
-		this.aperturaycierregestion = data;
+		if(data.mesformat == 'Enero'){
+			data.mes = 1
+		}else if(data.mesformat == 'Febrero'){
+			data.mes = 2
+		}else if(data.mesformat == 'Marzo'){
+			data.mes = 3
+		}else if(data.mesformat == 'Abril'){
+			data.mes = 4
+		}else if(data.mesformat == 'Mayo'){
+			data.mes = 5
+		}else if(data.mesformat == 'Junio'){
+			data.mes = 6
+		}else if(data.mesformat == 'Julio'){
+			data.mes = 7
+		}else if(data.mesformat == 'Agosto'){
+			data.mes = 8
+		}else if(data.mesformat == 'Septiembre'){
+			data.mes = 9
+		}else if(data.mesformat == 'Octubre'){
+			data.mes = 10
+		}else if(data.mesformat == 'Noviembre'){
+			data.mes = 11
+		}else if(data.mesformat == 'Diciembre'){
+			data.mes = 12
+		}
+		new services.Operaciones().Buscar(this.WebApi.ws_aperturaycierregestion_Buscar, data )
+		.then((resaperturaycierregestion) => {	
+				this.lstaperturaycierregestioncargar= resaperturaycierregestion.data._data;
+				this.aperturaycierregestion = this.lstaperturaycierregestioncargar[0];
+				console.log(this.aperturaycierregestion)
+			}).catch((err) => {   
+		});
+		
 		this.operacion = 'Update';
 		this.dialog = true;
 	}
@@ -152,7 +186,7 @@ export default class AdmAperturayCierreGestionComponent extends Vue {
 	private Eliminar(data: services.clase_aperturaycierregestion): void {
 		swal.fire({
 			title: 'Esta seguro de esta operacion?',
-			text: 'Eliminacion de Registro ' + data.gestion +'/'+ data.mes,
+			text: 'Eliminacion de Registro ' + data.gestion +'/'+ data.mesformat,
 			type: 'warning',
 			showCancelButton: true,
 			confirmButtonColor: 'green',
@@ -160,7 +194,33 @@ export default class AdmAperturayCierreGestionComponent extends Vue {
 			cancelButtonText: 'Cancelar',
 			confirmButtonText: 'Eliminar!',
 		}).then((resultOfQuestion) => {
+			if(data.mesformat == 'Enero'){
+				data.mes = 1
+			}else if(data.mesformat == 'Febrero'){
+				data.mes = 2
+			}else if(data.mesformat == 'Marzo'){
+				data.mes = 3
+			}else if(data.mesformat == 'Abril'){
+				data.mes = 4
+			}else if(data.mesformat == 'Mayo'){
+				data.mes = 5
+			}else if(data.mesformat == 'Junio'){
+				data.mes = 6
+			}else if(data.mesformat == 'Julio'){
+				data.mes = 7
+			}else if(data.mesformat == 'Agosto'){
+				data.mes = 8
+			}else if(data.mesformat == 'Septiembre'){
+				data.mes = 9
+			}else if(data.mesformat == 'Octubre'){
+				data.mes = 10
+			}else if(data.mesformat == 'Noviembre'){
+				data.mes = 11
+			}else if(data.mesformat == 'Diciembre'){
+				data.mes = 12
+			}
 			if (resultOfQuestion.value) {
+			console.log(data)
 			new services.Operaciones().Eliminar(this.WebApi.ws_aperturaycierregestion_Eliminar, data)
 				.then((result) => {
 				if (result.data.error === 0) {
