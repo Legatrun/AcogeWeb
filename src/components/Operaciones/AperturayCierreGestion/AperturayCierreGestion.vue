@@ -129,6 +129,52 @@
 				</v-card-actions>
 			</v-card>
 		</v-dialog>
+
+
+					<v-row no-gutters>
+						<v-card outlined hover style="border-width:thick;" width="100%" class="pa-2">
+						<h4 class="title font-weight-light" style="color:#2f5572;">GESTIONES<p class="subtitle-1"> </p></h4>				
+							<v-row>
+								<v-expansion-panels focusable>
+									<v-expansion-panel
+										v-for="(grupo,i) in lstaperturaycierregestion"
+										:key="i"
+										@click.prevent="llenarValorParams(grupo.mes)"
+									>
+										<v-expansion-panel-header>
+											{{ grupo.gestion }} <v-spacer></v-spacer> 
+										</v-expansion-panel-header>
+										<v-expansion-panel-content>
+											<v-simple-table dense>
+												<template v-slot:default>
+													<tbody>
+														<tr v-for="(param,index) in grupo.params" :key="index">
+															<td>{{param.gestion}}</td>
+															<template >
+																<td>
+																	<v-checkbox @change="check($event,param.abierta)"
+																		class="mx-2" color="custom" input-value="true"> 
+																	</v-checkbox>
+																</td>
+															</template>
+														
+														</tr>
+													</tbody>
+												</template>
+											</v-simple-table>
+										</v-expansion-panel-content>
+									</v-expansion-panel>
+								</v-expansion-panels>
+							</v-row>
+						</v-card>
+					</v-row>
+					<br>
+
+
+
+
+
+
 	</v-card>
 </template>
 

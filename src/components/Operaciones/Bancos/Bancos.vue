@@ -50,11 +50,22 @@
 			<template v-slot:top>
 				<v-tooltip bottom>
 					<template v-slot:activator="{ on }">
-						<v-btn color="accent" v-on="on" @click="Insertar()">Adicionar Nuevo Registro de Bancos</v-btn>
-						<v-btn color="accent" v-on="on" @click="newPais()">Adicionar Nuevo Registro de Pais</v-btn>
-						<v-btn color="accent" v-on="on" @click="newCiudad()">Adicionar Nueva ciudad</v-btn>
+						<v-btn color="gray" v-on="on" @click="Insertar()">Adicionar Nuevo Registro de Bancos</v-btn>
+					
 					</template>
 					<span>Adicionar nuevo registro de Banco</span>
+				</v-tooltip>
+				<v-tooltip bottom>
+					<template v-slot:activator="{ on }">
+						<v-btn color="gray" v-on="on" @click="newPais()">Adicionar Nuevo Registro de Pais</v-btn>
+					</template>
+					<span>Adicionar nuevo registro de Pais</span>
+				</v-tooltip>
+				<v-tooltip bottom>
+					<template v-slot:activator="{ on }">
+						<v-btn color="gray" v-on="on" @click="newCiudad()">Adicionar Nueva ciudad</v-btn>
+					</template>
+					<span>Adicionar nuevo registro de Ciudad</span>
 				</v-tooltip>
 			</template>
 			<template v-slot:no-data>

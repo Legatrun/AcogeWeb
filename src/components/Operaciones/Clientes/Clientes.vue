@@ -61,11 +61,31 @@
 			<template v-slot:top>
 				<v-tooltip bottom>
 					<template v-slot:activator="{ on }">
-						<v-btn color="accent" v-on="on" @click="Insertar()">Adicionar Nuevo Registro de Clientes</v-btn>
-						<v-btn color="accent" v-on="on" @click="newPais()">Adicionar Nuevo Registro de Pais</v-btn>
-						<v-btn color="accent" v-on="on" @click="newCiudad()">Adicionar Nuevo Registro de Ciudad</v-btn>
-						<v-btn color="accent" v-on="on" @click="newZona()">Adicionar Nuevo Registro de Zona</v-btn>
-						<v-btn color="accent" v-on="on" @click="newTipocliente()">Adicionar Nuevo Registro de Tipo Cliente</v-btn>
+						<v-btn color="gray" v-on="on" @click="Insertar()">Adicionar Nuevo Registro de Clientes</v-btn>
+					</template>
+					<span>Adicionar nuevo registro de cliente</span>
+				</v-tooltip>
+				<v-tooltip bottom>
+					<template v-slot:activator="{ on }">
+						<v-btn color="gray" v-on="on" @click="newPais()">Adicionar Nuevo Registro de Pais</v-btn>
+					</template>
+					<span>Adicionar nuevo registro de pais</span>
+				</v-tooltip>
+				<v-tooltip bottom>
+					<template v-slot:activator="{ on }">
+						<v-btn color="gray" v-on="on" @click="newCiudad()">Adicionar Nuevo Registro de Ciudad</v-btn>
+					</template>
+					<span>Adicionar nuevo registro de ciudad</span>
+				</v-tooltip>
+				<v-tooltip bottom>
+					<template v-slot:activator="{ on }">
+						<v-btn color="gray" v-on="on" @click="newZona()">Adicionar Nuevo Registro de Zona</v-btn>
+					</template>
+					<span>Adicionar nuevo registro de zona</span>
+				</v-tooltip>
+				<v-tooltip bottom>
+					<template v-slot:activator="{ on }">
+						<v-btn color="gray" v-on="on" @click="newTipocliente()">Adicionar Nuevo Registro de Tipo Cliente</v-btn>
 					</template>
 					<span>Adicionar nuevo registro de cliente</span>
 				</v-tooltip>

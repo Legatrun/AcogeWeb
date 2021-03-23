@@ -49,11 +49,11 @@
 					<template v-slot:activator="{ on }">
 						<v-btn color="gray" v-on="on" @click="Insertar()">Adicionar Nuevo Registro de Almacenes</v-btn> 
 					</template>
-					<span>Adicionar nuevo registro de cliente</span>
+					<span>Adicionar nuevo registro de Almacenes</span>
 				</v-tooltip>
 				<v-tooltip bottom>
 					<template v-slot:activator="{ on }">
-						<v-btn color="accent" v-on="on" @click="newCiudad()">Adicionar Nueva ciudad</v-btn>
+						<v-btn color="gray" v-on="on" @click="newCiudad()">Adicionar Nueva ciudad</v-btn>
 					</template>
 					<span>Adicionar nuevo registro de cliente</span>
 				</v-tooltip>
@@ -64,8 +64,6 @@
 				</v-alert>
 			</template>
 		</v-data-table>
-
-
 
 		<v-dialog v-model="dialog" persistent max-width="50%">
 			<v-card>

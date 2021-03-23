@@ -59,7 +59,7 @@
 			<template v-slot:top>
 				<v-tooltip bottom>
 					<template v-slot:activator="{ on }">
-						<v-btn color="accent" v-on="on" @click="Insertar()">Adicionar Nuevo Registro de Items</v-btn>
+						<v-btn color="gray" v-on="on" @click="Insertar()">Adicionar Nuevo Registro de Items</v-btn>
 					</template>
 					<span>Adicionar nuevo registro de Item</span>
 				</v-tooltip>

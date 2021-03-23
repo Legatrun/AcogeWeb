@@ -50,7 +50,7 @@
 			<template v-slot:top>
 				<v-tooltip bottom>
 					<template v-slot:activator="{ on }">
-						<v-btn color="accent" v-on="on" @click="Insertar()">Adicionar Nuevo Registro de CuentasBancos</v-btn>
+						<v-btn color="gray" v-on="on" @click="Insertar()">Adicionar Nuevo Registro de CuentasBancos</v-btn>
 					</template>
 					<span>Adicionar nuevo registro de Cuenta de Banco</span>
 				</v-tooltip>

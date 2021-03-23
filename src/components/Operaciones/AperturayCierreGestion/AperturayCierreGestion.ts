@@ -183,6 +183,25 @@ export default class AdmAperturayCierreGestionComponent extends Vue {
 	private select_fecha(fecha: string) {
 		return fecha.substr(0, 10);
 	}
+
+	private llenarValorParams(mes: number) {
+		let scope = this;
+		let isOpen: Boolean = true;
+		this.lstaperturaycierregestion.forEach(function(params: any, i: number) {
+		  if (params.mes === mes) {
+			scope.lstaperturaformateados[i].abierta = true;
+		  }
+		  isOpen = scope.lstaperturaformateados[i].abierta;
+		});
+	  }
+
+	  private renderChecklist(mes: string) {
+		let scope = this;
+		let parametroActual = this.lstaperturaformateados.filter(
+		  (param) => param.mesformat === mes
+		);
+	  }
+
 	private Eliminar(data: services.clase_aperturaycierregestion): void {
 		swal.fire({
 			title: 'Esta seguro de esta operacion?',
