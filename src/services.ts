@@ -93,6 +93,37 @@ export class Endpoints {
 	public ws_cuentasbancos_Insertar: string = $store.state.server + 'Api/cuentasbancos/Insertar';
 	public ws_cuentasbancos_Actualizar: string = $store.state.server + 'Api/cuentasbancos/Actualizar';
 	public ws_cuentasbancos_Eliminar: string = $store.state.server + 'Api/cuentasbancos/Eliminar';
+	public ws_tipodocumentosidentidad_Consultar: string = $store.state.server + 'Api/tipodocumentosidentidad/Consultar';
+	public ws_tipodocumentosidentidad_Buscar: string = $store.state.server + 'Api/tipodocumentosidentidad/Buscar';
+	public ws_tipodocumentosidentidad_Insertar: string = $store.state.server + 'Api/tipodocumentosidentidad/Insertar';
+	public ws_tipodocumentosidentidad_Actualizar: string = $store.state.server + 'Api/tipodocumentosidentidad/Actualizar';
+	public ws_tipodocumentosidentidad_Eliminar: string = $store.state.server + 'Api/tipodocumentosidentidad/Eliminar';
+	public ws_tipomovimientoinventario_Consultar: string = $store.state.server + 'Api/tipomovimientoinventario/Consultar';
+	public ws_tipomovimientoinventario_Buscar: string = $store.state.server + 'Api/tipomovimientoinventario/Buscar';
+	public ws_tipomovimientoinventario_Insertar: string = $store.state.server + 'Api/tipomovimientoinventario/Insertar';
+	public ws_tipomovimientoinventario_Actualizar: string = $store.state.server + 'Api/tipomovimientoinventario/Actualizar';
+	public ws_tipomovimientoinventario_Eliminar: string = $store.state.server + 'Api/tipomovimientoinventario/Eliminar';
+	public ws_tiposcliente_Consultar: string = $store.state.server + 'Api/tiposcliente/Consultar';
+	public ws_tiposcliente_Buscar: string = $store.state.server + 'Api/tiposcliente/Buscar';
+	public ws_tiposcliente_Insertar: string = $store.state.server + 'Api/tiposcliente/Insertar';
+	public ws_tiposcliente_Actualizar: string = $store.state.server + 'Api/tiposcliente/Actualizar';
+	public ws_tiposcliente_Eliminar: string = $store.state.server + 'Api/tiposcliente/Eliminar';	
+	public ws_tipositems_Consultar: string = $store.state.server + 'Api/tipositems/Consultar';
+	public ws_tipositems_Buscar: string = $store.state.server + 'Api/tipositems/Buscar';
+	public ws_tipositems_Insertar: string = $store.state.server + 'Api/tipositems/Insertar';
+	public ws_tipositems_Actualizar: string = $store.state.server + 'Api/tipositems/Actualizar';
+	public ws_tipositems_Eliminar: string = $store.state.server + 'Api/tipositems/Eliminar';
+	public ws_tiposproveedor_Consultar: string = $store.state.server + 'Api/tiposproveedor/Consultar';
+	public ws_tiposproveedor_Buscar: string = $store.state.server + 'Api/tiposproveedor/Buscar';
+	public ws_tiposproveedor_Insertar: string = $store.state.server + 'Api/tiposproveedor/Insertar';
+	public ws_tiposproveedor_Actualizar: string = $store.state.server + 'Api/tiposproveedor/Actualizar';
+	public ws_tiposproveedor_Eliminar: string = $store.state.server + 'Api/tiposproveedor/Eliminar';
+	public ws_zonas_Consultar: string = $store.state.server + 'Api/zonas/Consultar';
+	public ws_zonas_Buscar: string = $store.state.server + 'Api/zonas/Buscar';
+	public ws_zonas_Insertar: string = $store.state.server + 'Api/zonas/Insertar';
+	public ws_zonas_Actualizar: string = $store.state.server + 'Api/zonas/Actualizar';
+	public ws_zonas_Eliminar: string = $store.state.server + 'Api/zonas/Eliminar';
+	public ws_empresa_Consultar: string = $store.state.server + 'Api/Empresa/consultar';
 }
 
 // tslint:disable-next-line: max-classes-per-file class-name
@@ -116,6 +147,7 @@ export class clase_aperturaycierregestion {
 	public gestion!: string;
 	public mes!: number;
 	public abierta!: boolean;
+	public mesformat!: string;
 }
 
 // tslint:disable-next-line: max-classes-per-file class-name
@@ -295,6 +327,58 @@ export class clase_tipodepagos {
 export class clase_unidaddemanejo {
 	public idunidadmanejo!: number;
 	public descripcion!: string;
+}
+
+// tslint:disable-next-line: max-classes-per-file class-name
+export class clase_tipodocumentosidentidad {
+	public iddocumentoidentidad!: number;
+	public descripcion!: string;
+	public sigla!: string;
+}
+
+// tslint:disable-next-line: max-classes-per-file class-name
+export class clase_tipomovimientoinventario {
+	public idtipomovimiento!: number;
+	public descripcion!: string;
+}
+
+// tslint:disable-next-line: max-classes-per-file class-name
+export class clase_tiposcliente {
+	public idtipocliente!: number;
+	public descripcion!: string;
+}
+
+// tslint:disable-next-line: max-classes-per-file class-name
+export class clase_tipositems {
+	public idtipoitem!: number;
+	public descripcion!: string;
+	public sigla!: string;
+	public ingresainventario!: boolean;
+}
+
+// tslint:disable-next-line: max-classes-per-file class-name
+export class clase_tiposproveedor {
+	public idtipoproveedor!: number;
+	public descripcion!: string;
+}
+
+// tslint:disable-next-line: max-classes-per-file class-name
+export class clase_zonas {
+	public idzona!: number;
+	public idpais!: number;
+	public idciudad!: number;
+	public descripcion!: string;
+}
+
+export class clase_empresa {
+	public idempresa !: number;
+	public idpais !: number;
+	public idciudad!: number;
+	public descripcion !: string;
+	public logo !: string;
+	public NIT !: string;
+	public patronal !: string;
+	public estado !: boolean;
 }
 
 // tslint:disable-next-line: max-classes-per-file class-name

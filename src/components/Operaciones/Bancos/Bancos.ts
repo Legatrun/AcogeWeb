@@ -9,7 +9,7 @@ import helpers from '@/helper';
 @Component
 export default class AdmBancosComponent extends Vue {
 	private headers: any[] = [
-		{ text: 'IDBanco', align: 'left', sortable: true, value: 'idbanco', width: '15%' },
+		//{ text: 'IDBanco', align: 'left', sortable: true, value: 'idbanco', width: '15%' },
 		{ text: 'nit', align: 'left', sortable: false, value: 'nit', width: '15%' },
 		{ text: 'descripcion', align: 'left', sortable: false, value: 'descripcion', width: '15%' },
 		{ text: 'bancopropio', align: 'left', sortable: false, value: 'bancopropio', width: '15%' },
@@ -21,11 +21,26 @@ export default class AdmBancosComponent extends Vue {
 
 	private bancos = new services.clase_bancos();
 	private lstbancos: services.clase_bancos[] = [];
+	private lstbancosCargar: services.clase_bancos[] = [];
 	private buscarbancos = '';
+	private pais = new services.clase_pais();
+	private lstpais: services.clase_pais[] = [];
+	private ciudades = new services.clase_ciudades();
+	private lstciudades: services.clase_ciudades[] = [];
 	private dialog = false;
 	private operacion = '';
 	private helper: helpers = new helpers();
 	private popup = new popup.Swal();
+	private activo = false;
+	private BancoPropio = false;
+	validacion = [
+	(v: any) => !!v || 'El campo es requerido',
+    (v: any) => !/^\s*$/.test(v) || 'No se permite espacios vacios',
+  ];
+  validacionNIT = [
+	(v: any) => !!v || 'El campo es requerido',
+	(v: any) => !(!/^[0-9, -]*$/.test(v)) || "El campo sólo permite '-' como caracter especial",
+];
 	private FormatDate(data: any) {
 		return moment(data).format('YYYY-MM-DD');
 	}
@@ -61,6 +76,34 @@ export default class AdmBancosComponent extends Vue {
 			}).catch((error) => {
 					this.popup.error('Consultar', 'Error Inesperado: ' + error);
 			});
+		this.cargarPais();
+		this.cargarCiudad();
+	}
+	private cargarPais(){
+		new services.Operaciones().Consultar(this.WebApi.ws_pais_Consultar)
+			.then((respais) => {
+				if (respais.data._error.error === 0) {
+					this.lstpais = respais.data._data;
+					this.dialog = false;
+				} else {
+					this.popup.error('Consultar', respais.data._error.descripcion);
+				}
+			}).catch((error) => {
+					this.popup.error('Consultar', 'Error Inesperado: ' + error);
+			});
+	}
+	private cargarCiudad(){
+		new services.Operaciones().Consultar(this.WebApi.ws_ciudades_Consultar)
+			.then((resciudades) => {
+				if (resciudades.data._error.error === 0) {
+					this.lstciudades = resciudades.data._data;
+					this.dialog = false;
+				} else {
+					this.popup.error('Consultar', resciudades.data._error.descripcion);
+				}
+			}).catch((error) => {
+					this.popup.error('Consultar', 'Error Inesperado: ' + error);
+			});
 	}
 	private Insertar(): void {
 		this.bancos = new services.clase_bancos();
@@ -68,6 +111,7 @@ export default class AdmBancosComponent extends Vue {
 		this.dialog = true;
 	}
 	private Grabar() {
+		this.bancos.bancopropio = this.BancoPropio;
 		if (this.operacion === 'Update') {
 			new services.Operaciones().Actualizar(this.WebApi.ws_bancos_Actualizar, this.bancos)
 			.then((result) => {
@@ -103,7 +147,12 @@ export default class AdmBancosComponent extends Vue {
 		this.dialog = false;
 	}
 	private Actualizar(data: services.clase_bancos): void {
-		this.bancos = data;
+		new services.Operaciones().Buscar(this.WebApi.ws_bancos_Buscar, data )
+			 .then((resBanco) => {	
+					 this.lstbancosCargar= resBanco.data._data;
+					 this.bancos = this.lstbancosCargar[0];
+				 }).catch((err) => {   
+				});
 		this.operacion = 'Update';
 		this.dialog = true;
 	}
@@ -113,7 +162,7 @@ export default class AdmBancosComponent extends Vue {
 	private Eliminar(data: services.clase_bancos): void {
 		swal.fire({
 			title: 'Esta seguro de esta operacion?',
-			text: 'Eliminacion de Registro' + data.idbanco,
+			text: 'Eliminacion de Registro ' + data.descripcion,
 			type: 'warning',
 			showCancelButton: true,
 			confirmButtonColor: 'green',
@@ -153,5 +202,41 @@ export default class AdmBancosComponent extends Vue {
 			});
 		}
 		});
+	}
+	private newPais(){
+		this.$router.push({​​​​ path: '/Pais' }​​​​);​​​​
+	}
+	private newCiudad(){
+		this.$router.push({​​​​ path: '/Ciudades' }​​​​);​​​​
+	}
+	get lstbancosormateados(){
+		return this.lstbancos.map((bancos : services.clase_bancos)=>{
+			return{
+				idbanco:bancos.idbanco,
+				nit:bancos.nit,
+				descripcion: bancos.descripcion,
+				bancopropio: bancos.bancopropio,
+				idpais: this.formatearPais(bancos.idpais),
+				idciudad: this.formatearCiudad(bancos.idciudad)
+			}
+		})
+	}
+	private formatearCiudad(idciudad : Number){
+		let ciudadLiteral: string = '';
+			this.lstciudades.forEach(function(value){
+				if(value.idciudad == idciudad){
+					ciudadLiteral = value.descripcion;
+				}
+			});
+		return ciudadLiteral;	
+	}
+	private formatearPais(idpais: Number){
+		let paisLiteral: string = '';
+			this.lstpais.forEach(function(value){
+				if(value.idpais== idpais){
+					paisLiteral = value.descripcion;
+				}
+			});
+		return paisLiteral;	
 	}
 }

@@ -21,6 +21,12 @@ import Proveedores from './components/Operaciones/Proveedores/Proveedores.vue';
 import Sucursales from './components/Operaciones/Sucursales/Sucursales.vue';
 import TipodePagos from './components/Operaciones/TipodePagos/TipodePagos.vue';
 import UnidadDeManejo from './components/Operaciones/UnidadDeManejo/UnidadDeManejo.vue';
+import TipoDocumentosIdentidad from './components/Operaciones/TipoDocumentosIdentidad/TipoDocumentosIdentidad.vue';
+import TipoMovimientoInventario from './components/Operaciones/TipoMovimientoInventario/TipoMovimientoInventario.vue';
+import TiposCliente from './components/Operaciones/TiposCliente/TiposCliente.vue';
+import TiposItems from './components/Operaciones/TiposItems/TiposItems.vue';
+import TiposProveedor from './components/Operaciones/TiposProveedor/TiposProveedor.vue';
+import Zonas from './components/Operaciones/Zonas/Zonas.vue';
 
 Vue.use(Router);
 
@@ -47,6 +53,12 @@ export default new Router({
 		{ path: '/Sucursales', name: 'Sucursales', component: Sucursales },
 		{ path: '/TipodePagos', name: 'TipodePagos', component: TipodePagos },
 		{ path: '/UnidadDeManejo', name: 'UnidadDeManejo', component: UnidadDeManejo },
+		{ path: '/TipoDocumentosIdentidad', name: 'TipoDocumentosIdentidad', component: TipoDocumentosIdentidad },
+		{ path: '/TipoMovimientoInventario', name: 'TipoMovimientoInventario', component: TipoMovimientoInventario },
+		{ path: '/TiposCliente', name: 'TiposCliente', component: TiposCliente },
+		{ path: '/TiposItems', name: 'TiposItems', component: TiposItems },
+		{ path: '/TiposProveedor', name: 'TiposProveedor', component: TiposProveedor },
+		{ path: '/Zonas', name: 'Zonas', component: Zonas },
 	],
 });
 

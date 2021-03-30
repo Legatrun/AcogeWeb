@@ -9,22 +9,32 @@ import helpers from '@/helper';
 @Component
 export default class AdmCiudadesComponent extends Vue {
 	private headers: any[] = [
-		{ text: 'IDCiudad', align: 'left', sortable: true, value: 'idciudad', width: '15%' },
+		//{ text: 'IDCiudad', align: 'left', sortable: true, value: 'idciudad', width: '15%' },
 		{ text: 'idpais', align: 'left', sortable: false, value: 'idpais', width: '15%' },
 		{ text: 'descripcion', align: 'left', sortable: false, value: 'descripcion', width: '15%' },
 		{ text: 'sigla', align: 'left', sortable: false, value: 'sigla', width: '15%' },
 		{ text: 'idmoneda', align: 'left', sortable: false, value: 'idmoneda', width: '15%' },
-		{ text: 'Operaciones', align: 'center', sortable: false, value: 'action', width: '20%' },
+		{ text: 'Operaciones', align: 'left', sortable: false, value: 'action', width: '20%' },
 	];
 	private WebApi = new services.Endpoints();
 
 	private ciudades = new services.clase_ciudades();
 	private lstciudades: services.clase_ciudades[] = [];
+	private lstciudadesCargar: services.clase_ciudades[] = [];
 	private buscarciudades = '';
+	private monedas = new services.clase_monedas();
+	private lstmonedas: services.clase_monedas[] = [];
+	private pais = new services.clase_pais();
+	private lstpais: services.clase_pais[] = [];
 	private dialog = false;
 	private operacion = '';
 	private helper: helpers = new helpers();
 	private popup = new popup.Swal();
+	private activo = false;
+	validacion = [
+		(v: any) => !!v || 'El campo es requerido',
+    	(v: any) => !/^\s*$/.test(v) || 'No se permiten espacios vacios',
+  ];
 	private FormatDate(data: any) {
 		return moment(data).format('YYYY-MM-DD');
 	}
@@ -56,6 +66,34 @@ export default class AdmCiudadesComponent extends Vue {
 					this.dialog = false;
 				} else {
 					this.popup.error('Consultar', resciudades.data._error.descripcion);
+				}
+			}).catch((error) => {
+					this.popup.error('Consultar', 'Error Inesperado: ' + error);
+			});
+			this.cargarMonedas();
+			this.cargarPais();
+	}
+	private cargarMonedas(){
+		new services.Operaciones().Consultar(this.WebApi.ws_monedas_Consultar)
+			.then((resmonedas) => {
+				if (resmonedas.data._error.error === 0) {
+					this.lstmonedas = resmonedas.data._data;
+					this.dialog = false;
+				} else {
+					this.popup.error('Consultar', resmonedas.data._error.descripcion);
+				}
+			}).catch((error) => {
+					this.popup.error('Consultar', 'Error Inesperado: ' + error);
+			});
+	}
+	private cargarPais(){
+		new services.Operaciones().Consultar(this.WebApi.ws_pais_Consultar)
+			.then((respais) => {
+				if (respais.data._error.error === 0) {
+					this.lstpais = respais.data._data;
+					this.dialog = false;
+				} else {
+					this.popup.error('Consultar', respais.data._error.descripcion);
 				}
 			}).catch((error) => {
 					this.popup.error('Consultar', 'Error Inesperado: ' + error);
@@ -102,7 +140,12 @@ export default class AdmCiudadesComponent extends Vue {
 		this.dialog = false;
 	}
 	private Actualizar(data: services.clase_ciudades): void {
-		this.ciudades = data;
+		new services.Operaciones().Buscar(this.WebApi.ws_ciudades_Buscar, data )
+		.then((resCiudades) => {	
+				this.lstciudadesCargar= resCiudades.data._data;
+				this.ciudades = this.lstciudadesCargar[0];
+			}).catch((err) => {   
+		   });
 		this.operacion = 'Update';
 		this.dialog = true;
 	}
@@ -112,7 +155,7 @@ export default class AdmCiudadesComponent extends Vue {
 	private Eliminar(data: services.clase_ciudades): void {
 		swal.fire({
 			title: 'Esta seguro de esta operacion?',
-			text: 'Eliminacion de Registro' + data.idciudad,
+			text: 'Eliminacion de Registro ' + data.descripcion,
 			type: 'warning',
 			showCancelButton: true,
 			confirmButtonColor: 'green',
@@ -152,5 +195,38 @@ export default class AdmCiudadesComponent extends Vue {
 			});
 		}
 		});
+	}
+	private newMoneda(){
+		this.$router.push({​​​​ path: '/Monedas' }​​​​);​​​​
+	}
+	get lstciudadesformateados(){
+		return this.lstciudades.map((ciudades : services.clase_ciudades)=>{
+			return{
+				idpais: this.formatearpais(ciudades.idpais),
+				idciudad: ciudades.idciudad,
+				descripcion: ciudades.descripcion,
+				sigla: ciudades.sigla,
+				idmoneda: this.formatearMoneda(ciudades.idmoneda)
+				
+			}
+		})
+	}
+	private formatearpais(idpais : Number){
+		let paisLiteral: string = '';
+			this.lstpais.forEach(function(value){
+				if(value.idpais == idpais){
+					paisLiteral = value.descripcion;
+				}
+			});
+		return paisLiteral;	
+	}
+	private formatearMoneda(idmoneda: Number){
+		let monedaLiteral: string = '';
+			this.lstmonedas.forEach(function(value){
+				if(value.idmoneda == idmoneda){
+					monedaLiteral = value.descripcion;
+				}
+			});
+		return monedaLiteral;	
 	}
 }

@@ -1,9 +1,9 @@
 <template>
 	<v-card>
 		<v-toolbar color="primary" style="color:white">
-			<v-toolbar-title>Datos de Monedas</v-toolbar-title>
+			<v-toolbar-title>Datos de TiposCliente</v-toolbar-title>
 			<v-divider></v-divider>
-			<v-text-field v-model="buscarmonedas"
+			<v-text-field v-model="buscartiposcliente"
 					append-icon="search"
 					label="Buscar Registro"
 					single-line
@@ -12,9 +12,9 @@
 		</v-toolbar>
 		<v-data-table 	style="padding: 5px"
 						:headers="headers" 
-						:items="lstmonedas" 
+						:items="lsttiposcliente" 
 						:items-per-page="30"
-						:search = "buscarmonedas" 
+						:search = "buscartiposcliente" 
 						:footer-props="{
 							showFirstLastPage: true,
 							'items-per-page-options': [10, 20, 30, 40, 50, -1],
@@ -24,23 +24,21 @@
 						class="elevation-1">
 			<template slot="item" slot-scope="props">
 				<tr>
-					<!--<td>{{ helper.showDataDescription(props.item.idmoneda,lstMonedas, id, descripcion)  }}</td>// Ejemplo de Uso de Helper Para obtener la Descripcion de una Tabla por medio de su Id-->
-					<!-- <td>{{ props.item.idmoneda }}</td> -->
+					<!--<td>{{ helper.showDataDescription(props.item.idtipocliente,lstTiposCliente, id, descripcion)  }}</td>// Ejemplo de Uso de Helper Para obtener la Descripcion de una Tabla por medio de su Id-->
+					<!-- <td>{{ props.item.idtipocliente }}</td> -->
 					<td>{{ props.item.descripcion }}</td>
-					<td>{{ props.item.sigla }}</td>
-					<td>{{ FormatBoolean(props.item.monedalocal) }}</td>
 					<td>
 						<v-tooltip bottom>
 							<template v-slot:activator="{ on }">
 								<v-btn color="success" v-on="on" fab small dark  @click="Actualizar(props.item)"><v-icon>edit</v-icon></v-btn>
 							</template>
-							<span>Modificar Registro de Moneda</span>
+							<span>Modificar Registro de Tipo Cliente</span>
 						</v-tooltip>
 						<v-tooltip style="padding-left:10px" bottom>
 							<template v-slot:activator="{ on }" >
 								<v-btn color="error" v-on="on" fab small dark  @click="Eliminar(props.item)"><v-icon>delete</v-icon></v-btn>
 							</template>
-							<span>Eliminar Registro de Moneda</span>
+							<span>Eliminar Registro de Tipo Cliente</span>
 						</v-tooltip>
 					</td>
 				</tr>
@@ -48,9 +46,9 @@
 			<template v-slot:top>
 				<v-tooltip bottom>
 					<template v-slot:activator="{ on }">
-						<v-btn color="gray" v-on="on" @click="Insertar()">Adicionar Nuevo Registro de Monedas</v-btn>
+						<v-btn color="accent" v-on="on" @click="Insertar()">Adicionar Nuevo Registro de TiposCliente</v-btn>
 					</template>
-					<span>Adicionar nuevo registro de Monedas</span>
+					<span>Adicionar nuevo registro de Tipo Cliente</span>
 				</v-tooltip>
 			</template>
 			<template v-slot:no-data>
@@ -62,20 +60,20 @@
 		<v-dialog v-model="dialog" persistent max-width="50%">
 			<v-card>
 				<v-toolbar style="padding:10px" dark class="primary">
-					<v-toolbar-title>Datos de Monedas</v-toolbar-title>
+					<v-toolbar-title>Datos de TiposCliente</v-toolbar-title>
 				</v-toolbar>
 				<v-divider></v-divider>
 				<v-form ref="form" style="padding:10px" v-model="activo">
 					<v-card-text>
 						<v-layout wrap>
 							<template v-if="operacion == 'Insert'">
-								
+							
 							</template>
 							<template v-else>
 								
 							</template>
 							<v-flex sm12 style="padding: 5px">
-								<v-text-field v-model="monedas.descripcion"
+								<v-text-field v-model="tiposcliente.descripcion"
 											label="Descripcion"
 											hint="Ingrese Descripcion"
 											placeholder="Descripcion"
@@ -83,26 +81,8 @@
 											persistent-hint
 											required
 											:rules="validacion"
-											@input="monedas.descripcion = updateText(monedas.descripcion)">
+											@input="tiposcliente.descripcion = updateText(tiposcliente.descripcion)">
 								</v-text-field>
-							</v-flex>
-							<v-flex sm12 style="padding: 5px">
-								<v-text-field v-model="monedas.sigla"
-											label="Sigla"
-											hint="Ingrese Sigla"
-											placeholder="Sigla"
-											clearable
-											persistent-hint
-											required
-											:rules="siglarules"
-											@input="monedas.sigla = updateText(monedas.sigla)">
-								</v-text-field>
-							</v-flex>
-							
-							<v-flex sm6 style="padding: 5px">
-								<v-col cols="7" sm="5">
-									<p class="text-sm-left"><b>Moneda Local: </b></p> <v-switch  v-model="monedas.monedalocal" color="custom"  :label="`Estado: ${monedas.monedalocal ? 'Si' : 'No'}`"> </v-switch>
-									</v-col>
 							</v-flex>
 						</v-layout>
 					</v-card-text>
@@ -117,4 +97,4 @@
 	</v-card>
 </template>
 
-<script src="./Monedas.ts"></script>
+<script src="./TiposCliente.ts"></script>

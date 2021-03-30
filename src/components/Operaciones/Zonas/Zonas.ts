@@ -7,23 +7,24 @@ import * as popup from '@/popup';
 import helpers from '@/helper';
 
 @Component
-export default class AdmCajasComponent extends Vue {
+export default class AdmZonasComponent extends Vue {
 	private headers: any[] = [
-		//{ text: 'IDCaja', align: 'left', sortable: true, value: 'idcaja', width: '15%' },
+		//{ text: 'IDZona', align: 'left', sortable: true, value: 'idzona', width: '15%' },
+		{ text: 'idpais', align: 'left', sortable: false, value: 'idpais', width: '15%' },
+		{ text: 'idciudad', align: 'left', sortable: false, value: 'idciudad', width: '15%' },
 		{ text: 'descripcion', align: 'left', sortable: false, value: 'descripcion', width: '15%' },
-		{ text: 'cuenta', align: 'left', sortable: false, value: 'cuenta', width: '15%' },
-		{ text: 'monto', align: 'left', sortable: false, value: 'monto', width: '15%' },
-		{ text: 'idmoneda', align: 'left', sortable: false, value: 'idmoneda', width: '15%' },
 		{ text: 'Operaciones', align: 'left', sortable: false, value: 'action', width: '20%' },
 	];
 	private WebApi = new services.Endpoints();
 
-	private cajas = new services.clase_cajas();
-	private lstcajas: services.clase_cajas[] = [];
-	private lstcajasCargar: services.clase_cajas[] = [];
-	private buscarcajas = '';
-	private monedas = new services.clase_monedas();
-	private lstmonedas: services.clase_monedas[] = [];
+	private zonas = new services.clase_zonas();
+	private lstzonas: services.clase_zonas[] = [];
+	private lstzonascargar: services.clase_zonas[] = [];
+	private buscarzonas = '';
+	private pais = new services.clase_pais();
+	private lstpais: services.clase_pais[] = [];
+	private ciudades = new services.clase_ciudades();
+	private lstciudades: services.clase_ciudades[] = [];
 	private dialog = false;
 	private operacion = '';
 	private helper: helpers = new helpers();
@@ -33,14 +34,6 @@ export default class AdmCajasComponent extends Vue {
 		(v: any) => !!v || 'El campo es requerido',
     (v: any) => !/^\s*$/.test(v) || 'No se permite espacios vacios',
   ];
-  MontoRules = [
-	//(v: any) => !!v || "El campo es requerido",
-	(v: any) => !(!/^[0-9]*$/.test(v)) || "El campo sólo permite números, hasta 10 dígitos",
-];
-MontosRules = [
-	(v: any) => !!v || "El campo es requerido",
-	(v: any) => !(!/^[0-9, .]*$/.test(v)) || "El campo sólo permite números",
-];
 	private FormatDate(data: any) {
 		return moment(data).format('YYYY-MM-DD');
 	}
@@ -65,40 +58,54 @@ MontosRules = [
 		if (this.$store.state.auth !== true) {​​​​
 			this.$router.push({​​​​ path: '/Login' }​​​​);​​​​
 		}
-		new services.Operaciones().Consultar(this.WebApi.ws_cajas_Consultar)
-			.then((rescajas) => {
-				if (rescajas.data._error.error === 0) {
-					this.lstcajas = rescajas.data._data;
+		new services.Operaciones().Consultar(this.WebApi.ws_zonas_Consultar)
+			.then((reszonas) => {
+				if (reszonas.data._error.error === 0) {
+					this.lstzonas = reszonas.data._data;
 					this.dialog = false;
 				} else {
-					this.popup.error('Consultar', rescajas.data._error.descripcion);
+					this.popup.error('Consultar', reszonas.data._error.descripcion);
 				}
 			}).catch((error) => {
 					this.popup.error('Consultar', 'Error Inesperado: ' + error);
 			});
-			this.cargarMonedas();
+		this.cargarPais();
+		this.cargarCiudad();
 	}
-	private cargarMonedas(){
-		new services.Operaciones().Consultar(this.WebApi.ws_monedas_Consultar)
-			.then((resmonedas) => {
-				if (resmonedas.data._error.error === 0) {
-					this.lstmonedas = resmonedas.data._data;
+	private cargarPais(){
+		new services.Operaciones().Consultar(this.WebApi.ws_pais_Consultar)
+			.then((respais) => {
+				if (respais.data._error.error === 0) {
+					this.lstpais = respais.data._data;
 					this.dialog = false;
 				} else {
-					this.popup.error('Consultar', resmonedas.data._error.descripcion);
+					this.popup.error('Consultar', respais.data._error.descripcion);
+				}
+			}).catch((error) => {
+					this.popup.error('Consultar', 'Error Inesperado: ' + error);
+			});
+	}
+	private cargarCiudad(){
+		new services.Operaciones().Consultar(this.WebApi.ws_ciudades_Consultar)
+			.then((resciudades) => {
+				if (resciudades.data._error.error === 0) {
+					this.lstciudades = resciudades.data._data;
+					this.dialog = false;
+				} else {
+					this.popup.error('Consultar', resciudades.data._error.descripcion);
 				}
 			}).catch((error) => {
 					this.popup.error('Consultar', 'Error Inesperado: ' + error);
 			});
 	}
 	private Insertar(): void {
-		this.cajas = new services.clase_cajas();
+		this.zonas = new services.clase_zonas();
 		this.operacion = 'Insert';
 		this.dialog = true;
 	}
 	private Grabar() {
 		if (this.operacion === 'Update') {
-			new services.Operaciones().Actualizar(this.WebApi.ws_cajas_Actualizar, this.cajas)
+			new services.Operaciones().Actualizar(this.WebApi.ws_zonas_Actualizar, this.zonas)
 			.then((result) => {
 				if (result.data.error === 0) {
 					this.popup.success('Actualizar', result.data.descripcion);
@@ -112,7 +119,7 @@ MontosRules = [
 			this.popup.error('Actualizar', 'Error Inesperado: ' + error);
 			});
 	} else {
-		new services.Operaciones().Insertar(this.WebApi.ws_cajas_Insertar, this.cajas)
+		new services.Operaciones().Insertar(this.WebApi.ws_zonas_Insertar, this.zonas)
 		.then((result) => {
 			if (result.data.error === 0) {
 			this.popup.success('Insertar', result.data.descripcion);
@@ -131,23 +138,23 @@ MontosRules = [
 		this.cargar_data();
 		this.dialog = false;
 	}
-	private Actualizar(data: services.clase_cajas): void {
-		new services.Operaciones().Buscar(this.WebApi.ws_cajas_Buscar, data )
-		.then((resCajas) => {	
-				this.lstcajasCargar= resCajas.data._data;
-				this.cajas = this.lstcajasCargar[0];
-			}).catch((err) => {   
-		   });
-   this.operacion = 'Update';
-   this.dialog = true;
+	private Actualizar(data: services.clase_zonas): void {
+		new services.Operaciones().Buscar(this.WebApi.ws_zonas_Buscar, data )
+			 .then((resZonas) => {	
+					 this.lstzonascargar= resZonas.data._data;
+					 this.zonas = this.lstzonascargar[0];
+				 }).catch((err) => {   
+				});
+		this.operacion = 'Update';
+		this.dialog = true;
 	}
 	private select_fecha(fecha: string) {
 		return fecha.substr(0, 10);
 	}
-	private Eliminar(data: services.clase_cajas): void {
+	private Eliminar(data: services.clase_zonas): void {
 		swal.fire({
 			title: 'Esta seguro de esta operacion?',
-			text: 'Eliminacion de Registro ' + data.descripcion,
+			text: 'Eliminacion de Registro ' +data.descripcion,
 			type: 'warning',
 			showCancelButton: true,
 			confirmButtonColor: 'green',
@@ -156,7 +163,7 @@ MontosRules = [
 			confirmButtonText: 'Eliminar!',
 		}).then((resultOfQuestion) => {
 			if (resultOfQuestion.value) {
-			new services.Operaciones().Eliminar(this.WebApi.ws_cajas_Eliminar, data)
+			new services.Operaciones().Eliminar(this.WebApi.ws_zonas_Eliminar, data)
 				.then((result) => {
 				if (result.data.error === 0) {
 					swal.fire({
@@ -188,27 +195,32 @@ MontosRules = [
 		}
 		});
 	}
-	private newMoneda(){
-		this.$router.push({​​​​ path: '/Monedas' }​​​​);​​​​
-	}
-	get lstcajasformateados(){
-		return this.lstcajas.map((cajas : services.clase_cajas)=>{
+	get lstzonasformateados(){
+		return this.lstzonas.map((zonas : services.clase_zonas)=>{
 			return{
-				idcaja: cajas.idcaja,
-				descripcion: cajas.descripcion,
-				cuenta: cajas.cuenta,
-				monto: cajas.monto,
-				idmoneda: this.formatearMoneda(cajas.idmoneda)
+				idzona: zonas.idzona,
+				idpais: this.formatearpais(zonas.idpais),
+				idciudad: this.formatearciudad(zonas.idciudad),
+				descripcion: zonas.descripcion
 			}
 		})
 	}
-	private formatearMoneda(idmoneda: Number){
-		let monedaLiteral: string = '';
-			this.lstmonedas.forEach(function(value){
-				if(value.idmoneda == idmoneda){
-					monedaLiteral = value.descripcion;
+	private formatearpais(idpais : Number){
+		let paisLiteral: string = '';
+			this.lstpais.forEach(function(value){
+				if(value.idpais == idpais){
+					paisLiteral = value.descripcion;
 				}
 			});
-		return monedaLiteral;	
+		return paisLiteral;	
+	}
+	private formatearciudad(idciudad : Number){
+		let ciudadLiteral: string = '';
+			this.lstciudades.forEach(function(value){
+				if(value.idciudad == idciudad){
+					ciudadLiteral = value.descripcion;
+				}
+			});
+		return ciudadLiteral;	
 	}
 }

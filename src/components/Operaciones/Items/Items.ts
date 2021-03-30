@@ -9,36 +9,47 @@ import helpers from '@/helper';
 @Component
 export default class AdmItemsComponent extends Vue {
 	private headers: any[] = [
-		{ text: 'CodigoItem', align: 'left', sortable: true, value: 'codigoitem', width: '15%' },
-		{ text: 'modelonroparte', align: 'left', sortable: false, value: 'modelonroparte', width: '15%' },
-		{ text: 'descripcion', align: 'left', sortable: false, value: 'descripcion', width: '15%' },
-		{ text: 'fechacreacion', align: 'left', sortable: false, value: 'fechacreacion', width: '15%' },
-		{ text: 'fechaultimomovimiento', align: 'left', sortable: false, value: 'fechaultimomovimiento', width: '15%' },
-		{ text: 'costoinicial', align: 'left', sortable: false, value: 'costoinicial', width: '15%' },
-		{ text: 'costoactual', align: 'left', sortable: false, value: 'costoactual', width: '15%' },
-		{ text: 'saldoinicial', align: 'left', sortable: false, value: 'saldoinicial', width: '15%' },
-		{ text: 'saldoactual', align: 'left', sortable: false, value: 'saldoactual', width: '15%' },
-		{ text: 'idclase', align: 'left', sortable: false, value: 'idclase', width: '15%' },
-		{ text: 'idtipoitem', align: 'left', sortable: false, value: 'idtipoitem', width: '15%' },
-		{ text: 'idunidadmanejo', align: 'left', sortable: false, value: 'idunidadmanejo', width: '15%' },
-		{ text: 'codigoitemsup', align: 'left', sortable: false, value: 'codigoitemsup', width: '15%' },
-		{ text: 'cantidadminima', align: 'left', sortable: false, value: 'cantidadminima', width: '15%' },
-		{ text: 'cantidadmaxima', align: 'left', sortable: false, value: 'cantidadmaxima', width: '15%' },
-		{ text: 'Operaciones', align: 'center', sortable: false, value: 'action', width: '20%' },
+		{ text: 'CodigoItem', align: 'left', sortable: true, value: 'codigoitem', width: '5%' },
+		{ text: 'modelonroparte', align: 'left', sortable: false, value: 'modelonroparte', width: '5%' },
+		{ text: 'descripcion', align: 'left', sortable: false, value: 'descripcion', width: '5%' },
+		{ text: 'fechacreacion', align: 'left', sortable: false, value: 'fechacreacion', width: '10%' },
+		{ text: 'fechaultimomovimiento', align: 'left', sortable: false, value: 'fechaultimomovimiento', width: '10%' },
+		{ text: 'costoinicial', align: 'left', sortable: false, value: 'costoinicial', width: '5%' },
+		{ text: 'costoactual', align: 'left', sortable: false, value: 'costoactual', width: '5%' },
+		{ text: 'saldoinicial', align: 'left', sortable: false, value: 'saldoinicial', width: '5%' },
+		{ text: 'saldoactual', align: 'left', sortable: false, value: 'saldoactual', width: '5%' },
+		{ text: 'idclase', align: 'left', sortable: false, value: 'idclase', width: '5%' },
+		{ text: 'idtipoitem', align: 'left', sortable: false, value: 'idtipoitem', width: '5%' },
+		{ text: 'idunidadmanejo', align: 'left', sortable: false, value: 'idunidadmanejo', width: '5%' },
+		{ text: 'codigoitemsup', align: 'left', sortable: false, value: 'codigoitemsup', width: '5%' },
+		{ text: 'cantidadminima', align: 'left', sortable: false, value: 'cantidadminima', width: '5%' },
+		{ text: 'cantidadmaxima', align: 'left', sortable: false, value: 'cantidadmaxima', width: '5%' },
+		{ text: 'Operaciones', align: 'left', sortable: false, value: 'action', width: '10%' },
 	];
 	// tslint:disable-next-line: variable-name
 	private menu_fechacreacion: boolean = false;
 	// tslint:disable-next-line: variable-name
 	private menu_fechaultimomovimiento: boolean = false;
 	private WebApi = new services.Endpoints();
-
 	private items = new services.clase_items();
 	private lstitems: services.clase_items[] = [];
+	private claseitems = new services.clase_claseitems();
+	private lstclaseitems: services.clase_claseitems[] = [];
+	private lstclaseitemscargar: services.clase_items[] = [];
+	private tipositems = new services.clase_tipositems();
+	private lsttipositems: services.clase_tipositems[] = [];
+	private unidaddemanejo = new services.clase_unidaddemanejo();
+	private lstunidaddemanejo: services.clase_unidaddemanejo[] = [];
 	private buscaritems = '';
 	private dialog = false;
 	private operacion = '';
 	private helper: helpers = new helpers();
 	private popup = new popup.Swal();
+	private activo = false;
+	validacion = [
+		(v: any) => !!v || 'El campo es requerido',
+    (v: any) => !/^\s*$/.test(v) || 'No se permite espacios vacios',
+  ];
 	private FormatDate(data: any) {
 		return moment(data).format('YYYY-MM-DD');
 	}
@@ -70,6 +81,48 @@ export default class AdmItemsComponent extends Vue {
 					this.dialog = false;
 				} else {
 					this.popup.error('Consultar', resitems.data._error.descripcion);
+				}
+			}).catch((error) => {
+					this.popup.error('Consultar', 'Error Inesperado: ' + error);
+			});
+			this.cargarClaseItem();
+			this.cargarUnidadManejo();
+			this.cargartipoItem();
+	}
+	private cargarClaseItem(){
+		new services.Operaciones().Consultar(this.WebApi.ws_claseitems_Consultar)
+			.then((resclaseitems) => {
+				if (resclaseitems.data._error.error === 0) {
+					this.lstclaseitems = resclaseitems.data._data;
+					this.dialog = false;
+				} else {
+					this.popup.error('Consultar', resclaseitems.data._error.descripcion);
+				}
+			}).catch((error) => {
+					this.popup.error('Consultar', 'Error Inesperado: ' + error);
+			});
+	}
+	private cargartipoItem(){
+		new services.Operaciones().Consultar(this.WebApi.ws_tipositems_Consultar)
+			.then((restipositems) => {
+				if (restipositems.data._error.error === 0) {
+					this.lsttipositems = restipositems.data._data;
+					this.dialog = false;
+				} else {
+					this.popup.error('Consultar', restipositems.data._error.descripcion);
+				}
+			}).catch((error) => {
+					this.popup.error('Consultar', 'Error Inesperado: ' + error);
+			});
+	}
+	private cargarUnidadManejo(){
+		new services.Operaciones().Consultar(this.WebApi.ws_unidaddemanejo_Consultar)
+			.then((resunidaddemanejo) => {
+				if (resunidaddemanejo.data._error.error === 0) {
+					this.lstunidaddemanejo = resunidaddemanejo.data._data;
+					this.dialog = false;
+				} else {
+					this.popup.error('Consultar', resunidaddemanejo.data._error.descripcion);
 				}
 			}).catch((error) => {
 					this.popup.error('Consultar', 'Error Inesperado: ' + error);
@@ -118,7 +171,15 @@ export default class AdmItemsComponent extends Vue {
 		this.dialog = false;
 	}
 	private Actualizar(data: services.clase_items): void {
-		this.items = data;
+
+		new services.Operaciones().Buscar(this.WebApi.ws_items_Buscar, data )
+			 .then((resBanco) => {	
+					 this.lstclaseitemscargar= resBanco.data._data;
+					 this.items = this.lstclaseitemscargar[0];
+				 }).catch((err) => {   
+				});
+		this.operacion = 'Update';
+		this.dialog = true;
 		this.items.fechacreacion = this.FormatDate(Date.now());
 		this.items.fechaultimomovimiento = this.FormatDate(Date.now());
 		this.operacion = 'Update';
@@ -130,7 +191,7 @@ export default class AdmItemsComponent extends Vue {
 	private Eliminar(data: services.clase_items): void {
 		swal.fire({
 			title: 'Esta seguro de esta operacion?',
-			text: 'Eliminacion de Registro' + data.codigoitem,
+			text: 'Eliminacion de Registro ' + data.descripcion,
 			type: 'warning',
 			showCancelButton: true,
 			confirmButtonColor: 'green',
@@ -170,5 +231,53 @@ export default class AdmItemsComponent extends Vue {
 			});
 		}
 		});
+	}
+	get lstItemformateados(){
+		return this.lstitems.map((item : services.clase_items)=>{
+			return{
+				codigoitem: item.codigoitem,
+				modelonroparte: item.modelonroparte,
+				descripcion: item.descripcion,
+				fechacreacion: item.fechacreacion,
+				fechaultimomovimiento: item.fechaultimomovimiento,
+				costoinicial: item.costoinicial,
+				costoactual: item.costoactual,
+				saldoinicial: item.saldoinicial,
+				saldoactual: item.saldoactual,
+				idclase: this.formatearclase(item.idclase),
+				idtipoitem: this.formateartipoitem(item.idtipoitem),
+				idunidadmanejo: this.formatearuniddmanejo(item.idunidadmanejo),
+				codigoitemsup: item.codigoitemsup,
+				cantidadminima: item.cantidadminima,
+				cantidadmaxima: item.cantidadmaxima
+			}
+		})
+	}
+	private formatearclase(idclase : Number){
+		let claseLiteral: string = '';
+			this.lstclaseitems.forEach(function(value){
+				if(value.idclase == idclase){
+					claseLiteral = value.descripcion;
+				}
+			});
+		return claseLiteral;	
+	}
+	private formateartipoitem(idtipoitem : Number){
+		let tipoitemLiteral: string = '';
+			this.lsttipositems.forEach(function(value){
+				if(value.idtipoitem == idtipoitem){
+					tipoitemLiteral = value.descripcion;
+				}
+			});
+		return tipoitemLiteral;	
+	}
+	private formatearuniddmanejo(idunidadmanejo : Number){
+		let unidadmanejoliteral: string = '';
+			this.lstunidaddemanejo.forEach(function(value){
+				if(value.idunidadmanejo == idunidadmanejo){
+					unidadmanejoliteral = value.descripcion;
+				}
+			});
+		return unidadmanejoliteral;	
 	}
 }

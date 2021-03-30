@@ -19,7 +19,7 @@ export default class AppComponent extends Vue {
   private objcryptServer = new crypto();
   private encryptServer = '';
   private decryptServer = '';
-  private version = '2.1.0';
+  private version = '2.1.1';
   public Login() {
     this.$router.push({ path: '/Login' });
   }
@@ -39,7 +39,7 @@ export default class AppComponent extends Vue {
     this.$router.push({ path: '/' });
   }
   private created() {
-    this.dialog.success('Bienvenido', 'Proyecto Generado');
+    // this.dialog.success('Bienvenido', 'Proyecto Generado');
     Axios.get('static/params.json').then((Response: any) => {
       this.objcryptServer = new crypto();
       this.encryptServer = this.objcryptServer.EncryptAES(Response.data.urlService);
