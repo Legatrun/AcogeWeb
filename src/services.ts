@@ -124,6 +124,16 @@ export class Endpoints {
 	public ws_zonas_Actualizar: string = $store.state.server + 'Api/zonas/Actualizar';
 	public ws_zonas_Eliminar: string = $store.state.server + 'Api/zonas/Eliminar';
 	public ws_empresa_Consultar: string = $store.state.server + 'Api/Empresa/consultar';
+	public ws_tiposcomprobantes_Consultar: string = $store.state.server + 'Api/tiposcomprobantes/Consultar';
+	public ws_tiposcomprobantes_Buscar: string = $store.state.server + 'Api/tiposcomprobantes/Buscar';
+	public ws_tiposcomprobantes_Insertar: string = $store.state.server + 'Api/tiposcomprobantes/Insertar';
+	public ws_tiposcomprobantes_Actualizar: string = $store.state.server + 'Api/tiposcomprobantes/Actualizar';
+	public ws_tiposcomprobantes_Eliminar: string = $store.state.server + 'Api/tiposcomprobantes/Eliminar';
+	public ws_correlativostiposcomprobantes_Consultar: string = $store.state.server + 'Api/correlativostiposcomprobantes/Consultar';
+	public ws_correlativostiposcomprobantes_Buscar: string = $store.state.server + 'Api/correlativostiposcomprobantes/Buscar';
+	public ws_correlativostiposcomprobantes_Insertar: string = $store.state.server + 'Api/correlativostiposcomprobantes/Insertar';
+	public ws_correlativostiposcomprobantes_Actualizar: string = $store.state.server + 'Api/correlativostiposcomprobantes/Actualizar';
+	public ws_correlativostiposcomprobantes_Eliminar: string = $store.state.server + 'Api/correlativostiposcomprobantes/Eliminar';
 }
 
 // tslint:disable-next-line: max-classes-per-file class-name
@@ -131,6 +141,14 @@ export class ClaseAutenticacion {
     public usuario!: string;
     public password!: string;
     public dominio?: string;
+}
+
+export class clase_tiposcomprobantes {
+	public idtipocomprobante!: number;
+	public descripcion!: string;
+	public sigla!: string;
+	public automatico!: boolean;
+	public idsucursal!: number;
 }
 
 // tslint:disable-next-line: max-classes-per-file class-name
@@ -188,6 +206,13 @@ export class clase_claseitems {
 	public cuentagasto!: string;
 	public cuentainventario!: string;
 	public ingresainventario!: boolean;
+}
+
+export class clase_correlativostiposcomprobantes {
+	public idtipocomprobante!: number;
+	public anio!: number;
+	public mes!: number;
+	public correlativo!: number;
 }
 
 // tslint:disable-next-line: max-classes-per-file class-name

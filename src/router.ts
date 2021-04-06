@@ -27,7 +27,10 @@ import TiposCliente from './components/Operaciones/TiposCliente/TiposCliente.vue
 import TiposItems from './components/Operaciones/TiposItems/TiposItems.vue';
 import TiposProveedor from './components/Operaciones/TiposProveedor/TiposProveedor.vue';
 import Zonas from './components/Operaciones/Zonas/Zonas.vue';
-
+import CorrelativosTiposComprobantes from './components/Operaciones/CorrelativosTiposComprobantes/CorrelativosTiposComprobantes.vue';
+import TiposComprobantes from './components/Operaciones/TiposComprobantes/TiposComprobantes.vue';
+import InserciontiposComp from './components/Operaciones/InsercionTiposComp/InserciontiposComp.vue';
+import RegistrosDiariosComp from './components/Operaciones/RegistrosDiarios/RegistrosDiarios.vue';
 Vue.use(Router);
 
 export default new Router({
@@ -59,6 +62,11 @@ export default new Router({
 		{ path: '/TiposItems', name: 'TiposItems', component: TiposItems },
 		{ path: '/TiposProveedor', name: 'TiposProveedor', component: TiposProveedor },
 		{ path: '/Zonas', name: 'Zonas', component: Zonas },
+		{ path: '/TiposComprobantes', name: 'TiposComprobantes', component: TiposComprobantes },
+		{ path: '/CorrelativosTiposComprobantes', name: 'CorrelativosTiposComprobantes', component: CorrelativosTiposComprobantes },
+		{ path: '/TiposComprobantes', name: 'TiposComprobantes', component: TiposComprobantes },
+		{ path: '/InserciontiposComp', name: 'InserciontiposComp', component: InserciontiposComp },
+		{ path: '/RegistrosDiarios', name: 'RegistrosDiariosComp', component: RegistrosDiariosComp },
 	],
 });
 
