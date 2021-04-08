@@ -28,12 +28,12 @@
 					<td>{{ props.item.codigoitem }}</td>
 					<td>{{ props.item.modelonroparte }}</td>
 					<td>{{ props.item.descripcion }}</td>
-					<td>{{ FormatDate(props.item.fechacreacion) }}</td>
-					<td>{{ FormatDate(props.item.fechaultimomovimiento) }}</td>
-					<td>{{ props.item.costoinicial }}</td>
+					<!-- <td>{{ FormatDate(props.item.fechacreacion) }}</td>
+					<td>{{ FormatDate(props.item.fechaultimomovimiento) }}</td> -->
+					<!-- <td>{{ props.item.costoinicial }}</td>
 					<td>{{ props.item.costoactual }}</td>
 					<td>{{ props.item.saldoinicial }}</td>
-					<td>{{ props.item.saldoactual }}</td>
+					<td>{{ props.item.saldoactual }}</td> -->
 					<td>{{ props.item.idclase }}</td>
 					<td>{{ props.item.idtipoitem }}</td>
 					<td>{{ props.item.idunidadmanejo }}</td>

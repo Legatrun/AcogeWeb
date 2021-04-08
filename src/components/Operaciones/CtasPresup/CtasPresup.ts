@@ -11,14 +11,14 @@ export default class AdmCtasPresupComponent extends Vue {
 	
 	private headers: any[] = [
 		
-		{ text: 'CuentaPresup', align: 'left', sortable: true, value: 'cuentapresup', width: '10%' },
-		{ text: 'nombrecuentapresup', align: 'left', sortable: false, value: 'nombrecuentapresup', width: '10%' },
-		{ text: 'idmoneda', align: 'left', sortable: false, value: 'idmoneda', width: '10%' },
-		{ text: 'nivel', align: 'left', sortable: false, value: 'nivel', width: '10%' },
-		{ text: 'fechacreacion', align: 'left', sortable: false, value: 'fechacreacion', width: '10%' },
-		{ text: 'fechamodificacion', align: 'left', sortable: false, value: 'fechamodificacion', width: '10%' },
-		{ text: 'balancecuenta', align: 'left', sortable: false, value: 'balancecuenta', width: '10%' },
-		{ text: 'cuentaasiento', align: 'left', sortable: false, value: 'cuentaasiento', width: '10%' },
+		{ text: 'Cuenta Presup', align: 'left', sortable: true, value: 'cuentapresup', width: '10%' },
+		{ text: 'nombre cuenta presup', align: 'left', sortable: false, value: 'nombrecuentapresup', width: '10%' },
+		{ text: 'moneda', align: 'left', sortable: false, value: 'idmoneda', width: '10%' },
+		// { text: 'nivel', align: 'left', sortable: false, value: 'nivel', width: '10%' },
+		// { text: 'fecha creacion', align: 'left', sortable: false, value: 'fechacreacion', width: '10%' },
+		// { text: 'fecha modificacion', align: 'left', sortable: false, value: 'fechamodificacion', width: '10%' },
+		{ text: 'balance cuenta', align: 'left', sortable: false, value: 'balancecuenta', width: '10%' },
+		{ text: 'cuenta asiento', align: 'left', sortable: false, value: 'cuentaasiento', width: '10%' },
 		{ text: 'grabado', align: 'left', sortable: false, value: 'grabado', width: '10%' },
 		{ text: 'Operaciones', align: 'left', sortable: false, value: 'action', width: '10%' },
 	];
@@ -39,6 +39,7 @@ export default class AdmCtasPresupComponent extends Vue {
 	private helper: helpers = new helpers();
 	private popup = new popup.Swal();
 	private activo = false;
+	private lista=['1', '2','3','4','5', '6'];
 	validacion = [
 		(v: any) => !!v || 'El campo es requerido',
     (v: any) => !/^\s*$/.test(v) || 'No se permite espacios vacios',
@@ -101,6 +102,7 @@ export default class AdmCtasPresupComponent extends Vue {
 		this.dialog = true;
 	}
 	private Grabar() {
+		console.log(this.ctaspresup)
 		if (this.operacion === 'Update') {
 			new services.Operaciones().Actualizar(this.WebApi.ws_ctaspresup_Actualizar, this.ctaspresup)
 			.then((result) => {
@@ -199,7 +201,7 @@ export default class AdmCtasPresupComponent extends Vue {
 				cuentapresup: ctaspresup.cuentapresup,
 				nombrecuentapresup: ctaspresup.nombrecuentapresup,
 				idmoneda: this.formatearMoneda(ctaspresup.idmoneda),
-				nivel:ctaspresup.nombrecuentapresup,
+				nivel:ctaspresup.nivel,
 				fechacreacion: ctaspresup.fechacreacion,
 				fechamodificacion:ctaspresup.fechamodificacion,
 				balancecuenta:ctaspresup.balancecuenta,

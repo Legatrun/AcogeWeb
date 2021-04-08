@@ -29,9 +29,9 @@
 					<td>{{ props.item.cuentapresup }}</td>
 					<td>{{ props.item.nombrecuentapresup }}</td>
 					<td>{{ props.item.idmoneda }}</td>
-					<td>{{ props.item.nivel }}</td>
+					<!-- <td>{{ props.item.nivel }}</td>
 					<td>{{ FormatDate(props.item.fechacreacion) }}</td>
-					<td>{{ FormatDate(props.item.fechamodificacion) }}</td>
+					<td>{{ FormatDate(props.item.fechamodificacion) }}</td> -->
 					<td>{{ FormatBoolean(props.item.balancecuenta) }}</td>
 					<td>{{ FormatBoolean(props.item.cuentaasiento) }}</td>
 					<td>{{ FormatBoolean(props.item.grabado) }}</td>
@@ -125,7 +125,19 @@
 								@input="ctaspresup.idmoneda = updateText(ctaspresup.idmoneda)"
 								></v-autocomplete>
 							</v-col>
-							<v-flex sm6 style="padding: 5px">
+
+							<v-col cols="5" sm="6" class="pa-2">
+								<v-autocomplete
+								v-model="ctaspresup.nivel"
+								label="Nivel"
+								:items="lista"
+								:rules="validacion"
+								outlined
+								autocomplete="off"
+								color="#1A237E"
+								></v-autocomplete>
+							</v-col>
+							<!-- <v-flex sm6 style="padding: 5px">
 								<v-text-field v-model="ctaspresup.nivel"
 											label="Nivel"
 											hint="Ingrese Nivel"
@@ -136,7 +148,7 @@
 											:rules="validacion"
 											@input="ctaspresup.nivel = updateText(ctaspresup.nivel)">
 								</v-text-field>
-							</v-flex>
+							</v-flex> -->
 							<v-flex sm4 class="hidden-xs-only" style="padding: 5px">
 								<v-menu
 									ref="menu_fechacreacion"

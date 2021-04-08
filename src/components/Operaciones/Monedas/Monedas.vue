@@ -86,7 +86,7 @@
 											@input="monedas.descripcion = updateText(monedas.descripcion)">
 								</v-text-field>
 							</v-flex>
-							<v-flex sm12 style="padding: 5px">
+							<v-flex sm6 style="padding: 5px">
 								<v-text-field v-model="monedas.sigla"
 											label="Sigla"
 											hint="Ingrese Sigla"

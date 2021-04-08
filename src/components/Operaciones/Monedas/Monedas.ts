@@ -76,6 +76,7 @@ export default class AdmMonedasComponent extends Vue {
 	}
 	private Grabar() {
 		this.monedas.sigla = this.monedas.sigla.trim();
+		console.log(this.monedas)
 		if (this.operacion === 'Update') {
 			new services.Operaciones().Actualizar(this.WebApi.ws_monedas_Actualizar, this.monedas)
 			.then((result) => {

@@ -26,9 +26,9 @@
 			<template slot="item" slot-scope="props">
 				<tr>
 					<!--<td>{{ helper.showDataDescription(props.item.codigocliente,lstClientes, id, descripcion)  }}</td>// Ejemplo de Uso de Helper Para obtener la Descripcion de una Tabla por medio de su Id-->
-					<td>{{ props.item.codigocliente }}</td>
+					<!-- <td>{{ props.item.codigocliente }}</td>
 					<td>{{ props.item.codigoclienteprincipal }}</td>
-					<td>{{ props.item.iddocumentoidentidad }}</td>
+					<td>{{ props.item.iddocumentoidentidad }}</td> -->
 					<td>{{ props.item.numerodocumento }}</td>
 					<td>{{ props.item.razonsocial }}</td>
 					<td>{{ props.item.idpais }}</td>
@@ -36,12 +36,12 @@
 					<td>{{ props.item.idzona }}</td>
 					<td>{{ props.item.idtipocliente }}</td>
 					<td>{{ props.item.descripciondireccion }}</td>
-					<td>{{ props.item.telefono }}</td>
-					<td>{{ props.item.correoelectronico }}</td>
-					<td>{{ props.item.casillacorreo }}</td>
-					<td>{{ props.item.cuentacontable }}</td>
-					<td>{{ props.item.cuentacontableanticipos }}</td>
-					<td>{{ FormatBoolean(props.item.activo) }}</td>
+					<!-- <td>{{ props.item.telefono }}</td>
+					<td>{{ props.item.correoelectronico }}</td> -->
+					<!-- <td>{{ props.item.casillacorreo }}</td>
+					<td>{{ props.item.cuentacontable }}</td> -->
+					<!-- <td>{{ props.item.cuentacontableanticipos }}</td> -->
+					<!-- <td>{{ FormatBoolean(props.item.activo) }}</td> -->
 					<td>
 						<v-tooltip bottom>
 							<template v-slot:activator="{ on }">
@@ -83,12 +83,12 @@
 					</template>
 					<span>Adicionar nuevo registro de zona</span>
 				</v-tooltip>
-				<v-tooltip bottom>
+				<!-- <v-tooltip bottom>
 					<template v-slot:activator="{ on }">
 						<v-btn color="gray" v-on="on" @click="newTipocliente()">Adicionar Nuevo Registro de Tipo Cliente</v-btn>
 					</template>
 					<span>Adicionar nuevo registro de cliente</span>
-				</v-tooltip>
+				</v-tooltip> -->
 			</template>
 			<template v-slot:no-data>
 				<v-alert :value="true" color="warning" icon="warning">

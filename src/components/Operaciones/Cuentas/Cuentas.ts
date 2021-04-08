@@ -72,6 +72,7 @@ export default class AdmCuentasComponent extends Vue {
 			});
 		this.cargarMonedas();
 	}
+	
 	private cargarMonedas(){
 		new services.Operaciones().Consultar(this.WebApi.ws_monedas_Consultar)
 			.then((resmonedas) => {
