@@ -6,18 +6,18 @@
           <v-icon>{{ item.icon }}</v-icon>
         </v-list-item-icon>
         <v-list-item-content>
-          <v-list-item-title>{{ item.title }}</v-list-item-title>
+          <v-list-item-title style="font-size:1.2em" >{{ item.title }}</v-list-item-title>
         </v-list-item-content>
       </v-list-item>
       <v-list-group v-for="item in menuParametros" :key="item.title" :prepend-icon="item.icon" no-action>
         <template v-slot:activator>
           <v-list-item-content>
-            <v-list-item-title v-text="item.title"></v-list-item-title>
+            <v-list-item-title style="font-size:1.2em" v-text="item.title"></v-list-item-title>
           </v-list-item-content>
         </template>
         <v-list-item v-for="subItem in menuListaParametros" :key="subItem.title" :to="subItem.path" no-action>
           <v-list-item-content>
-            <v-list-item-title v-text="subItem.title"></v-list-item-title>
+            <v-list-item-title style="font-size:1.2em" v-text="subItem.title"></v-list-item-title>
           </v-list-item-content>
         </v-list-item>
       </v-list-group>
@@ -26,7 +26,7 @@
           <v-icon>{{ item.icon }}</v-icon>
         </v-list-item-icon>            
         <v-list-item-content>
-          <v-list-item-title>{{ item.title }}</v-list-item-title>
+          <v-list-item-title style="font-size:1.2em">{{ item.title }}</v-list-item-title>
         </v-list-item-content>
       </v-list-item>
     </v-list>
