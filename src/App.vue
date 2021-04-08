@@ -25,9 +25,8 @@
         </v-app-bar>
         <main class="body-background">
             <v-content>
-                <v-container grid-list-xl fluid style="width:'100%'  " >
+                <!-- <v-container grid-list-xl fluid style="width:'100%'  " > -->
                     <router-view></router-view>
-                </v-container>
             </v-content>
         </main>
         <v-footer class="primary" app fixed>
@@ -50,5 +49,4 @@
         background-repeat: no-repeat;
         background-size: cover;
     }
-</style>
 </style>

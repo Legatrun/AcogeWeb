@@ -134,8 +134,52 @@ export class Endpoints {
 	public ws_correlativostiposcomprobantes_Insertar: string = $store.state.server + 'Api/correlativostiposcomprobantes/Insertar';
 	public ws_correlativostiposcomprobantes_Actualizar: string = $store.state.server + 'Api/correlativostiposcomprobantes/Actualizar';
 	public ws_correlativostiposcomprobantes_Eliminar: string = $store.state.server + 'Api/correlativostiposcomprobantes/Eliminar';
+	public ws_asientosdetalle_Consultar: string = $store.state.server + 'Api/asientosdetalle/Consultar';
+	public ws_asientosdetalle_Buscar: string = $store.state.server + 'Api/asientosdetalle/Buscar';
+	public ws_asientosdetalle_Insertar: string = $store.state.server + 'Api/asientosdetalle/Insertar';
+	public ws_asientosdetalle_Actualizar: string = $store.state.server + 'Api/asientosdetalle/Actualizar';
+	public ws_asientosdetalle_Eliminar: string = $store.state.server + 'Api/asientosdetalle/Eliminar';
+	public ws_asientosencabezado_Consultar: string = $store.state.server + 'Api/asientosencabezado/Consultar';
+	public ws_asientosencabezado_Buscar: string = $store.state.server + 'Api/asientosencabezado/Buscar';
+	public ws_asientosencabezado_Insertar: string = $store.state.server + 'Api/asientosencabezado/Insertar';
+	public ws_asientosencabezado_Actualizar: string = $store.state.server + 'Api/asientosencabezado/Actualizar';
+	public ws_asientosencabezado_Eliminar: string = $store.state.server + 'Api/asientosencabezado/Eliminar';
+	public ws_tiposdecambio_Consultar: string = $store.state.server + 'Api/tiposdecambio/Consultar';
+	public ws_tiposdecambio_Buscar: string = $store.state.server + 'Api/tiposdecambio/Buscar';
+	public ws_tiposdecambio_Insertar: string = $store.state.server + 'Api/tiposdecambio/Insertar';
+	public ws_tiposdecambio_Actualizar: string = $store.state.server + 'Api/tiposdecambio/Actualizar';
+	public ws_tiposdecambio_Eliminar: string = $store.state.server + 'Api/tiposdecambio/Eliminar';
 }
 
+export class clase_asientosdetalle {
+	public idtipocomprobante!: number;
+	public numerocomprobante!: string;
+	public nrolinea!: number;
+	public cuenta!: string;
+	public glosadetalle!: string;
+	public tipomov!: string;
+	public montobs!: number;
+	public montosus!: number;
+}
+
+export class clase_asientosencabezado {
+	public idtipocomprobante!: number;
+	public numerocomprobante!: string;
+	public fecha!: any;
+	public referencia!: string;
+	public glosa!: string;
+	public cotizacion!: number;
+	public codigomodulo!: string;
+}
+
+export class clase_tiposdecambio {
+	public fecha!: any;
+	public idmonedaorigen!: number;
+	public idmonedadestino!: number;
+	public cotizacionoficial!: number;
+	public cotizacioncompra!: number;
+	public cotizacionventa!: number;
+}
 // tslint:disable-next-line: max-classes-per-file class-name
 export class ClaseAutenticacion {
     public usuario!: string;

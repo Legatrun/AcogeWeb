@@ -51,6 +51,9 @@ export default class MenuComponent extends Vue {
         new MenuItem('Tipo Comprobantes', 'exit_to_app', '/TiposComprobantes'), 
         new MenuItem('Correlativos Tipos Comprobantes', 'exit_to_app', '/CorrelativosTiposComprobantes'), 
         new MenuItem('Registros Diaios', 'exit_to_app', '/RegistrosDiarios'), 
+        new MenuItem('AsientosDetalle', 'exit_to_app', '/AsientosDetalle'), 
+        new MenuItem('AsientosEncabezado', 'exit_to_app', '/AsientosEncabezado'), 
+        new MenuItem('TiposdeCambio', 'exit_to_app', '/TiposdeCambio'), 
     ];
 
     public menuSalir: MenuItem[] = [

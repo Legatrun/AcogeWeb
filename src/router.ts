@@ -31,6 +31,10 @@ import CorrelativosTiposComprobantes from './components/Operaciones/Correlativos
 import TiposComprobantes from './components/Operaciones/TiposComprobantes/TiposComprobantes.vue';
 import InserciontiposComp from './components/Operaciones/InsercionTiposComp/InserciontiposComp.vue';
 import RegistrosDiariosComp from './components/Operaciones/RegistrosDiarios/RegistrosDiarios.vue';
+import AsientosDetalle from './components/Operaciones/AsientosDetalle/AsientosDetalle.vue';
+import AsientosEncabezado from './components/Operaciones/AsientosEncabezado/AsientosEncabezado.vue';
+import TiposdeCambio from './components/Operaciones/TiposdeCambio/TiposdeCambio.vue';
+
 Vue.use(Router);
 
 export default new Router({
@@ -67,6 +71,10 @@ export default new Router({
 		{ path: '/TiposComprobantes', name: 'TiposComprobantes', component: TiposComprobantes },
 		{ path: '/InserciontiposComp', name: 'InserciontiposComp', component: InserciontiposComp },
 		{ path: '/RegistrosDiarios', name: 'RegistrosDiariosComp', component: RegistrosDiariosComp },
+		{ path: '/Principal', name: 'Principal', component: Principal  },
+		{ path: '/AsientosDetalle', name: 'AsientosDetalle', component: AsientosDetalle },
+		{ path: '/AsientosEncabezado', name: 'AsientosEncabezado', component: AsientosEncabezado },
+		{ path: '/TiposdeCambio', name: 'TiposdeCambio', component: TiposdeCambio },
 	],
 });
 
