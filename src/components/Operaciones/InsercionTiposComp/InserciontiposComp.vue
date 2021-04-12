@@ -117,7 +117,7 @@
 					<v-card-text>
 						<v-layout wrap>
 							<template v-if="operacion == 'Insert'">
-								<v-flex sm12 style="padding: 5px">
+								<v-flex sm6 style="padding: 5px">
 									<v-text-field v-model="correlativostiposcomprobantes.idtipocomprobante"
 												label="ID Tipo Comprobante"
 												hint="Ingrese ID Tipo Comprobante"
@@ -128,7 +128,7 @@
 												@input="correlativostiposcomprobantes.idtipocomprobante = updateText(correlativostiposcomprobantes.idtipocomprobante)">
 									</v-text-field>
 								</v-flex>
-								<v-flex sm12 style="padding: 5px">
+								<v-flex sm6 style="padding: 5px">
 									<v-text-field v-model="correlativostiposcomprobantes.anio"
 												label="Año"
 												hint="Ingrese Año"
@@ -151,7 +151,7 @@
 							</v-col>
 							</template>
 							<template v-else>
-								<v-flex sm12 style="padding: 5px">
+								<v-flex sm6 style="padding: 5px">
 									<v-text-field v-model="correlativostiposcomprobantes.idtipocomprobante"
 												label="ID Tipo Comprobante"
 												placeholder="ID Tipo Comprobante"
@@ -159,7 +159,7 @@
 												persistent-hint>
 									</v-text-field>
 								</v-flex>
-								<v-flex sm12 style="padding: 5px">
+								<v-flex sm6 style="padding: 5px">
 									<v-text-field v-model="correlativostiposcomprobantes.anio"
 												label="Año"
 												placeholder="Año"
@@ -168,7 +168,7 @@
 									</v-text-field>
 								</v-flex>
 							
-								<v-col cols="5" sm="6" class="pa-2">	
+								<!-- <v-col cols="5" sm="6" class="pa-2">	
 										<v-autocomplete v-model="correlativostiposcomprobantes.mes"
 												:rules="validacion"
 												:items="lstMeses"
@@ -177,7 +177,7 @@
 												autocomplete="off"
 												color="#1A237E">
 										</v-autocomplete>
-							</v-col>
+							</v-col> -->
 							</template>
 							<v-flex sm12 style="padding: 5px">
 								<v-text-field v-model="correlativostiposcomprobantes.correlativo"

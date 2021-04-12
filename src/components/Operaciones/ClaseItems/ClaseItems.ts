@@ -35,8 +35,12 @@ export default class AdmClaseItemsComponent extends Vue {
   ];
   CuentasRules = [
 	(v: any) => !!v || "El campo es requerido",
-	(v: any) => !(!/^[0-9, -]*$/.test(v)) || "El campo sólo permite números y '-' como caracter especial",
+	(v: any) => (/^[0-9,-]*$/.test(v)) || "El campo sólo permite números y '-' como caracter especial",
 ];
+siglarules = [
+	(v: any) => !!v || 'El campo es requerido',
+	(v: any) => (/^[a-zA-Z-0-9,-]*$/.test(v)) || 'No se permite espacios vacios ni caracteres especiales',
+	];
 	private FormatDate(data: any) {
 		return moment(data).format('YYYY-MM-DD');
 	}

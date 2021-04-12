@@ -38,6 +38,14 @@ export default class AdmCuentasBancosComponent extends Vue {
 		(v: any) => !!v || 'El campo es requerido',
     (v: any) => !/^\s*$/.test(v) || 'No se permite espacios vacios',
   ];
+  CuentasRules = [
+	(v: any) => !!v || "El campo es requerido",
+	(v: any) => (/^[0-9,-]*$/.test(v)) || "El campo sólo permite números y '-' como caracter especial",
+];
+saldoRules = [
+	(v: any) => !!v || "El campo es requerido",
+	(v: any) => (/^[0-9, ,]*$/.test(v)) || "El campo sólo permite números y ',' como caracter especial",
+];
 	private FormatDate(data: any) {
 		return moment(data).format('YYYY-MM-DD');
 	}

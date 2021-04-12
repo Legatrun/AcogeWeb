@@ -112,6 +112,7 @@ export default class AdmBancosComponent extends Vue {
 	}
 	private Grabar() {
 		this.bancos.bancopropio = this.BancoPropio;
+		this.bancos.nit=this.bancos.nit.trim();
 		if (this.operacion === 'Update') {
 			new services.Operaciones().Actualizar(this.WebApi.ws_bancos_Actualizar, this.bancos)
 			.then((result) => {

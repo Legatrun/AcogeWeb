@@ -11,12 +11,10 @@ import helpers from '@/helper';
 export default class RegistrosDiariosComponent extends Vue {
 	private headersCuentas: any[] = [
 		{ text: 'Cuenta', align: 'left', sortable: true, value: 'cuenta', width: '15%' },
-		{ text: 'nombrecuenta', align: 'left', sortable: false, value: 'nombrecuenta', width: '15%' },
-		{ text: 'idmoneda', align: 'left', sortable: false, value: 'idmoneda', width: '10%' },
-		{ text: 'nivel', align: 'left', sortable: false, value: 'nivel', width: '10%' },
-		{ text: 'cuentaasiento', align: 'left', sortable: false, value: 'cuentaasiento', width: '15%' },
-		{ text: 'cuentasumar', align: 'left', sortable: false, value: 'cuentasumar', width: '15%' },
-		{ text: 'activopasivo', align: 'left', sortable: false, value: 'activopasivo', width: '10%' },
+		{ text: 'Nombre de Cuenta', align: 'left', sortable: false, value: 'nombrecuenta', width: '15%' },
+		{ text: 'Nivel', align: 'left', sortable: false, value: 'nivel', width: '10%' },
+		{ text: 'Cuenta Asiento', align: 'left', sortable: false, value: 'cuentaasiento', width: '15%' },
+		{ text: 'Cuenta Sumar', align: 'left', sortable: false, value: 'cuentasumar', width: '15%' },
 		{ text: 'Operaciones', align: 'left', sortable: false, value: 'action', width: '10%' },
 	];
 	private headers: any[] = [
@@ -54,6 +52,8 @@ export default class RegistrosDiariosComponent extends Vue {
 	private activo = false;
 	private nuevo=false;
 	private dialogCuentas=false;
+	private buscarCuenta = '';
+	
     private lstComprobante =['Diario', 'Compras', 'Ingresos', 'Ingresos Santa Cruz']
 	validacion = [
 		(v: any) => !!v || 'El campo es requerido',
@@ -157,15 +157,16 @@ export default class RegistrosDiariosComponent extends Vue {
 	private Cancelar() {
 		this.cargar_data();
 		this.dialog = false;
+		this.dialogCuentas = false;
 		this.nuevo=false;
 	}
 	private nuevoOn(){
 		this.nuevo=true;
 	}
-	private Actualizar(data: services.clase_monedas): void {
-		this.monedas = data;
-		this.operacion = 'Update';
-		this.dialog = true;
+	private Actualizar(data: services.clase_cuentas): void {
+		this.cuentas = data;
+		// this.operacion = 'Update';
+		this.dialogCuentas = false;
 	}
 	private select_fecha(fecha: string) {
 		return fecha.substr(0, 10);
@@ -214,7 +215,39 @@ export default class RegistrosDiariosComponent extends Vue {
 		}
 		});
 	}
-
+	select_codigo(nextInput: string)
+	{
+		
+		this.lsttiposdecambio = [];
+		console.log(this.fecha)
+			if (this.fecha !== undefined)
+			{
+				this.buscarTipoDeCambio();
+			}					
+		
+		//REINICIAR CAMPOS
+		//this.reiniciarDinamicos();
+		this.setFocus(nextInput);
+	}
+	private buscarTipoDeCambio(){
+		
+		this.tiposdecambio.fecha=this.fecha;
+		const params = new URLSearchParams();
+		params.append('fecha', this.tiposdecambio.fecha);
+		console.log(this.tiposdecambio)
+		new services.Operaciones().Buscar(this.WebApi.ws_tiposdecambio_Buscar, this.tiposdecambio)
+		.then((resTiposDeCambio) => {			
+			this.lsttiposdecambio = resTiposDeCambio.data._data;
+		}).catch((err) => {this.lsttiposdecambio = []; });
+	}
+	private clickOnFocus(id: string) {
+		
+		JSclickOnFocus(id);
+	}
+	private setFocus(nextId: string){
+		
+		(document.querySelector('#' + nextId) as any).focus();
+	}
 	get lstcuentasformateados(){
 		return this.lstcuentas.map((cuentas : services.clase_cuentas)=>{
 			return{
@@ -237,4 +270,8 @@ export default class RegistrosDiariosComponent extends Vue {
 			});
 		return monedaLiteral;	
 	}
+}
+function JSclickOnFocus(id:string) {
+	var obj: any = document.getElementById(id);
+		obj.click();
 }

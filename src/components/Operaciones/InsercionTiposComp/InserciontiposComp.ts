@@ -103,42 +103,43 @@ export default class AdmCorrelativosTiposComprobantesComponent extends Vue {
 			});
 	}
 	private GrabarCorrelativos() {
-		if(this.correlativostiposcomprobantes.mes.toString() === 'Enero'){
-			this.correlativostiposcomprobantes.mes = 1
-		}else
-		if(this.correlativostiposcomprobantes.mes.toString() === 'Febrero'){
-			this.correlativostiposcomprobantes.mes = 2
-		}else
-		if(this.correlativostiposcomprobantes.mes.toString() === 'Marzo'){
-			this.correlativostiposcomprobantes.mes = 3
-		}else
-		if(this.correlativostiposcomprobantes.mes.toString() === 'Abril'){
-			this.correlativostiposcomprobantes.mes = 4
-		}else
-		if(this.correlativostiposcomprobantes.mes.toString() === 'Mayo'){
-			this.correlativostiposcomprobantes.mes = 5
-		}else
-		if(this.correlativostiposcomprobantes.mes.toString() === 'Junio'){
-			this.correlativostiposcomprobantes.mes = 6
-		}else
-		if(this.correlativostiposcomprobantes.mes.toString() === 'Julio'){
-			this.correlativostiposcomprobantes.mes = 7
-		}else
-		if(this.correlativostiposcomprobantes.mes.toString() === 'Agosto'){
-			this.correlativostiposcomprobantes.mes = 8
-		}else
-		if(this.correlativostiposcomprobantes.mes.toString() === 'Septiembre'){
-			this.correlativostiposcomprobantes.mes = 9
-		}else
-		if(this.correlativostiposcomprobantes.mes.toString() === 'Octubre'){
-			this.correlativostiposcomprobantes.mes = 10
-		}else
-		if(this.correlativostiposcomprobantes.mes.toString() === 'Noviembre'){
-			this.correlativostiposcomprobantes.mes = 11
-		}else
-		if(this.correlativostiposcomprobantes.mes.toString() === 'Diciembre'){
-			this.correlativostiposcomprobantes.mes = 12
-		}
+		// if(this.correlativostiposcomprobantes.mes.toString() === 'Enero'){
+		// 	this.correlativostiposcomprobantes.mes = 1
+		// }else
+		// if(this.correlativostiposcomprobantes.mes.toString() === 'Febrero'){
+		// 	this.correlativostiposcomprobantes.mes = 2
+		// }else
+		// if(this.correlativostiposcomprobantes.mes.toString() === 'Marzo'){
+		// 	this.correlativostiposcomprobantes.mes = 3
+		// }else
+		// if(this.correlativostiposcomprobantes.mes.toString() === 'Abril'){
+		// 	this.correlativostiposcomprobantes.mes = 4
+		// }else
+		// if(this.correlativostiposcomprobantes.mes.toString() === 'Mayo'){
+		// 	this.correlativostiposcomprobantes.mes = 5
+		// }else
+		// if(this.correlativostiposcomprobantes.mes.toString() === 'Junio'){
+		// 	this.correlativostiposcomprobantes.mes = 6
+		// }else
+		// if(this.correlativostiposcomprobantes.mes.toString() === 'Julio'){
+		// 	this.correlativostiposcomprobantes.mes = 7
+		// }else
+		// if(this.correlativostiposcomprobantes.mes.toString() === 'Agosto'){
+		// 	this.correlativostiposcomprobantes.mes = 8
+		// }else
+		// if(this.correlativostiposcomprobantes.mes.toString() === 'Septiembre'){
+		// 	this.correlativostiposcomprobantes.mes = 9
+		// }else
+		// if(this.correlativostiposcomprobantes.mes.toString() === 'Octubre'){
+		// 	this.correlativostiposcomprobantes.mes = 10
+		// }else
+		// if(this.correlativostiposcomprobantes.mes.toString() === 'Noviembre'){
+		// 	this.correlativostiposcomprobantes.mes = 11
+		// }else
+		// if(this.correlativostiposcomprobantes.mes.toString() === 'Diciembre'){
+		// 	this.correlativostiposcomprobantes.mes = 12
+		// }
+		this.correlativostiposcomprobantes.mes=1;
 		if (this.operacion === 'Update') {
 			new services.Operaciones().Actualizar(this.WebApi.ws_correlativostiposcomprobantes_Actualizar, this.correlativostiposcomprobantes)
 			.then((result) => {

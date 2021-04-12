@@ -1,6 +1,6 @@
 <template>
 
-	<v-card class="contenedor" max-width="80%"> 
+	<v-card class="contenedor" max-width="75%" height="100%"> 
 	 <!-- <v-layout wrap> -->
 		 
       <v-navigation-drawer
@@ -60,7 +60,7 @@
         </v-list>
       </v-navigation-drawer>
 
-		<v-card max-width="1500">
+		<v-card max-width="100%">
         <v-toolbar color="primary" style="color:white">
 			<v-toolbar-title>Registros Diarios</v-toolbar-title>
 			<v-divider></v-divider>
@@ -102,10 +102,12 @@
 										<v-text-field
 											v-model="fecha"
 											label="Ingrese fecha "
-											hint="Ingrese fecha "
 											persistent-hint
 											prepend-icon="event"
-											v-on="on">
+											v-on="on"
+											@change="select_codigo('fecha')"
+											id="fecha"
+											@focus="clickOnFocus('fecha')">
 										</v-text-field>
 									</template>
 									<v-date-picker v-model="fecha" no-title @input="menu_fechacreacion = false"></v-date-picker>
@@ -128,10 +130,10 @@
 								item-value="idtipocomprobante"
 								outlined
 								autocomplete="off"
-								color="#1A237E"
+								color="primary"
 								></v-autocomplete>
 							</v-col>
-							<v-flex sm3 style="padding: 5px">
+							<v-flex sm4 style="padding: 5px">
 								<v-text-field 
 											label="Numero de Comprobante"
 											v-model="asientosencabezado.numerocomprobante"
@@ -160,6 +162,14 @@
 					</v-card-text>
 					<v-divider></v-divider>
 			<v-card max-width="1800" v-if="nuevo==true">
+				<v-toolbar color="primary" style="color:white">
+			<v-toolbar-title>Nuevo</v-toolbar-title>
+				<v-spacer></v-spacer>
+			
+				<v-spacer></v-spacer>
+				<v-btn color="error" dark @click="Cancelar()">X</v-btn>
+		</v-toolbar>
+		<br>
 				<v-layout column>
 					<v-layout wrap>
 						
@@ -167,26 +177,26 @@
 					<v-layout wrap>
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 						<!-- <v-btn color="success" v-on="on" fab small dark  @click="BuscarCuentas()"><v-icon>search</v-icon></v-btn> -->
-						<v-tooltip bottom>
-							<template v-slot:activator="{ on }">
-								<v-btn color="success" v-on="on" fab small dark  @click="BuscarCuentas()"><v-icon>search</v-icon></v-btn>
-							</template>
-							<span>Buscar Cuenta</span>
-						</v-tooltip>
+						
 						<v-flex sm4 style="padding: 5px">
 								<v-text-field 
 											label="Nombre de la Cuenta: "
-											v-model="asientosencabezado.referencia"
+											v-model="cuentas.nombrecuenta"
 											placeholder="Nombre de la Cuenta"
 											persistent-hint
 											outlined
 											clearable>
 								</v-text-field>
 							</v-flex>
-					   
+					    <v-tooltip bottom>
+							<template v-slot:activator="{ on }">
+								<v-btn color="primary" v-on="on" fab small dark  @click="BuscarCuentas()"><v-icon>search</v-icon></v-btn>
+							</template>
+							<span>Buscar Cuenta</span>
+						</v-tooltip>
 						<v-col sm6 style="padding: 5px">
 							<v-flex sm4 style="padding: 5px">
-									<v-text-field v-model="fecha"
+									<v-text-field v-model="cuentas.cuenta"
 												label="Cuenta "
 												placeholder="Cuenta "
 												persistent-hint
@@ -204,7 +214,7 @@
 						<v-flex sm4 style="padding: 5px">
 								<v-text-field 
 											label="Glosa Detalle: "
-											v-model="asientosencabezado.referencia"
+											v-model="asientosdetalle.glosadetalle"
 											placeholder="Glosa Detalle"
 											persistent-hint
 											outlined
@@ -216,12 +226,12 @@
 
 				<v-layout column>
 						<v-layout wrap>
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 							<v-flex sm4 style="padding: 5px">
 								<v-text-field 
 											label="Debe Monto Bs: "
 											v-model="asientosencabezado.referencia"
-											placeholder="Glosa Detalle"
+											placeholder="Debe Monto Bs"
 											persistent-hint
 											outlined
 											clearable
@@ -241,7 +251,7 @@
 							</v-flex>
 						</v-layout>
 						<v-layout wrap>
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 							<v-flex sm4 style="padding: 5px">
 								<v-text-field 
 											label="Haber Monto Bs: "
@@ -267,10 +277,7 @@
 							
 							<v-layout wrap>
 								
-								<v-card-actions style="justify-content: center;padding:10px">
-									<br>
-									<v-btn color="error" dark style="width: 80%" @click="Cancelar()">Cancelar</v-btn>
-								</v-card-actions>
+							
 							</v-layout>
 						</v-layout>
 					</v-layout>
@@ -290,12 +297,12 @@
 								label="Glosa General"
 								hint="Glosa General"
 								no-resize
-								color="orange orange-darken-4"
+								color="primary"
 								height="180"
 								></v-textarea>
 						</v-col>
 					<v-col sm="15" class="pa-2" >
-						<v-flex sm4 style="padding: 5px">
+						<v-flex sm6 style="padding: 5px">
 								<v-text-field v-model="fecha"
 											label="Mod. Procedencia: "
 											placeholder="Mod. Procedencia: "
@@ -314,18 +321,19 @@
 								<v-layout wrap>
 									&nbsp;&nbsp;&nbsp;&nbsp;
 							<v-flex sm4 style="padding: 5px">
-								<v-text-field value=" "
+									<v-text-field 
 											label="Debe Bs: "
-											hint=" "
-											placeholder="Debe Bs: "
+											v-model="asientosencabezado.referencia"
+											placeholder="Debe Bs "
 											persistent-hint
 											outlined
-											color="blue"
+											clearable
 											>
 								</v-text-field>
+
 							</v-flex>
 									<v-flex sm4 style="padding: 5px">
-								<v-text-field value=" "
+								<v-text-field 
 											label="Debe Sus: "
 											hint=" "
 											placeholder="Debe Sus: "
@@ -339,7 +347,7 @@
 								<v-layout wrap>
 									&nbsp;&nbsp;&nbsp;&nbsp;
 									<v-flex sm4 style="padding: 5px">
-								<v-text-field value=" "
+								<v-text-field 
 											label="Haber Bs: "
 											hint=" "
 											placeholder="Haber Bs: "
@@ -351,7 +359,7 @@
 							</v-flex>
 									<!-- <p><b>Haber Sus: </b> </p> -->
 									<v-flex sm4 style="padding: 5px">
-								<v-text-field value=" "
+								<v-text-field 
 											label="Haber Sus: "
 											hint=" "
 											placeholder="Haber Sus: "
@@ -366,7 +374,7 @@
 									<!-- &nbsp;&nbsp;&nbsp;&nbsp;<p><b>Ajuste Bs: </b> </p>  -->
 									&nbsp;&nbsp;&nbsp;&nbsp;
 							<v-flex sm4 style="padding: 5px">
-								<v-text-field value=" "
+								<v-text-field 
 											label="Ajuste Bs: "
 											hint=" "
 											placeholder="Ajuste Bs: "
@@ -378,7 +386,7 @@
 							</v-flex>
 									<!-- <p><b>Ajuste Sus: </b> </p> -->
 							<v-flex sm4 style="padding: 5px">
-								<v-text-field value=" "
+								<v-text-field 
 											label="Ajuste Sus: "
 											hint=" "
 											placeholder="Ajuste Sus"
@@ -397,15 +405,25 @@
 		    </v-layout>
 			<v-divider></v-divider>
 		</v-card>
-
-
 		
-<v-dialog v-model="dialogCuentas" persistent max-width="50%">
+<v-dialog v-model="dialogCuentas" max-width="70%">
+	<v-toolbar color="primary" style="color:white">
+			<v-toolbar-title>Buscar Cuenta</v-toolbar-title>
+				<v-spacer></v-spacer>
+				<v-text-field v-model="buscarCuenta"
+						append-icon="search"
+						label="Buscar Cuentas"
+						single-line
+						solo
+						hide-details></v-text-field>
+				<v-spacer></v-spacer>
+				<v-btn color="error" dark @click="Cancelar()">X</v-btn>
+		</v-toolbar>
 	<v-data-table 	style="padding: 5px"
 						:headers="headersCuentas" 
 						:items="lstcuentasformateados" 
 						:items-per-page="30"
-						:search = "buscarcuentas" 
+						:search = "buscarCuenta" 
 						:footer-props="{
 							showFirstLastPage: true,
 							'items-per-page-options': [10, 20, 30, 40, 50, -1],
@@ -418,11 +436,9 @@
 					<!--<td>{{ helper.showDataDescription(props.item.cuenta,lstCuentas, id, descripcion)  }}</td>// Ejemplo de Uso de Helper Para obtener la Descripcion de una Tabla por medio de su Id-->
 					<td>{{ props.item.cuenta }}</td>
 					<td>{{ props.item.nombrecuenta }}</td>
-					<td>{{ props.item.idmoneda }}</td>
 					<td>{{ props.item.nivel }}</td>
 					<td>{{ FormatBoolean(props.item.cuentaasiento) }}</td>
 					<td>{{ props.item.cuentasumar }}</td>
-					<td>{{ props.item.activopasivo }}</td>
 					<td>
 						<v-tooltip bottom>
 							<template v-slot:activator="{ on }">

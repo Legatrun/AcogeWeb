@@ -122,8 +122,8 @@
 							</v-flex>
 							<v-flex sm6 style="padding: 5px">
 								<v-text-field v-model="claseitems.cuentaventa"
-											label="CuentaVenta"
-											hint="Ingrese CuentaVenta"
+											label="Cuenta Venta"
+											hint="Ingrese Cuenta Venta"
 											placeholder="CuentaVenta"
 											clearable
 											persistent-hint

@@ -1,5 +1,5 @@
 <template>
-	<v-card>
+	<v-card class="v_text_field">
 		<v-toolbar color="primary" style="color:white">
 			<v-toolbar-title>Datos de CuentasBancos</v-toolbar-title>
 			<v-divider></v-divider>
@@ -85,6 +85,7 @@
 								color="#1A237E"
 								></v-autocomplete> 
 							</v-col>
+
 								<v-flex sm6 style="padding: 5px">
 									<v-text-field v-model="cuentasbancos.nrocuenta"
 												label="NroCuenta"
@@ -134,15 +135,16 @@
 								color="#1A237E"
 								></v-autocomplete>
 							</v-col>
-							<v-flex sm6 style="padding: 5px">
-								<v-text-field v-model="cuentasbancos.saldoactual"
+							<v-flex sm6 style="padding: 5px" >
+								<v-text-field 
+											v-model="cuentasbancos.saldoactual"
 											label="Saldo Actual"
 											hint="Ingrese Saldo Actual"
 											placeholder="Saldo Actual"
 											clearable
 											persistent-hint
 											required
-											:rules="validacion"
+											:rules="saldoRules"
 											>
 								</v-text-field>
 							</v-flex>
@@ -154,7 +156,7 @@
 											clearable
 											persistent-hint
 											required
-											:rules="validacion"
+											:rules="CuentasRules"
 											>
 								</v-text-field>
 							</v-flex>
@@ -195,3 +197,4 @@
 </template>
 
 <script src="./CuentasBancos.ts"></script>
+
