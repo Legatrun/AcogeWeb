@@ -34,13 +34,19 @@ export default class AdmSucursalesComponent extends Vue {
 	private helper: helpers = new helpers();
 	private popup = new popup.Swal();
 	private activo = false;
+	
 	validacion = [
 		(v: any) => !!v || 'El campo es requerido',
     (v: any) => !/^\s*$/.test(v) || 'No se permite espacios vacios',
   ];
   correosRules = [
+	(v: any) => !!v || 'El campo es requerido',
 	(v: any) => /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(v) || "Ingrese un correo valido",
-];
+	];
+	Telefonorules = [
+		(v: any) => !!v || 'El campo es requerido',
+		(v: any) => (/^[0-9]*$/.test(v)) || 'No se permite espacios vacios ni caracteres especiales',
+		];
 	private FormatDate(data: any) {
 		return moment(data).format('YYYY-MM-DD');
 	}

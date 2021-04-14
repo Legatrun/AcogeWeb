@@ -72,7 +72,7 @@
 							<template v-else>
 								
 							</template>
-							<v-flex sm12 style="padding: 5px">
+							<v-flex sm6 style="padding: 5px">
 								<v-text-field v-model="lineas.descripcion"
 											label="Descripcion"
 											hint="Ingrese Descripcion"
@@ -84,7 +84,7 @@
 											@input="lineas.descripcion = updateText(lineas.descripcion)">
 								</v-text-field>
 							</v-flex>
-							<v-flex sm12 style="padding: 5px">
+							<v-flex sm6 style="padding: 5px">
 								<v-text-field v-model="lineas.cuenta"
 											label="Cuenta"
 											hint="Ingrese Cuenta"
@@ -92,7 +92,9 @@
 											clearable
 											persistent-hint
 											required
-											:rules="validacion"
+											:rules="cuentasrules"
+											maxlength = "20"
+											counter
 											@input="lineas.cuenta = updateText(lineas.cuenta)">
 								</v-text-field>
 							</v-flex>

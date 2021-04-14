@@ -54,6 +54,7 @@ export default class AdmClientesComponent extends Vue {
     (v: any) => !/^\s*$/.test(v) || 'No se permite espacios vacios',
   ];
 	correosRules = [
+		(v: any) => !!v || 'El campo es requerido',
 		(v: any) => /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(v) || "Ingrese un correo valido",
 	];
 	private FormatDate(data: any) {

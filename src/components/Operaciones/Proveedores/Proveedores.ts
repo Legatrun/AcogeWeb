@@ -52,6 +52,18 @@ export default class AdmProveedoresComponent extends Vue {
 		(v: any) => !!v || 'El campo es requerido',
     (v: any) => !/^\s*$/.test(v) || 'No se permite espacios vacios',
   ];
+  Codigorules = [
+	(v: any) => !!v || 'El campo es requerido',
+	(v: any) => (/^[0-9]*$/.test(v)) || 'No se permite espacios vacios ni caracteres especiales',
+	];
+	NumeroDocrules = [
+		(v: any) => !!v || 'El campo es requerido',
+		(v: any) => (/^[0-9,-]*$/.test(v)) || 'No se permite espacios vacios ni caracteres especiales solo "-',
+		];
+		cuentasrules = [
+			(v: any) => !!v || 'El campo es requerido',
+			(v: any) => (/^[0-9,-]*$/.test(v)) || 'No se permite espacios vacios ni caracteres especiales solo "-" ',
+			];
 	private FormatDate(data: any) {
 		return moment(data).format('YYYY-MM-DD');
 	}

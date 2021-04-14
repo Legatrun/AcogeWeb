@@ -29,6 +29,16 @@ export default class RegistrosDiariosComponent extends Vue {
 		{ text: 'HaberMontoBs', align: 'left', sortable: false, value: 'action', width: '10%' },
 		{ text: 'HaberMontoSus', align: 'left', sortable: false, value: 'descripcion', width: '10%' },
 	];
+	private headersAsientos: any[] = [
+		{ text: 'fecha', align: 'left', sortable: false, value: 'fecha', width: '15%' },
+		{ text: 'IDTipoComprobante', align: 'left', sortable: true, value: 'idtipocomprobante', width: '15%' },
+		{ text: 'NumeroComprobante', align: 'left', sortable: true, value: 'numerocomprobante', width: '15%' },
+		{ text: 'referencia', align: 'left', sortable: false, value: 'referencia', width: '15%' },
+		{ text: 'glosa', align: 'left', sortable: false, value: 'glosa', width: '15%' },
+		{ text: 'T.C.', align: 'left', sortable: false, value: 'cotizacion', width: '15%' },
+		{ text: 'codigomodulo', align: 'left', sortable: false, value: 'codigomodulo', width: '15%' },
+		{ text: 'Operaciones', align: 'center', sortable: false, value: 'action', width: '20%' },
+	];
 	private WebApi = new services.Endpoints();
     private fecha = '';
     private menu_fechacreacion = false;
@@ -53,7 +63,9 @@ export default class RegistrosDiariosComponent extends Vue {
 	private nuevo=false;
 	private dialogCuentas=false;
 	private buscarCuenta = '';
-	
+	private numeroComprobante = '';
+	private buscarasientosencabezado = '';
+	private dialogAsientos= false;
     private lstComprobante =['Diario', 'Compras', 'Ingresos', 'Ingresos Santa Cruz']
 	validacion = [
 		(v: any) => !!v || 'El campo es requerido',
@@ -99,6 +111,20 @@ export default class RegistrosDiariosComponent extends Vue {
 					this.popup.error('Consultar', 'Error Inesperado: ' + error);
 			});
 			this.cargarCuentas();
+			this.cargarAsientos();
+	}
+	private cargarAsientos(){
+		new services.Operaciones().Consultar(this.WebApi.ws_asientosencabezado_Consultar)
+			.then((resasientosencabezado) => {
+				if (resasientosencabezado.data._error.error === 0) {
+					this.lstasientosencabezado = resasientosencabezado.data._data;
+					this.dialog = false;
+				} else {
+					this.popup.error('Consultar', resasientosencabezado.data._error.descripcion);
+				}
+			}).catch((error) => {
+					this.popup.error('Consultar', 'Error Inesperado: ' + error);
+			});
 	}
 	private BuscarCuentas(){
 		this.dialogCuentas=true;
@@ -158,6 +184,7 @@ export default class RegistrosDiariosComponent extends Vue {
 		this.cargar_data();
 		this.dialog = false;
 		this.dialogCuentas = false;
+		this.dialogAsientos = false;
 		this.nuevo=false;
 	}
 	private nuevoOn(){
@@ -167,6 +194,11 @@ export default class RegistrosDiariosComponent extends Vue {
 		this.cuentas = data;
 		// this.operacion = 'Update';
 		this.dialogCuentas = false;
+	}
+	private ActualizarAsiento(data: services.clase_asientosencabezado): void {
+		this.asientosencabezado = data;
+		// this.operacion = 'Update';
+		this.dialogAsientos = false;
 	}
 	private select_fecha(fecha: string) {
 		return fecha.substr(0, 10);
@@ -215,11 +247,10 @@ export default class RegistrosDiariosComponent extends Vue {
 		}
 		});
 	}
-	select_codigo(nextInput: string)
+	select_tipoCambio(nextInput: string)
 	{
-		
+		console.log(nextInput)
 		this.lsttiposdecambio = [];
-		console.log(this.fecha)
 			if (this.fecha !== undefined)
 			{
 				this.buscarTipoDeCambio();
@@ -229,6 +260,7 @@ export default class RegistrosDiariosComponent extends Vue {
 		//this.reiniciarDinamicos();
 		this.setFocus(nextInput);
 	}
+	
 	private buscarTipoDeCambio(){
 		
 		this.tiposdecambio.fecha=this.fecha;
@@ -236,9 +268,16 @@ export default class RegistrosDiariosComponent extends Vue {
 		params.append('fecha', this.tiposdecambio.fecha);
 		console.log(this.tiposdecambio)
 		new services.Operaciones().Buscar(this.WebApi.ws_tiposdecambio_Buscar, this.tiposdecambio)
-		.then((resTiposDeCambio) => {			
+		.then((resTiposDeCambio) => {
 			this.lsttiposdecambio = resTiposDeCambio.data._data;
+			this.tiposdecambio.cotizacionoficial =this.lsttiposdecambio[0].cotizacionoficial;
+			console.log(this.tiposdecambio.cotizacionoficial)
+			this.$forceUpdate();
 		}).catch((err) => {this.lsttiposdecambio = []; });
+	}
+	private generaNumComprobante(){
+		this.numeroComprobante =  moment().year.toString() + '/' + moment().month.toString() +  '-' + '000001';
+		
 	}
 	private clickOnFocus(id: string) {
 		

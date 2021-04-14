@@ -50,12 +50,12 @@
 				</tr>
 			</template>
 			<template v-slot:top>
-				<v-tooltip bottom>
+				<!-- <v-tooltip bottom>
 					<template v-slot:activator="{ on }">
 						<v-btn color="accent" v-on="on" @click="Insertar()">Adicionar Nuevo Registro de AsientosDetalle</v-btn>
 					</template>
 					<span>Adicionar nuevo registro de cliente</span>
-				</v-tooltip>
+				</v-tooltip> -->
 			</template>
 			<template v-slot:no-data>
 				<v-alert :value="true" color="warning" icon="warning">

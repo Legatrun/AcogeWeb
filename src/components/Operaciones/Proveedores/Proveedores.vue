@@ -88,7 +88,7 @@
 												clearable
 												persistent-hint
 												required
-												:rules="validacion"
+												:rules="Codigorules"
 												@input="proveedores.codigoproveedor = updateText(proveedores.codigoproveedor)">
 									</v-text-field>
 								</v-flex>
@@ -126,7 +126,7 @@
 											clearable
 											persistent-hint
 											required
-											:rules="validacion"
+											:rules="NumeroDocrules"
 											@input="proveedores.numerodocumento = updateText(proveedores.numerodocumento)">
 								</v-text-field>
 							</v-flex>
@@ -240,7 +240,7 @@
 											clearable
 											persistent-hint
 											required
-											:rules="validacion"
+											:rules="cuentasrules"
 											@input="proveedores.cuenta = updateText(proveedores.cuenta)">
 								</v-text-field>
 							</v-flex>

@@ -157,7 +157,9 @@
 											clearable
 											persistent-hint
 											required
-											:rules="validacion"
+											:rules="Telefonorules"
+											maxlength="8"
+											counter 
 											@input="sucursales.numero = updateText(sucursales.numero)">
 								</v-text-field>
 							</v-flex>
@@ -169,7 +171,9 @@
 											clearable
 											persistent-hint
 											required
-											:rules="validacion"
+											:rules="Telefonorules"
+											maxlength="8"
+											counter 
 											@input="sucursales.telefonos = updateText(sucursales.telefonos)">
 								</v-text-field>
 							</v-flex>
