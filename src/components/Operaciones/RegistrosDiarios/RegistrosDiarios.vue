@@ -37,7 +37,7 @@
             <v-list-item-icon>
               <v-icon>mdi-share</v-icon>
             </v-list-item-icon>
-            <v-list-item-title>Grabar</v-list-item-title>
+            <v-list-item-title @click="Grabar()">Grabar</v-list-item-title>
           </v-list-item>
           <v-list-item link>
             <v-list-item-icon>
@@ -162,6 +162,7 @@
 						</v-layout>
 					</v-card-text>
 					<v-divider></v-divider>
+		<v-virtual-scroll>
 			<v-card max-width="1800" v-if="nuevo==true">
 				<v-toolbar color="primary" style="color:white">
 			<v-toolbar-title>Nuevo</v-toolbar-title>
@@ -212,7 +213,7 @@
 					
 					<v-layout wrap>
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-						<v-flex sm4 style="padding: 5px">
+						<v-flex sm6 style="padding: 5px">
 								<v-text-field 
 											label="Glosa Detalle: "
 											v-model="asientosdetalle.glosadetalle"
@@ -284,7 +285,7 @@
 					</v-layout>
 				</v-layout>
 			</v-card>
-					
+				</v-virtual-scroll>	
 						
 			<v-card max-width="1500">
 				<v-layout wrap>
