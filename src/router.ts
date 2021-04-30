@@ -35,6 +35,21 @@ import AsientosDetalle from './components/Operaciones/AsientosDetalle/AsientosDe
 import AsientosEncabezado from './components/Operaciones/AsientosEncabezado/AsientosEncabezado.vue';
 import TiposdeCambio from './components/Operaciones/TiposdeCambio/TiposdeCambio.vue';
 
+import descuentos from './components/Operaciones/descuentos/descuentos.vue';
+import empleado from './components/Operaciones/empleado/empleado.vue';
+import haberes from './components/Operaciones/haberes/haberes.vue';
+import parametros from './components/Operaciones/parametros/parametros.vue';
+import planilla from './components/Operaciones/planilla/planilla.vue';
+import Firmas from './components/Operaciones/Firmas/Firmas.vue';
+
+import CreditoFiscal from './components/Operaciones/CreditoFiscal/CreditoFiscal.vue';
+import jerarquia from './components/Operaciones/jerarquia/jerarquia.vue';
+import planilla_esp from './components/Operaciones/planilla_esp/planilla_esp.vue';
+import tipo_descuento from './components/Operaciones/tipo_descuento/tipo_descuento.vue';
+import tipo_empleado from './components/Operaciones/tipo_empleado/tipo_empleado.vue';
+import tipo_haber from './components/Operaciones/tipo_haber/tipo_haber.vue';
+
+
 Vue.use(Router);
 
 export default new Router({
@@ -75,6 +90,22 @@ export default new Router({
 		{ path: '/AsientosDetalle', name: 'AsientosDetalle', component: AsientosDetalle },
 		{ path: '/AsientosEncabezado', name: 'AsientosEncabezado', component: AsientosEncabezado },
 		{ path: '/TiposdeCambio', name: 'TiposdeCambio', component: TiposdeCambio },
+
+
+		{ path: '/descuentos', name: 'descuentos', component: descuentos },
+		{ path: '/empleado', name: 'empleado', component: empleado },
+		{ path: '/haberes', name: 'haberes', component: haberes },
+		{ path: '/parametros', name: 'parametros', component: parametros },
+		{ path: '/planilla', name: 'planilla', component: planilla },
+		{ path: '/Firmas', name: 'Firmas', component: Firmas },
+
+		{ path: '/CreditoFiscal', name: 'CreditoFiscal', component: CreditoFiscal },
+		{ path: '/jerarquia', name: 'jerarquia', component: jerarquia },
+		{ path: '/planilla_esp', name: 'planilla_esp', component: planilla_esp },
+		{ path: '/tipo_descuento', name: 'tipo_descuento', component: tipo_descuento },
+		{ path: '/tipo_empleado', name: 'tipo_empleado', component: tipo_empleado },
+		{ path: '/tipo_haber', name: 'tipo_haber', component: tipo_haber },
+
 	],
 });
 

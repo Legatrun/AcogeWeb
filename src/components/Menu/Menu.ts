@@ -57,8 +57,21 @@ export default class MenuComponent extends Vue {
         new MenuItem('Insertar Tipos Comprobantes', 'exit_to_app', '/InserciontiposComp'), 
         new MenuItem('Tipo Comprobantes', 'exit_to_app', '/TiposComprobantes'), 
         new MenuItem('Correlativos Tipos Comprobantes', 'exit_to_app', '/CorrelativosTiposComprobantes'), 
-        new MenuItem('Registros Diarios', 'exit_to_app', '/RegistrosDiarios'), 
-       
+        new MenuItem('Registros Diarios', 'exit_to_app', '/RegistrosDiarios'),
+
+        new MenuItem('Descuentos', 'exit_to_app', '/descuentos'),
+        new MenuItem('Empleado', 'exit_to_app', '/empleado'),
+        new MenuItem('Haberes', 'exit_to_app', '/haberes'),
+        new MenuItem('Parametros', 'exit_to_app', '/parametros'),
+        new MenuItem('Planilla', 'exit_to_app', '/planilla'),
+        new MenuItem('Firmas', 'exit_to_app', '/Firmas'),
+
+        new MenuItem('CreditoFiscal', 'exit_to_app', '/CreditoFiscal'),
+        new MenuItem('Jerarquia', 'exit_to_app', '/jerarquia'),
+        new MenuItem('Planilla esp', 'exit_to_app', '/planilla_esp'),
+        new MenuItem('Tipo descuento', 'exit_to_app', '/tipo_descuento'),
+        new MenuItem('Tipo empleado', 'exit_to_app', '/tipo_empleado'),
+        new MenuItem('Tipo haber', 'exit_to_app', '/tipo_haber'),
     ];
 
     public menuSalir: MenuItem[] = [
