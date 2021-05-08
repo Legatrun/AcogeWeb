@@ -133,10 +133,11 @@
                         item-text="Gestion"
                         :rules="ruleSelec"
                         no-data-text="No se encontro ningun tema"
-												@input="parametros.año = updateText(parametros.año)">
+												>
 									</v-autocomplete>
 								</v-flex>
 							</template>
+              <!--
 							<template v-else>
 								<v-flex sm12 style="padding: 5px">
                   <v-autocomplete v-model="parametros.mes"
@@ -147,7 +148,7 @@
                       color="primary"
                       :items="listarMes"
                       item-text="Mes"
-                      item-value="value"
+                      item-value="Mes"
                       :rules="ruleSelec"
                       no-data-text="No se encontro ningun tema"
                   >
@@ -168,6 +169,7 @@
                   </v-autocomplete>
 								</v-flex>
 							</template>
+              -->
 							<v-flex sm4 style="padding: 5px">
 								<v-text-field v-model="parametros.cotizacion"
 											label="Ingrese cotizacion"

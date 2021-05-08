@@ -49,6 +49,14 @@ import tipo_descuento from './components/Operaciones/tipo_descuento/tipo_descuen
 import tipo_empleado from './components/Operaciones/tipo_empleado/tipo_empleado.vue';
 import tipo_haber from './components/Operaciones/tipo_haber/tipo_haber.vue';
 
+import planilla_descuentos from './components/Operaciones/planilla_descuentos/planilla_descuentos.vue';
+import planilla_haberes from './components/Operaciones/planilla_haberes/planilla_haberes.vue';
+import ReporteCreditoFiscal from './components/Operaciones/ReporteCreditoFiscal/ReporteCreditoFiscal.vue';
+
+import empleado_depto from './components/Operaciones/empleado_depto/empleado_depto.vue';
+import Personal_departamentos from './components/Operaciones/Personal_departamentos/Personal_departamentos.vue';
+
+
 
 Vue.use(Router);
 
@@ -105,6 +113,13 @@ export default new Router({
 		{ path: '/tipo_descuento', name: 'tipo_descuento', component: tipo_descuento },
 		{ path: '/tipo_empleado', name: 'tipo_empleado', component: tipo_empleado },
 		{ path: '/tipo_haber', name: 'tipo_haber', component: tipo_haber },
+
+		{ path: '/planilla_descuentos', name: 'planilla_descuentos', component: planilla_descuentos },
+		{ path: '/planilla_haberes', name: 'planilla_haberes', component: planilla_haberes },
+		{ path: '/ReporteCreditoFiscal', name: 'ReporteCreditoFiscal', component: ReporteCreditoFiscal },
+		{ path: '/empleado_depto', name: 'empleado_depto', component: empleado_depto },
+
+		{ path: '/Personal_departamentos', name: 'Personal_departamentos', component: Personal_departamentos },
 
 	],
 });

@@ -117,7 +117,7 @@
                         outlined
                         autocomplete="off"
                         color="#1A237E"
-                        :rules="validacion"
+                        :rules="ruleValida"
                         no-data-text="No se encontro ningun tema">
 									</v-autocomplete>
 								</v-flex>
@@ -130,7 +130,7 @@
                         outlined
                         autocomplete="off"
                         color="#1A237E"
-                        :rules="validacion"
+                        :rules="ruleValida"
                         no-data-text="No se encontro ningun tema"
 												>
 									</v-autocomplete>
@@ -144,63 +144,50 @@
                         outlined
                         autocomplete="off"
                         color="#1A237E"
-                        :rules="validacion"
+                        :rules="ruleValida"
                         no-data-text="No se encontro ningun tema"
 												>
 									</v-autocomplete>
 								</v-flex>
 							</template>
+              <!--
 							<template v-else>
                 <v-flex sm12 style="padding: 5px">
-                  <v-autocomplete v-model="creditofiscal.empleado"
-                      label="Seleccionar empleado"
-                      :items="lstempleados"
-                      item-text="nombres"
-                      item-value="empleado"
-                      outlined
-                      autocomplete="off"
-                      color="#1A237E"
-                      :rules="validacion"
-                      no-data-text="No se encontro ningun tema"
+                  <v-text-field v-model="creditofiscal.empleado"
+                      label=" Empleado"
+                      clearable
+                      persistent-hint
+                      required
                       >
-                  </v-autocomplete>
+                  </v-text-field>
                 </v-flex>
                 <v-flex sm6 style="padding: 5px">
-                  <v-autocomplete v-model="creditofiscal.mes"
-                    label="Seleccionar mes"
-                    :items="listarMes"
-                    item-text="Mes"
-                    item-value="value"
-                    outlined
-                    autocomplete="off"
-                    color="#1A237E"
-                    :rules="validacion"
-                    no-data-text="No se encontro ningun tema"
+                  <v-text-field v-model="creditofiscal.mes"
+                    label=" Mes"
+                    clearable
+                    persistent-hint
+                    required
                     >
-                  </v-autocomplete>
+                  </v-text-field>
                 </v-flex>
                 <v-flex sm6 style="padding: 5px">
-                  <v-autocomplete v-model="creditofiscal.año"
-                      label="Seleccionar año"
-                      :items="listarGestion"
-                      item-text="Gestion"
-                      item-value="Gestion"
-                      outlined
-                      autocomplete="off"
-                      color="#1A237E"
-                      :rules="validacion"
-                      no-data-text="No se encontro ningun tema"
+                  <v-text-field v-model="creditofiscal.año"
+                      label="Seleccionar Año"
+                      clearable
+                      persistent-hint
+                      required
                       >
-                  </v-autocomplete>
+                  </v-text-field>
                 </v-flex>
 							</template>
+              -->
 							<v-flex sm4 style="padding: 5px">
 								<v-text-field v-model="creditofiscal.declarado"
 											label="Ingrese declarado"
 											clearable
 											persistent-hint
 											required
-                      :rules="ruleValida"
+                      :rules="validacion"
                       counter
                       maxlength="10"
 											@input="creditofiscal.declarado = updateText(creditofiscal.declarado)">
@@ -212,7 +199,7 @@
 											clearable
 											persistent-hint
 											required
-                      :rules="ruleValida"
+                      :rules="validacion"
                       counter
                       maxlength="10"
 											@input="creditofiscal.actualizacion = updateText(creditofiscal.actualizacion)">
@@ -224,7 +211,7 @@
 											clearable
 											persistent-hint
 											required
-                      :rules="ruleValida"
+                      :rules="validacion"
                       counter
                       maxlength="10"
 											@input="creditofiscal.saldo = updateText(creditofiscal.saldo)">

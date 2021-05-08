@@ -157,7 +157,7 @@ export default class AdmClientesComponent extends Vue {
 					this.lsttiposcliente = restiposcliente.data._data;
 					this.dialog = false;
 				} else {
-					this.popup.error('Consultar', restiposcliente.data._error.descripcion);
+					this.popup.error('Consultar', restiposcliente.data._error.nombres);
 				}
 			}).catch((error) => {
 					this.popup.error('Consultar', 'Error Inesperado: ' + error);

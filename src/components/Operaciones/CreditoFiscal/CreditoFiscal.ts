@@ -138,13 +138,7 @@ export default class AdmCreditoFiscalComponent extends Vue {
 		this.dialog = false;
 	}
 	private Actualizar(data: services.clase_creditofiscal): void {
-		//this.creditofiscal = data;
-		new services.Operaciones().Buscar(this.WebApi.ws_creditofiscal_Buscar, data )
-			.then((res) => {
-				this.lstcreditofiscalcargar= res.data._data;
-				this.creditofiscal = this.lstcreditofiscalcargar[0];
-			}).catch((err) => {
-		});
+		this.creditofiscal = data;
 		this.operacion = 'Update';
 		this.dialog = true;
 	}

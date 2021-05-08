@@ -72,6 +72,14 @@ export default class MenuComponent extends Vue {
         new MenuItem('Tipo descuento', 'exit_to_app', '/tipo_descuento'),
         new MenuItem('Tipo empleado', 'exit_to_app', '/tipo_empleado'),
         new MenuItem('Tipo haber', 'exit_to_app', '/tipo_haber'),
+
+        new MenuItem('Planilla descuentos', 'exit_to_app', '/planilla_descuentos'),
+        new MenuItem('Planilla haberes', 'exit_to_app', '/planilla_haberes'),
+        new MenuItem('Reporte Credito Fiscal', 'exit_to_app', '/ReporteCreditoFiscal'),
+
+        new MenuItem('Empleado depto', 'exit_to_app', '/empleado_depto'),
+        new MenuItem('Personal departamentos', 'exit_to_app', '/Personal_departamentos'),
+
     ];
 
     public menuSalir: MenuItem[] = [

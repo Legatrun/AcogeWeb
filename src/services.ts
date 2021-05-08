@@ -226,7 +226,117 @@ export class Endpoints {
 	public ws_tipo_haber_Actualizar: string = $store.state.server + 'Api/tipo_haber/Actualizar';
 	public ws_tipo_haber_Eliminar: string = $store.state.server + 'Api/tipo_haber/Eliminar';
 
+	//parte 3
+
+	public ws_planilla_descuentos_Consultar: string = $store.state.server + 'Api/planilla_descuentos/Consultar';
+	public ws_planilla_descuentos_Buscar: string = $store.state.server + 'Api/planilla_descuentos/Buscar';
+	public ws_planilla_descuentos_Insertar: string = $store.state.server + 'Api/planilla_descuentos/Insertar';
+	public ws_planilla_descuentos_Actualizar: string = $store.state.server + 'Api/planilla_descuentos/Actualizar';
+	public ws_planilla_descuentos_Eliminar: string = $store.state.server + 'Api/planilla_descuentos/Eliminar';
+
+	public ws_planilla_haberes_Consultar: string = $store.state.server + 'Api/planilla_haberes/Consultar';
+	public ws_planilla_haberes_Buscar: string = $store.state.server + 'Api/planilla_haberes/Buscar';
+	public ws_planilla_haberes_Insertar: string = $store.state.server + 'Api/planilla_haberes/Insertar';
+	public ws_planilla_haberes_Actualizar: string = $store.state.server + 'Api/planilla_haberes/Actualizar';
+	public ws_planilla_haberes_Eliminar: string = $store.state.server + 'Api/planilla_haberes/Eliminar';
+
+	public ws_reportecreditofiscal_Consultar: string = $store.state.server + 'Api/reportecreditofiscal/Consultar';
+	public ws_reportecreditofiscal_Buscar: string = $store.state.server + 'Api/reportecreditofiscal/Buscar';
+	public ws_reportecreditofiscal_Insertar: string = $store.state.server + 'Api/reportecreditofiscal/Insertar';
+	public ws_reportecreditofiscal_Actualizar: string = $store.state.server + 'Api/reportecreditofiscal/Actualizar';
+	public ws_reportecreditofiscal_Eliminar: string = $store.state.server + 'Api/reportecreditofiscal/Eliminar';
+
+
+	public ws_empleado_depto_Consultar: string = $store.state.server + 'Api/empleado_depto/Consultar';
+	public ws_empleado_depto_Buscar: string = $store.state.server + 'Api/empleado_depto/Buscar';
+	public ws_empleado_depto_Insertar: string = $store.state.server + 'Api/empleado_depto/Insertar';
+	public ws_empleado_depto_Actualizar: string = $store.state.server + 'Api/empleado_depto/Actualizar';
+	public ws_empleado_depto_Eliminar: string = $store.state.server + 'Api/empleado_depto/Eliminar';
+
+	public ws_personal_departamentos_Consultar: string = $store.state.server + 'Api/personal_departamentos/Consultar';
+	public ws_personal_departamentos_Buscar: string = $store.state.server + 'Api/personal_departamentos/Buscar';
+	public ws_personal_departamentos_Insertar: string = $store.state.server + 'Api/personal_departamentos/Insertar';
+	public ws_personal_departamentos_Actualizar: string = $store.state.server + 'Api/personal_departamentos/Actualizar';
+	public ws_personal_departamentos_Eliminar: string = $store.state.server + 'Api/personal_departamentos/Eliminar';
+
 }
+// tslint:disable-next-line: max-classes-per-file class-name
+export class clase_personal_departamentos {
+	public personal_departamento!: number;
+	public nombre!: string;
+	public minimo!: number;
+	public maximo!: number;
+	public empresa!: number;
+}
+// tslint:disable-next-line: max-classes-per-file class-name
+export class clase_empleado_depto {
+	public empleado!: number;
+	public departamento!: number;
+	public cargo!: string;
+	public haber_basico!: number;
+	public quincena!: number;
+	public fecha_ingreso!: any;
+	public fecha_quinquenio!: any;
+	public correlativo!: number;
+	public tipoempleado!: number;
+	public planilla!: number;
+	public jerarquia!: number;
+	public cuenta!: string;
+	public oficina!: string;
+	public estado!: boolean;
+	public saldo_anterior_iva!: number;
+	public envio_email!: boolean;
+}
+// tslint:disable-next-line: max-classes-per-file class-name
+export class clase_planilla_descuentos {
+	public empleado!: number;
+	public mes!: number;
+	public año!: number;
+	public descuento!: number;
+	public correlativo!: number;
+	public fecha!: any;
+	public valor!: number;
+}
+
+// tslint:disable-next-line: max-classes-per-file class-name
+export class clase_planilla_haberes {
+	public empleado!: number;
+	public mes!: number;
+	public año!: number;
+	public haber!: number;
+	public correlativo!: number;
+	public fecha!: any;
+	public valor!: number;
+}
+
+export class clase_reportecreditofiscal {
+	public mes!: number;
+	public año!: number;
+	public empleado!: number;
+	public cempleado!: string;
+	public basico!: number;
+	public antiguedad!: number;
+	public totalganado!: number;
+	public descuentosdeley!: number;
+	public totalsueldo!: number;
+	public otrosingresos!: number;
+	public sueldoneto!: number;
+	public minimonoimp!: number;
+	public difsujetaimp!: number;
+	public _13porciva!: number;
+	public form87decl!: number;
+	public _13s_2min!: number;
+	public saldoa_f_fisco!: number;
+	public saldoa_f_depent!: number;
+	public saldoanterior!: number;
+	public actualizacion!: number;
+	public saldototal!: number;
+	public saldototaldep!: number;
+	public saldoutilizado!: number;
+	public impuestoretenido!: number;
+	public saldosigmes!: number;
+}
+
 
 // tslint:disable-next-line: max-classes-per-file class-name
 export class clase_creditofiscal {
