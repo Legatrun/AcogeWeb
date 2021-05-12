@@ -29,7 +29,7 @@ export default class AdmjerarquiaComponent extends Vue {
 	];
 	RuleCodJer = [
 		(v:any) => !!v || "El campo es requiredo",
-		(v:any) => (/^[0-9A-Z]*$/.test(v)) || "El campo no acepta caracteres especiales"
+		(v:any) => (/^[0-9]*$/.test(v)) || "No se permiten letras o caracteres especiales"
 	];
 	private FormatDate(data: any) {
 		return moment(data).format('YYYY-MM-DD');

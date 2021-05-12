@@ -83,10 +83,9 @@
 							<v-flex sm6 style="padding: 5px">
 								<v-text-field v-model="planilla_esp.haber"
 											label="Ingrese haber"
-											clearable
-											persistent-hint
+											
                       :rules="Rulehaber"
-											required
+											
                       counter
                       maxlength="10"
 											@input="planilla_esp.haber = updateText(planilla_esp.haber)">
@@ -94,10 +93,8 @@
 							</v-flex>
 							<v-flex sm6 style="padding: 5px">
 								<v-text-field v-model="planilla_esp.tipo"
-											label="Ingrese tipo"
-											clearable
-											persistent-hint
-											required
+											label="Ingrese tipo de planilla"
+										
                       :rules="validacion"
                       counter
                       maxlength="1"

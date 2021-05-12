@@ -44,7 +44,7 @@ export default class AdmCreditoFiscalComponent extends Vue {
 		{Mes:'JULIO',value:7},{Mes:'AGUSTO',value:8}, {Mes:'SEPTIEMBRE',value:9},{Mes:'OCTUBRE',value:10},	{Mes:'NOVIEMBRE',value:11},{Mes:'DICIEMBRE',value:12}
     ];
     private listarGestion: any[]=[
-		{Gestion:2020},{Gestion:2021},{Gestion:2022},{Gestion:2023},{Gestion:2024},{Gestio:2025}
+		{Gestion:2021},{Gestion:2022},{Gestion:2023},{Gestion:2024},{Gestion:2025}
     ];
 	private FormatDate(data: any) {
 		return moment(data).format('YYYY-MM-DD');

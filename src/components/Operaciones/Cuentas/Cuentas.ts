@@ -33,8 +33,9 @@ export default class AdmCuentasComponent extends Vue {
 	private activo = false;
 	validacion = [
 		(v: any) => !!v || 'El campo es requerido',
-    (v: any) => !/^\s*$/.test(v) || 'No se permite espacios vacios',
-  ];
+		(v: any) => !/^\s*$/.test(v) || 'No se permite espacios vacios',
+	];
+
 	private FormatDate(data: any) {
 		return moment(data).format('YYYY-MM-DD');
 	}

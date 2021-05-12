@@ -61,6 +61,9 @@ export default class Admempleado_deptoComponent extends Vue {
 	private helper: helpers = new helpers();
 	private popup = new popup.Swal();
 	private activa = false;
+	private listarciudad: any[] = [
+		{ciudad: 'LA PAZ'},{ciudad:'COCHABAMBA'},{ciudad:'SANTA CRUZ'},{ciudad:'BENI'},{ciudad: 'PANDO'},{ciudad: 'TERIJA'},{ciudad: 'ORURO'},{ciudad: 'POTOSI'},{ciudad: 'CHOQUISACA'},
+	];
 	validacion = [
 		(v:any) => !!v || "El campo es requiredo",
 		(v:any) => (/^[0-9,.]*$/.test(v)) || "El campo solo acepta numeros",
@@ -132,7 +135,7 @@ export default class Admempleado_deptoComponent extends Vue {
 		this.cargarPlanilla();
 		this.cargarJerarquia();
 		this.cargarTipoEmpleado();
-		this.cargarCiudad();
+		//this.cargarCiudad();
 
 	}
 	slectEmpleado(nextInput: number){
@@ -152,7 +155,7 @@ export default class Admempleado_deptoComponent extends Vue {
 		this.empleado_depto.planilla = 0;
 		this.empleado_depto.jerarquia = 0;
 		this.empleado_depto.cuenta = "";
-		this.empleado_depto.oficina = "";
+		this.empleado_depto.oficina = '';
 		this.empleado_depto.tipoempleado = 0;
 		this.empleado_depto.saldo_anterior_iva = 0;
 		this.empleado_depto.estado = false;
@@ -269,19 +272,7 @@ export default class Admempleado_deptoComponent extends Vue {
 		});
 
 	}
-	private cargarCiudad(){
-		new services.Operaciones().Consultar(this.WebApi.ws_ciudades_Consultar)
-			.then((resciudades) => {
-				if (resciudades.data._error.error === 0) {
-					this.lstciudades = resciudades.data._data;
-					this.dialog = false;
-				} else {
-					this.popup.error('Consultar', resciudades.data._error.descripcion);
-				}
-			}).catch((error) => {
-			this.popup.error('Consultar', 'Error Inesperado: ' + error);
-		});
-	}
+
 	private Insertar(): void {
 		this.empleado_depto = new services.clase_empleado_depto();
 		this.empleado_depto.fecha_ingreso = this.FormatDate(Date.now());

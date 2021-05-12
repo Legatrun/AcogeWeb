@@ -230,8 +230,8 @@
 								<v-autocomplete v-model="empleado.lugar_nac"
 											label="Seleccione Lugar de nacimiento"
                       :items="lstzonas"
-                      item-text="descripcion"
-                      item-value="descripcion"
+                      item-text="description"
+                      item-value="description"
                       outlined
                       autocomplete="off"
                       color="#1A237E"

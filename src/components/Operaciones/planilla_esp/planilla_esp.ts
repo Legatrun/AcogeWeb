@@ -27,7 +27,7 @@ export default class Admplanilla_espComponent extends Vue {
 	private activa = false;
 	validacion = [
 		(v:any) => !!v || "El campo es requiredo",
-		(v:any) => (/^[a-z A-Z 0-9]*$/.test(v)) || "El campo solo acepta letras"
+		(v:any) => (/^[a-z A-Z]*$/.test(v)) || "El campo solo acepta letras"
 	]
 	Rulehaber = [
 		(v:any) => (/^[0-9]*$/.test(v)) || "El campo no acepta caracteres especiales"

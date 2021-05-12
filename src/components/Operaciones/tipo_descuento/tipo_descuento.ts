@@ -26,8 +26,8 @@ export default class Admtipo_descuentoComponent extends Vue {
 
     RulNombre = [
 		(v:any) => !!v || "El campo es requiredo",
-		(v:any) => (/^[a-z A-Z]*$/.test(v)) || "El campo solo acepta letras"
-    ]
+		(v:any) => (/^[a-z A-Z]*$/.test(v)) || "No se permiten numeros o caracteres especiales"
+    ];
 	private FormatDate(data: any) {
 		return moment(data).format('YYYY-MM-DD');
 	}
