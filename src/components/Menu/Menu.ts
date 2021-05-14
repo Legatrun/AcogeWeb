@@ -66,9 +66,9 @@ export default class MenuComponent extends Vue {
         new MenuItem('Planilla', 'exit_to_app', '/planilla'),
         new MenuItem('Firmas', 'exit_to_app', '/Firmas'),
 
-        new MenuItem('CreditoFiscal', 'exit_to_app', '/CreditoFiscal'),
+        new MenuItem('Credito Fiscal', 'exit_to_app', '/CreditoFiscal'),
         new MenuItem('Jerarquia', 'exit_to_app', '/jerarquia'),
-        new MenuItem('Planilla esp', 'exit_to_app', '/planilla_esp'),
+        new MenuItem('Planilla especial', 'exit_to_app', '/planilla_esp'),
         new MenuItem('Tipo descuento', 'exit_to_app', '/tipo_descuento'),
         new MenuItem('Tipo empleado', 'exit_to_app', '/tipo_empleado'),
         new MenuItem('Tipo haber', 'exit_to_app', '/tipo_haber'),
@@ -77,7 +77,7 @@ export default class MenuComponent extends Vue {
         new MenuItem('Planilla haberes', 'exit_to_app', '/planilla_haberes'),
         new MenuItem('Reporte Credito Fiscal', 'exit_to_app', '/ReporteCreditoFiscal'),
 
-        new MenuItem('Empleado depto', 'exit_to_app', '/empleado_depto'),
+        new MenuItem('Empleado departamento', 'exit_to_app', '/empleado_depto'),
         new MenuItem('Personal departamentos', 'exit_to_app', '/Personal_departamentos'),
 
     ];

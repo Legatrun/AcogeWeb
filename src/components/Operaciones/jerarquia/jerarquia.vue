@@ -67,7 +67,7 @@
 					<v-card-text>
 						<v-layout wrap>
 							<template v-if="operacion == 'Insert'">
-								<v-flex sm12 style="padding: 5px">
+								<v-flex sm6 style="padding: 5px">
 									<v-text-field v-model="jerarquia.jerarquia"
 												label="Ingrese Codigo jerarquia"
 												clearable
@@ -81,10 +81,11 @@
 								</v-flex>
 							</template>
 							<template v-else>
-								<v-flex sm12 style="padding: 5px">
+								<v-flex sm6 style="padding: 5px">
 									<v-text-field v-model="jerarquia.jerarquia"
                         label="Ingrese Codigo jerarquia"
                         clearable
+						readonly
                         persistent-hint
                         :rules="RuleCodJer"
                         counter
@@ -93,7 +94,7 @@
 									</v-text-field>
 								</v-flex>
 							</template>
-							<v-flex sm12 style="padding: 5px">
+							<v-flex sm6 style="padding: 5px">
 								<v-text-field v-model="jerarquia.nombre"
 											label="Ingrese nombre jerarquia"
 											clearable

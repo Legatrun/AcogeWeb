@@ -62,7 +62,10 @@ export default class Admempleado_deptoComponent extends Vue {
 	private popup = new popup.Swal();
 	private activa = false;
 	private listarciudad: any[] = [
-		{ciudad: 'LA PAZ'},{ciudad:'COCHABAMBA'},{ciudad:'SANTA CRUZ'},{ciudad:'BENI'},{ciudad: 'PANDO'},{ciudad: 'TERIJA'},{ciudad: 'ORURO'},{ciudad: 'POTOSI'},{ciudad: 'CHOQUISACA'},
+		{ciudad: 'LA PAZ'},{ciudad:'COCHABAMBA'},
+		{ciudad:'SANTA CRUZ'},{ciudad:'BENI'},
+		{ciudad: 'PANDO'},{ciudad: 'TERIJA'},{ciudad: 'ORURO'},
+		{ciudad: 'POTOSI'},{ciudad: 'CHOQUISACA'},
 	];
 	validacion = [
 		(v:any) => !!v || "El campo es requiredo",

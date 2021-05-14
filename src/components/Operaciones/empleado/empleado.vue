@@ -230,8 +230,8 @@
 								<v-autocomplete v-model="empleado.lugar_nac"
 											label="Seleccione Lugar de nacimiento"
                       :items="lstzonas"
-                      item-text="description"
-                      item-value="description"
+                      item-text="descripcion"
+                      item-value="descripcion"
                       outlined
                       autocomplete="off"
                       color="#1A237E"
@@ -283,9 +283,9 @@
 							</v-flex>
 
 							<v-flex sm12 style="padding: 5px">
-								<v-text-field v-model="empleado.patmes = 0"
+								<v-text-field v-model="empleado.patmes"
 											label="Ingrese PatMes"
-
+											value="0"
 											clearable
 											persistent-hint
                       disabled
