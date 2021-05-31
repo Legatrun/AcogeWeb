@@ -18,6 +18,7 @@ export default class AdmCorrelativosTiposComprobantesComponent extends Vue {
 	private correlativostiposcomprobantes = new services.clase_correlativostiposcomprobantes();
 	private lstcorrelativostiposcomprobantes: services.clase_correlativostiposcomprobantes[] = [];
 	private buscarcorrelativostiposcomprobantes = '';
+	private lstMeses =['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
 	private dialog = false;
 	private operacion = '';
 	private popup = new popup.Swal();
@@ -62,6 +63,9 @@ export default class AdmCorrelativosTiposComprobantesComponent extends Vue {
 		this.correlativostiposcomprobantes = new services.clase_correlativostiposcomprobantes();
 		this.operacion = 'Insert';
 		this.dialog = true;
+	}
+	private InsertaCorrelativo(){
+		
 	}
 	private Grabar() {
 		if (this.operacion === 'Update') {
@@ -150,5 +154,50 @@ export default class AdmCorrelativosTiposComprobantesComponent extends Vue {
 			});
 		}
 		});
+	}
+	get lstcorrelativostiposcomprobantesFormat(){
+		return this.lstcorrelativostiposcomprobantes.map((correlativostiposcomprobantes : services.clase_correlativostiposcomprobantes)=>{
+			return{
+				idtipocomprobante: correlativostiposcomprobantes.idtipocomprobante,
+				mes: this.formatearMes(correlativostiposcomprobantes.mes),
+				anio: correlativostiposcomprobantes.anio,
+				correlativo: correlativostiposcomprobantes.correlativo
+				
+			}
+		})
+	}
+
+	private formatearMes(mes : Number){
+		let mesLiteral: string = '';
+			this.lstcorrelativostiposcomprobantes.forEach(function(value){
+				if(value.mes == mes){
+					if(value.mes === 1){
+						mesLiteral = 'Enero';
+					}else if(value.mes === 2){
+						mesLiteral = 'Febrero';
+					}else if(value.mes === 3){
+						mesLiteral = 'Marzo';
+					}else if(value.mes === 4){
+						mesLiteral = 'Abril';
+					}else if(value.mes === 5){
+						mesLiteral = 'Mayo';
+					}else if(value.mes === 6){
+						mesLiteral = 'Junio';
+					}else if(value.mes === 7){
+						mesLiteral = 'Julio';
+					}else if(value.mes === 8){
+						mesLiteral = 'Agosto';
+					}else if(value.mes === 9){
+						mesLiteral = 'Septiembre';
+					}else if(value.mes === 10){
+						mesLiteral = 'Octubre';
+					}else if(value.mes === 11){
+						mesLiteral = 'Noviembre';
+					}else if(value.mes === 12){
+						mesLiteral = 'Diciembre';
+					}
+				}
+			});
+		return mesLiteral;	
 	}
 }

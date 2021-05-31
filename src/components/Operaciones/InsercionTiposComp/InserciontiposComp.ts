@@ -187,16 +187,20 @@ export default class AdmCorrelativosTiposComprobantesComponent extends Vue {
 	} else {
 		new services.Operaciones().Insertar(this.WebApi.ws_tiposcomprobantes_Insertar, this.tiposcomprobantes)
 		.then((result) => {
-			if (result.data.error === 0) {
-			this.popup.success('Insertar', result.data.descripcion);
+			if (result.data._error.error === 0) {
+			this.popup.success('Insertar', 'ok');
 			this.cargar_dataTipoComp();
+			this.tiposcomprobantes.idtipocomprobante = result.data._data[0].idtipocomprobante;	
+			this.correlativostiposcomprobantes.idtipocomprobante = this.tiposcomprobantes.idtipocomprobante;
 			this.e1=2;
 			} else {
 			this.popup.error('Insertar', result.data.descripcion);
+			console.log(result.data._data[0].idtipocomprobante)
 			}
 		})
 		.catch((error) => {
 			this.popup.error('Insertar', 'Error Inesperado: ' + error);
+			console.log(error)
 			});
 		}
 	}

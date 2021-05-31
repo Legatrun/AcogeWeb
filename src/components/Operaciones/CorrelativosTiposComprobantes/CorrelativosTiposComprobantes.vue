@@ -12,7 +12,7 @@
 		</v-toolbar>
 		<v-data-table 	style="padding: 5px"
 						:headers="headers" 
-						:items="lstcorrelativostiposcomprobantes" 
+						:items="lstcorrelativostiposcomprobantesFormat" 
 						:items-per-page="30"
 						:search = "buscarcorrelativostiposcomprobantes" 
 						:footer-props="{
@@ -33,13 +33,13 @@
 							<template v-slot:activator="{ on }">
 								<v-btn color="success" v-on="on" fab small dark  @click="Actualizar(props.item)"><v-icon>edit</v-icon></v-btn>
 							</template>
-							<span>Modificar Registro de Demo</span>
+							<span>Modificar Registro </span>
 						</v-tooltip>
 						<v-tooltip style="padding-left:10px" bottom>
 							<template v-slot:activator="{ on }" >
 								<v-btn color="error" v-on="on" fab small dark  @click="Eliminar(props.item)"><v-icon>delete</v-icon></v-btn>
 							</template>
-							<span>Eliminar Registro de Demo</span>
+							<span>Eliminar Registro </span>
 						</v-tooltip>
 					</td>
 				</tr>
@@ -68,7 +68,7 @@
 					<v-card-text>
 						<v-layout wrap>
 							<template v-if="operacion == 'Insert'">
-								<v-flex sm12 style="padding: 5px">
+								<!-- <v-flex sm12 style="padding: 5px">
 									<v-text-field v-model="correlativostiposcomprobantes.idtipocomprobante"
 												label="IDTipoComprobante"
 												hint="Ingrese IDTipoComprobante"
@@ -78,7 +78,7 @@
 												required
 												@input="correlativostiposcomprobantes.idtipocomprobante = updateText(correlativostiposcomprobantes.idtipocomprobante)">
 									</v-text-field>
-								</v-flex>
+								</v-flex> -->
 								<v-flex sm12 style="padding: 5px">
 									<v-text-field v-model="correlativostiposcomprobantes.anio"
 												label="Anio"
@@ -103,15 +103,15 @@
 								</v-flex>
 							</template>
 							<template v-else>
-								<v-flex sm12 style="padding: 5px">
+								<!-- <v-flex sm12 style="padding: 5px">
 									<v-text-field v-model="correlativostiposcomprobantes.idtipocomprobante"
 												label="IDTipoComprobante"
 												placeholder="IDTipoComprobante"
 												readonly
 												persistent-hint>
 									</v-text-field>
-								</v-flex>
-								<v-flex sm12 style="padding: 5px">
+								</v-flex> -->
+								<v-flex sm6 style="padding: 5px">
 									<v-text-field v-model="correlativostiposcomprobantes.anio"
 												label="Anio"
 												placeholder="Anio"
@@ -119,7 +119,7 @@
 												persistent-hint>
 									</v-text-field>
 								</v-flex>
-								<v-flex sm12 style="padding: 5px">
+								<v-flex sm6 style="padding: 5px">
 									<v-text-field v-model="correlativostiposcomprobantes.mes"
 												label="Mes"
 												placeholder="Mes"
@@ -128,7 +128,7 @@
 									</v-text-field>
 								</v-flex>
 							</template>
-							<v-flex sm12 style="padding: 5px">
+							<v-flex sm6 style="padding: 5px">
 								<v-text-field v-model="correlativostiposcomprobantes.correlativo"
 											label="Correlativo"
 											hint="Ingrese Correlativo"

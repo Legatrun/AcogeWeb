@@ -8,7 +8,7 @@ import * as popup from '@/popup';
 @Component
 export default class AdmTiposComprobantesComponent extends Vue {
 	private headers: any[] = [
-		{ text: 'IDTipoComprobante', align: 'left', sortable: true, value: 'idtipocomprobante', width: '15%' },
+		// { text: 'IDTipoComprobante', align: 'left', sortable: true, value: 'idtipocomprobante', width: '15%' },
 		{ text: 'descripcion', align: 'left', sortable: false, value: 'descripcion', width: '15%' },
 		{ text: 'sigla', align: 'left', sortable: false, value: 'sigla', width: '15%' },
 		{ text: 'automatico', align: 'left', sortable: false, value: 'automatico', width: '15%' },
@@ -19,6 +19,8 @@ export default class AdmTiposComprobantesComponent extends Vue {
 
 	private tiposcomprobantes = new services.clase_tiposcomprobantes();
 	private lsttiposcomprobantes: services.clase_tiposcomprobantes[] = [];
+	private sucursales = new services.clase_sucursales();
+	private lstsucursales: services.clase_sucursales[] = [];
 	private buscartiposcomprobantes = '';
 	private dialog = false;
 	private operacion = '';
@@ -55,6 +57,20 @@ export default class AdmTiposComprobantesComponent extends Vue {
 					this.dialog = false;
 				} else {
 					this.popup.error('Consultar', restiposcomprobantes.data._error.descripcion);
+				}
+			}).catch((error) => {
+					this.popup.error('Consultar', 'Error Inesperado: ' + error);
+			});
+			this.cargarSucursales();
+	}
+	private cargarSucursales(){
+		new services.Operaciones().Consultar(this.WebApi.ws_sucursales_Consultar)
+			.then((ressucursales) => {
+				if (ressucursales.data._error.error === 0) {
+					this.lstsucursales = ressucursales.data._data;
+					this.dialog = false;
+				} else {
+					this.popup.error('Consultar', ressucursales.data._error.descripcion);
 				}
 			}).catch((error) => {
 					this.popup.error('Consultar', 'Error Inesperado: ' + error);
@@ -153,4 +169,26 @@ export default class AdmTiposComprobantesComponent extends Vue {
 		}
 		});
 	}
+	//FORMATEO DE LOS ID POR LITERALES EN LISTA PRINCIPAL
+	get lsttiposcomprobanteformateados(){
+		return this.lsttiposcomprobantes.map((tiposcomprobantes : services.clase_tiposcomprobantes)=>{
+			return{
+				idtipocomprobate: tiposcomprobantes.idtipocomprobante,
+				descripcion: tiposcomprobantes.descripcion,
+				idsucursal: this.formatearidSucursal(tiposcomprobantes.idsucursal),
+				automatico: tiposcomprobantes.automatico,
+				sigla: tiposcomprobantes.sigla,
+			}
+		})
+	}
+	private formatearidSucursal(idsucursal : Number){
+		let idsucursalLiteral: string = '';
+			this.lstsucursales.forEach(function(value){
+				if(value.idsucursal == idsucursal){
+					idsucursalLiteral = value.nombre;
+				}
+			});
+		return idsucursalLiteral;	
+	}
+	
 }

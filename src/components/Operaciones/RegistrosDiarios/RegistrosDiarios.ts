@@ -119,6 +119,7 @@ export default class RegistrosDiariosComponent extends Vue {
 				if (resasientosencabezado.data._error.error === 0) {
 					this.lstasientosencabezado = resasientosencabezado.data._data;
 					this.dialog = false;
+					console.log(JSON.stringify(this.lstasientosencabezado))
 				} else {
 					this.popup.error('Consultar', resasientosencabezado.data._error.descripcion);
 				}

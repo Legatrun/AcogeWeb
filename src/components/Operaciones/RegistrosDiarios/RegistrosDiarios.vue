@@ -327,7 +327,6 @@
 							<v-flex sm4 style="padding: 5px">
 									<v-text-field 
 											label="Debe Bs: "
-											v-model="asientosencabezado.referencia"
 											placeholder="Debe Bs "
 											persistent-hint
 											outlined

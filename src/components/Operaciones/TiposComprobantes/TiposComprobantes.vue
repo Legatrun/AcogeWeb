@@ -12,7 +12,7 @@
 		</v-toolbar>
 		<v-data-table 	style="padding: 5px"
 						:headers="headers" 
-						:items="lsttiposcomprobantes" 
+						:items="lsttiposcomprobanteformateados" 
 						:items-per-page="30"
 						:search = "buscartiposcomprobantes" 
 						:footer-props="{
