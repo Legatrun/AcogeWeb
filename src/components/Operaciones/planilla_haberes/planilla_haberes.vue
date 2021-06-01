@@ -33,13 +33,13 @@
 					<td>{{ FormatDate(props.item.fecha) }}</td>
 					<td>{{ props.item.valor }}</td>
 					<td>
-						<v-tooltip bottom>
+						<v-tooltip bottom color="#008080">
 							<template v-slot:activator="{ on }">
 								<v-btn color="success" v-on="on" fab small dark  @click="Actualizar(props.item)"><v-icon>edit</v-icon></v-btn>
 							</template>
 							<span>Modificar Registro de  planilla haberes</span>
 						</v-tooltip>
-						<v-tooltip style="padding-left:10px" bottom>
+						<v-tooltip style="padding-left:10px" bottom color="#008080">
 							<template v-slot:activator="{ on }" >
 								<v-btn color="error" v-on="on" fab small dark  @click="Eliminar(props.item)"><v-icon>delete</v-icon></v-btn>
 							</template>
@@ -49,9 +49,9 @@
 				</tr>
 			</template>
 			<template v-slot:top>
-				<v-tooltip bottom>
+				<v-tooltip bottom color="#008080">
 					<template v-slot:activator="{ on }">
-						<v-btn color="accent" v-on="on" @click="Insertar()">Adicionar Nuevo Registro de planilla haberes</v-btn>
+						<v-btn color="accent" v-on="on" @click="Insertar()"><v-icon left>mdi-plus</v-icon>Agregar planilla haberes</v-btn>
 					</template>
 					<span>Adicionar nuevo registro de  planilla haberes</span>
 				</v-tooltip>
@@ -75,62 +75,62 @@
 								<v-flex sm6 style="padding: 5px">
 									<v-autocomplete  v-model="planilla_haberes.empleado"
 												label="Seleccione empleado"
-                         :items="lstempleadodeptos"
-                         item-text="empleado"
-                         item-value="empleado"
-                         outlined
-                         autocomplete="off"
-                         color="#1A237E"
-                         :rules="RulAuton"
-                         no-data-text="No se encontro ningun tema">
+												:items="lstempleadodeptos"
+												item-text="empleado"
+												item-value="empleado"
+												outlined
+												autocomplete="off"
+											
+												:rules="RulAuton"
+												no-data-text="No se encontro ningun tema">
 									</v-autocomplete>
 								</v-flex>
 								<v-flex sm6 style="padding: 5px">
 									<v-autocomplete v-model="planilla_haberes.mes"
 												label="Seleccione mes"
-                        :items="lstparametros"
-                        item-text="mes"
-                        item-value="mes"
-                        outlined
-                        autocomplete="off"
-                        color="#1A237E"
-                        :rules="RulAuton"
-                        no-data-text="No se encontro ningun tema">
+												:items="lstparametros"
+												:item-text="ForMes"
+												item-value="mes"
+												outlined
+												autocomplete="off"
+											
+												:rules="RulAuton"
+												no-data-text="No se encontro ningun tema">
 									</v-autocomplete>
 								</v-flex>
 								<v-flex sm6 style="padding: 5px">
 									<v-autocomplete v-model="planilla_haberes.año"
 												label="Seleccione año"
-                        :items="lstparametros"
-                        item-text="año"
-                        item-value="año"
-                        outlined
-                        autocomplete="off"
-                        color="#1A237E"
-                        :rules="RulAuton"
-                        no-data-text="No se encontro ningun tema"
+												:items="lstparametros"
+												item-text="año"
+												item-value="año"
+												outlined
+												autocomplete="off"
+												
+												:rules="RulAuton"
+												no-data-text="No se encontro ningun tema"
 												>
 									</v-autocomplete>
 								</v-flex>
 								<v-flex sm6 style="padding: 5px">
 									<v-autocomplete v-model="planilla_haberes.haber"
 												label="Seleccione haber"
-                        :items="lsthaberes"
-                        item-text="nombre"
-                        item-value="haber"
-                        outlined
-                        autocomplete="off"
-                        color="#1A237E"
-                        :rules="RulAuton"
-                        no-data-text="No se encontro ningun tema"
+												:items="lsthaberes"
+												item-text="nombre"
+												item-value="haber"
+												outlined
+												autocomplete="off"
+												color="#1A237E"
+												:rules="RulAuton"
+												no-data-text="No se encontro ningun tema"
 												>
 									</v-autocomplete>
 								</v-flex>
 								<v-flex sm4 style="padding: 5px">
 									<v-text-field v-model="planilla_haberes.correlativo"
-                      label="Ingrese correlativo"
-                      readonly
-                      persistent-hint>
+												label="Ingrese correlativo"
+												readonly
+												persistent-hint>
 									</v-text-field>
 								</v-flex>
 							</template>
@@ -204,9 +204,9 @@
 											clearable
 											pesistent-hint
 											required
-                      :rules="validacion"
-                      counter
-                      maxlength="10"
+											:rules="validacion"
+											counter
+											maxlength="10"
                 >
 								</v-text-field>
 							</v-flex>

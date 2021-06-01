@@ -16,7 +16,7 @@ export default class AdmdescuentosComponent extends Vue {
 		{ text: 'Tipo', align: 'left', sortable: false, value: 'tipo', width: '10%' },
 		{ text: 'Tipo descuento', align: 'left', sortable: false, value: 'idtipodescuentoFormat', width: '15%' },
 		{ text: 'Basico', align: 'left', sortable: false, value: 'basico', width: '10%' },
-		{ text: 'Eventual', align: 'left', sortable: false, value: 'eventual', width: '15%' },
+		{ text: 'Eventual', align: 'left', sortable: false, value: 'eventual', width: '10%' },
 		{ text: 'Operaciones', align: 'center', sortable: false, value: 'action', width: '20%' },
 	];
 	private WebApi = new services.Endpoints();
@@ -37,19 +37,19 @@ export default class AdmdescuentosComponent extends Vue {
 	private RuleDeNo=[
 		(v:any) => !!v || "El campo es requiredo",
 		(v:any) => (v && v.length>=3) || "Minimo 3 caracteres",
-		(v:any) => (/^[a-z A-Z]*$/.test(v)) || "El campo solo acepta letras"
+		(v:any) => (/^[a-z A-Z]*$/.test(v)) || "No se permiten numeros o carcteres especiales"
 	]
 	private RuleDeValor=[
 		(v:any) => !!v || "El campo es requiredo",
-		(v:any) => (/^[0-9,.]*$/.test(v)) || "El campo solo acepta numeros"
+		(v:any) => (/^[0-9.]*$/.test(v)) || "No se permiten letras o carcteres especiales"
 	]
 	private RuleTipoDes = [
 		(v:any) => !!v || "El campo es requiredo",
-		(v: any) => !/^\s*$/.test(v) || 'No se permite espacios vacios',
+		(v: any) => !/^\s*$/.test(v) || 'No se permite espacios vacios o carcteres especiales',
 	]
 	private RuleEven=[
 		(v:any) => !!v || "El campo es requiredo",
-		(v:any) => (/^[0-9]*$/.test(v)) || "El campo solo acepta numeros"
+		(v:any) => (/^[0-9]*$/.test(v)) || "No se permiten letras o carcteres especiales"
 	]
 
 	private FormatDate(data: any) {

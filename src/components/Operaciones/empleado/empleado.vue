@@ -26,11 +26,12 @@
 				<tr>
 					<!--<td>{{ helper.showDataDescription(props.item.empleado,lstempleado, id, descripcion)  }}</td>// Ejemplo de Uso de Helper Para obtener la Descripcion de una Tabla por medio de su Id-->
 				<!--	<td>{{ props.item.empleado }}</td> -->
-					<td>{{ props.item.paterno }}</td>
+					<td>{{ props.item.nombres +' ' + props.item.paterno + ' ' + props.item.materno }}</td>
+					<!--
 					<td>{{ props.item.materno }}</td>
 					<td>{{ props.item.nombres }}</td>
 					<td>{{ FormatDate(props.item.fecha_nac) }}</td>
-					<!--<td>{{ props.item.identificacion }}</td>-->
+					<td>{{ props.item.identificacion }}</td>-->
 					<td>{{ props.item.cod_asegurado }}</td>
 					<!--<td>{{ props.item.direccion }}</td>-->
 					<!--<td>{{ props.item.email }}</td>-->
@@ -81,27 +82,27 @@
           </td>
 				<!--	<td>{{ props.item.patmes }}</td> -->
 					<td>
-						<v-tooltip bottom>
+						<v-tooltip bottom color="#008080">
 							<template v-slot:activator="{ on }">
 								<v-btn color="success" v-on="on" fab small dark  @click="Actualizar(props.item)"><v-icon>edit</v-icon></v-btn>
 							</template>
-							<span>Modificar Registro del Empleado</span>
+							<span >Modificar Registro del Empleado</span>
 						</v-tooltip>
-						<v-tooltip style="padding-left:10px" bottom>
+						<v-tooltip style="padding-left:10px" bottom color="#008080">
 							<template v-slot:activator="{ on }" >
 								<v-btn color="error" v-on="on" fab small dark  @click="Eliminar(props.item)"><v-icon>delete</v-icon></v-btn>
 							</template>
-							<span>Eliminar Registro del Empleado</span>
+							<span style="color:tyal">Eliminar Registro del Empleado</span>
 						</v-tooltip>
 					</td>
 				</tr>
 			</template>
 			<template v-slot:top>
-				<v-tooltip bottom>
+				<v-tooltip bottom color="#008080">
 					<template v-slot:activator="{ on }">
-						<v-btn color="accent" v-on="on" @click="Insertar()">Adicionar Nuevo Registro de empleado</v-btn>
+						<v-btn color="accent" v-on="on" @click="Insertar()"><v-icon left>mdi-plus</v-icon>Agregar empleado</v-btn>
 					</template>
-					<span>Adicionar Nuevo registro de empleado</span>
+					<span >Adicionar Nuevo registro de empleado</span>
 				</v-tooltip>
 			</template>
 			<template v-slot:no-data>
@@ -119,39 +120,39 @@
 				<v-form ref="form" style="padding:10px" v-model="activo">
 					<v-card-text>
 						<v-layout wrap>
-							<v-flex sm12 style="padding: 5px">
+							<v-flex sm6 style="padding: 5px">
 								<v-text-field v-model="empleado.paterno"
 											label="Apellido paterno"
 											clearable
 											persistent-hint
 											required
-                      counter
-                      maxlength="20"
-                      :rules="RulnomPatMat"
+											counter
+											maxlength="20"
+											:rules="RulnomPatMat"
 											@input="empleado.paterno = updateText(empleado.paterno)">
 								</v-text-field>
 							</v-flex>
-							<v-flex sm12 style="padding: 5px">
+							<v-flex sm6 style="padding: 5px">
 								<v-text-field v-model="empleado.materno"
 											label="Apellido materno"
 											clearable
 											persistent-hint
 											required
-                      counter
-                      maxlength="20"
-                      :rules="RulnomPatMat"
+											counter
+											maxlength="20"
+											:rules="RulnomPatMat"
 											@input="empleado.materno = updateText(empleado.materno)">
 								</v-text-field>
 							</v-flex>
-							<v-flex sm12 style="padding: 5px">
+							<v-flex sm6 style="padding: 5px">
 								<v-text-field v-model="empleado.nombres"
 											label="Nombre de empleado"
 											clearable
 											persistent-hint
 											required
-                      counter
-                      maxlength="20"
-                      :rules="RulnomPatMat"
+											counter
+											maxlength="20"
+											:rules="RulnomPatMat"
 											@input="empleado.nombres = updateText(empleado.nombres)">
 								</v-text-field>
 							</v-flex>
@@ -178,20 +179,23 @@
 								</v-menu>
 							</v-flex>
 							<v-flex sm6 style="padding: 5px">
-                <v-text-field v-model="empleado.identificacion"
-                      label="Cedula de identidad"
-                      clearable
-                      persistent-hint
-                      :rules="validacion"
-                      @input="empleado.identificacion = updateText(empleado.identificacion)">
-                </v-text-field>
+								<v-text-field v-model="empleado.identificacion"
+								            label="Cedula de Idemtidad"
+											clearable
+											:rules="validacion"
+											persistent-hint
+											required
+											@input="empleado.identificacion = updateText(empleado.identificacion)"
+								>
+								</v-text-field>
+							
 							</v-flex>
-							<v-flex sm12 style="padding: 5px">
+							<v-flex sm6 style="padding: 5px">
 								<v-text-field v-model="empleado.cod_asegurado"
 											label="Codigo Asegurado"
 											clearable
 											persistent-hint
-                      disabled
+											readonly
 											required
 											@input="empleado.cod_asegurado = updateText(empleado.cod_asegurado)">
 								</v-text-field>
@@ -201,7 +205,7 @@
 											label="Direccion"
 											clearable
 											persistent-hint
-                      :rules="RulnomPatMat"
+                                            :rules="RulnomPatMat"
 											required
 											@input="empleado.direccion = updateText(empleado.direccion)">
 								</v-text-field>
@@ -211,7 +215,7 @@
 											label="Email"
 											clearable
 											persistent-hint
-                      :rules="RulEmpEmai"
+                                            :rules="RulEmpEmai"
 											required>
 								</v-text-field>
 							</v-flex>
@@ -219,9 +223,9 @@
 								<v-text-field v-model="empleado.telefono"
 											label="Telefono"
 											clearable
-                      counter
-                      maxlength="8"
-                      :rules="RulEmpTele"
+											counter
+											maxlength="8"
+											:rules="RulEmpTele"
 											persistent-hint
 											required>
 								</v-text-field>
@@ -229,68 +233,65 @@
 							<v-flex sm6 style="padding: 5px">
 								<v-autocomplete v-model="empleado.lugar_nac"
 											label="Seleccione Lugar de nacimiento"
-                      :items="lstzonas"
-                      item-text="descripcion"
-                      item-value="descripcion"
-                      outlined
-                      autocomplete="off"
-                      color="#1A237E"
-                      :rules="RulAuton"
-                      no-data-text="No se encontro ningun tema"
+											:items="lstzonas"
+											item-text="descripcion"
+											item-value="descripcion"
+											outlined
+											autocomplete="off"
+											
+											:rules="RulAuton"
+											no-data-text="No se encontro ningun tema"
 											@input="empleado.lugar_nac = updateText(empleado.lugar_nac)">
 								</v-autocomplete>
 							</v-flex>
 							<v-flex sm6 style="padding: 5px">
 								<v-autocomplete v-model="empleado.nacionalidad"
 											label="Seleccione Nacionalidad"
-                      :items="lstpaises"
-                      item-text="descripcion"
-                      item-value="descripcion"
-                      outlined
-                      autocomplete="off"
-                      color="#1A237E"
-                      :rules="RulAuton"
-                      no-data-text="No se encontro ningun tema"
+											:items="lstpaises"
+											item-text="descripcion"
+											item-value="descripcion"
+											outlined
+											autocomplete="off"
+									
+											:rules="RulAuton"
+											no-data-text="No se encontro ningun tema"
 											@input="empleado.nacionalidad = updateText(empleado.nacionalidad)">
 								</v-autocomplete>
 							</v-flex>
 
 							<v-flex sm6 style="padding: 5px">
 								<v-autocomplete v-model="empleado.sexo"
-                      label="Seleccionar genero"
-                      :items="listarSexo"
-                      item-text="Sexo"
-                      item-value="value"
-                      :rules="RulAuton"
-                      autocomplete="off"
-                      outlined
-                      no-data-text="No se encontro ningun tema"
-                      color="primary">
+											label="Seleccionar genero"
+											:items="listarSexo"
+											item-text="Sexo"
+											item-value="value"
+											:rules="RulAuton"
+											autocomplete="off"
+											outlined
+											no-data-text="No se encontro ningun tema"
+                     						>
 								</v-autocomplete>
 							</v-flex>
 							<v-flex sm6 style="padding: 5px">
 								<v-autocomplete v-model="empleado.estado_civil"
 											label="Seleccione Estado"
-                      :items="listarEstado"
-                      autocomplete="off"
-                      color="primary"
-                      outlined
-                      item-text="Estado"
-                      item-value="value"
-                      no-data-text="No se encontro ningun tema"
-                      :rules="RulAuton">
+											:items="listarEstado"
+											autocomplete="off"
+											color="primary"
+											outlined
+											item-text="Estado"
+											item-value="value"
+											no-data-text="No se encontro ningun tema"
+											:rules="RulAuton">
 								</v-autocomplete>
 							</v-flex>
 
-							<v-flex sm12 style="padding: 5px">
-								<v-text-field v-model="empleado.patmes"
+							<v-flex  sm12 style="padding: 5px">
+								<v-text-field  v-model="empleado.patmes"
 											label="Ingrese PatMes"
 											value="0"
-											clearable
-											persistent-hint
-                      disabled
-                      required
-											@input="empleado.patmes = updateText(empleado.patmes)">
+											v-show="empleado.patmes"
+											>
 								</v-text-field>
 							</v-flex>
 						</v-layout>

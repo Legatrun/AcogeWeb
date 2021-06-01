@@ -1,7 +1,7 @@
 <template>
 	<v-card>
 		<v-toolbar color="primary" style="color:white">
-			<v-toolbar-title>Datos de planilla esp</v-toolbar-title>
+			<v-toolbar-title>Datos de planilla especial</v-toolbar-title>
 			<v-divider></v-divider>
 			<v-text-field v-model="buscarplanilla_esp"
 					append-icon="search"
@@ -30,27 +30,27 @@
 					<td>{{ props.item.haber }}</td>
 					<td>{{ props.item.tipo }}</td>
 					<td>
-						<v-tooltip bottom>
+						<v-tooltip bottom color="#008080">
 							<template v-slot:activator="{ on }">
 								<v-btn color="success" v-on="on" fab small dark  @click="Actualizar(props.item)"><v-icon>edit</v-icon></v-btn>
 							</template>
-							<span>Modificar Registro de planilla esp</span>
+							<span>Modificar Registro de planilla especial</span>
 						</v-tooltip>
-						<v-tooltip style="padding-left:10px" bottom>
+						<v-tooltip style="padding-left:10px" bottom color="#008080">
 							<template v-slot:activator="{ on }" >
 								<v-btn color="error" v-on="on" fab small dark  @click="Eliminar(props.item)"><v-icon>delete</v-icon></v-btn>
 							</template>
-							<span>Eliminar Registro de  planilla es</span>
+							<span>Eliminar Registro de  planilla especial</span>
 						</v-tooltip>
 					</td>
 				</tr>
 			</template>
 			<template v-slot:top>
-				<v-tooltip bottom>
+				<v-tooltip bottom color="#008080">
 					<template v-slot:activator="{ on }">
-						<v-btn color="accent" v-on="on" @click="Insertar()">Adicionar Nuevo Registro de planilla esp</v-btn>
+						<v-btn color="accent" v-on="on" @click="Insertar()"><v-icon left>mdi-plus</v-icon>Agregar planilla especial</v-btn>
 					</template>
-					<span>Adicionar nuevo registro de  planilla es</span>
+					<span>Adicionar nuevo registro de  planilla especial</span>
 				</v-tooltip>
 			</template>
 			<template v-slot:no-data>
@@ -74,9 +74,9 @@
 											clearable
 											persistent-hint
 											required
-                      :rules="validacion"
-                      counter
-                      maxlength="50"
+											:rules="validacion"
+											counter
+											maxlength="50"
 											@input="planilla_esp.descripcion = updateText(planilla_esp.descripcion)">
 								</v-textarea>
 							</v-flex>
@@ -84,10 +84,10 @@
 								<v-text-field v-model="planilla_esp.haber"
 											label="Ingrese haber"
 											
-                      :rules="Rulehaber"
-											
-                      counter
-                      maxlength="10"
+											:rules="Rulehaber"
+																	
+											counter
+											maxlength="10"
 											@input="planilla_esp.haber = updateText(planilla_esp.haber)">
 								</v-text-field>
 							</v-flex>
@@ -95,9 +95,9 @@
 								<v-text-field v-model="planilla_esp.tipo"
 											label="Ingrese tipo de planilla"
 										
-                      :rules="validacion"
-                      counter
-                      maxlength="1"
+											:rules="validacion"
+											counter
+											maxlength="1"
 											@input="planilla_esp.tipo = updateText(planilla_esp.tipo)">
 								</v-text-field>
 							</v-flex>

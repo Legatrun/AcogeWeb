@@ -36,13 +36,13 @@
 					<td>{{ FormatBoolean(props.item.extra) }}</td>
 					<td>{{ props.item.eventual }}</td>
 					<td>
-						<v-tooltip bottom>
+						<v-tooltip bottom color="#008080">
 							<template v-slot:activator="{ on }">
 								<v-btn color="success" v-on="on" fab small dark  @click="Actualizar(props.item)"><v-icon>edit</v-icon></v-btn>
 							</template>
 							<span>Modificar Registro de Haberes</span>
 						</v-tooltip>
-						<v-tooltip style="padding-left:10px" bottom>
+						<v-tooltip style="padding-left:10px" bottom color="#008080">
 							<template v-slot:activator="{ on }" >
 								<v-btn color="error" v-on="on" fab small dark  @click="Eliminar(props.item)"><v-icon>delete</v-icon></v-btn>
 							</template>
@@ -52,9 +52,9 @@
 				</tr>
 			</template>
 			<template v-slot:top>
-				<v-tooltip bottom>
+				<v-tooltip bottom color="#008080">
 					<template v-slot:activator="{ on }">
-						<v-btn color="accent" v-on="on" @click="Insertar()">Adicionar Nuevo Registro de haberes</v-btn>
+						<v-btn color="accent" v-on="on" @click="Insertar()"><v-icon left>mdi-plus</v-icon>Agregar haberes</v-btn>
 					</template>
 					<span>Adicionar nuevo registro  de haberes</span>
 				</v-tooltip>
@@ -75,36 +75,27 @@
 					<v-card-text>
 						<v-layout wrap>
 
-							<v-flex sm12 style="padding: 5px">
+							<v-flex sm6 style="padding: 5px">
 								<v-text-field v-model="haberes.nombre"
 											label="Ingrese nombre"
 											clearable
 											persistent-hint
 											required
-                      :rules="HaberNom"
+                                           :rules="HaberNom"
 											@input="haberes.nombre = updateText(haberes.nombre)">
 								</v-text-field>
 							</v-flex>
-							<v-flex sm4 style="padding: 5px">
-								<h4 class="mb-0">Haberes Calculo:</h4>
-								<v-switch v-model="haberes.calculo"
-									color="indigo"
-                  :label="`: ${haberes.calculo ? 'Si' : 'No'}`"
-									></v-switch>
-							</v-flex>
-							<v-flex sm4 style="padding: 5px">
-								<h4 class="mb-0">Haberes Retencion:</h4>
-								<v-switch v-model="haberes.retencion"
-									color="indigo"
-                  :label="`: ${haberes.retencion ? 'Si' : 'No'}`"
-									></v-switch>
-							</v-flex>
-							<v-flex sm4 style="padding: 5px">
-								<h4 class="mb-0">Haberes Tipo:</h4>
-								<v-switch v-model="haberes.tipo"
-									color="indigo"
-                  :label="`: ${haberes.tipo ? 'Si' : 'No'}`"
-								></v-switch>
+                            <v-flex sm6 style="padding: 5px">
+								<v-autocomplete v-model="haberes.tipo_haber"
+											label="Selecciona tipo Haberes"
+											outlined
+											:items="lsttipohaberes"
+											item-text="nombre"
+											item-value="tipo_haber"
+											autocomplete="off"
+											no-data-text="No se encontro ningun tema"
+											@input="haberes.tipo_haber = updateText(haberes.tipo_haber)">
+								</v-autocomplete>
 							</v-flex>
 							<v-flex sm6 style="padding: 5px">
 								<v-text-field v-model="haberes.valor"
@@ -112,51 +103,62 @@
 											clearable
 											persistent-hint
 											required
-                      :rules="validacion"
-                      counter
-                      maxlength="8"
+											:rules="validacion"
+											counter
+											maxlength="8"
 											@input="haberes.valor = updateText(haberes.valor)">
 								</v-text-field>
 							</v-flex>
 							<v-flex sm6 style="padding: 5px">
-								<v-autocomplete v-model="haberes.tipo_haber"
-											label="Selecciona tipo Haberes"
-                      outlined
-                      :items="lsttipohaberes"
-                      item-text="nombre"
-                      item-value="tipo_haber"
-                      autocomplete="off"
-                      color="#1A237E"
-                      no-data-text="No se encontro ningun tema"
-											@input="haberes.tipo_haber = updateText(haberes.tipo_haber)">
-								</v-autocomplete>
-							</v-flex>
-							<v-flex sm4 style="padding: 5px">
-								<h4 class="mb-0">Haberes Basico:</h4>
-								<v-switch v-model="haberes.basico"
-									color="indigo"
-                  :label="`: ${haberes.basico ? 'Si' : 'No'}`"
-								></v-switch>
-							</v-flex>
-							<v-flex sm4 style="padding: 5px">
-								<h4 class="mb-0">Haberes Extra:</h4>
-								<v-switch v-model="haberes.extra"
-									color="indigo"
-                  :label="`: ${haberes.extra ? 'Si' : 'No'}`"
-									></v-switch>
-							</v-flex>
-							<v-flex sm4 style="padding: 5px">
 								<v-text-field v-model="haberes.eventual"
 											label="Ingrese eventual"
 											clearable
 											persistent-hint
 											required
-                      :rules="HaberEvento"
-                      counter
-                      maxlength="3"
+											:rules="HaberEvento"
+											counter
+											maxlength="3"
 											@input="haberes.eventual = updateText(haberes.eventual)">
 								</v-text-field>
 							</v-flex>
+							<v-flex sm4 style="padding: 5px">
+								<h4 class="mb-0 ">Haberes Calculo:</h4>
+								<v-switch v-model="haberes.calculo"
+									color="success"
+                                    :label="`: ${haberes.calculo ? 'Si' : 'No'}`"
+									></v-switch>
+							</v-flex>
+							<v-flex sm4 style="padding: 5px">
+								<h4 class="mb-0">Haberes Retencion:</h4>
+								<v-switch v-model="haberes.retencion"
+									color="success"
+                                    :label="`: ${haberes.retencion ? 'Si' : 'No'}`"
+									></v-switch>
+							</v-flex>
+							<v-flex sm4 style="padding: 5px">
+								<h4 class="mb-0">Haberes Tipo:</h4>
+								<v-switch v-model="haberes.tipo"
+									color="success"
+                                    :label="`: ${haberes.tipo ? 'Si' : 'No'}`"
+								></v-switch>
+							</v-flex>
+						
+							
+							<v-flex sm6 style="padding: 5px">
+								<h4 class="mb-0">Haberes Basico:</h4>
+								<v-switch v-model="haberes.basico"
+									color="success"
+                  					:label="`: ${haberes.basico ? 'Si' : 'No'}`"
+								></v-switch>
+							</v-flex>
+							<v-flex sm6 style="padding: 5px">
+								<h4 class="mb-0">Haberes Extra:</h4>
+								<v-switch v-model="haberes.extra"
+									color="indigo"
+                  					:label="`: ${haberes.extra ? 'Si' : 'No'}`"
+									></v-switch>
+							</v-flex>
+						
 						</v-layout>
 					</v-card-text>
 				</v-form>

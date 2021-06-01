@@ -28,13 +28,13 @@
 					<!--<td>{{ props.item.tipo_haber }}</td>-->
 					<td>{{ props.item.nombre }}</td>
 					<td>
-						<v-tooltip bottom>
+						<v-tooltip bottom color="#008080">
 							<template v-slot:activator="{ on }">
 								<v-btn color="success" v-on="on" fab small dark  @click="Actualizar(props.item)"><v-icon>edit</v-icon></v-btn>
 							</template>
 							<span>Modificar Registro de tipo haber</span>
 						</v-tooltip>
-						<v-tooltip style="padding-left:10px" bottom>
+						<v-tooltip style="padding-left:10px" bottom color="#008080">
 							<template v-slot:activator="{ on }" >
 								<v-btn color="error" v-on="on" fab small dark  @click="Eliminar(props.item)"><v-icon>delete</v-icon></v-btn>
 							</template>
@@ -44,9 +44,9 @@
 				</tr>
 			</template>
 			<template v-slot:top>
-				<v-tooltip bottom>
+				<v-tooltip bottom color="#008080">
 					<template v-slot:activator="{ on }">
-						<v-btn color="accent" v-on="on" @click="Insertar()">Adicionar Nuevo Registro de tipo haber</v-btn>
+						<v-btn color="accent" v-on="on" @click="Insertar()"><v-icon left>mdi-plus</v-icon>Agregar tipo haber</v-btn>
 					</template>
 					<span>Adicionar nuevo registro de tipo haber</span>
 				</v-tooltip>
@@ -68,13 +68,13 @@
 						<v-layout wrap>
 							<v-flex sm12 style="padding: 5px">
 								<v-text-field v-model="tipo_haber.nombre"
-											label="Ingrese nombre de baber"
+											label="Ingrese tipo baber"
 											clearable
-                      :rules="RuleNombre"
+                   						   :rules="RuleNombre"
 											persistent-hint
 											required
-                      counter
-                      maxlength="20"
+											counter
+											maxlength="20"
 											@input="tipo_haber.nombre = updateText(tipo_haber.nombre)">
 								</v-text-field>
 							</v-flex>

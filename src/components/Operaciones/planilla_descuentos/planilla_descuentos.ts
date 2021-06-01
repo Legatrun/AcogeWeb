@@ -45,7 +45,7 @@ export default class Admplanilla_descuentosComponent extends Vue {
 	];
 	validacion = [
 		(v: any) => !!v || "El campo es requiredo",
-		(v: any) => (/^[0-9,.]*$/.test(v)) || "El campo no acepta letras"
+		(v: any) => (/^[0-9 .]*$/.test(v)) || "No se permiten letras o carcateres especiales"
 	];
 
 	private FormatDate(data: any) {
@@ -58,6 +58,9 @@ export default class Admplanilla_descuentosComponent extends Vue {
 		} else {
 			return 'NO';
 		}
+	}
+	private ForClie(data: any){
+
 	}
 
 	private FormatMes(data: any) {
@@ -95,6 +98,45 @@ export default class Admplanilla_descuentosComponent extends Vue {
 			return 'NOVIEMBRE';
 		}
 		if (data == 12) {
+			return 'DICIEMBRE';
+		}
+	}
+	private ForMes(data: any){
+		const set:any = `${data.mes}`;
+		if(set == 1){
+			return  'ENERO';
+		}
+		if(set == 2){
+			return 'FEBRERO';
+		}
+		if(set == 3){
+			return 'MARZO';
+		}
+		if (set == 4){
+			return 'ABRIL';
+		}
+		if(set == 5){
+			return 'MAYO';
+		}
+		if(set == 6){
+			return  'JUNIO';
+		}
+		if(set == 7){
+			return 'JULIO';
+		}
+		if(set == 8){
+			return 'AGOSTO';
+		}
+		if (set == 9){
+			return 'SEPTIEMBRE';
+		}
+		if(set == 10){
+			return 'OCTUBRE';
+		}
+		if(set == 11){
+			return 'NOVIEMBRE';
+		}
+		if(set == 12){
 			return 'DICIEMBRE';
 		}
 	}

@@ -60,6 +60,10 @@ export default class Admplanilla_haberesComponent extends Vue {
 			return 'NO';
 		}
 	}
+	private Conta(){
+		 this.planilla_haberes.correlativo+1;
+
+	}
 	private FormatMes(data: any) {
 		if (data == 1) {
 			return 'ENERO';
@@ -95,6 +99,45 @@ export default class Admplanilla_haberesComponent extends Vue {
 			return 'NOVIEMBRE';
 		}
 		if (data == 12) {
+			return 'DICIEMBRE';
+		}
+	}
+	private ForMes(data: any){
+		const set:any = `${data.mes}`;
+		if(set == 1){
+			return  'ENERO';
+		}
+		if(set == 2){
+			return 'FEBRERO';
+		}
+		if(set == 3){
+			return 'MARZO';
+		}
+		if (set == 4){
+			return 'ABRIL';
+		}
+		if(set == 5){
+			return 'MAYO';
+		}
+		if(set == 6){
+			return  'JUNIO';
+		}
+		if(set == 7){
+			return 'JULIO';
+		}
+		if(set == 8){
+			return 'AGOSTO';
+		}
+		if (set == 9){
+			return 'SEPTIEMBRE';
+		}
+		if(set == 10){
+			return 'OCTUBRE';
+		}
+		if(set == 11){
+			return 'NOVIEMBRE';
+		}
+		if(set == 12){
 			return 'DICIEMBRE';
 		}
 	}

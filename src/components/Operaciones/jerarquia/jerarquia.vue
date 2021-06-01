@@ -28,13 +28,13 @@
 					<td>{{ props.item.jerarquia }}</td>
 					<td>{{ props.item.nombre }}</td>
 					<td>
-						<v-tooltip bottom>
+						<v-tooltip bottom color="#008080">
 							<template v-slot:activator="{ on }">
 								<v-btn color="success" v-on="on" fab small dark  @click="Actualizar(props.item)"><v-icon>edit</v-icon></v-btn>
 							</template>
 							<span>Modificar Registro de jerarquia</span>
 						</v-tooltip>
-						<v-tooltip style="padding-left:10px" bottom>
+						<v-tooltip style="padding-left:10px" bottom color="#008080">
 							<template v-slot:activator="{ on }" >
 								<v-btn color="error" v-on="on" fab small dark  @click="Eliminar(props.item)"><v-icon>delete</v-icon></v-btn>
 							</template>
@@ -44,9 +44,9 @@
 				</tr>
 			</template>
 			<template v-slot:top>
-				<v-tooltip bottom>
-					<template v-slot:activator="{ on }">
-						<v-btn color="accent" v-on="on" @click="Insertar()">Adicionar Nuevo Registro de jerarquia</v-btn>
+				<v-tooltip bottom color="#008080">
+					<template v-slot:activator="{ on }" >
+						<v-btn color="accent" v-on="on" @click="Insertar()"><v-icon left>mdi-plus</v-icon>Agregar jerarquia</v-btn>
 					</template>
 					<span>Adicionar nuevo registro de jerarquia</span>
 				</v-tooltip>
@@ -72,10 +72,10 @@
 												label="Ingrese Codigo jerarquia"
 												clearable
 												persistent-hint
-                        :rules="RuleCodJer"
+                        						:rules="RuleCodJer"
 												required
-                        counter
-                        maxlength="10"
+												counter
+												maxlength="10"
 												@input="jerarquia.jerarquia = updateText(jerarquia.jerarquia)">
 									</v-text-field>
 								</v-flex>
@@ -83,23 +83,23 @@
 							<template v-else>
 								<v-flex sm6 style="padding: 5px">
 									<v-text-field v-model="jerarquia.jerarquia"
-                        label="Ingrese Codigo jerarquia"
-                        clearable
-						readonly
-                        persistent-hint
-                        :rules="RuleCodJer"
-                        counter
-                        maxlength="20"
-                        required>
+												label="Ingrese Codigo jerarquia"
+												clearable
+												readonly
+												persistent-hint
+												:rules="RuleCodJer"
+												counter
+												maxlength="20"
+												required>
 									</v-text-field>
 								</v-flex>
 							</template>
 							<v-flex sm6 style="padding: 5px">
 								<v-text-field v-model="jerarquia.nombre"
-											label="Ingrese nombre jerarquia"
+											label="Ingrese jerarquia"
 											clearable
 											persistent-hint
-                      :rules="RulNombre"
+                                            :rules="RulNombre"
 											required
 											@input="jerarquia.nombre = updateText(jerarquia.nombre)">
 								</v-text-field>

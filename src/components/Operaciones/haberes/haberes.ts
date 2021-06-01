@@ -38,20 +38,20 @@ export default class AdmhaberesComponent extends Vue {
 	private HaberNom  =[
 		(v:any) => !!v || "El campo es requiredo",
 		(v:any) => (v && v.length>=2) || "Minimo 2 numeros",
-		(v:any) => (/^[a-zA-Z]*$/.test(v)) || "El campo solo acepta letras",
+		(v:any) => (/^[a-zA-Z]*$/.test(v)) || "No se permiten numeros o carcteres especiales",
 	]
 	private validacion  =[
 		(v:any) => !!v || "El campo es requiredo",
-		(v:any) => (/^[0-9,.]*$/.test(v)) || "El campo solo acepta numeros",
+		(v:any) => (/^[0-9.]*$/.test(v)) || "No se permiten letras o carcteres especiales",
 
 	]
 	private rulSelec= [
 		(v: any) => !!v || 'El campo es requerido',
-		(v: any) => !/^\s*$/.test(v) || 'No se permite espacios vacios',
+		(v: any) => !/^\s*$/.test(v) || 'No se permite espacios vacios o carcteres especiales',
 	];
 	private HaberEvento = [
 		(v:any) => !!v || "El campo es requiredo",
-		(v:any) => (/^[0-9]*$/.test(v)) || "El campo solo acepta numeros",
+		(v:any) => (/^[0-9]*$/.test(v)) || "No se permiten letras o carcteres especiales",
 	]
 	private FormatDate(data: any) {
 		return moment(data).format('YYYY-MM-DD');

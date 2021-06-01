@@ -25,11 +25,11 @@ export default class AdmjerarquiaComponent extends Vue {
 	private popup = new popup.Swal();
 	RulNombre = [
 		(v:any) => !!v || "El campo es requiredo",
-		(v:any) => (/^[a-z A-Z]*$/.test(v)) || "El campo solo acepta letras"
+		(v:any) => (/^[a-z A-Z]*$/.test(v)) || "No se permiten  caracteres especiales"
 	];
 	RuleCodJer = [
 		(v:any) => !!v || "El campo es requiredo",
-		(v:any) => (/^[0-9]*$/.test(v)) || "No se permiten letras o caracteres especiales"
+		(v:any) => (/^[0-9 A-Z]*$/.test(v)) || "No se permiten  caracteres especiales"
 	];
 	private FormatDate(data: any) {
 		return moment(data).format('YYYY-MM-DD');

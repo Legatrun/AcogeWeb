@@ -68,13 +68,13 @@
 					<td>{{ props.item.minimo_nacional }}</td>
 					<td>{{ props.item.ufb }}</td>
 					<td>
-						<v-tooltip bottom>
+						<v-tooltip bottom color="#008080">
 							<template v-slot:activator="{ on }">
 								<v-btn color="success" v-on="on" fab small dark  @click="Actualizar(props.item)"><v-icon>edit</v-icon></v-btn>
 							</template>
 							<span>Modificar Registro de Parametros</span>
 						</v-tooltip>
-						<v-tooltip style="padding-left:10px" bottom>
+						<v-tooltip style="padding-left:10px" bottom color="#008080">
 							<template v-slot:activator="{ on }" >
 								<v-btn color="error" v-on="on" fab small dark  @click="Eliminar(props.item)"><v-icon>delete</v-icon></v-btn>
 							</template>
@@ -84,9 +84,9 @@
 				</tr>
 			</template>
 			<template v-slot:top>
-				<v-tooltip bottom>
+				<v-tooltip bottom color="#008080">
 					<template v-slot:activator="{ on }">
-						<v-btn color="accent" v-on="on" @click="Insertar()">Adicionar Nuevo Registro de parametros</v-btn>
+						<v-btn color="accent" v-on="on" @click="Insertar()"><v-icon left>mdi-plus</v-icon>Agregar parametros</v-btn>
 					</template>
 					<span>Adicionar nuevo registro  de parametro</span>
 				</v-tooltip>
@@ -125,14 +125,14 @@
 								<v-flex sm6 style="padding: 5px">
 									<v-autocomplete v-model="parametros.año"
 												label="Seleccionar año"
-                        autocomplete="off"
-                        outlined
-                        color="primary"
-                        :items="listarGestion"
-                        item-value="Gestion"
-                        item-text="Gestion"
-                        :rules="ruleSelec"
-                        no-data-text="No se encontro ningun tema"
+												autocomplete="off"
+												outlined
+												color="primary"
+												:items="listarGestion"
+												item-value="Gestion"
+												item-text="Gestion"
+												:rules="ruleSelec"
+												no-data-text="No se encontro ningun tema"
 												>
 									</v-autocomplete>
 								</v-flex>
@@ -175,10 +175,10 @@
 											label="Ingrese cotizacion"
 											clearable
 											persistent-hint
-                      :rules="validacion"
+                                            :rules="validacion"
 											required
-                      counter
-                      maxlength="10"
+											counter
+											maxlength="10"
 											@input="parametros.cotizacion = updateText(parametros.cotizacion)">
 								</v-text-field>
 							</v-flex>
@@ -188,9 +188,9 @@
 											clearable
 											persistent-hint
 											required
-                      :rules="validacion"
-                      counter
-                      maxlength="10"
+											:rules="validacion"
+											counter
+											maxlength="10"
 											@input="parametros.minimo_nacional = updateText(parametros.minimo_nacional)">
 								</v-text-field>
 							</v-flex>
@@ -200,9 +200,9 @@
 											clearable
 											persistent-hint
 											required
-                      :rules="validacion"
-                      counter
-                      maxlength="10"
+											:rules="validacion"
+											counter
+											maxlength="10"
 											@input="parametros.ufb = updateText(parametros.ufb)">
 								</v-text-field>
 							</v-flex>

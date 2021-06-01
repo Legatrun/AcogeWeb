@@ -115,7 +115,7 @@ export default class Admtipo_empleadoComponent extends Vue {
 	private Eliminar(data: services.clase_tipo_empleado): void {
 		swal.fire({
 			title: 'Esta seguro de esta operacion?',
-			text: 'Eliminacion de Registro' + data.tipo_empleado,
+			text: 'Eliminar' + ' ' + data.nombre,
 			type: 'warning',
 			showCancelButton: true,
 			confirmButtonColor: 'green',

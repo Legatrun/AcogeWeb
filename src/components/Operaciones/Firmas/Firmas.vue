@@ -30,13 +30,13 @@
 					<td>{{ props.item.firma2 }}</td>
 					<td>{{ props.item.cargo2 }}</td>
 					<td>
-						<v-tooltip bottom>
+						<v-tooltip bottom color="#008080">
 							<template v-slot:activator="{ on }">
 								<v-btn color="success" v-on="on" fab small dark  @click="Actualizar(props.item)"><v-icon>edit</v-icon></v-btn>
 							</template>
 							<span>Modificar Registro de Firmas</span>
 						</v-tooltip>
-						<v-tooltip style="padding-left:10px" bottom>
+						<v-tooltip style="padding-left:10px" bottom color="#008080">
 							<template v-slot:activator="{ on }" >
 								<v-btn color="error" v-on="on" fab small dark  @click="Eliminar(props.item)"><v-icon>delete</v-icon></v-btn>
 							</template>
@@ -46,9 +46,9 @@
 				</tr>
 			</template>
 			<template v-slot:top>
-				<v-tooltip bottom>
+				<v-tooltip bottom color="#008080">
 					<template v-slot:activator="{ on }">
-						<v-btn color="accent" v-on="on" @click="Insertar()">Adicionar Nuevo Registro de Firmas</v-btn>
+						<v-btn color="accent" v-on="on" @click="Insertar()"><v-icon left>mdi-plus</v-icon>Agregar Firmas</v-btn>
 					</template>
 					<span>Adicionar nuevo registro de Firmas</span>
 				</v-tooltip>
@@ -68,42 +68,43 @@
 				<v-form ref="form" style="padding:10px" v-model="activa">
 					<v-card-text>
 						<v-layout wrap>
-							<v-flex sm12 style="padding: 5px">
+							<v-flex sm6 style="padding: 5px">
 								<v-text-field v-model="firmas.firma1"
-											label="Ingrese Firma1"
+											label="Ingrese Firma(1)"
 											clearable
 											persistent-hint
-                      :rules="validacion"
+                                            :rules="validacion"
 											required
 											@input="firmas.firma1 = updateText(firmas.firma1)">
 								</v-text-field>
 							</v-flex>
-							<v-flex sm12 style="padding: 5px">
-								<v-text-field v-model="firmas.cargo1"
-											label="Ingrese Cargo1"
+							<v-flex sm6 style="padding: 5px">
+							<v-text-field v-model="firmas.firma2"
+											label="Ingrese Firma(2)"
 											clearable
 											persistent-hint
-                      :rules="validacion"
-											required
-											@input="firmas.cargo1 = updateText(firmas.cargo1)">
-								</v-text-field>
-							</v-flex>
-							<v-flex sm12 style="padding: 5px">
-								<v-text-field v-model="firmas.firma2"
-											label="Ingrese Firma2"
-											clearable
-											persistent-hint
-                      :rules="validacion"
+                                            :rules="validacion"
 											required
 											@input="firmas.firma2 = updateText(firmas.firma2)">
 								</v-text-field>
 							</v-flex>
-							<v-flex sm12 style="padding: 5px">
-								<v-text-field v-model="firmas.cargo2"
-											label="Ingrese Cargo2"
+							<v-flex sm6 style="padding: 5px">
+								<v-text-field v-model="firmas.cargo1"
+											label="Ingrese Cargo(1)"
 											clearable
 											persistent-hint
-                      :rules="validacion"
+                                            :rules="validacion"
+											required
+											@input="firmas.cargo1 = updateText(firmas.cargo1)">
+								</v-text-field>
+							</v-flex>
+							
+							<v-flex sm6 style="padding: 5px">
+								<v-text-field v-model="firmas.cargo2"
+											label="Ingrese Cargo(2)"
+											clearable
+											persistent-hint
+                                            :rules="validacion"
 											required
 											@input="firmas.cargo2 = updateText(firmas.cargo2)">
 								</v-text-field>

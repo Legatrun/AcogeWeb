@@ -35,13 +35,13 @@
 					<td>{{ FormatBoolean(props.item.basico) }}</td>
 					<td>{{ props.item.eventual }}</td>
 					<td>
-						<v-tooltip bottom>
+						<v-tooltip bottom color="#008080">
 							<template v-slot:activator="{ on }">
 								<v-btn color="success" v-on="on" fab small dark  @click="Actualizar(props.item)"><v-icon>edit</v-icon></v-btn>
 							</template>
 							<span>Modificar Registro de Descuento</span>
 						</v-tooltip>
-						<v-tooltip style="padding-left:10px" bottom>
+						<v-tooltip style="padding-left:10px" bottom color="#008080">
 							<template v-slot:activator="{ on }" >
 								<v-btn color="error" v-on="on" fab small dark  @click="Eliminar(props.item)"><v-icon>delete</v-icon></v-btn>
 							</template>
@@ -51,9 +51,9 @@
 				</tr>
 			</template>
 			<template v-slot:top>
-				<v-tooltip bottom>
+				<v-tooltip bottom color="#008080">
 					<template v-slot:activator="{ on }">
-						<v-btn color="accent" v-on="on" @click="Insertar()">Adicionar Nuevo Registro de descuentos</v-btn>
+						<v-btn color="accent" v-on="on" @click="Insertar()"><v-icon left>mdi-plus</v-icon>Agregar descuentos</v-btn>
 					</template>
 					<span>Adicionar nuevo registro de descuentos</span>
 				</v-tooltip>
@@ -73,79 +73,74 @@
 				<v-form ref="form" style="padding:10px" v-model="validacion">
 					<v-card-text>
 						<v-layout wrap>
-							<v-flex sm12 style="padding: 5px">
+							<v-flex sm6 style="padding: 5px">
 								<v-text-field v-model="descuentos.nombre"
 											label="Ingrese Nombre de descuento"
 											clearable
 											persistent-hint
-                      :rules="RuleDeNo"
-                      counter
-                      maxlength="25"
+											:rules="RuleDeNo"
+											counter
+											maxlength="25"
 											required
 											@input="descuentos.nombre = updateText(descuentos.nombre)">
 								</v-text-field>
 							</v-flex>
 							<v-flex sm6 style="padding: 5px">
-								<h4 class="mb-0">Calculo:</h4>
-								<v-switch v-model="descuentos.calculo"
-									color="indigo"
-									hint="Seleccione calculo"
-                  :label="`Descuento calculo: ${descuentos.calculo ? 'Si' : 'No'}`"
-									></v-switch>
+								<v-autocomplete v-model="descuentos.tipo_descuento"
+											label="Seleccione Tipo descuento"
+											:items="lsttipodescuento"
+											item-text="nombre"
+											item-value="tipo_descuento"
+											outlined
+											autocomplete="off"
+											@input="descuentos.tipo_descuento = updateText(descuentos.tipo_descuento)">
+								</v-autocomplete>
 							</v-flex>
+
 							<v-flex sm6 style="padding: 5px">
 								<v-text-field v-model="descuentos.valor"
 											label="Ingrese valor"
 											clearable
 											persistent-hint
-                      :rules="RuleDeValor"
-                      counter
-                      maxlength="8"
+											:rules="RuleDeValor"
+											counter
+											maxlength="8"
 											required
 											@input="descuentos.valor = updateText(descuentos.valor)">
 								</v-text-field>
-							</v-flex>
-							<v-flex sm6 style="padding: 5px">
-								<h4 class="mb-0">Tipo:</h4>
-								<v-switch v-model="descuentos.tipo"
-									color="indigo"
-									hint="Seleccione tipo"
-                  :label="`Descuento tipo: ${descuentos.tipo ? 'Si' : 'No'}`"
-									></v-switch>
-							</v-flex>
-							<v-flex sm6 style="padding: 5px">
-								<v-autocomplete v-model="descuentos.tipo_descuento"
-											label="Seleccione Tipo descuento"
-                      :items="lsttipodescuento"
-                      item-text="nombre"
-                      item-value="tipo_descuento"
-                      outlined
-                      autocomplete="off"
-                      color="#1A237E"
-                      :rules="RuleTipoDes"
-                      no-data-text="No se encontro ningun tema"
-											@input="descuentos.tipo_descuento = updateText(descuentos.tipo_descuento)">
-								</v-autocomplete>
-							</v-flex>
-							<v-flex sm6 style="padding: 5px">
-								<h4 class="mb-0">Basico:</h4>
-								<v-switch v-model="descuentos.basico"
-									color="indigo"
-									hint="Seleccione basico"
-                  :label="`Descuento basico: ${descuentos.basico ? 'Si' : 'No'}`"
-									></v-switch>
 							</v-flex>
 							<v-flex sm6 style="padding: 5px">
 								<v-text-field v-model="descuentos.eventual"
 											label="Ingrese Eventual"
 											clearable
 											persistent-hint
-                      :rules="RuleEven"
+                      						:rules="RuleEven"
 											required
-                      counter
-                      maxlength="3"
+											counter
+											maxlength="3"
 											@input="descuentos.eventual = updateText(descuentos.eventual)">
 								</v-text-field>
+							</v-flex>
+							<v-flex sm4 style="padding: 5px">
+								<h4 class="mb-0">Calculo:</h4>
+								<v-switch v-model="descuentos.calculo"
+									color="success"
+                                    :label="`Descuento calculo: ${descuentos.calculo ? 'Si' : 'No'}`"
+									></v-switch>
+							</v-flex>
+							<v-flex sm4 style="padding: 5px">
+								<h4 class="mb-0">Tipo:</h4>
+								<v-switch v-model="descuentos.tipo"
+									color="success"	
+                                    :label="`Descuento tipo: ${descuentos.tipo ? 'Si' : 'No'}`"
+									></v-switch>
+							</v-flex>
+							<v-flex sm4 style="padding: 5px">
+								<h4 class="mb-0">Basico:</h4>
+								<v-switch v-model="descuentos.basico"
+									color="success"
+                                    :label="`Descuento basico: ${descuentos.basico ? 'Si' : 'No'}`"
+									></v-switch>
 							</v-flex>
 						</v-layout>
 					</v-card-text>

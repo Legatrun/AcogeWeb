@@ -10,17 +10,18 @@ import helpers from '@/helper';
 export default class AdmempleadoComponent extends Vue {
 	private headers: any[] = [
 		//{ text: 'empleado', align: 'left', sortable: true, value: 'empleado', width: '15%' },
-		{ text: 'Paterno', align: 'left', sortable: false, value: 'paterno', width: '10%' },
-		{ text: 'Materno', align: 'left', sortable: false, value: 'materno', width: '10%' },
-		{ text: 'Nombres', align: 'left', sortable: false, value: 'nombres', width: '15%' },
-		{ text: 'Fecha nac', align: 'left', sortable: false, value: 'fecha_nac', width: '10%' },
+		{ text: 'Empleados', align: 'left', sortable: false, value: 'nombres', width: '20%' },
+		
+		//{ text: 'Materno', align: 'left', sortable: false, value: 'materno', width: '10%' },
+		//{ text: 'Nombres', align: 'left', sortable: false, value: 'nombres', width: '15%' },
+		//{ text: 'Fecha nac', align: 'left', sortable: false, value: 'fecha_nac', width: '10%' },
 		//{ text: 'C_I', align: 'left', sortable: false, value: 'identificacion', width: '15%' },
 		{ text: 'Cod asegurado', align: 'left', sortable: false, value: 'cod_asegurado', width: '10%' },
 		//{ text: 'Direccion', align: 'left', sortable: false, value: 'direccion', width: '15%' },
 		//{ text: 'Email', align: 'left', sortable: false, value: 'email', width: '15%' },
 		//{ text: 'Telefono', align: 'left', sortable: false, value: 'telefono', width: '10%' },
 		//{ text: 'Lugar nac', align: 'left', sortable: false, value: 'lugar_nac', width: '10%' },
-		{ text: 'Pais', align: 'left', sortable: false, value: 'nacionalidad', width: '10%' },
+		{ text: 'Pais', align: 'left', sortable: false, value: 'nacionalidad', width: '20%' },
 		{ text: 'Genero', align: 'left', sortable: false, value: 'sexo', width: '15%' },
 		{ text: 'Estado', align: 'left', sortable: false, value: 'estado_civil', width: '10%' },
 		//{ text: 'patmes', align: 'left', sortable: false, value: 'patmes', width: '15%' },
@@ -61,7 +62,7 @@ export default class AdmempleadoComponent extends Vue {
 	 RulnomPatMat = [
 		(v:any) => !!v || "El campo es requiredo",
         (v:any) => (v && v.length>=3) || "Minimo 3 caracteres",
-		(v:any) => (/^[a-z A-Z]*$/.test(v)) || "El campo solo acepta letras"
+		(v:any) => (/^[a-z A-Z]*$/.test(v)) || "No se permiten numeros o carcteres especiales"
 	];
 	 RulEmpEmai = [
 		(v:any) => !!v || "El campo es requiredo",
@@ -70,16 +71,17 @@ export default class AdmempleadoComponent extends Vue {
 	 RulEmpTele = [
 		(v:any) => !!v || "El campo es requiredo",
         (v:any) => (v && v.length>=6) || "Minimo 6 numeros",
-        (v:any) => (/^[0-9]*$/.test(v)) || "El campo no acepta letras"
+        (v:any) => (/^[0-9]*$/.test(v)) || "No se permiten letras o carcteres especiales"
 
 	];
 	 validacion = [
 		(v: any) => !!v || 'El campo es requerido',
         (v:any) => (v&&v.length >= 6) || "Minimo 6 numeros",
-		 //(v:any) => (/^[0-9,BCDEHJLOPRST]*$/.test(v)) || "El campo  acepta letras"
+		(v:any) => (v&&v.length <= 20) || "Maximo 20",
+		(v: any) => !/^\s*$/.test(v) || 'No se permite espacios vacios o carcteres especiales'
 	];
 	 RulAuton = [
-		 (v: any) => !/^\s*$/.test(v) || 'No se permite espacios vacios',
+		 (v: any) => !/^\s*$/.test(v) || 'No se permite espacios vacios o carcteres especiales',
 	 ];
 
 

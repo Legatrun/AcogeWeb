@@ -69,13 +69,13 @@
 					<td>{{ props.item.actualizacion }}</td>
 					<td>{{ props.item.saldo }}</td>
 					<td>
-						<v-tooltip bottom>
+						<v-tooltip bottom color="#008080">
 							<template v-slot:activator="{ on }">
 								<v-btn color="success" v-on="on" fab small dark  @click="Actualizar(props.item)"><v-icon>edit</v-icon></v-btn>
 							</template>
 							<span>Modificar Registro de Credito Fiscal</span>
 						</v-tooltip>
-						<v-tooltip style="padding-left:10px" bottom>
+						<v-tooltip style="padding-left:10px" bottom color="#008080">
 							<template v-slot:activator="{ on }" >
 								<v-btn color="error" v-on="on" fab small dark  @click="Eliminar(props.item)"><v-icon>delete</v-icon></v-btn>
 							</template>
@@ -85,9 +85,9 @@
 				</tr>
 			</template>
 			<template v-slot:top>
-				<v-tooltip bottom>
+				<v-tooltip bottom color="#008080">
 					<template v-slot:activator="{ on }">
-						<v-btn color="accent" v-on="on" @click="Insertar()">Adicionar Nuevo Registro de Credito Fiscal</v-btn>
+						<v-btn color="accent" v-on="on" @click="Insertar()"><v-icon left>mdi-plus</v-icon>Agregar Credito Fiscal</v-btn>
 					</template>
 					<span>Adicionar nuevo registro de  Credito Fiscal</span>
 				</v-tooltip>
@@ -111,41 +111,41 @@
 								<v-flex sm12 style="padding: 5px">
 									<v-autocomplete v-model="creditofiscal.empleado"
 												label="Seleccionar empleado"
-                        :items="lstempleados"
-                        item-text="nombres"
-                        item-value="empleado"
-                        outlined
-                        autocomplete="off"
-                        color="#1A237E"
-                        :rules="ruleValida"
-                        no-data-text="No se encontro ningun tema">
+												:items="lstempleados"
+												item-text="nombres"
+												item-value="empleado"
+												outlined
+												autocomplete="off"
+												
+												:rules="ruleValida"
+												no-data-text="No se encontro ningun tema">
 									</v-autocomplete>
 								</v-flex>
 								<v-flex sm6 style="padding: 5px">
 									<v-autocomplete v-model="creditofiscal.mes"
 												label="Seleccionar mes"
-                        :items="listarMes"
-                        item-text="Mes"
-                        item-value="value"
-                        outlined
-                        autocomplete="off"
-                        color="#1A237E"
-                        :rules="ruleValida"
-                        no-data-text="No se encontro ningun tema"
+												:items="listarMes"
+												item-text="Mes"
+												item-value="value"
+												outlined
+												autocomplete="off"
+												
+												:rules="ruleValida"
+												no-data-text="No se encontro ningun tema"
 												>
 									</v-autocomplete>
 								</v-flex>
 								<v-flex sm6 style="padding: 5px">
 									<v-autocomplete v-model="creditofiscal.año"
 												label="Seleccionar año"
-                        :items="listarGestion"
-                        item-text="Gestion"
-                        item-value="Gestion"
-                        outlined
-                        autocomplete="off"
-                        color="#1A237E"
-                        :rules="ruleValida"
-                        no-data-text="No se encontro ningun tema"
+												:items="listarGestion"
+												item-text="Gestion"
+												item-value="Gestion"
+												outlined
+												autocomplete="off"
+											
+												:rules="ruleValida"
+												no-data-text="No se encontro ningun tema"
 												>
 									</v-autocomplete>
 								</v-flex>
@@ -187,9 +187,9 @@
 											clearable
 											persistent-hint
 											required
-                      :rules="validacion"
-                      counter
-                      maxlength="10"
+											:rules="validacion"
+											counter
+											maxlength="10"
 											@input="creditofiscal.declarado = updateText(creditofiscal.declarado)">
 								</v-text-field>
 							</v-flex>
@@ -199,9 +199,9 @@
 											clearable
 											persistent-hint
 											required
-                      :rules="validacion"
-                      counter
-                      maxlength="10"
+											:rules="validacion"
+											counter
+											maxlength="10"
 											@input="creditofiscal.actualizacion = updateText(creditofiscal.actualizacion)">
 								</v-text-field>
 							</v-flex>
@@ -211,9 +211,9 @@
 											clearable
 											persistent-hint
 											required
-                      :rules="validacion"
-                      counter
-                      maxlength="10"
+											:rules="validacion"
+											counter
+											maxlength="10"
 											@input="creditofiscal.saldo = updateText(creditofiscal.saldo)">
 								</v-text-field>
 							</v-flex>
