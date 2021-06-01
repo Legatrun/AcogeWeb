@@ -19,7 +19,7 @@ export default class MenuComponent extends Vue {
         new MenuItem ('Inicio', 'home', '/Principal'),
     ];
     public menuParametros: MenuItem[] = [
-        new MenuItem ('OTROS', 'exit_to_app', ''),
+        new MenuItem ('Parametros del Sistema', 'exit_to_app', ''),
     ];
 
     public menuListaParametros: MenuItem[] = [
@@ -166,7 +166,7 @@ export default class MenuComponent extends Vue {
         new MenuItem('TiposdeCambio', 'exit_to_app', '/TiposdeCambio'),
     ];
     public menuListaTransaccionesContabilidad: MenuItem[] = [
-        new MenuItem('Registros Diarios', 'exit_to_app', '/RegistrosDiarios'),
+        
     ];
 /////////////////////////////////parametros Generales
 public menuParamsGenerales: MenuItem[] = [
@@ -186,6 +186,24 @@ public menuReportesParamsGenerales: MenuItem[] = [
         new MenuItem('Pais', 'exit_to_app', '/Pais'), 
         new MenuItem('Zonas', 'exit_to_app', '/Zonas'),  
         new MenuItem('Ciudades', 'exit_to_app', '/Ciudades'), 
+    ];
+
+/////////////////////////////////Tesoreria
+public menuTesoreria: MenuItem[] = [
+    new MenuItem ('Tesoreria', 'exit_to_app', ''),
+];
+public menuAdministracionTesoreria: MenuItem[] = [
+    new MenuItem ('Administracion', 'exit_to_app', ''),
+];
+public menuTransaccionTesoreria: MenuItem[] = [
+    new MenuItem ('Transacciones', 'exit_to_app', ''),
+];
+public menuReportesTesoreria: MenuItem[] = [
+    new MenuItem ('Reportes', 'exit_to_app', ''),
+];
+    public menuListaTesoreria: MenuItem[] = [
+        new MenuItem('Registros Diarios', 'exit_to_app', '/RegistrosDiarios'),
+        
     ];
 
     public menuSalir: MenuItem[] = [
