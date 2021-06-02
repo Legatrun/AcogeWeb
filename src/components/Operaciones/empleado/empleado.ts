@@ -15,7 +15,7 @@ export default class AdmempleadoComponent extends Vue {
 		//{ text: 'Materno', align: 'left', sortable: false, value: 'materno', width: '10%' },
 		//{ text: 'Nombres', align: 'left', sortable: false, value: 'nombres', width: '15%' },
 		//{ text: 'Fecha nac', align: 'left', sortable: false, value: 'fecha_nac', width: '10%' },
-		//{ text: 'C_I', align: 'left', sortable: false, value: 'identificacion', width: '15%' },
+		{ text: 'Cidula de identidad', align: 'left', sortable: false, value: 'identificacion', width: '15%' },
 		{ text: 'Cod asegurado', align: 'left', sortable: false, value: 'cod_asegurado', width: '10%' },
 		//{ text: 'Direccion', align: 'left', sortable: false, value: 'direccion', width: '15%' },
 		//{ text: 'Email', align: 'left', sortable: false, value: 'email', width: '15%' },
@@ -74,11 +74,15 @@ export default class AdmempleadoComponent extends Vue {
         (v:any) => (/^[0-9]*$/.test(v)) || "No se permiten letras o carcteres especiales"
 
 	];
+	civalidacionUpd = [
+        (v:any) => (/^[0-9 A-Z-]*$/.test(v)) || "CI(Ej: 123456-LP)"
+
+	];
 	 validacion = [
 		(v: any) => !!v || 'El campo es requerido',
-        (v:any) => (v&&v.length >= 6) || "Minimo 6 numeros",
-		(v:any) => (v&&v.length <= 20) || "Maximo 20",
-		(v: any) => !/^\s*$/.test(v) || 'No se permite espacios vacios o carcteres especiales'
+       // (v:any) => (v&&v.length >= 6) || "Deberia ingresar minimo 6 caracteres",
+		//(v:any) => (v&&v.length <= 20) || "Se permite hasta 20 caracteres",	
+		(v:any) => (/^\d{6,10}((\s|[-])[A-Z]{2})?$/.test(v)) || "CI(Ej: 123456-LP)",
 	];
 	 RulAuton = [
 		 (v: any) => !/^\s*$/.test(v) || 'No se permite espacios vacios o carcteres especiales',

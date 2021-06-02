@@ -9,10 +9,11 @@ import helpers from '@/helper';
 @Component
 export default class AdmFirmasComponent extends Vue {
 	private headers: any[] = [
-		{ text: 'Firma1', align: 'left', sortable: false, value: 'firma1', width: '15%' },
-		{ text: 'Cargo1', align: 'left', sortable: false, value: 'cargo1', width: '15%' },
-		{ text: 'Firma2', align: 'left', sortable: false, value: 'firma2', width: '15%' },
-		{ text: 'Cargo2', align: 'left', sortable: false, value: 'cargo2', width: '15%' },
+		{ text: 'Firma (1)', align: 'left', sortable: false, value: 'firma1', width: '15%' },
+		{ text: 'Firma (2)', align: 'left', sortable: false, value: 'firma2', width: '15%' },
+		{ text: 'Cargo (1)', align: 'left', sortable: false, value: 'cargo1', width: '15%' },
+		
+		{ text: 'Cargo (2)', align: 'left', sortable: false, value: 'cargo2', width: '15%' },
 		{ text: 'Operaciones', align: 'center', sortable: false, value: 'action', width: '20%' },
 	];
 	private WebApi = new services.Endpoints();

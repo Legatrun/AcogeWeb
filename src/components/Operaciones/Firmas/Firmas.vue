@@ -26,8 +26,9 @@
 				<tr>
 					<!--<td>{{ helper.showDataDescription(props.item.cargo2,lstFirmas, id, descripcion)  }}</td>// Ejemplo de Uso de Helper Para obtener la Descripcion de una Tabla por medio de su Id-->
 					<td>{{ props.item.firma1 }}</td>
-					<td>{{ props.item.cargo1 }}</td>
 					<td>{{ props.item.firma2 }}</td>
+					<td>{{ props.item.cargo1 }}</td>
+					
 					<td>{{ props.item.cargo2 }}</td>
 					<td>
 						<v-tooltip bottom color="#008080">

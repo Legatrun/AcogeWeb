@@ -28,9 +28,13 @@ export default class AdmPersonal_departamentosComponent extends Vue {
 	private helper: helpers = new helpers();
 	private popup = new popup.Swal();
 	private activa = false;
+	coddepartamento=[
+		(v:any) => !!v || "El campo es requiredo",
+		(v:any) => (/^[0-9]*$/.test(v)) || "No se permite letras  caracteres especiales",
+	];
 	validacion = [
 		(v:any) => !!v || "El campo es requiredo",
-		(v:any) => (/^[0-9,.]*$/.test(v)) || "El campo solo acepta numeros",
+		(v:any) => (/^[0-9,.]*$/.test(v)) || "No se permite letras  caracteres especiales",
 	];
 	ruleValida = [
 		(v: any) => !!v || 'El campo es requerido',

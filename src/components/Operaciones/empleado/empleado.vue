@@ -30,8 +30,8 @@
 					<!--
 					<td>{{ props.item.materno }}</td>
 					<td>{{ props.item.nombres }}</td>
-					<td>{{ FormatDate(props.item.fecha_nac) }}</td>
-					<td>{{ props.item.identificacion }}</td>-->
+					<td>{{ FormatDate(props.item.fecha_nac) }}</td>-->
+					<td>{{ props.item.identificacion }}</td>
 					<td>{{ props.item.cod_asegurado }}</td>
 					<!--<td>{{ props.item.direccion }}</td>-->
 					<!--<td>{{ props.item.email }}</td>-->
@@ -178,18 +178,39 @@
 									<v-date-picker v-model="empleado.fecha_nac" no-title @input="menu_fecha_nac = false"></v-date-picker>
 								</v-menu>
 							</v-flex>
-							<v-flex sm6 style="padding: 5px">
+							<template v-if="operacion == 'Update'">
+                           <v-flex sm6 style="padding: 5px">
 								<v-text-field v-model="empleado.identificacion"
 								            label="Cedula de Idemtidad"
 											clearable
-											:rules="validacion"
 											persistent-hint
 											required
+										    :rules="civalidacionUpd"
+											counter
+											maxlength="20"
 											@input="empleado.identificacion = updateText(empleado.identificacion)"
 								>
 								</v-text-field>
 							
 							</v-flex>
+							</template>
+							<template v-else>
+                            <v-flex sm6 style="padding: 5px">
+								<v-text-field v-model="empleado.identificacion"
+								            label="Cedula de Idemtidad"
+											clearable
+											persistent-hint
+											required
+											:rules="validacion"
+											counter
+											maxlength="20"
+											@input="empleado.identificacion = updateText(empleado.identificacion)"
+								>
+								</v-text-field>
+							
+							</v-flex>
+							</template>
+							
 							<v-flex sm6 style="padding: 5px">
 								<v-text-field v-model="empleado.cod_asegurado"
 											label="Codigo Asegurado"

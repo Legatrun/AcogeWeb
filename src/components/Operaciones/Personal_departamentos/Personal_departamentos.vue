@@ -76,9 +76,9 @@
 												clearable
 												persistent-hint
 												required
-                        :rules="ruleValida"
-                        counter
-                        maxlength="10"
+												:rules="coddepartamento"
+												counter
+												maxlength="10"
 												@input="personal_departamentos.personal_departamento = updateText(personal_departamentos.personal_departamento)">
 									</v-text-field>
 								</v-flex>
@@ -131,14 +131,13 @@
 							<v-flex sm4 style="padding: 5px">
 								<v-autocomplete v-model="personal_departamentos.empresa"
 											label="Seleccione empresa"
-                      :items="lstempresas"
-                      item-value="idempresa"
-                      item-text="descripcion"
-                      outlined
-                      autocomplete="off"
-                      color="#1A237E"
-                      :rules="ruleValida"
-                      no-data-text="No se encontro ningun tema">
+											:items="lstempresas"
+											item-value="idempresa"
+											item-text="descripcion"
+											outlined
+											autocomplete="off"
+											:rules="ruleValida"
+											no-data-text="No se encontro ningun tema">
 								</v-autocomplete>
 							</v-flex>
 						</v-layout>

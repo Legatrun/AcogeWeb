@@ -35,10 +35,10 @@ export default class AdmparametrosComponent extends Vue {
 	private listarGestion: any[]=[
 		{Gestion:2021},{Gestion:2022},{Gestion:2023},{Gestion:2024},{Gestion:2025}
 	];
-
+	
 	 validacion=[
 		(v:any) => !!v || "El campo es requiredo",
-		(v:any) => (/^[0-9,.]*$/.test(v)) || "El campo solo acepta letras",
+		(v:any) => (/^[0-9,.]*$/.test(v)) || "No se permite letras  espacios vacios caracteres especiales",
 	];
 	 ruleSelec=[
 		(v: any) => !!v || 'El campo es requerido',

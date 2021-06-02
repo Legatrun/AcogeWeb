@@ -64,12 +64,17 @@ export default class Admempleado_deptoComponent extends Vue {
 	private listarciudad: any[] = [
 		{ciudad: 'LA PAZ'},{ciudad:'COCHABAMBA'},
 		{ciudad:'SANTA CRUZ'},{ciudad:'BENI'},
-		{ciudad: 'PANDO'},{ciudad: 'TERIJA'},{ciudad: 'ORURO'},
-		{ciudad: 'POTOSI'},{ciudad: 'CHOQUISACA'},
+		{ciudad: 'PANDO'},{ciudad: 'TERIJA'},
+		{ciudad: 'ORURO'},{ciudad: 'POTOSI'},
+		{ciudad: 'CHOQUISACA'},
 	];
 	validacion = [
 		(v:any) => !!v || "El campo es requiredo",
-		(v:any) => (/^[0-9,.]*$/.test(v)) || "El campo solo acepta numeros",
+		(v:any) => (/^[0-9,.]*$/.test(v)) || "No se permite letras caracteres especiales",
+	];
+	quincena = [
+		
+		(v:any) => (/^[0-9,.]*$/.test(v)) || "No se permite letras caracteres especiales",
 	];
 	ruleValida = [
 		(v: any) => !!v || 'El campo es requerido',
@@ -81,19 +86,24 @@ export default class Admempleado_deptoComponent extends Vue {
 		var fechaactual = new Date(ar[0],ar[1],ar[2]);
 		fechaactual.setFullYear(fechaactual.getFullYear()+5);
 		var res = fechaactual.getFullYear() +'-'+ fechaactual.getMonth() +'-'+ fechaactual.getDate();
-		this.empleado_depto.fecha_quinquenio = res;
+	
+		this.empleado_depto.fecha_quinquenio = this.FormatDate(res);
+		
 	}
 
 	beforeUpdate(){
-		this.sumarfecha()
 		this.validarquincena();
+		this.sumarfecha()
+		
 	}
 	private validarquincena(){
-		var mes="";
+		
 		var po = 0;
 		 po=(this.empleado_depto.haber_basico*50)/100;
-		 if (this.empleado_depto.quincena>po){
+		 if (po < this.empleado_depto.quincena){
 		 	this.message = "tiene que ser menor 50% de basico"
+		 }else{
+			this.message = ""
 		 }
 
 	}
@@ -138,7 +148,7 @@ export default class Admempleado_deptoComponent extends Vue {
 		this.cargarPlanilla();
 		this.cargarJerarquia();
 		this.cargarTipoEmpleado();
-		//this.cargarCiudad();
+		this.cargarCiudad();
 
 	}
 	slectEmpleado(nextInput: number){
@@ -275,7 +285,19 @@ export default class Admempleado_deptoComponent extends Vue {
 		});
 
 	}
-
+	private cargarCiudad(){
+		new services.Operaciones().Consultar(this.WebApi.ws_ciudades_Consultar)
+			.then((resciudades) => {
+				if (resciudades.data._error.error === 0) {
+					this.lstciudades = resciudades.data._data;
+					this.dialog = false;
+				} else {
+					this.popup.error('Consultar', resciudades.data._error.descripcion);
+				}
+			}).catch((error) => {
+					this.popup.error('Consultar', 'Error Inesperado: ' + error);
+		});
+	}
 	private Insertar(): void {
 		this.empleado_depto = new services.clase_empleado_depto();
 		this.empleado_depto.fecha_ingreso = this.FormatDate(Date.now());
@@ -398,6 +420,8 @@ export default class Admempleado_deptoComponent extends Vue {
 				jerarquia:empleadoDepto.jerarquia,
 				cuenta:empleadoDepto.cuenta,
 				oficina:empleadoDepto.oficina,
+				//oficina:this.formatearCiudad(empleadoDepto.oficina),
+				
 				estado:empleadoDepto.estado,
 				saldo_anterior_iva:empleadoDepto.saldo_anterior_iva,
 				envio_email:empleadoDepto.envio_email,
@@ -412,6 +436,15 @@ export default class Admempleado_deptoComponent extends Vue {
 			}
 		});
 		return departamentoLiteral;
+	}
+	private formatearCiudad(ciudad : any){
+		let ciudadLiteral: string = '';
+			this.lstciudades.forEach(function(value){
+				if(value.descripcion == ciudad){
+					ciudadLiteral = value.descripcion;
+				}
+			});
+		return ciudadLiteral;	
 	}
 
 }

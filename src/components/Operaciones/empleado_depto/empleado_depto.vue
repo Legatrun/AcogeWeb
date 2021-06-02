@@ -45,13 +45,13 @@
 					<td>{{ FormatBoolean(props.item.envio_email) }}</td>
 						-->
 					<td>
-						<v-tooltip bottom>
+						<v-tooltip bottom color="#008080">
 							<template v-slot:activator="{ on }">
 								<v-btn color="success" v-on="on" fab small dark  @click="Actualizar(props.item)"><v-icon>edit</v-icon></v-btn>
 							</template>
 							<span>Modificar Registro de empleado departamento</span>
 						</v-tooltip>
-						<v-tooltip style="padding-left:10px" bottom>
+						<v-tooltip style="padding-left:10px" bottom color="#008080">
 							<template v-slot:activator="{ on }" >
 								<v-btn color="error" v-on="on" fab small dark  @click="Eliminar(props.item)"><v-icon>delete</v-icon></v-btn>
 							</template>
@@ -61,9 +61,9 @@
 				</tr>
 			</template>
 			<template v-slot:top>
-				<v-tooltip bottom>
+				<v-tooltip bottom color="#008080">
 					<template v-slot:activator="{ on }">
-						<v-btn color="accent" v-on="on" @click="Insertar()">Adicionar Nuevo Registro de empleado departamento</v-btn>
+						<v-btn color="accent" v-on="on" @click="Insertar()"><v-icon left>mdi-plus</v-icon>Agregar empleado departamento</v-btn>
 					</template>
 					<span>Adicionar nuevo registro de empleado departamento</span>
 				</v-tooltip>
@@ -117,14 +117,13 @@
 							<v-flex sm6 style="padding: 5px">
 								<v-autocomplete v-model="empleado_depto.departamento"
 											label="Seleccione departamento"
-                      :items="lstdepartamentos"
-                      item-text="nombre"
-                      item-value="personal_departamento"
-                      outlined
-                      autocomplete="off"
-                      color="#1A237E"
-                      :rules="ruleValida"
-                      no-data-text="No se encontro ningun tema">
+											:items="lstdepartamentos"
+											item-text="nombre"
+											item-value="personal_departamento"
+											outlined
+											color="#1A237E"
+											:rules="ruleValida"
+											no-data-text="No se encontro ningun tema">
 								</v-autocomplete>
 							</v-flex>
 							<v-flex sm4 style="padding: 5px">
@@ -156,8 +155,9 @@
 											label="Ingrese quincena"
 											clearable
 											persistent-hint
-                      :error-messages="message"
+                                            :error-messages="message"
 											required
+											:rules="quincena"
 											@input="empleado_depto.quincena = updateText(empleado_depto.quincena)">
 								</v-text-field>
 							</v-flex>
@@ -266,13 +266,12 @@
 							<v-flex sm6 style="padding: 5px">
 									<v-autocomplete v-model="empleado_depto.oficina"
 											label="Selecciona oficina"
-                      :items="listarciudad"
-                      item-text="ciudad"
-                      item-value="ciudad"
-                      outlined
-                      autocomplete="off"
-                      color="#1A237E"
-                      :rules="ruleValida"
+												:items="lstciudades"
+								item-text="descripcion"
+								item-value="descripcion"
+											outlined
+											autocomplete="off"
+                    
                       no-data-text="No se encontro ningun tema">
 								</v-autocomplete>
 							
