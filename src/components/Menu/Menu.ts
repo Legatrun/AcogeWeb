@@ -83,7 +83,7 @@ export default class MenuComponent extends Vue {
         // new MenuItem('Planilla', 'exit_to_app', '/planilla'),
         new MenuItem('Jerarquia', 'exit_to_app', '/jerarquia'),
         // //new MenuItem('Planilla especial', 'exit_to_app', '/planilla_esp'),
-        // new MenuItem('Tipo descuento', 'exit_to_app', '/tipo_descuento'),
+        new MenuItem('Tipo descuento', 'exit_to_app', '/tipo_descuento'),
         // new MenuItem('Tipo haber', 'exit_to_app', '/tipo_haber'),
         //new MenuItem('Planilla descuentos', 'exit_to_app', '/planilla_descuentos'),
        // new MenuItem('Planilla haberes', 'exit_to_app', '/planilla_haberes'),

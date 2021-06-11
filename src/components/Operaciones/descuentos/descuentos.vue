@@ -117,7 +117,7 @@
                       						:rules="RuleEven"
 											required
 											counter
-											maxlength="3"
+											maxlength="2"
 											@input="descuentos.eventual = updateText(descuentos.eventual)">
 								</v-text-field>
 							</v-flex>

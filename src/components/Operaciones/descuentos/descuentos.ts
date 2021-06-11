@@ -45,7 +45,6 @@ export default class AdmdescuentosComponent extends Vue {
 	]
 	private RuleTipoDes = [
 		(v:any) => !!v || "El campo es requiredo",
-		(v: any) => !/^\s*$/.test(v) || 'No se permite espacios vacios o carcteres especiales',
 	]
 	private RuleEven=[
 		(v:any) => !!v || "El campo es requiredo",
@@ -71,6 +70,7 @@ export default class AdmdescuentosComponent extends Vue {
 	}
 	private mounted() {
 		this.cargar_data();
+		this.cargarTipoDescuento();
 	}
 	private cargar_data() {
 		if (this.$store.state.auth !== true) {​​​​
@@ -87,7 +87,7 @@ export default class AdmdescuentosComponent extends Vue {
 			}).catch((error) => {
 					this.popup.error('Consultar', 'Error Inesperado: ' + error);
 			});
-		this.cargarTipoDescuento();
+		
 
 	}
 	private Insertar(): void {
@@ -148,7 +148,7 @@ export default class AdmdescuentosComponent extends Vue {
 	private Eliminar(data: services.clase_descuentos): void {
 		swal.fire({
 			title: 'Esta seguro de esta operacion?',
-			text: 'Eliminacion de Registro' + data.descuento,
+			text: 'Eliminacion de Registro ' + data.nombre,
 			type: 'warning',
 			showCancelButton: true,
 			confirmButtonColor: 'green',

@@ -126,6 +126,13 @@ export default class Admempleado_deptoComponent extends Vue {
 	}
 	private mounted() {
 		this.cargar_data();
+		this.cargarEmpleados();
+		this.cargarDepartamento();
+		this.cargarTipoEmpleado();
+		this.cargarPlanilla();
+		this.cargarJerarquia();
+		this.cargarTipoEmpleado();
+		this.cargarCiudad();
 	}
 	private cargar_data() {
 		if (this.$store.state.auth !== true) {​​​​
@@ -142,13 +149,7 @@ export default class Admempleado_deptoComponent extends Vue {
 			}).catch((error) => {
 					this.popup.error('Consultar', 'Error Inesperado: ' + error);
 			});
-		this.cargarEmpleados();
-		this.cargarDepartamento();
-		this.cargarTipoEmpleado();
-		this.cargarPlanilla();
-		this.cargarJerarquia();
-		this.cargarTipoEmpleado();
-		this.cargarCiudad();
+		
 
 	}
 	slectEmpleado(nextInput: number){
@@ -437,6 +438,8 @@ export default class Admempleado_deptoComponent extends Vue {
 		});
 		return departamentoLiteral;
 	}
+
+	
 	private formatearCiudad(ciudad : any){
 		let ciudadLiteral: string = '';
 			this.lstciudades.forEach(function(value){

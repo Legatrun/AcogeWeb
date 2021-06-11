@@ -37,7 +37,7 @@ export default class AdmhaberesComponent extends Vue {
 	public activa  = false;
 	private HaberNom  =[
 		(v:any) => !!v || "El campo es requiredo",
-		(v:any) => (v && v.length>=2) || "Minimo 2 numeros",
+		//(v:any) => (v && v.length>=2) || "Ingrese ",
 		(v:any) => (/^[a-zA-Z]*$/.test(v)) || "No se permiten numeros o carcteres especiales",
 	]
 	private validacion  =[
@@ -47,7 +47,6 @@ export default class AdmhaberesComponent extends Vue {
 	]
 	private rulSelec= [
 		(v: any) => !!v || 'El campo es requerido',
-		(v: any) => !/^\s*$/.test(v) || 'No se permite espacios vacios o carcteres especiales',
 	];
 	private HaberEvento = [
 		(v:any) => !!v || "El campo es requiredo",
@@ -72,6 +71,7 @@ export default class AdmhaberesComponent extends Vue {
 	}
 	private mounted() {
 		this.cargar_data();
+		this.cargarTipoHaber();
 	}
 	private cargar_data() {
 		if (this.$store.state.auth !== true) {​​​​
@@ -88,7 +88,7 @@ export default class AdmhaberesComponent extends Vue {
 			}).catch((error) => {
 					this.popup.error('Consultar', 'Error Inesperado: ' + error);
 			});
-		this.cargarTipoHaber();
+		
 	}
 
 	private cargarTipoHaber(){
@@ -162,7 +162,7 @@ export default class AdmhaberesComponent extends Vue {
 	private Eliminar(data: services.clase_haberes): void {
 		swal.fire({
 			title: 'Esta seguro de esta operacion?',
-			text: 'Eliminacion de Registro' + data.haber,
+			text: 'Eliminacion de Registro ' + data.nombre,
 			type: 'warning',
 			showCancelButton: true,
 			confirmButtonColor: 'green',

@@ -88,7 +88,7 @@
 												clearable
 												persistent-hint
 												required
-												:rules="Codigorules"
+												:rules="codProveedor"
 												@input="proveedores.codigoproveedor = updateText(proveedores.codigoproveedor)">
 									</v-text-field>
 								</v-flex>
@@ -228,7 +228,7 @@
 											clearable
 											persistent-hint
 											required
-											:rules="validacion"
+											:rules="validaFax"
 											@input="proveedores.fax = updateText(proveedores.fax)">
 								</v-text-field>
 							</v-flex>
@@ -258,7 +258,7 @@
 								@input="proveedores.idtipoproveedor = updateText(proveedores.idtipoproveedor)"
 								></v-autocomplete>
 							</v-col>
-							<v-flex sm4 class="hidden-xs-only" style="padding: 5px">
+							<v-flex sm6 class="hidden-xs-only" style="padding: 5px">
 								<v-menu
 									ref="menu_fechacreacion"
 										v-model="menu_fechacreacion"
@@ -289,7 +289,7 @@
 											clearable
 											persistent-hint
 											required
-											:rules="validacion"
+											:rules="CodAduana"
 											>
 								</v-text-field>
 							</v-flex>

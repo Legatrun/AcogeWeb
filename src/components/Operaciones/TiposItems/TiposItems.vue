@@ -1,7 +1,7 @@
 <template>
 	<v-card>
 		<v-toolbar color="primary" style="color:white">
-			<v-toolbar-title>Datos de TiposItems</v-toolbar-title>
+			<v-toolbar-title>Datos de Tipos de Items</v-toolbar-title>
 			<v-divider></v-divider>
 			<v-text-field v-model="buscartipositems"
 					append-icon="search"
@@ -48,7 +48,7 @@
 			<template v-slot:top>
 				<v-tooltip bottom>
 					<template v-slot:activator="{ on }">
-						<v-btn color="accent" v-on="on" @click="Insertar()">Adicionar Nuevo Registro de TiposItems</v-btn>
+						<v-btn color="accent" v-on="on" @click="Insertar()">Adicionar Nuevo Registro de Tipos Items</v-btn>
 					</template>
 					<span>Adicionar nuevo registro de Tipo Item</span>
 				</v-tooltip>
@@ -62,7 +62,7 @@
 		<v-dialog v-model="dialog" persistent max-width="50%">
 			<v-card>
 				<v-toolbar style="padding:10px" dark class="primary">
-					<v-toolbar-title>Datos de TiposItems</v-toolbar-title>
+					<v-toolbar-title>Datos de Tipos Items</v-toolbar-title>
 				</v-toolbar>
 				<v-divider></v-divider>
 				<v-form ref="form" style="padding:10px" v-model="activo">
@@ -82,7 +82,7 @@
 											clearable
 											persistent-hint
 											required
-											:rules="validacion"
+											:rules="validacionDescri"
 											@input="tipositems.descripcion = updateText(tipositems.descripcion)">
 								</v-text-field>
 							</v-flex>
@@ -94,16 +94,17 @@
 											clearable
 											persistent-hint
 											required
-											:rules="validacion"
+											:rules="validacionSigla"
 											@input="tipositems.sigla = updateText(tipositems.sigla)">
 								</v-text-field>
 							</v-flex>
-							
-							<v-flex sm6 style="padding: 5px">
-								<v-col cols="7" sm="5">
-									<p class="text-sm-left"><b>Ingresa Inventario: </b></p> <v-switch  v-model="tipositems.ingresainventario" color="custom"  :label="`Estado: ${tipositems.ingresainventario ? 'Si' : 'No'}`"> </v-switch>
-									</v-col>
-							</v-flex>
+								<v-flex sm12 style="padding: 5px">
+								<h4 class="mb-0 ">Ingresa Inventario:</h4>
+								<v-switch v-model="tipositems.ingresainventario"
+									color="success"
+                                    :label="`Estado: ${tipositems.ingresainventario ? 'Si' : 'No'}`"
+									></v-switch>
+							     </v-flex>
 						</v-layout>
 					</v-card-text>
 				</v-form>

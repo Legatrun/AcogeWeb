@@ -10,9 +10,9 @@ import helpers from '@/helper';
 export default class AdmTiposItemsComponent extends Vue {
 	private headers: any[] = [
 		//{ text: 'IDTipoItem', align: 'left', sortable: true, value: 'idtipoitem', width: '15%' },
-		{ text: 'descripcion', align: 'left', sortable: false, value: 'descripcion', width: '15%' },
-		{ text: 'sigla', align: 'left', sortable: false, value: 'sigla', width: '15%' },
-		{ text: 'ingresainventario', align: 'left', sortable: false, value: 'ingresainventario', width: '15%' },
+		{ text: 'Descripcion', align: 'left', sortable: false, value: 'descripcion', width: '15%' },
+		{ text: 'Sigla', align: 'left', sortable: false, value: 'sigla', width: '15%' },
+		{ text: 'Inventario Ingresado', align: 'left', sortable: false, value: 'ingresainventario', width: '15%' },
 		{ text: 'Operaciones', align: 'left', sortable: false, value: 'action', width: '20%' },
 	];
 	private WebApi = new services.Endpoints();
@@ -25,10 +25,18 @@ export default class AdmTiposItemsComponent extends Vue {
 	private helper: helpers = new helpers();
 	private popup = new popup.Swal();
 	private activo = false;
-	validacion = [
+
+	validacionDescri = [
 		(v: any) => !!v || 'El campo es requerido',
-    (v: any) => !/^\s*$/.test(v) || 'No se permite espacios vacios',
-  ];
+		(v:any) => (v && v.length<=50) || "No se permite mas de  50 caracteres",
+		(v:any) => (/^[0-9 A-Z-/]*$/.test(v)) || "No se permiten  carcteres especiales"
+	];
+	validacionSigla = [
+		(v: any) => !!v || 'El campo es requerido',
+		(v:any) => (/^[0-9 A-Z-]*$/.test(v)) || "No se permiten  carcteres especiales",
+		(v:any) => (v && v.length<=5) || "No se permite mas de  5 caracteres",
+
+	];
 	private FormatDate(data: any) {
 		return moment(data).format('YYYY-MM-DD');
 	}

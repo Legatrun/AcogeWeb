@@ -115,7 +115,7 @@ export default class Admtipo_descuentoComponent extends Vue {
 	private Eliminar(data: services.clase_tipo_descuento): void {
 		swal.fire({
 			title: 'Esta seguro de esta operacion?',
-			text: 'Eliminacion de Registro' + data.tipo_descuento,
+			text: 'Eliminacion de Registro ' + data.nombre,
 			type: 'warning',
 			showCancelButton: true,
 			confirmButtonColor: 'green',

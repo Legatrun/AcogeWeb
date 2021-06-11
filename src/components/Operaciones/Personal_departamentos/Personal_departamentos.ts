@@ -27,7 +27,7 @@ export default class AdmPersonal_departamentosComponent extends Vue {
 	private operacion = '';
 	private helper: helpers = new helpers();
 	private popup = new popup.Swal();
-	private activa = false;
+	private activa = false;	
 	coddepartamento=[
 		(v:any) => !!v || "El campo es requiredo",
 		(v:any) => (/^[0-9]*$/.test(v)) || "No se permite letras  caracteres especiales",
@@ -38,7 +38,6 @@ export default class AdmPersonal_departamentosComponent extends Vue {
 	];
 	ruleValida = [
 		(v: any) => !!v || 'El campo es requerido',
-		(v: any) => !/^\s*$/.test(v) || 'No se permite espacios vacios',
 	];
 	private FormatDate(data: any) {
 		return moment(data).format('YYYY-MM-DD');
@@ -59,6 +58,7 @@ export default class AdmPersonal_departamentosComponent extends Vue {
 	}
 	private mounted() {
 		this.cargar_data();
+		this.cargarEmpresa();
 	}
 	private cargar_data() {
 		if (this.$store.state.auth !== true) {​​​​
@@ -75,7 +75,7 @@ export default class AdmPersonal_departamentosComponent extends Vue {
 			}).catch((error) => {
 					this.popup.error('Consultar', 'Error Inesperado: ' + error);
 			});
-		this.cargarEmpresa();
+		///this.cargarEmpresa();
 	}
 	private cargarEmpresa(){
 		new services.Operaciones().Consultar(this.WebApi.ws_empresa_Consultar)
@@ -142,10 +142,10 @@ export default class AdmPersonal_departamentosComponent extends Vue {
 	private Eliminar(data: services.clase_personal_departamentos): void {
 		swal.fire({
 			title: 'Esta seguro de esta operacion?',
-			text: 'Eliminacion de Registro' + data.personal_departamento,
+			text: 'Eliminacion de Registro ' +  data.nombre,
 			type: 'warning',
 			showCancelButton: true,
-			confirmButtonColor: 'green',
+			confirmButtonColor: 'green', 
 			cancelButtonColor: 'red',
 			cancelButtonText: 'Cancelar',
 			confirmButtonText: 'Eliminar!',

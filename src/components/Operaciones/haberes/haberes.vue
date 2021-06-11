@@ -117,7 +117,7 @@
 											required
 											:rules="HaberEvento"
 											counter
-											maxlength="3"
+											maxlength="2"
 											@input="haberes.eventual = updateText(haberes.eventual)">
 								</v-text-field>
 							</v-flex>

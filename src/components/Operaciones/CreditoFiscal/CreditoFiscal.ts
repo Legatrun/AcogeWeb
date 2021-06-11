@@ -10,12 +10,23 @@ import helpers from '@/helper';
 export default class AdmCreditoFiscalComponent extends Vue {
 	private headers: any[] = [
 		//{ text: 'Empleado', align: 'left', sortable: true, value: 'empleado', width: '15%' },
-		{ text: 'Mes', align: 'left', sortable: true, value: 'mes', width: '15%' },
-		{ text: 'Año', align: 'left', sortable: true, value: 'año', width: '15%' },
-		{ text: 'Declarado', align: 'left', sortable: false, value: 'declarado', width: '15%' },
-		{ text: 'Actualizacion', align: 'left', sortable: false, value: 'actualizacion', width: '15%' },
-		{ text: 'Saldo', align: 'left', sortable: false, value: 'saldo', width: '15%' },
+		{ text: 'Empleado', align: 'left', sortable: true, value: 'mes', width: '15%' },
+		{ text: 'Paterno', align: 'left', sortable: true, value: 'año', width: '15%' },
+		{ text: 'Materno', align: 'left', sortable: false, value: 'declarado', width: '15%' },
+		{ text: 'Nombres', align: 'left', sortable: false, value: 'actualizacion', width: '15%' },
+		{ text: 'Saldo Mes ', align: 'left', sortable: false, value: 'saldo', width: '15%' },
+		{ text: 'Saldo Anterior ', align: 'left', sortable: false, value: 'saldo', width: '15%' },
 		{ text: 'Operaciones', align: 'center', sortable: false, value: 'action', width: '20%' },
+	];
+	private headersdos: any[] = [
+		//{ text: 'Empleado', align: 'left', sortable: true, value: 'empleado', width: '15%' },
+		{ text: 'Correlativo', align: 'left', sortable: true,  width: '15%' },
+		{ text: 'Total Prestamo', align: 'left', sortable: true,  width: '15%' },
+		{ text: 'Fecha', align: 'left', sortable: false,   width: '15%' },
+		{ text: 'Empleado', align: 'left', sortable: false , width: '15%' },
+		{ text: 'Saldo Mes ', align: 'left', sortable: false,  width: '15%' },
+		{ text: 'Nombre ', align: 'left', sortable: false,  width: '15%' },
+		{ text: 'Paterno', align: 'center', sortable: false,  width: '20%' },
 	];
 	private WebApi = new services.Endpoints();
 

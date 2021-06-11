@@ -10,20 +10,20 @@ import helpers from '@/helper';
 export default class AdmProveedoresComponent extends Vue {
 	private headers: any[] = [
 		{ text: 'CodigoProveedor', align: 'left', sortable: true, value: 'codigoproveedor', width: '5%' },
-		{ text: 'iddocumentoidentidad', align: 'left', sortable: false, value: 'iddocumentoidentidad', width: '5%' },
-		{ text: 'numerodocumento', align: 'left', sortable: false, value: 'numerodocumento', width: '5%' },
-		{ text: 'razonsocial', align: 'left', sortable: false, value: 'razonsocial', width: '5%' },
-		{ text: 'direccion', align: 'left', sortable: false, value: 'direccion', width: '5%' },
-		{ text: 'idpais', align: 'left', sortable: false, value: 'idpais', width: '5%' },
-		{ text: 'idciudad', align: 'left', sortable: false, value: 'idciudad', width: '5%' },
-		{ text: 'idmoneda', align: 'left', sortable: false, value: 'idmoneda', width: '5%' },
-		{ text: 'contacto', align: 'left', sortable: false, value: 'contacto', width: '5%' },
-		{ text: 'telefonos', align: 'left', sortable: false, value: 'telefonos', width: '5%' },
-		{ text: 'fax', align: 'left', sortable: false, value: 'fax', width: '5%' },
-		{ text: 'cuenta', align: 'left', sortable: false, value: 'cuenta', width: '5%' },
-		{ text: 'idtipoproveedor', align: 'left', sortable: false, value: 'idtipoproveedor', width: '5%' },
-		{ text: 'fechacreacion', align: 'left', sortable: false, value: 'fechacreacion', width: '5%' },
-		{ text: 'codaduana', align: 'left', sortable: false, value: 'codaduana', width: '5%' },
+		{ text: 'Documento Identidad', align: 'left', sortable: false, value: 'iddocumentoidentidad', width: '5%' },
+		{ text: 'Numero Documento', align: 'left', sortable: false, value: 'numerodocumento', width: '5%' },
+		{ text: 'Razon Social', align: 'left', sortable: false, value: 'razonsocial', width: '5%' },
+		{ text: 'Direccion', align: 'left', sortable: false, value: 'direccion', width: '5%' },
+		{ text: 'Pais', align: 'left', sortable: false, value: 'idpais', width: '5%' },
+		{ text: 'Ciudad', align: 'left', sortable: false, value: 'idciudad', width: '5%' },
+		{ text: 'Moneda', align: 'left', sortable: false, value: 'idmoneda', width: '5%' },
+		{ text: 'Contacto', align: 'left', sortable: false, value: 'contacto', width: '5%' },
+		{ text: 'Telefonos', align: 'left', sortable: false, value: 'telefonos', width: '5%' },
+		{ text: 'Fax', align: 'left', sortable: false, value: 'fax', width: '5%' },
+		{ text: 'Cuenta', align: 'left', sortable: false, value: 'cuenta', width: '5%' },
+		{ text: 'Tipo Proveedor', align: 'left', sortable: false, value: 'idtipoproveedor', width: '5%' },
+		{ text: 'Fecha Creacion', align: 'left', sortable: false, value: 'fechacreacion', width: '5%' },
+		{ text: 'Aduana', align: 'left', sortable: false, value: 'codaduana', width: '5%' },
 		{ text: 'Operaciones', align: 'left', sortable: false, value: 'action', width: '10%' },
 	];
 	// tslint:disable-next-line: variable-name
@@ -48,22 +48,40 @@ export default class AdmProveedoresComponent extends Vue {
 	private helper: helpers = new helpers();
 	private popup = new popup.Swal();
 	private activo = false;
+	codProveedor = [
+		(v: any) => !!v || 'El campo es requerido',
+		(v:any) => (v && v.length<=10) || "No se permite mas de  10 caracteres",
+		(v: any) => (/^[0-9]*$/.test(v)) || 'No se permite espacios vacios ni caracteres especiales',
+
+	];
+	validaFax = [
+		(v: any) => !!v || 'El campo es requerido',
+		(v:any) => (v && v.length<=50) || "No se permite mas de  50 caracteres",
+		(v: any) => !/^\s*$/.test(v) || 'No se permite espacios vacios',
+
+	];
 	validacion = [
 		(v: any) => !!v || 'El campo es requerido',
-    (v: any) => !/^\s*$/.test(v) || 'No se permite espacios vacios',
-  ];
-  Codigorules = [
+       (v: any) => !/^\s*$/.test(v) || 'No se permite espacios vacios',
+    ];
+    Codigorules = [
 	(v: any) => !!v || 'El campo es requerido',
-	(v: any) => (/^[0-9]*$/.test(v)) || 'No se permite espacios vacios ni caracteres especiales',
+	(v: any) => (/^[0-9 ]*$/.test(v)) || 'No se permite espacios vacios ni caracteres especiales',
 	];
 	NumeroDocrules = [
 		(v: any) => !!v || 'El campo es requerido',
-		(v: any) => (/^[0-9,-]*$/.test(v)) || 'No se permite espacios vacios ni caracteres especiales solo "-',
-		];
-		cuentasrules = [
+		(v:any) => (v && v.length<=20) || "No se permite mas de  20 caracteres",
+		(v: any) => (/^[0-9 ,-]*$/.test(v)) || 'No se permite espacios vacios ni caracteres especiales solo "-',
+	];
+	cuentasrules = [
 			(v: any) => !!v || 'El campo es requerido',
-			(v: any) => (/^[0-9,-]*$/.test(v)) || 'No se permite espacios vacios ni caracteres especiales solo "-" ',
-			];
+			(v:any) => (v && v.length<=20) || "No se permite mas de  20 caracteres",
+			(v: any) => (/^[0-9 ,-]*$/.test(v)) || 'No se permite espacios vacios ni caracteres especiales solo "-" ',
+	];
+	CodAduana = [
+		(v: any) => !!v || 'El campo es requerido',
+		(v:any) => (v && v.length<=3) || "No se permite mas de  3 caracteres",
+	];
 	private FormatDate(data: any) {
 		return moment(data).format('YYYY-MM-DD');
 	}
@@ -217,6 +235,7 @@ export default class AdmProveedoresComponent extends Vue {
 					 this.lstproveedorescargar= resProveedores.data._data;
 					 this.proveedores = this.lstproveedorescargar[0];
 				 }).catch((err) => {   
+
 				});
 		this.operacion = 'Update';
 		this.dialog = true;

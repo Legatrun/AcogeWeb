@@ -10,7 +10,7 @@ import helpers from '@/helper';
 export default class AdmTiposProveedorComponent extends Vue {
 	private headers: any[] = [
 		//{ text: 'IDTipoProveedor', align: 'left', sortable: true, value: 'idtipoproveedor', width: '15%' },
-		{ text: 'descripcion', align: 'left', sortable: false, value: 'descripcion', width: '15%' },
+		{ text: 'Descripcion', align: 'left', sortable: false, value: 'descripcion', width: '15%' },
 		{ text: 'Operaciones', align: 'left', sortable: false, value: 'action', width: '20%' },
 	];
 	private WebApi = new services.Endpoints();
@@ -25,8 +25,9 @@ export default class AdmTiposProveedorComponent extends Vue {
 	private activo = false;
 	validacion = [
 		(v: any) => !!v || 'El campo es requerido',
-    (v: any) => !/^\s*$/.test(v) || 'No se permite espacios vacios',
-  ];
+		(v:any) => (v && v.length<=20) || "No se permite mas de  20 caracteres",
+		(v: any) => !/^\s*$/.test(v) || 'No se permite espacios vacios',
+       ];
 	private FormatDate(data: any) {
 		return moment(data).format('YYYY-MM-DD');
 	}
