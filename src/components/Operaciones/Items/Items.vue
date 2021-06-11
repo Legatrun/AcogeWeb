@@ -88,7 +88,7 @@
 												clearable
 												persistent-hint
 												required
-												:rules="validacion"
+												:rules="valiCod"
 												@input="items.codigoitem = updateText(items.codigoitem)">
 									</v-text-field>
 								</v-flex>
@@ -111,7 +111,7 @@
 											clearable
 											persistent-hint
 											required
-											:rules="validacion"
+											:rules="valiCod"
 											@input="items.modelonroparte = updateText(items.modelonroparte)">
 								</v-text-field>
 							</v-flex>
@@ -181,7 +181,7 @@
 											clearable
 											persistent-hint
 											required
-											:rules="validacion"
+											:rules="ValidMone"
 											@input="items.costoinicial = updateText(items.costoinicial)">
 								</v-text-field>
 							</v-flex>
@@ -193,7 +193,7 @@
 											clearable
 											persistent-hint
 											required
-											:rules="validacion"
+											:rules="ValidMone"
 											@input="items.costoactual = updateText(items.costoactual)">
 								</v-text-field>
 							</v-flex>
@@ -205,7 +205,8 @@
 											clearable
 											persistent-hint
 											required
-											:rules="validacion"
+											maxlength="10"
+											:rules="ValiCantidad"
 											@input="items.saldoinicial = updateText(items.saldoinicial)">
 								</v-text-field>
 							</v-flex>
@@ -217,7 +218,8 @@
 											clearable
 											persistent-hint
 											required
-											:rules="validacion"
+											maxlength="10"
+											:rules="ValiCantidad"
 											@input="items.saldoactual = updateText(items.saldoactual)">
 								</v-text-field>
 							</v-flex>
@@ -284,19 +286,21 @@
 											clearable
 											persistent-hint
 											required
-											:rules="validacion"
+										    maxlength="10"
+											:rules="ValiCantidad"
 											@input="items.cantidadminima = updateText(items.cantidadminima)">
 								</v-text-field>
 							</v-flex>
 							<v-flex sm6 style="padding: 5px">
 								<v-text-field v-model="items.cantidadmaxima"
-											label="CantidadMaxima"
+											label="Cantidad Maxima"
 											hint="Ingrese Cantidad Maxima"
 											placeholder="Cantidad Maxima"
 											clearable
 											persistent-hint
 											required
-											:rules="validacion"
+											maxlength="10"
+											:rules="ValiCantidad"
 											@input="items.cantidadmaxima = updateText(items.cantidadmaxima)">
 								</v-text-field>
 							</v-flex>

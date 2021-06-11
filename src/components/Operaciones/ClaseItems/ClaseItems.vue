@@ -116,7 +116,7 @@
 											clearable
 											persistent-hint
 											required
-											:rules="validacion"
+											:rules="siglarules"
 											@input="claseitems.sigla = updateText(claseitems.sigla)">
 								</v-text-field>
 							</v-flex>
@@ -137,7 +137,7 @@
 							<v-flex sm6 style="padding: 5px">
 								<v-text-field v-model="claseitems.cuentacosto"
 											label="CuentaCosto"
-											hint="Ingrese CuentaCosto"
+											hint="Ingrese Cuenta Costo"
 											placeholder="CuentaCosto"
 											clearable
 											persistent-hint
@@ -151,7 +151,7 @@
 							<v-flex sm6 style="padding: 5px">
 								<v-text-field v-model="claseitems.cuentagasto"
 											label="CuentaGasto"
-											hint="Ingrese CuentaGasto"
+											hint="Ingrese Cuenta Gasto"
 											placeholder="CuentaGasto"
 											clearable
 											persistent-hint
@@ -165,7 +165,7 @@
 							<v-flex sm6 style="padding: 5px">
 								<v-text-field v-model="claseitems.cuentainventario"
 											label="CuentaInventario"
-											hint="Ingrese CuentaInventario"
+											hint="Ingrese Cuenta Inventario"
 											placeholder="CuentaInventario"
 											clearable
 											persistent-hint

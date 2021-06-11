@@ -10,20 +10,20 @@ import helpers from '@/helper';
 export default class AdmItemsComponent extends Vue {
 	private headers: any[] = [
 		{ text: 'Codigo Item', align: 'left', sortable: true, value: 'codigoitem', width: '5%' },
-		{ text: 'modelo nro parte', align: 'left', sortable: false, value: 'modelonroparte', width: '5%' },
-		{ text: 'descripcion', align: 'left', sortable: false, value: 'descripcion', width: '5%' },
+		{ text: 'Modelo nro parte', align: 'left', sortable: false, value: 'modelonroparte', width: '5%' },
+		{ text: 'Descripcion', align: 'left', sortable: false, value: 'descripcion', width: '5%' },
 		//{ text: 'fechacreacion', align: 'left', sortable: false, value: 'fechacreacion', width: '10%' },
 		//{ text: 'fechaultimomovimiento', align: 'left', sortable: false, value: 'fechaultimomovimiento', width: '10%' },
 		// { text: 'costo inicial', align: 'left', sortable: false, value: 'costoinicial', width: '5%' },
 		// { text: 'costo actual', align: 'left', sortable: false, value: 'costoactual', width: '5%' },
 		// { text: 'saldo inicial', align: 'left', sortable: false, value: 'saldoinicial', width: '5%' },
 		// { text: 'saldo actual', align: 'left', sortable: false, value: 'saldoactual', width: '5%' },
-		{ text: 'clase', align: 'left', sortable: false, value: 'idclase', width: '5%' },
-		{ text: 'tipo item', align: 'left', sortable: false, value: 'idtipoitem', width: '5%' },
-		{ text: 'unidad manejo', align: 'left', sortable: false, value: 'idunidadmanejo', width: '5%' },
-		{ text: 'item sup', align: 'left', sortable: false, value: 'codigoitemsup', width: '5%' },
-		{ text: 'cantidadminima', align: 'left', sortable: false, value: 'cantidadminima', width: '5%' },
-		{ text: 'cantidadmaxima', align: 'left', sortable: false, value: 'cantidadmaxima', width: '5%' },
+		{ text: 'Clase', align: 'left', sortable: false, value: 'idclase', width: '5%' },
+		{ text: 'Tipo Item', align: 'left', sortable: false, value: 'idtipoitem', width: '5%' },
+		{ text: 'Unidad Manejo', align: 'left', sortable: false, value: 'idunidadmanejo', width: '5%' },
+		{ text: 'Item Sup', align: 'left', sortable: false, value: 'codigoitemsup', width: '5%' },
+		{ text: 'Cantidad Minima', align: 'left', sortable: false, value: 'cantidadminima', width: '5%' },
+		{ text: 'Cantidad Maxima', align: 'left', sortable: false, value: 'cantidadmaxima', width: '5%' },
 		{ text: 'Operaciones', align: 'left', sortable: false, value: 'action', width: '10%' },
 	];
 	// tslint:disable-next-line: variable-name
@@ -48,8 +48,22 @@ export default class AdmItemsComponent extends Vue {
 	private activo = false;
 	validacion = [
 		(v: any) => !!v || 'El campo es requerido',
-    (v: any) => !/^\s*$/.test(v) || 'No se permite espacios vacios',
-  ];
+        (v: any) => !/^\s*$/.test(v) || 'No se permite espacios vacios',
+    ];
+	valiCod = [
+		(v: any) => !!v || 'El campo es requerido',
+		(v:any) => (v && v.length<=30) || "No se permite mas de  30 caracteres",
+        (v: any) => !/^\s*$/.test(v) || 'No se permite espacios vacios',
+
+	];
+	ValiCantidad = [
+		(v: any) => !!v || 'El campo es requerido',
+		(v:any) => (/^[0-9]*$/.test(v)) || "No se permiten letras o carcteres especiales"
+	];
+	ValidMone = [
+		(v: any) => !!v || 'El campo es requerido',
+		(v:any) => (/^[0-9 .]*$/.test(v)) || "No se permiten letras o carcteres especiales"
+	];
 	private FormatDate(data: any) {
 		return moment(data).format('YYYY-MM-DD');
 	}
