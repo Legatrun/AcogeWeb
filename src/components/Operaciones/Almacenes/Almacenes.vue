@@ -27,7 +27,7 @@
 					<td>{{ props.item.descripcion }}</td>
 					<td>{{ props.item.idtipomovimientoformat }}</td>
 					<td>{{ props.item.idciudadFormat }}</td>
-					<td>{{ FormatBoolean(props.item.virtual) }}</td>
+					<td>{{FormatBoolean(props.item.virtual)  }}</td>
 					<td>
 						<v-tooltip bottom>
 							<template v-slot:activator="{ on }">
@@ -55,7 +55,7 @@
 					<template v-slot:activator="{ on }">
 						<v-btn color="gray" v-on="on" @click="newCiudad()">Adicionar Nueva ciudad</v-btn>
 					</template>
-					<span>Adicionar nuevo registro de cliente</span>
+					<span>Adicionar nuevo registro de ciudad</span>
 				</v-tooltip>
 			</template>
 			<template v-slot:no-data>
@@ -75,11 +75,11 @@
 					<v-card-text>
 						<v-layout wrap>
 							<template v-if="operacion == 'Insert'">
-								<v-flex sm12 style="padding: 5px">
+								<v-flex sm6 style="padding: 5px">
 									<v-text-field v-model="almacenes.codigoalmacen"
-												label="CodigoAlmacen"
-												hint="Ingrese CodigoAlmacen"
-												placeholder="CodigoAlmacen"
+												label="Codigo Almacen"
+												hint="Ingrese Codigo Almacen"
+												placeholder="Codigo Almacen"
 												clearable
 												persistent-hint
 												required
@@ -90,16 +90,16 @@
 								</v-flex>
 							</template>
 							<template v-else>
-								<v-flex sm12 style="padding: 5px">
+								<v-flex sm6 style="padding: 5px">
 									<v-text-field v-model="almacenes.codigoalmacen"
-												label="CodigoAlmacen"
-												placeholder="CodigoAlmacen"
+												label="Codigo Almacen"
+												placeholder="Codigo Almacen"
 												readonly
 												persistent-hint>
 									</v-text-field>
 								</v-flex>
 							</template>
-							<v-flex sm12 style="padding: 5px">
+							<v-flex sm6 style="padding: 5px">
 								<v-text-field v-model="almacenes.descripcion"
 											label="Descripcion"
 											hint="Ingrese Descripcion"
@@ -113,7 +113,7 @@
 								</v-text-field>
 							</v-flex>
 
-							<v-col cols="5" sm="4" class="pa-2">	
+							<v-flex sm6 style="padding: 5px">	
 										<v-autocomplete v-model="almacenes.idtipomovimiento"
 												:rules="validacion"
 												:items="lsttipomovimientoinventario"
@@ -125,9 +125,9 @@
 												color="#1A237E"
 												@input="almacenes.idtipomovimiento = updateText(almacenes.idtipomovimiento)">
 										</v-autocomplete>
-							</v-col>
+							</v-flex>
 
-							<v-col cols="5" sm="4" class="pa-2">	
+							<v-flex sm6 style="padding: 5px">	
 										<v-autocomplete v-model="almacenes.idciudad"
 												:rules="validacion"
 												:items="lstciudades"
@@ -139,9 +139,16 @@
 												color="#1A237E"
 												@input="almacenes.idciudad = updateText(almacenes.idciudad)">
 										</v-autocomplete>
-							</v-col>
+							</v-flex>
+								<v-flex sm12 style="padding: 5px">
+								<h4 class="mb-0 ">Virtual:</h4>
+								<v-switch v-model="almacenes.virtual"
+									color="success"
+                                    :label="`Estado: ${almacenes.virtual ? 'Si' : 'No Virtual'}`"
+									></v-switch>
+							</v-flex>
+
 						
-							<p class="text-sm-left"><b>Virtual: </b></p> <v-switch  v-model="almacenes.virtual" color="custom"  :label="`Estado: ${almacenes.virtual ? 'Virtual' : 'No Virtual'}`"> </v-switch>
 						</v-layout>
 					</v-card-text>
 				</v-form>

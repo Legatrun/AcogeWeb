@@ -1,7 +1,7 @@
 <template>
 	<v-card>
 		<v-toolbar color="primary" style="color:white">
-			<v-toolbar-title>Datos de AsientosDetalle</v-toolbar-title>
+			<v-toolbar-title>Datos de Asientos Detalle</v-toolbar-title>
 			<v-divider></v-divider>
 			<v-text-field v-model="buscarasientosdetalle"
 					append-icon="search"

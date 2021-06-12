@@ -35,6 +35,12 @@ export default class AdmCiudadesComponent extends Vue {
 		(v: any) => !!v || 'El campo es requerido',
     	(v: any) => !/^\s*$/.test(v) || 'No se permiten espacios vacios',
   ];
+  valiaSigla = [
+	(v: any) => !!v || 'El campo es requerido',
+	(v:any) => (v && v.length<=5) || "No se permite mas de  5 caracteres",
+	(v: any) => !/^\s*$/.test(v) || 'No se permite espacios vacios',
+
+];
 	private FormatDate(data: any) {
 		return moment(data).format('YYYY-MM-DD');
 	}

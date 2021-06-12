@@ -133,7 +133,7 @@
 											clearable
 											persistent-hint
 											required
-											:rules="validacion"
+											:rules="valiaSigla"
 											@input="ciudades.sigla = updateText(ciudades.sigla)">
 								</v-text-field>
 							</v-flex>

@@ -10,8 +10,8 @@ import helpers from '@/helper';
 export default class AdmAlmacenesComponent extends Vue {
 	private headers: any[] = [
 		{ text: 'Descripcion', align: 'left', sortable: false, value: 'descripcion', width: '15%' },
-		{ text: 'IDTipoMovimiento', align: 'left', sortable: false, value: 'idtipomovimientoformat', width: '15%' },
-		{ text: 'IDCiudad', align: 'left', sortable: false, value: 'idciudadFormat', width: '15%' },
+		{ text: 'Tipo de Movimiento', align: 'left', sortable: false, value: 'idtipomovimientoformat', width: '15%' },
+		{ text: 'Ciudad', align: 'left', sortable: false, value: 'idciudadFormat', width: '15%' },
 		{ text: 'Virtual', align: 'left', sortable: false, value: 'virtual', width: '15%' },
 		{ text: 'Operaciones', align: 'center', sortable: false, value: 'action', width: '20%' },
 	];
@@ -30,6 +30,8 @@ export default class AdmAlmacenesComponent extends Vue {
 	private helper: helpers = new helpers();
 	private popup = new popup.Swal();
 	private activo = false;
+
+
 	validacion = [
 		(v: any) => !!v || 'El campo es requerido',
     (v: any) => !/^\s*$/.test(v) || 'No se permite espacios vacios',
@@ -56,6 +58,8 @@ export default class AdmAlmacenesComponent extends Vue {
 	}
 	private mounted() {
 		this.cargar_data();
+		this.cargarTipoMovimientoInventario();
+		this.cargarCiudades();
 	}
 	private cargar_data() {
 		if (this.$store.state.auth !== true) {​​​​
@@ -65,6 +69,7 @@ export default class AdmAlmacenesComponent extends Vue {
 			.then((resalmacenes) => {
 				if (resalmacenes.data._error.error === 0) {
 					this.lstalmacenes = resalmacenes.data._data;
+					
 					this.dialog = false;
 					console.log(this.lstalmacenes)
 				} else {
@@ -73,8 +78,7 @@ export default class AdmAlmacenesComponent extends Vue {
 			}).catch((error) => {
 					this.popup.error('Consultar', 'Error Inesperado: ' + error);
 			});
-			this.cargarTipoMovimientoInventario();
-			this.cargarCiudades();
+			
 	}
 	private cargarTipoMovimientoInventario(){
 		new services.Operaciones().Consultar(this.WebApi.ws_tipomovimientoinventario_Consultar)
