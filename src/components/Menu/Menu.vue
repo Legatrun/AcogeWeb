@@ -452,9 +452,7 @@
           </v-list-item>
         </v-list-group>
       </v-list-group>
-    </v-list>   
-
-
+    </v-list> 
 
 <!-- >Tesoreria -->
        <v-list-group
@@ -524,79 +522,6 @@
         </v-list-group>
       </v-list-group>
     </v-list>   
-
-
-
-    <!-- >Tesoreria -->
-       <v-list-group
-        :value="true"
-        prepend-icon="mdi-account-circle"
-      >
-        <template v-slot:activator>
-          <v-list-item-title>Tesoreria</v-list-item-title>
-        </template>
-        <v-list-group
-          :value="true"
-          no-action
-          sub-group
-        >
-          <template v-slot:activator>
-            <v-list-item-content>
-              <v-list-item-title>Administracion</v-list-item-title>
-            </v-list-item-content>
-          </template>
-          <v-list-item v-for="subItem in menuListaParametros" :key="subItem.title" :to="subItem.path" no-action>
-              <v-list-item-content>
-                  <v-list-item-title  v-text="subItem.title"></v-list-item-title>
-              </v-list-item-content>
-          </v-list-item>
-               
-        </v-list-group>
-        <v-list-group
-          no-action
-          sub-group
-        >
-        <template v-slot:activator>
-            <v-list-item-content>
-              <v-list-item-title>Transacciones</v-list-item-title>
-            </v-list-item-content>
-          </template>
-          <v-list-item
-            v-for="([title, icon], i) in cruds"
-            :key="i"
-            link
-          >
-            <v-list-item-title v-text="title"></v-list-item-title>
-            <v-list-item-icon>
-              <v-icon v-text="icon"></v-icon>
-            </v-list-item-icon>
-          </v-list-item>
-        </v-list-group>
-
-        <v-list-group
-          no-action
-          sub-group
-        >
-        <template v-slot:activator>
-            <v-list-item-content>
-              <v-list-item-title>Reportes</v-list-item-title>
-            </v-list-item-content>
-          </template>
-          <v-list-item
-            v-for="([title, icon], i) in cruds"
-            :key="i"
-            link
-          >
-            <v-list-item-title v-text="title"></v-list-item-title>
-            <v-list-item-icon>
-              <v-icon v-text="icon"></v-icon>
-            </v-list-item-icon>
-          </v-list-item>
-        </v-list-group>
-      </v-list-group>
-    </v-list>   
-
-
 
 
 
