@@ -1,7 +1,7 @@
 <template>
 	<v-card>
 		<v-toolbar color="primary" style="color:white">
-			<v-toolbar-title>Datos de TipodePagos</v-toolbar-title>
+			<v-toolbar-title>Datos de Tipo de Pagos</v-toolbar-title>
 			<v-divider></v-divider>
 			<v-text-field v-model="buscartipodepagos"
 					append-icon="search"
@@ -46,7 +46,7 @@
 			<template v-slot:top>
 				<v-tooltip bottom>
 					<template v-slot:activator="{ on }">
-						<v-btn color="accent" v-on="on" @click="Insertar()">Adicionar Nuevo Registro de TipodePagos</v-btn>
+						<v-btn color="accent" v-on="on" @click="Insertar()">Adicionar Nuevo Registro de Tipo de Pagos</v-btn>
 					</template>
 					<span>Adicionar nuevo registro de Tipo de Pago</span>
 				</v-tooltip>
@@ -60,7 +60,7 @@
 		<v-dialog v-model="dialog" persistent max-width="50%">
 			<v-card>
 				<v-toolbar style="padding:10px" dark class="primary">
-					<v-toolbar-title>Datos de TipodePagos</v-toolbar-title>
+					<v-toolbar-title>Datos de Tipo de Pagos</v-toolbar-title>
 				</v-toolbar>
 				<v-divider></v-divider>
 				<v-form ref="form" style="padding:10px" v-model="activo">
@@ -80,6 +80,7 @@
 											clearable
 											persistent-hint
 											required
+											maxlength="50"
 											:rules="validacion"
 											@input="tipodepagos.descripcion = updateText(tipodepagos.descripcion)">
 								</v-text-field>
