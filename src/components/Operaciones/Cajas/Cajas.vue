@@ -12,7 +12,7 @@
 		</v-toolbar>
 		<v-data-table 	style="padding: 5px"
 						:headers="headers" 
-						:items="lstcajas" 
+						:items="lstcajasformateados" 
 						:items-per-page="30"
 						:search = "buscarcajas" 
 						:footer-props="{
@@ -25,7 +25,7 @@
 			<template slot="item" slot-scope="props">
 				<tr>
 					<!--<td>{{ helper.showDataDescription(props.item.idcaja,lstCajas, id, descripcion)  }}</td>// Ejemplo de Uso de Helper Para obtener la Descripcion de una Tabla por medio de su Id-->
-					<td>{{ props.item.idcaja }}</td>
+					<!-- <td>{{ props.item.idcaja }}</td> -->
 					<td>{{ props.item.descripcion }}</td>
 					<td>{{ props.item.cuenta }}</td>
 					<td>{{ props.item.monto }}</td>
@@ -35,13 +35,13 @@
 							<template v-slot:activator="{ on }">
 								<v-btn color="success" v-on="on" fab small dark  @click="Actualizar(props.item)"><v-icon>edit</v-icon></v-btn>
 							</template>
-							<span>Modificar Registro de Demo</span>
+							<span>Modificar Registro de Caja</span>
 						</v-tooltip>
 						<v-tooltip style="padding-left:10px" bottom>
 							<template v-slot:activator="{ on }" >
 								<v-btn color="error" v-on="on" fab small dark  @click="Eliminar(props.item)"><v-icon>delete</v-icon></v-btn>
 							</template>
-							<span>Eliminar Registro de Demo</span>
+							<span>Eliminar Registro de Caja</span>
 						</v-tooltip>
 					</td>
 				</tr>
@@ -49,9 +49,15 @@
 			<template v-slot:top>
 				<v-tooltip bottom>
 					<template v-slot:activator="{ on }">
-						<v-btn color="accent" v-on="on" @click="Insertar()">Adicionar Nuevo Registro de Cajas</v-btn>
+						<v-btn color="gray" v-on="on" @click="Insertar()">Adicionar Nuevo Registro de Cajas</v-btn>
 					</template>
-					<span>Adicionar nuevo registro de cliente</span>
+					<span>Adicionar nuevo registro de Caja</span>
+				</v-tooltip>
+				<v-tooltip bottom>
+					<template v-slot:activator="{ on }">
+						<v-btn color="gray" v-on="on" @click="newMoneda()">Adicionar Nuevo Registro Monedas</v-btn>
+					</template>
+					<span>Adicionar nuevo registro de Moneda</span>
 				</v-tooltip>
 			</template>
 			<template v-slot:no-data>
@@ -66,11 +72,11 @@
 					<v-toolbar-title>Datos de Cajas</v-toolbar-title>
 				</v-toolbar>
 				<v-divider></v-divider>
-				<v-form ref="form" style="padding:10px">
+				<v-form ref="form" style="padding:10px" v-model="activo">
 					<v-card-text>
 						<v-layout wrap>
 							<template v-if="operacion == 'Insert'">
-								<v-flex sm12 style="padding: 5px">
+								<!--<v-flex sm12 style="padding: 5px">
 									<v-text-field v-model="cajas.idcaja"
 												label="IDCaja"
 												hint="Ingrese IDCaja"
@@ -78,21 +84,22 @@
 												clearable
 												persistent-hint
 												required
+												:rules="validacion"
 												@input="cajas.idcaja = updateText(cajas.idcaja)">
 									</v-text-field>
-								</v-flex>
+								</v-flex>-->
 							</template>
 							<template v-else>
-								<v-flex sm12 style="padding: 5px">
+							<!--	<v-flex sm12 style="padding: 5px">
 									<v-text-field v-model="cajas.idcaja"
 												label="IDCaja"
 												placeholder="IDCaja"
 												readonly
 												persistent-hint>
 									</v-text-field>
-								</v-flex>
+								</v-flex>-->
 							</template>
-							<v-flex sm12 style="padding: 5px">
+							<v-flex sm6 style="padding: 5px">
 								<v-text-field v-model="cajas.descripcion"
 											label="Descripcion"
 											hint="Ingrese Descripcion"
@@ -100,10 +107,11 @@
 											clearable
 											persistent-hint
 											required
+											:rules="validacion"
 											@input="cajas.descripcion = updateText(cajas.descripcion)">
 								</v-text-field>
 							</v-flex>
-							<v-flex sm12 style="padding: 5px">
+							<v-flex sm6 style="padding: 5px">
 								<v-text-field v-model="cajas.cuenta"
 											label="Cuenta"
 											hint="Ingrese Cuenta"
@@ -111,10 +119,11 @@
 											clearable
 											persistent-hint
 											required
+											:rules="validacion"
 											@input="cajas.cuenta = updateText(cajas.cuenta)">
 								</v-text-field>
 							</v-flex>
-							<v-flex sm12 style="padding: 5px">
+							<v-flex sm6 style="padding: 5px">
 								<v-text-field v-model="cajas.monto"
 											label="Monto"
 											hint="Ingrese Monto"
@@ -122,26 +131,32 @@
 											clearable
 											persistent-hint
 											required
+											maxlength="10"
+											counter
+											:rules="MontosRules"
 											@input="cajas.monto = updateText(cajas.monto)">
 								</v-text-field>
 							</v-flex>
-							<v-flex sm12 style="padding: 5px">
-								<v-text-field v-model="cajas.idmoneda"
-											label="IDMoneda"
-											hint="Ingrese IDMoneda"
-											placeholder="IDMoneda"
-											clearable
-											persistent-hint
-											required
-											@input="cajas.idmoneda = updateText(cajas.idmoneda)">
-								</v-text-field>
-							</v-flex>
+							<v-col cols="5" sm="4" class="pa-2">
+								<v-autocomplete
+								v-model="cajas.idmoneda"
+								label="Moneda"
+								:items="lstmonedas"
+								item-text="descripcion"
+								item-value="idmoneda"
+								:rules="validacion"
+								outlined
+								autocomplete="off"
+								color="#1A237E"
+								
+								></v-autocomplete>
+							</v-col>
 						</v-layout>
 					</v-card-text>
 				</v-form>
 				<v-divider></v-divider>
 				<v-card-actions style="justify-content: center;padding:10px">
-					<v-btn color="success" dark style="width: 50%" @click="Grabar()">Grabar</v-btn>
+					<v-btn color="success" dark style="width: 50%" :disabled="!activo" @click="Grabar()">Grabar</v-btn>
 					<v-btn color="error" dark style="width: 50%" @click="Cancelar()">Cancelar</v-btn>
 				</v-card-actions>
 			</v-card>

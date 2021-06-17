@@ -9,15 +9,15 @@ import helpers from '@/helper';
 @Component
 export default class AdmClaseItemsComponent extends Vue {
 	private headers: any[] = [
-		{ text: 'IDClase', align: 'left', sortable: true, value: 'idclase', width: '15%' },
-		{ text: 'descripcion', align: 'left', sortable: false, value: 'descripcion', width: '15%' },
-		{ text: 'sigla', align: 'left', sortable: false, value: 'sigla', width: '15%' },
-		{ text: 'cuentaventa', align: 'left', sortable: false, value: 'cuentaventa', width: '15%' },
-		{ text: 'cuentacosto', align: 'left', sortable: false, value: 'cuentacosto', width: '15%' },
-		{ text: 'cuentagasto', align: 'left', sortable: false, value: 'cuentagasto', width: '15%' },
-		{ text: 'cuentainventario', align: 'left', sortable: false, value: 'cuentainventario', width: '15%' },
-		{ text: 'ingresainventario', align: 'left', sortable: false, value: 'ingresainventario', width: '15%' },
-		{ text: 'Operaciones', align: 'center', sortable: false, value: 'action', width: '20%' },
+		//{ text: 'IDClase', align: 'left', sortable: true, value: 'idclase', width: '10%' },
+		{ text: 'Descripcion', align: 'left', sortable: false, value: 'descripcion', width: '10%' },
+		{ text: 'Sigla', align: 'left', sortable: false, value: 'sigla', width: '10%' },
+		{ text: 'Cuenta Venta', align: 'left', sortable: false, value: 'cuentaventa', width: '10%' },
+		{ text: 'Cuenta Costo', align: 'left', sortable: false, value: 'cuentacosto', width: '10%' },
+		{ text: 'Cuenta Gasto', align: 'left', sortable: false, value: 'cuentagasto', width: '10%' },
+		{ text: 'Cuenta Inventario', align: 'left', sortable: false, value: 'cuentainventario', width: '10%' },
+		{ text: 'Inventario Igresado', align: 'left', sortable: false, value: 'ingresainventario', width: '10%' },
+		{ text: 'Operaciones', align: 'left', sortable: false, value: 'action', width: '10%' },
 	];
 	private WebApi = new services.Endpoints();
 
@@ -28,6 +28,23 @@ export default class AdmClaseItemsComponent extends Vue {
 	private operacion = '';
 	private helper: helpers = new helpers();
 	private popup = new popup.Swal();
+	private activo = false;
+	validacion = [
+		(v: any) => !!v || 'El campo es requerido',
+    (v: any) => !/^\s*$/.test(v) || 'No se permite espacios vacios',
+  ];
+   CuentasRules = [
+	(v: any) => !!v || "El campo es requerido",
+	(v:any) => (v && v.length<=20) || "No se permite mas de  20 caracteres",
+	(v: any) => (/^[0-9 ,-]*$/.test(v)) || "El campo sólo permite números y '-' como caracter especial",
+  ]; 
+
+   siglarules = [
+
+	(v: any) => !!v || 'El campo es requerido',
+	(v:any) => (v && v.length<=5) || "No se permite mas de  5 caracteres",
+	(v: any) => (/^[a-zA-Z 0-9,-]*$/.test(v)) || 'No se permite espacios vacios ni caracteres especiales',
+	];
 	private FormatDate(data: any) {
 		return moment(data).format('YYYY-MM-DD');
 	}
@@ -115,7 +132,7 @@ export default class AdmClaseItemsComponent extends Vue {
 	private Eliminar(data: services.clase_claseitems): void {
 		swal.fire({
 			title: 'Esta seguro de esta operacion?',
-			text: 'Eliminacion de Registro' + data.idclase,
+			text: 'Eliminacion de Registro ' + data.descripcion,
 			type: 'warning',
 			showCancelButton: true,
 			confirmButtonColor: 'green',

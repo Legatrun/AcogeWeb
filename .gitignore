@@ -1,6 +1,17 @@
+# Don't track content of these folders
+
+public/
+
+node_modules/
+
+tslint.zip
+tslint.json
+
+
 .DS_Store
 node_modules
 /dist
+/proyecto
 
 # local env files
 .env.local

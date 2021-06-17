@@ -1,5 +1,5 @@
 <template>
-	<v-card>
+	<v-card width='100%' >
 		<v-toolbar color="primary" style="color:white">
 			<v-toolbar-title>Datos de Proveedores</v-toolbar-title>
 			<v-divider></v-divider>
@@ -12,7 +12,7 @@
 		</v-toolbar>
 		<v-data-table 	style="padding: 5px"
 						:headers="headers" 
-						:items="lstproveedores" 
+						:items="lstproveedoresformateados" 
 						:items-per-page="30"
 						:search = "buscarproveedores" 
 						:footer-props="{
@@ -45,13 +45,13 @@
 							<template v-slot:activator="{ on }">
 								<v-btn color="success" v-on="on" fab small dark  @click="Actualizar(props.item)"><v-icon>edit</v-icon></v-btn>
 							</template>
-							<span>Modificar Registro de Demo</span>
+							<span>Modificar Registro de Proveedor</span>
 						</v-tooltip>
 						<v-tooltip style="padding-left:10px" bottom>
 							<template v-slot:activator="{ on }" >
 								<v-btn color="error" v-on="on" fab small dark  @click="Eliminar(props.item)"><v-icon>delete</v-icon></v-btn>
 							</template>
-							<span>Eliminar Registro de Demo</span>
+							<span>Eliminar Registro de Proveedor</span>
 						</v-tooltip>
 					</td>
 				</tr>
@@ -59,9 +59,9 @@
 			<template v-slot:top>
 				<v-tooltip bottom>
 					<template v-slot:activator="{ on }">
-						<v-btn color="accent" v-on="on" @click="Insertar()">Adicionar Nuevo Registro de Proveedores</v-btn>
+						<v-btn color="gray" v-on="on" @click="Insertar()">Adicionar Nuevo Registro de Proveedores</v-btn>
 					</template>
-					<span>Adicionar nuevo registro de cliente</span>
+					<span>Adicionar nuevo registro de Proveedor</span>
 				</v-tooltip>
 			</template>
 			<template v-slot:no-data>
@@ -76,62 +76,69 @@
 					<v-toolbar-title>Datos de Proveedores</v-toolbar-title>
 				</v-toolbar>
 				<v-divider></v-divider>
-				<v-form ref="form" style="padding:10px">
+				<v-form ref="form" style="padding:10px" v-model="activo">
 					<v-card-text>
 						<v-layout wrap>
 							<template v-if="operacion == 'Insert'">
-								<v-flex sm12 style="padding: 5px">
+								<v-flex sm6 style="padding: 5px">
 									<v-text-field v-model="proveedores.codigoproveedor"
-												label="CodigoProveedor"
-												hint="Ingrese CodigoProveedor"
-												placeholder="CodigoProveedor"
+												label="Codigo de Proveedor"
+												hint="Ingrese Codigo de Proveedor"
+												placeholder="Codigo de Proveedor"
 												clearable
 												persistent-hint
 												required
+												:rules="codProveedor"
 												@input="proveedores.codigoproveedor = updateText(proveedores.codigoproveedor)">
 									</v-text-field>
 								</v-flex>
 							</template>
 							<template v-else>
-								<v-flex sm12 style="padding: 5px">
+								<v-flex sm6 style="padding: 5px">
 									<v-text-field v-model="proveedores.codigoproveedor"
-												label="CodigoProveedor"
-												placeholder="CodigoProveedor"
+												label="Codigo de Proveedor"
+												placeholder="Codigo de Proveedor"
 												readonly
 												persistent-hint>
 									</v-text-field>
 								</v-flex>
 							</template>
-							<v-flex sm12 style="padding: 5px">
-								<v-text-field v-model="proveedores.iddocumentoidentidad"
-											label="IDDocumentoIdentidad"
-											hint="Ingrese IDDocumentoIdentidad"
-											placeholder="IDDocumentoIdentidad"
-											clearable
-											persistent-hint
-											required
-											@input="proveedores.iddocumentoidentidad = updateText(proveedores.iddocumentoidentidad)">
-								</v-text-field>
-							</v-flex>
-							<v-flex sm12 style="padding: 5px">
+						
+							<v-col cols="5" sm="6" class="pa-2">
+								<v-autocomplete
+								v-model="proveedores.iddocumentoidentidad"
+								label="Documento de Identidad"
+								:items="lsttipodocumentosidentidad"
+								item-text="descripcion"
+								item-value="iddocumentoidentidad"
+								:rules="validacion"
+								outlined
+								autocomplete="off"
+								color="#1A237E"
+								@input="proveedores.iddocumentoidentidad = updateText(proveedores.iddocumentoidentidad)"
+								></v-autocomplete>
+							</v-col>
+							<v-flex sm6 style="padding: 5px">
 								<v-text-field v-model="proveedores.numerodocumento"
-											label="NumeroDocumento"
-											hint="Ingrese NumeroDocumento"
-											placeholder="NumeroDocumento"
+											label="Numero de Documento"
+											hint="Ingrese Numero de Documento"
+											placeholder="Numero de Documento"
 											clearable
 											persistent-hint
 											required
+											:rules="NumeroDocrules"
 											@input="proveedores.numerodocumento = updateText(proveedores.numerodocumento)">
 								</v-text-field>
 							</v-flex>
-							<v-flex sm12 style="padding: 5px">
+							<v-flex sm6 style="padding: 5px">
 								<v-text-field v-model="proveedores.razonsocial"
 											label="RazonSocial"
-											hint="Ingrese RazonSocial"
-											placeholder="RazonSocial"
+											hint="Ingrese Razon Social"
+											placeholder="Razon Social"
 											clearable
 											persistent-hint
 											required
+											:rules="validacion"
 											@input="proveedores.razonsocial = updateText(proveedores.razonsocial)">
 								</v-text-field>
 							</v-flex>
@@ -143,43 +150,53 @@
 											clearable
 											persistent-hint
 											required
+											:rules="validacion"
 											@input="proveedores.direccion = updateText(proveedores.direccion)">
 								</v-text-field>
 							</v-flex>
-							<v-flex sm12 style="padding: 5px">
-								<v-text-field v-model="proveedores.idpais"
-											label="IDPais"
-											hint="Ingrese IDPais"
-											placeholder="IDPais"
-											clearable
-											persistent-hint
-											required
-											@input="proveedores.idpais = updateText(proveedores.idpais)">
-								</v-text-field>
-							</v-flex>
-							<v-flex sm12 style="padding: 5px">
-								<v-text-field v-model="proveedores.idciudad"
-											label="IDCiudad"
-											hint="Ingrese IDCiudad"
-											placeholder="IDCiudad"
-											clearable
-											persistent-hint
-											required
-											@input="proveedores.idciudad = updateText(proveedores.idciudad)">
-								</v-text-field>
-							</v-flex>
-							<v-flex sm12 style="padding: 5px">
-								<v-text-field v-model="proveedores.idmoneda"
-											label="IDMoneda"
-											hint="Ingrese IDMoneda"
-											placeholder="IDMoneda"
-											clearable
-											persistent-hint
-											required
-											@input="proveedores.idmoneda = updateText(proveedores.idmoneda)">
-								</v-text-field>
-							</v-flex>
-							<v-flex sm12 style="padding: 5px">
+							<v-col cols="5" sm="6" class="pa-2">
+								<v-autocomplete
+								v-model="proveedores.idpais"
+								label="Pais"
+								:items="lstpais"
+								item-text="descripcion"
+								item-value="idpais"
+								:rules="validacion"
+								outlined
+								autocomplete="off"
+								color="#1A237E"
+								@input="proveedores.idpais = updateText(proveedores.idpais)"
+								></v-autocomplete>
+							</v-col>
+							<v-col cols="5" sm="6" class="pa-2">
+								<v-autocomplete
+								v-model="proveedores.idciudad"
+								label="Ciudad"
+								:items="lstciudades"
+								item-text="descripcion"
+								item-value="idciudad"
+								:rules="validacion"
+								outlined
+								autocomplete="off"
+								color="#1A237E"
+								@input="proveedores.idciudad = updateText(proveedores.idciudad)"
+								></v-autocomplete>
+							</v-col>
+							<v-col cols="5" sm="6" class="pa-2">
+								<v-autocomplete
+								v-model="proveedores.idmoneda"
+								label="Moneda"
+								:items="lstmonedas"
+								item-text="descripcion"
+								item-value="idmoneda"
+								:rules="validacion"
+								outlined
+								autocomplete="off"
+								color="#1A237E"
+								@input="proveedores.idmoneda = updateText(proveedores.idmoneda)"
+								></v-autocomplete>
+							</v-col>
+							<v-flex sm6 style="padding: 5px">
 								<v-text-field v-model="proveedores.contacto"
 											label="Contacto"
 											hint="Ingrese Contacto"
@@ -187,10 +204,11 @@
 											clearable
 											persistent-hint
 											required
+											:rules="validacion"
 											@input="proveedores.contacto = updateText(proveedores.contacto)">
 								</v-text-field>
 							</v-flex>
-							<v-flex sm12 style="padding: 5px">
+							<v-flex sm6 style="padding: 5px">
 								<v-text-field v-model="proveedores.telefonos"
 											label="Telefonos"
 											hint="Ingrese Telefonos"
@@ -198,10 +216,11 @@
 											clearable
 											persistent-hint
 											required
+											:rules="validacion"
 											@input="proveedores.telefonos = updateText(proveedores.telefonos)">
 								</v-text-field>
 							</v-flex>
-							<v-flex sm12 style="padding: 5px">
+							<v-flex sm6 style="padding: 5px">
 								<v-text-field v-model="proveedores.fax"
 											label="Fax"
 											hint="Ingrese Fax"
@@ -209,10 +228,11 @@
 											clearable
 											persistent-hint
 											required
+											:rules="validaFax"
 											@input="proveedores.fax = updateText(proveedores.fax)">
 								</v-text-field>
 							</v-flex>
-							<v-flex sm12 style="padding: 5px">
+							<v-flex sm6 style="padding: 5px">
 								<v-text-field v-model="proveedores.cuenta"
 											label="Cuenta"
 											hint="Ingrese Cuenta"
@@ -220,21 +240,25 @@
 											clearable
 											persistent-hint
 											required
+											:rules="cuentasrules"
 											@input="proveedores.cuenta = updateText(proveedores.cuenta)">
 								</v-text-field>
 							</v-flex>
-							<v-flex sm12 style="padding: 5px">
-								<v-text-field v-model="proveedores.idtipoproveedor"
-											label="IDTipoProveedor"
-											hint="Ingrese IDTipoProveedor"
-											placeholder="IDTipoProveedor"
-											clearable
-											persistent-hint
-											required
-											@input="proveedores.idtipoproveedor = updateText(proveedores.idtipoproveedor)">
-								</v-text-field>
-							</v-flex>
-							<v-flex sm4 class="hidden-xs-only" style="padding: 5px">
+							<v-col cols="5" sm="6" class="pa-2">
+								<v-autocomplete
+								v-model="proveedores.idtipoproveedor"
+								label="Tipo de proveedor"
+								:items="lsttiposproveedor"
+								item-text="descripcion"
+								item-value="idtipoproveedor"
+								:rules="validacion"
+								outlined
+								autocomplete="off"
+								color="#1A237E"
+								@input="proveedores.idtipoproveedor = updateText(proveedores.idtipoproveedor)"
+								></v-autocomplete>
+							</v-col>
+							<v-flex sm6 class="hidden-xs-only" style="padding: 5px">
 								<v-menu
 									ref="menu_fechacreacion"
 										v-model="menu_fechacreacion"
@@ -247,8 +271,8 @@
 									<template v-slot:activator="{ on }">
 										<v-text-field
 											v-model="proveedores.fechacreacion"
-											label="Ingrese fechacreacion"
-											hint="Ingrese fechacreacion"
+											label="Ingrese fecha de creacion"
+											hint="Ingrese fecha de creacion"
 											persistent-hint
 											prepend-icon="event"
 											v-on="on">
@@ -257,15 +281,16 @@
 									<v-date-picker v-model="proveedores.fechacreacion" no-title @input="menu_fechacreacion = false"></v-date-picker>
 								</v-menu>
 							</v-flex>
-							<v-flex sm12 style="padding: 5px">
+							<v-flex sm6 style="padding: 5px">
 								<v-text-field v-model="proveedores.codaduana"
-											label="CodAduana"
-											hint="Ingrese CodAduana"
-											placeholder="CodAduana"
+											label="Codigo de Aduana"
+											hint="Ingrese Codigo de Aduana"
+											placeholder="Codigo de Aduana"
 											clearable
 											persistent-hint
 											required
-											@input="proveedores.codaduana = updateText(proveedores.codaduana)">
+											:rules="CodAduana"
+											>
 								</v-text-field>
 							</v-flex>
 						</v-layout>
@@ -273,7 +298,7 @@
 				</v-form>
 				<v-divider></v-divider>
 				<v-card-actions style="justify-content: center;padding:10px">
-					<v-btn color="success" dark style="width: 50%" @click="Grabar()">Grabar</v-btn>
+					<v-btn color="success" dark style="width: 50%" :disabled="!activo" @click="Grabar()">Grabar</v-btn>
 					<v-btn color="error" dark style="width: 50%" @click="Cancelar()">Cancelar</v-btn>
 				</v-card-actions>
 			</v-card>

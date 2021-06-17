@@ -25,7 +25,7 @@
 			<template slot="item" slot-scope="props">
 				<tr>
 					<!--<td>{{ helper.showDataDescription(props.item.idclase,lstClaseItems, id, descripcion)  }}</td>// Ejemplo de Uso de Helper Para obtener la Descripcion de una Tabla por medio de su Id-->
-					<td>{{ props.item.idclase }}</td>
+					<!-- <td>{{ props.item.idclase }}</td> -->
 					<td>{{ props.item.descripcion }}</td>
 					<td>{{ props.item.sigla }}</td>
 					<td>{{ props.item.cuentaventa }}</td>
@@ -38,13 +38,13 @@
 							<template v-slot:activator="{ on }">
 								<v-btn color="success" v-on="on" fab small dark  @click="Actualizar(props.item)"><v-icon>edit</v-icon></v-btn>
 							</template>
-							<span>Modificar Registro de Demo</span>
+							<span>Modificar Registro de Clase Item</span>
 						</v-tooltip>
 						<v-tooltip style="padding-left:10px" bottom>
 							<template v-slot:activator="{ on }" >
 								<v-btn color="error" v-on="on" fab small dark  @click="Eliminar(props.item)"><v-icon>delete</v-icon></v-btn>
 							</template>
-							<span>Eliminar Registro de Demo</span>
+							<span>Eliminar Registro de Clase Item</span>
 						</v-tooltip>
 					</td>
 				</tr>
@@ -52,9 +52,9 @@
 			<template v-slot:top>
 				<v-tooltip bottom>
 					<template v-slot:activator="{ on }">
-						<v-btn color="accent" v-on="on" @click="Insertar()">Adicionar Nuevo Registro de ClaseItems</v-btn>
+						<v-btn color="gray" v-on="on" @click="Insertar()">Adicionar Nuevo Registro de ClaseItems</v-btn>
 					</template>
-					<span>Adicionar nuevo registro de cliente</span>
+					<span>Adicionar nuevo registro de Clase Item</span>
 				</v-tooltip>
 			</template>
 			<template v-slot:no-data>
@@ -69,11 +69,11 @@
 					<v-toolbar-title>Datos de ClaseItems</v-toolbar-title>
 				</v-toolbar>
 				<v-divider></v-divider>
-				<v-form ref="form" style="padding:10px">
+				<v-form ref="form" style="padding:10px" v-model="activo">
 					<v-card-text>
 						<v-layout wrap>
 							<template v-if="operacion == 'Insert'">
-								<v-flex sm12 style="padding: 5px">
+								<!--<v-flex sm12 style="padding: 5px">
 									<v-text-field v-model="claseitems.idclase"
 												label="IDClase"
 												hint="Ingrese IDClase"
@@ -81,21 +81,22 @@
 												clearable
 												persistent-hint
 												required
+												:rules="validacion"
 												@input="claseitems.idclase = updateText(claseitems.idclase)">
 									</v-text-field>
-								</v-flex>
+								</v-flex>-->
 							</template>
 							<template v-else>
-								<v-flex sm12 style="padding: 5px">
+								<!--<v-flex sm12 style="padding: 5px">
 									<v-text-field v-model="claseitems.idclase"
 												label="IDClase"
 												placeholder="IDClase"
 												readonly
 												persistent-hint>
 									</v-text-field>
-								</v-flex>
+								</v-flex>-->
 							</template>
-							<v-flex sm12 style="padding: 5px">
+							<v-flex sm6 style="padding: 5px">
 								<v-text-field v-model="claseitems.descripcion"
 											label="Descripcion"
 											hint="Ingrese Descripcion"
@@ -103,10 +104,11 @@
 											clearable
 											persistent-hint
 											required
+											:rules="validacion"
 											@input="claseitems.descripcion = updateText(claseitems.descripcion)">
 								</v-text-field>
 							</v-flex>
-							<v-flex sm12 style="padding: 5px">
+							<v-flex sm6 style="padding: 5px">
 								<v-text-field v-model="claseitems.sigla"
 											label="Sigla"
 											hint="Ingrese Sigla"
@@ -114,66 +116,78 @@
 											clearable
 											persistent-hint
 											required
+											:rules="siglarules"
 											@input="claseitems.sigla = updateText(claseitems.sigla)">
 								</v-text-field>
 							</v-flex>
-							<v-flex sm12 style="padding: 5px">
+							<v-flex sm6 style="padding: 5px">
 								<v-text-field v-model="claseitems.cuentaventa"
-											label="CuentaVenta"
-											hint="Ingrese CuentaVenta"
+											label="Cuenta Venta"
+											hint="Ingrese Cuenta Venta"
 											placeholder="CuentaVenta"
 											clearable
 											persistent-hint
 											required
+											maxlength="17"
+											counter
+											:rules="CuentasRules"
 											@input="claseitems.cuentaventa = updateText(claseitems.cuentaventa)">
 								</v-text-field>
 							</v-flex>
-							<v-flex sm12 style="padding: 5px">
+							<v-flex sm6 style="padding: 5px">
 								<v-text-field v-model="claseitems.cuentacosto"
 											label="CuentaCosto"
-											hint="Ingrese CuentaCosto"
+											hint="Ingrese Cuenta Costo"
 											placeholder="CuentaCosto"
 											clearable
 											persistent-hint
 											required
+											maxlength="17"
+											counter
+											:rules="CuentasRules"
 											@input="claseitems.cuentacosto = updateText(claseitems.cuentacosto)">
 								</v-text-field>
 							</v-flex>
-							<v-flex sm12 style="padding: 5px">
+							<v-flex sm6 style="padding: 5px">
 								<v-text-field v-model="claseitems.cuentagasto"
 											label="CuentaGasto"
-											hint="Ingrese CuentaGasto"
+											hint="Ingrese Cuenta Gasto"
 											placeholder="CuentaGasto"
 											clearable
 											persistent-hint
 											required
+											maxlength="17"
+											counter
+											:rules="CuentasRules"
 											@input="claseitems.cuentagasto = updateText(claseitems.cuentagasto)">
 								</v-text-field>
 							</v-flex>
-							<v-flex sm12 style="padding: 5px">
+							<v-flex sm6 style="padding: 5px">
 								<v-text-field v-model="claseitems.cuentainventario"
 											label="CuentaInventario"
-											hint="Ingrese CuentaInventario"
+											hint="Ingrese Cuenta Inventario"
 											placeholder="CuentaInventario"
 											clearable
 											persistent-hint
 											required
+											maxlength="17"
+											counter
+											:rules="CuentasRules"
 											@input="claseitems.cuentainventario = updateText(claseitems.cuentainventario)">
 								</v-text-field>
 							</v-flex>
-							<v-flex sm4 style="padding: 5px">
-								<h4 class="mb-0">IngresaInventario:</h4>
-								<v-switch v-model="claseitems.ingresainventario"
-									color="indigo"
-									hint="Seleccione IngresaInventario"
-									label="claseitems.IngresaInventario"></v-switch>
+							
+							<v-flex sm12 style="padding: 5px">
+								<v-col cols="7" sm="5">
+									<p class="text-sm-left"><b>Ingresa Inventario: </b></p> <v-switch  v-model="claseitems.ingresainventario" color="custom"  :label="`Estado: ${claseitems.ingresainventario ? 'Si' : 'No'}`"> </v-switch>
+									</v-col>
 							</v-flex>
 						</v-layout>
 					</v-card-text>
 				</v-form>
 				<v-divider></v-divider>
 				<v-card-actions style="justify-content: center;padding:10px">
-					<v-btn color="success" dark style="width: 50%" @click="Grabar()">Grabar</v-btn>
+					<v-btn color="success" dark style="width: 50%" :disabled="!activo" @click="Grabar()">Grabar</v-btn>
 					<v-btn color="error" dark style="width: 50%" @click="Cancelar()">Cancelar</v-btn>
 				</v-card-actions>
 			</v-card>

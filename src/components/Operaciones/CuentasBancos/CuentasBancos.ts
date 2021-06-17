@@ -15,7 +15,7 @@ export default class AdmCuentasBancosComponent extends Vue {
 		{ text: 'saldoactual', align: 'left', sortable: false, value: 'saldoactual', width: '15%' },
 		{ text: 'cuentacontable', align: 'left', sortable: false, value: 'cuentacontable', width: '15%' },
 		{ text: 'fechaapertura', align: 'left', sortable: false, value: 'fechaapertura', width: '15%' },
-		{ text: 'Operaciones', align: 'center', sortable: false, value: 'action', width: '20%' },
+		{ text: 'Operaciones', align: 'left', sortable: false, value: 'action', width: '20%' },
 	];
 	// tslint:disable-next-line: variable-name
 	private menu_fechaapertura: boolean = false;
@@ -23,11 +23,29 @@ export default class AdmCuentasBancosComponent extends Vue {
 
 	private cuentasbancos = new services.clase_cuentasbancos();
 	private lstcuentasbancos: services.clase_cuentasbancos[] = [];
+	private lstcuentasbancoscargar: services.clase_cuentasbancos[] = [];
 	private buscarcuentasbancos = '';
+	private bancos = new services.clase_bancos();
+	private lstbancos: services.clase_bancos[] = [];
+	private monedas = new services.clase_monedas();
+	private lstmonedas: services.clase_monedas[] = [];
 	private dialog = false;
 	private operacion = '';
 	private helper: helpers = new helpers();
 	private popup = new popup.Swal();
+	private activo = false;
+	validacion = [
+		(v: any) => !!v || 'El campo es requerido',
+    (v: any) => !/^\s*$/.test(v) || 'No se permite espacios vacios',
+  ];
+  CuentasRules = [
+	(v: any) => !!v || "El campo es requerido",
+	(v: any) => (/^[0-9,-]*$/.test(v)) || "El campo sólo permite números y '-' como caracter especial",
+];
+saldoRules = [
+	(v: any) => !!v || "El campo es requerido",
+	(v: any) => (/^[0-9, ,]*$/.test(v)) || "El campo sólo permite números y ',' como caracter especial",
+];
 	private FormatDate(data: any) {
 		return moment(data).format('YYYY-MM-DD');
 	}
@@ -63,11 +81,50 @@ export default class AdmCuentasBancosComponent extends Vue {
 			}).catch((error) => {
 					this.popup.error('Consultar', 'Error Inesperado: ' + error);
 			});
+			this.cargarMonedas();
+			this.cargarBanco();
+	}
+	private cargarMonedas(){
+		new services.Operaciones().Consultar(this.WebApi.ws_monedas_Consultar)
+			.then((resmonedas) => {
+				if (resmonedas.data._error.error === 0) {
+					this.lstmonedas = resmonedas.data._data;
+					this.dialog = false;
+				} else {
+					this.popup.error('Consultar', resmonedas.data._error.descripcion);
+				}
+			}).catch((error) => {
+					this.popup.error('Consultar', 'Error Inesperado: ' + error);
+			});
+	}
+	private cargarBanco(){
+		new services.Operaciones().Consultar(this.WebApi.ws_bancos_Consultar)
+			.then((resbancos) => {
+				if (resbancos.data._error.error === 0) {
+					this.lstbancos = resbancos.data._data;
+					this.dialog = false;
+				} else {
+					this.popup.error('Consultar', resbancos.data._error.descripcion);
+				}
+			}).catch((error) => {
+					this.popup.error('Consultar', 'Error Inesperado: ' + error);
+			});
 	}
 	private Insertar(): void {
 		this.cuentasbancos = new services.clase_cuentasbancos();
 		this.cuentasbancos.fechaapertura = this.FormatDate(Date.now());
 		this.operacion = 'Insert';
+		this.dialog = true;
+	}
+	private Actualizar(data: services.clase_cuentasbancos): void {
+		new services.Operaciones().Buscar(this.WebApi.ws_cuentasbancos_Buscar, data )
+		.then((resCuentasBancosCargar) => {	
+				this.lstcuentasbancoscargar= resCuentasBancosCargar.data._data;
+				this.cuentasbancos = this.lstcuentasbancoscargar[0];
+			}).catch((err) => {   
+		   });
+		//this.cuentasbancos.fechaapertura = this.FormatDate(Date.now());
+		this.operacion = 'Update';
 		this.dialog = true;
 	}
 	private Grabar() {
@@ -105,19 +162,14 @@ export default class AdmCuentasBancosComponent extends Vue {
 		this.cargar_data();
 		this.dialog = false;
 	}
-	private Actualizar(data: services.clase_cuentasbancos): void {
-		this.cuentasbancos = data;
-		this.cuentasbancos.fechaapertura = this.FormatDate(Date.now());
-		this.operacion = 'Update';
-		this.dialog = true;
-	}
+	
 	private select_fecha(fecha: string) {
 		return fecha.substr(0, 10);
 	}
 	private Eliminar(data: services.clase_cuentasbancos): void {
 		swal.fire({
 			title: 'Esta seguro de esta operacion?',
-			text: 'Eliminacion de Registro' + data.idbanco + data.nrocuenta,
+			text: 'Eliminacion de Registro ' + data.idbanco +'/'+ data.nrocuenta,
 			type: 'warning',
 			showCancelButton: true,
 			confirmButtonColor: 'green',
@@ -126,6 +178,7 @@ export default class AdmCuentasBancosComponent extends Vue {
 			confirmButtonText: 'Eliminar!',
 		}).then((resultOfQuestion) => {
 			if (resultOfQuestion.value) {
+				
 			new services.Operaciones().Eliminar(this.WebApi.ws_cuentasbancos_Eliminar, data)
 				.then((result) => {
 				if (result.data.error === 0) {
@@ -157,5 +210,36 @@ export default class AdmCuentasBancosComponent extends Vue {
 			});
 		}
 		});
+	}
+	get lstcuentasbancosformateados(){
+		return this.lstcuentasbancos.map((cuentabancos : services.clase_cuentasbancos)=>{
+			return{
+				idbanco:cuentabancos.idbanco,
+				idbancoliteral: this.formatearbanco(cuentabancos.idbanco),
+				nrocuenta: cuentabancos.nrocuenta,
+				idmoneda: this.formatearMoneda(cuentabancos.idmoneda),
+				saldoactual:cuentabancos.saldoactual,
+				cuentacontable: cuentabancos.cuentacontable,
+				fechaapertura:cuentabancos.fechaapertura
+			}
+		})
+	}
+	private formatearbanco(idbanco : Number){
+		let bancoLiteral: string = '';
+			this.lstbancos.forEach(function(value){
+				if(value.idbanco == idbanco){
+					bancoLiteral = value.descripcion;
+				}
+			});
+		return bancoLiteral;	
+	}
+	private formatearMoneda(idmoneda: Number){
+		let monedaLiteral: string = '';
+			this.lstmonedas.forEach(function(value){
+				if(value.idmoneda == idmoneda){
+					monedaLiteral = value.descripcion;
+				}
+			});
+		return monedaLiteral;	
 	}
 }

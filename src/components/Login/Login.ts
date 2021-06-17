@@ -59,6 +59,8 @@ export default class LoginComponent extends Vue {
         if (this.login.usuario === '' || this.login.password === '') {
             this.popup.error('Campos Incompletos', 'Llene ambos campos por favor');
         } else {
+            this.$store.commit('login', true);
+            this.$router.push({ path: '/Principal' });
             this.objcrypt = new crypto();
             this.cryptedLogin = new services.ClaseAutenticacion();
             this.cryptedLogin.usuario = this.objcrypt.EncryptAES(this.login.usuario.toString());
@@ -73,7 +75,8 @@ export default class LoginComponent extends Vue {
                     this.popup.error('Error en la Autenticación', 'Sin conexión al Dominio');
                     return;
                 }
-                if (res.data._error.error === 0) {
+                if (res.data.error === 0) {
+                    
                     if (res.data.length !== 0
                         && this.login.usuario.trim() !== '' && this.login.password.trim() !== '') {
                         this.loginResponse = res.data;
@@ -84,7 +87,7 @@ export default class LoginComponent extends Vue {
                         this.$store.commit('logout', true);
                     }
                 } else {
-                    this.popup.error('Error en la Autenticación', res.data._error.descripcion);
+                    this.popup.error('Error en la Autenticación', res.data.error.descripcion);
                 }
             })
             .catch((err) => {

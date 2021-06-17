@@ -9,22 +9,38 @@ import helpers from '@/helper';
 @Component
 export default class AdmCajasComponent extends Vue {
 	private headers: any[] = [
-		{ text: 'IDCaja', align: 'left', sortable: true, value: 'idcaja', width: '15%' },
+		//{ text: 'IDCaja', align: 'left', sortable: true, value: 'idcaja', width: '15%' },
 		{ text: 'descripcion', align: 'left', sortable: false, value: 'descripcion', width: '15%' },
 		{ text: 'cuenta', align: 'left', sortable: false, value: 'cuenta', width: '15%' },
 		{ text: 'monto', align: 'left', sortable: false, value: 'monto', width: '15%' },
 		{ text: 'idmoneda', align: 'left', sortable: false, value: 'idmoneda', width: '15%' },
-		{ text: 'Operaciones', align: 'center', sortable: false, value: 'action', width: '20%' },
+		{ text: 'Operaciones', align: 'left', sortable: false, value: 'action', width: '20%' },
 	];
 	private WebApi = new services.Endpoints();
 
 	private cajas = new services.clase_cajas();
 	private lstcajas: services.clase_cajas[] = [];
+	private lstcajasCargar: services.clase_cajas[] = [];
 	private buscarcajas = '';
+	private monedas = new services.clase_monedas();
+	private lstmonedas: services.clase_monedas[] = [];
 	private dialog = false;
 	private operacion = '';
 	private helper: helpers = new helpers();
 	private popup = new popup.Swal();
+	private activo = false;
+	validacion = [
+		(v: any) => !!v || 'El campo es requerido',
+    (v: any) => !/^\s*$/.test(v) || 'No se permite espacios vacios',
+  ];
+  MontoRules = [
+	//(v: any) => !!v || "El campo es requerido",
+	(v: any) => !(!/^[0-9]*$/.test(v)) || "El campo sólo permite números, hasta 10 dígitos",
+];
+MontosRules = [
+	(v: any) => !!v || "El campo es requerido",
+	(v: any) => !(!/^[0-9, .]*$/.test(v)) || "El campo sólo permite números",
+];
 	private FormatDate(data: any) {
 		return moment(data).format('YYYY-MM-DD');
 	}
@@ -56,6 +72,20 @@ export default class AdmCajasComponent extends Vue {
 					this.dialog = false;
 				} else {
 					this.popup.error('Consultar', rescajas.data._error.descripcion);
+				}
+			}).catch((error) => {
+					this.popup.error('Consultar', 'Error Inesperado: ' + error);
+			});
+			this.cargarMonedas();
+	}
+	private cargarMonedas(){
+		new services.Operaciones().Consultar(this.WebApi.ws_monedas_Consultar)
+			.then((resmonedas) => {
+				if (resmonedas.data._error.error === 0) {
+					this.lstmonedas = resmonedas.data._data;
+					this.dialog = false;
+				} else {
+					this.popup.error('Consultar', resmonedas.data._error.descripcion);
 				}
 			}).catch((error) => {
 					this.popup.error('Consultar', 'Error Inesperado: ' + error);
@@ -102,9 +132,14 @@ export default class AdmCajasComponent extends Vue {
 		this.dialog = false;
 	}
 	private Actualizar(data: services.clase_cajas): void {
-		this.cajas = data;
-		this.operacion = 'Update';
-		this.dialog = true;
+		new services.Operaciones().Buscar(this.WebApi.ws_cajas_Buscar, data )
+		.then((resCajas) => {	
+				this.lstcajasCargar= resCajas.data._data;
+				this.cajas = this.lstcajasCargar[0];
+			}).catch((err) => {   
+		   });
+   this.operacion = 'Update';
+   this.dialog = true;
 	}
 	private select_fecha(fecha: string) {
 		return fecha.substr(0, 10);
@@ -112,7 +147,7 @@ export default class AdmCajasComponent extends Vue {
 	private Eliminar(data: services.clase_cajas): void {
 		swal.fire({
 			title: 'Esta seguro de esta operacion?',
-			text: 'Eliminacion de Registro' + data.idcaja,
+			text: 'Eliminacion de Registro ' + data.descripcion,
 			type: 'warning',
 			showCancelButton: true,
 			confirmButtonColor: 'green',
@@ -152,5 +187,28 @@ export default class AdmCajasComponent extends Vue {
 			});
 		}
 		});
+	}
+	private newMoneda(){
+		this.$router.push({​​​​ path: '/Monedas' }​​​​);​​​​
+	}
+	get lstcajasformateados(){
+		return this.lstcajas.map((cajas : services.clase_cajas)=>{
+			return{
+				idcaja: cajas.idcaja,
+				descripcion: cajas.descripcion,
+				cuenta: cajas.cuenta,
+				monto: cajas.monto,
+				idmoneda: this.formatearMoneda(cajas.idmoneda)
+			}
+		})
+	}
+	private formatearMoneda(idmoneda: Number){
+		let monedaLiteral: string = '';
+			this.lstmonedas.forEach(function(value){
+				if(value.idmoneda == idmoneda){
+					monedaLiteral = value.descripcion;
+				}
+			});
+		return monedaLiteral;	
 	}
 }

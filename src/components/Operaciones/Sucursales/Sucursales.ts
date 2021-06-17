@@ -9,26 +9,44 @@ import helpers from '@/helper';
 @Component
 export default class AdmSucursalesComponent extends Vue {
 	private headers: any[] = [
-		{ text: 'IDSucursal', align: 'left', sortable: true, value: 'idsucursal', width: '15%' },
-		{ text: 'idempresa', align: 'left', sortable: false, value: 'idempresa', width: '15%' },
-		{ text: 'idzona', align: 'left', sortable: false, value: 'idzona', width: '15%' },
-		{ text: 'nombre', align: 'left', sortable: false, value: 'nombre', width: '15%' },
-		{ text: 'direccion', align: 'left', sortable: false, value: 'direccion', width: '15%' },
-		{ text: 'numero', align: 'left', sortable: false, value: 'numero', width: '15%' },
-		{ text: 'telefonos', align: 'left', sortable: false, value: 'telefonos', width: '15%' },
-		{ text: 'email', align: 'left', sortable: false, value: 'email', width: '15%' },
-		{ text: 'codigopostal', align: 'left', sortable: false, value: 'codigopostal', width: '15%' },
-		{ text: 'Operaciones', align: 'center', sortable: false, value: 'action', width: '20%' },
+		//{ text: 'IDSucursal', align: 'left', sortable: true, value: 'idsucursal', width: '10%' },
+		{ text: 'idempresa', align: 'left', sortable: false, value: 'idempresa', width: '10%' },
+		{ text: 'idzona', align: 'left', sortable: false, value: 'idzona', width: '10%' },
+		{ text: 'nombre', align: 'left', sortable: false, value: 'nombre', width: '10%' },
+		{ text: 'direccion', align: 'left', sortable: false, value: 'direccion', width: '10%' },
+		{ text: 'numero', align: 'left', sortable: false, value: 'numero', width: '10%' },
+		{ text: 'telefonos', align: 'left', sortable: false, value: 'telefonos', width: '10%' },
+		{ text: 'email', align: 'left', sortable: false, value: 'email', width: '10%' },
+		{ text: 'codigopostal', align: 'left', sortable: false, value: 'codigopostal', width: '10%' },
+		{ text: 'Operaciones', align: 'left', sortable: false, value: 'action', width: '10%' },
 	];
 	private WebApi = new services.Endpoints();
 
 	private sucursales = new services.clase_sucursales();
 	private lstsucursales: services.clase_sucursales[] = [];
+	private lstsucursalescargar: services.clase_sucursales[] = [];
+	private lstempresa: services.clase_empresa[] = [];
 	private buscarsucursales = '';
+	private zonas = new services.clase_zonas();
+	private lstzonas: services.clase_zonas[] = [];
 	private dialog = false;
 	private operacion = '';
 	private helper: helpers = new helpers();
 	private popup = new popup.Swal();
+	private activo = false;
+	
+	validacion = [
+		(v: any) => !!v || 'El campo es requerido',
+    (v: any) => !/^\s*$/.test(v) || 'No se permite espacios vacios',
+  ];
+  correosRules = [
+	(v: any) => !!v || 'El campo es requerido',
+	(v: any) => /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(v) || "Ingrese un correo valido",
+	];
+	Telefonorules = [
+		(v: any) => !!v || 'El campo es requerido',
+		(v: any) => (/^[0-9]*$/.test(v)) || 'No se permite espacios vacios ni caracteres especiales',
+		];
 	private FormatDate(data: any) {
 		return moment(data).format('YYYY-MM-DD');
 	}
@@ -60,6 +78,33 @@ export default class AdmSucursalesComponent extends Vue {
 					this.dialog = false;
 				} else {
 					this.popup.error('Consultar', ressucursales.data._error.descripcion);
+				}
+			}).catch((error) => {
+					this.popup.error('Consultar', 'Error Inesperado: ' + error);
+			});
+			this.cargarZona();
+			this.cargarempresa();
+	}
+	private cargarempresa(){
+		new services.Operaciones().Consultar(this.WebApi.ws_empresa_Consultar)
+			.then((resempresa) => {
+				if (resempresa.data._error.error === 0) {
+					this.lstempresa = resempresa.data._data;
+				} else {
+					this.popup.error('Consultar', resempresa.data._error.descripcion);
+				}
+			}).catch((error) => {
+					this.popup.error('Consultar', 'Error Inesperado: ' + error);
+			});
+	}
+	private cargarZona(){
+		new services.Operaciones().Consultar(this.WebApi.ws_zonas_Consultar)
+			.then((reszonas) => {
+				if (reszonas.data._error.error === 0) {
+					this.lstzonas = reszonas.data._data;
+					this.dialog = false;
+				} else {
+					this.popup.error('Consultar', reszonas.data._error.descripcion);
 				}
 			}).catch((error) => {
 					this.popup.error('Consultar', 'Error Inesperado: ' + error);
@@ -106,7 +151,12 @@ export default class AdmSucursalesComponent extends Vue {
 		this.dialog = false;
 	}
 	private Actualizar(data: services.clase_sucursales): void {
-		this.sucursales = data;
+		new services.Operaciones().Buscar(this.WebApi.ws_sucursales_Buscar, data )
+			 .then((ressucursales) => {	
+					 this.lstsucursalescargar= ressucursales.data._data;
+					 this.sucursales = this.lstsucursalescargar[0];
+				 }).catch((err) => {   
+				});
 		this.operacion = 'Update';
 		this.dialog = true;
 	}
@@ -116,7 +166,7 @@ export default class AdmSucursalesComponent extends Vue {
 	private Eliminar(data: services.clase_sucursales): void {
 		swal.fire({
 			title: 'Esta seguro de esta operacion?',
-			text: 'Eliminacion de Registro' + data.idsucursal,
+			text: 'Eliminacion de Registro ' + data.nombre,
 			type: 'warning',
 			showCancelButton: true,
 			confirmButtonColor: 'green',
@@ -156,5 +206,40 @@ export default class AdmSucursalesComponent extends Vue {
 			});
 		}
 		});
+	}
+
+	get lstSucursalesFormat(){
+		return this.lstsucursales.map((sucursales : services.clase_sucursales)=>{
+			return{
+				idsucursal: sucursales.idsucursal,
+				codigoproveedor: sucursales.idsucursal,
+				idempresa: this.formatearempresa(sucursales.idempresa),
+				idzona: this.formatearZona(sucursales.idzona),
+				nombre: sucursales.nombre,
+				numero: sucursales.numero,
+				telefonos: sucursales.telefonos,
+				codigopostal: sucursales.codigopostal,
+				direccion: sucursales.direccion,
+				email: sucursales.email
+			}
+		})
+	}
+	private formatearempresa(idempresa : Number){
+		let empresaLiteral: string = '';
+			this.lstempresa.forEach(function(value){
+				if(value.idempresa == idempresa){
+					empresaLiteral = value.descripcion;
+				}
+			});
+		return empresaLiteral;	
+	}
+	private formatearZona(idzona: Number){
+		let zonaLiteral: string = '';
+			this.lstzonas.forEach(function(value){
+				if(value.idzona == idzona){
+					zonaLiteral = value.descripcion;
+				}
+			});
+		return zonaLiteral;	
 	}
 }

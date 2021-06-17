@@ -25,7 +25,7 @@
 			<template slot="item" slot-scope="props">
 				<tr>
 					<!--<td>{{ helper.showDataDescription(props.item.idmoneda,lstMonedas, id, descripcion)  }}</td>// Ejemplo de Uso de Helper Para obtener la Descripcion de una Tabla por medio de su Id-->
-					<td>{{ props.item.idmoneda }}</td>
+					<!-- <td>{{ props.item.idmoneda }}</td> -->
 					<td>{{ props.item.descripcion }}</td>
 					<td>{{ props.item.sigla }}</td>
 					<td>{{ FormatBoolean(props.item.monedalocal) }}</td>
@@ -34,13 +34,13 @@
 							<template v-slot:activator="{ on }">
 								<v-btn color="success" v-on="on" fab small dark  @click="Actualizar(props.item)"><v-icon>edit</v-icon></v-btn>
 							</template>
-							<span>Modificar Registro de Demo</span>
+							<span>Modificar Registro de Moneda</span>
 						</v-tooltip>
 						<v-tooltip style="padding-left:10px" bottom>
 							<template v-slot:activator="{ on }" >
 								<v-btn color="error" v-on="on" fab small dark  @click="Eliminar(props.item)"><v-icon>delete</v-icon></v-btn>
 							</template>
-							<span>Eliminar Registro de Demo</span>
+							<span>Eliminar Registro de Moneda</span>
 						</v-tooltip>
 					</td>
 				</tr>
@@ -48,9 +48,9 @@
 			<template v-slot:top>
 				<v-tooltip bottom>
 					<template v-slot:activator="{ on }">
-						<v-btn color="accent" v-on="on" @click="Insertar()">Adicionar Nuevo Registro de Monedas</v-btn>
+						<v-btn color="gray" v-on="on" @click="Insertar()">Adicionar Nuevo Registro de Monedas</v-btn>
 					</template>
-					<span>Adicionar nuevo registro de cliente</span>
+					<span>Adicionar nuevo registro de Monedas</span>
 				</v-tooltip>
 			</template>
 			<template v-slot:no-data>
@@ -65,31 +65,14 @@
 					<v-toolbar-title>Datos de Monedas</v-toolbar-title>
 				</v-toolbar>
 				<v-divider></v-divider>
-				<v-form ref="form" style="padding:10px">
+				<v-form ref="form" style="padding:10px" v-model="activo">
 					<v-card-text>
 						<v-layout wrap>
 							<template v-if="operacion == 'Insert'">
-								<v-flex sm12 style="padding: 5px">
-									<v-text-field v-model="monedas.idmoneda"
-												label="IDMoneda"
-												hint="Ingrese IDMoneda"
-												placeholder="IDMoneda"
-												clearable
-												persistent-hint
-												required
-												@input="monedas.idmoneda = updateText(monedas.idmoneda)">
-									</v-text-field>
-								</v-flex>
+								
 							</template>
 							<template v-else>
-								<v-flex sm12 style="padding: 5px">
-									<v-text-field v-model="monedas.idmoneda"
-												label="IDMoneda"
-												placeholder="IDMoneda"
-												readonly
-												persistent-hint>
-									</v-text-field>
-								</v-flex>
+								
 							</template>
 							<v-flex sm12 style="padding: 5px">
 								<v-text-field v-model="monedas.descripcion"
@@ -99,10 +82,11 @@
 											clearable
 											persistent-hint
 											required
+											:rules="validacion"
 											@input="monedas.descripcion = updateText(monedas.descripcion)">
 								</v-text-field>
 							</v-flex>
-							<v-flex sm12 style="padding: 5px">
+							<v-flex sm6 style="padding: 5px">
 								<v-text-field v-model="monedas.sigla"
 											label="Sigla"
 											hint="Ingrese Sigla"
@@ -110,22 +94,22 @@
 											clearable
 											persistent-hint
 											required
+											:rules="siglarules"
 											@input="monedas.sigla = updateText(monedas.sigla)">
 								</v-text-field>
 							</v-flex>
-							<v-flex sm4 style="padding: 5px">
-								<h4 class="mb-0">MonedaLocal:</h4>
-								<v-switch v-model="monedas.monedalocal"
-									color="indigo"
-									hint="Seleccione MonedaLocal"
-									label="monedas.MonedaLocal"></v-switch>
+							
+							<v-flex sm6 style="padding: 5px">
+								<v-col cols="7" sm="5">
+									<p class="text-sm-left"><b>Moneda Local: </b></p> <v-switch  v-model="monedas.monedalocal" color="custom"  :label="`Estado: ${monedas.monedalocal ? 'Si' : 'No'}`"> </v-switch>
+									</v-col>
 							</v-flex>
 						</v-layout>
 					</v-card-text>
 				</v-form>
 				<v-divider></v-divider>
 				<v-card-actions style="justify-content: center;padding:10px">
-					<v-btn color="success" dark style="width: 50%" @click="Grabar()">Grabar</v-btn>
+					<v-btn color="success" dark style="width: 50%" :disabled="!activo" @click="Grabar()">Grabar</v-btn>
 					<v-btn color="error" dark style="width: 50%" @click="Cancelar()">Cancelar</v-btn>
 				</v-card-actions>
 			</v-card>

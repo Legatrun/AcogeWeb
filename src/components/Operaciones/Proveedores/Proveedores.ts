@@ -9,34 +9,79 @@ import helpers from '@/helper';
 @Component
 export default class AdmProveedoresComponent extends Vue {
 	private headers: any[] = [
-		{ text: 'CodigoProveedor', align: 'left', sortable: true, value: 'codigoproveedor', width: '15%' },
-		{ text: 'iddocumentoidentidad', align: 'left', sortable: false, value: 'iddocumentoidentidad', width: '15%' },
-		{ text: 'numerodocumento', align: 'left', sortable: false, value: 'numerodocumento', width: '15%' },
-		{ text: 'razonsocial', align: 'left', sortable: false, value: 'razonsocial', width: '15%' },
-		{ text: 'direccion', align: 'left', sortable: false, value: 'direccion', width: '15%' },
-		{ text: 'idpais', align: 'left', sortable: false, value: 'idpais', width: '15%' },
-		{ text: 'idciudad', align: 'left', sortable: false, value: 'idciudad', width: '15%' },
-		{ text: 'idmoneda', align: 'left', sortable: false, value: 'idmoneda', width: '15%' },
-		{ text: 'contacto', align: 'left', sortable: false, value: 'contacto', width: '15%' },
-		{ text: 'telefonos', align: 'left', sortable: false, value: 'telefonos', width: '15%' },
-		{ text: 'fax', align: 'left', sortable: false, value: 'fax', width: '15%' },
-		{ text: 'cuenta', align: 'left', sortable: false, value: 'cuenta', width: '15%' },
-		{ text: 'idtipoproveedor', align: 'left', sortable: false, value: 'idtipoproveedor', width: '15%' },
-		{ text: 'fechacreacion', align: 'left', sortable: false, value: 'fechacreacion', width: '15%' },
-		{ text: 'codaduana', align: 'left', sortable: false, value: 'codaduana', width: '15%' },
-		{ text: 'Operaciones', align: 'center', sortable: false, value: 'action', width: '20%' },
+		{ text: 'CodigoProveedor', align: 'left', sortable: true, value: 'codigoproveedor', width: '5%' },
+		{ text: 'Documento Identidad', align: 'left', sortable: false, value: 'iddocumentoidentidad', width: '5%' },
+		{ text: 'Numero Documento', align: 'left', sortable: false, value: 'numerodocumento', width: '5%' },
+		{ text: 'Razon Social', align: 'left', sortable: false, value: 'razonsocial', width: '5%' },
+		{ text: 'Direccion', align: 'left', sortable: false, value: 'direccion', width: '5%' },
+		{ text: 'Pais', align: 'left', sortable: false, value: 'idpais', width: '5%' },
+		{ text: 'Ciudad', align: 'left', sortable: false, value: 'idciudad', width: '5%' },
+		{ text: 'Moneda', align: 'left', sortable: false, value: 'idmoneda', width: '5%' },
+		{ text: 'Contacto', align: 'left', sortable: false, value: 'contacto', width: '5%' },
+		{ text: 'Telefonos', align: 'left', sortable: false, value: 'telefonos', width: '5%' },
+		{ text: 'Fax', align: 'left', sortable: false, value: 'fax', width: '5%' },
+		{ text: 'Cuenta', align: 'left', sortable: false, value: 'cuenta', width: '5%' },
+		{ text: 'Tipo Proveedor', align: 'left', sortable: false, value: 'idtipoproveedor', width: '5%' },
+		{ text: 'Fecha Creacion', align: 'left', sortable: false, value: 'fechacreacion', width: '5%' },
+		{ text: 'Aduana', align: 'left', sortable: false, value: 'codaduana', width: '5%' },
+		{ text: 'Operaciones', align: 'left', sortable: false, value: 'action', width: '10%' },
 	];
 	// tslint:disable-next-line: variable-name
 	private menu_fechacreacion: boolean = false;
 	private WebApi = new services.Endpoints();
-
 	private proveedores = new services.clase_proveedores();
 	private lstproveedores: services.clase_proveedores[] = [];
+	private lstproveedorescargar: services.clase_proveedores[] = [];
 	private buscarproveedores = '';
+	private pais = new services.clase_pais();
+	private lstpais: services.clase_pais[] = [];
+	private tipodocumentosidentidad = new services.clase_tipodocumentosidentidad();
+	private lsttipodocumentosidentidad: services.clase_tipodocumentosidentidad[] = [];
+	private ciudades = new services.clase_ciudades();
+	private lstciudades: services.clase_ciudades[] = [];
+	private monedas = new services.clase_monedas();
+	private lstmonedas: services.clase_monedas[] = [];
+	private tiposproveedor = new services.clase_tiposproveedor();
+	private lsttiposproveedor: services.clase_tiposproveedor[] = [];
 	private dialog = false;
 	private operacion = '';
 	private helper: helpers = new helpers();
 	private popup = new popup.Swal();
+	private activo = false;
+	codProveedor = [
+		(v: any) => !!v || 'El campo es requerido',
+		(v:any) => (v && v.length<=10) || "No se permite mas de  10 caracteres",
+		(v: any) => (/^[0-9]*$/.test(v)) || 'No se permite espacios vacios ni caracteres especiales',
+
+	];
+	validaFax = [
+		(v: any) => !!v || 'El campo es requerido',
+		(v:any) => (v && v.length<=50) || "No se permite mas de  50 caracteres",
+		(v: any) => !/^\s*$/.test(v) || 'No se permite espacios vacios',
+
+	];
+	validacion = [
+		(v: any) => !!v || 'El campo es requerido',
+       (v: any) => !/^\s*$/.test(v) || 'No se permite espacios vacios',
+    ];
+    Codigorules = [
+	(v: any) => !!v || 'El campo es requerido',
+	(v: any) => (/^[0-9 ]*$/.test(v)) || 'No se permite espacios vacios ni caracteres especiales',
+	];
+	NumeroDocrules = [
+		(v: any) => !!v || 'El campo es requerido',
+		(v:any) => (v && v.length<=20) || "No se permite mas de  20 caracteres",
+		(v: any) => (/^[0-9 ,-]*$/.test(v)) || 'No se permite espacios vacios ni caracteres especiales solo "-',
+	];
+	cuentasrules = [
+			(v: any) => !!v || 'El campo es requerido',
+			(v:any) => (v && v.length<=20) || "No se permite mas de  20 caracteres",
+			(v: any) => (/^[0-9 ,-]*$/.test(v)) || 'No se permite espacios vacios ni caracteres especiales solo "-" ',
+	];
+	CodAduana = [
+		(v: any) => !!v || 'El campo es requerido',
+		(v:any) => (v && v.length<=3) || "No se permite mas de  3 caracteres",
+	];
 	private FormatDate(data: any) {
 		return moment(data).format('YYYY-MM-DD');
 	}
@@ -72,6 +117,76 @@ export default class AdmProveedoresComponent extends Vue {
 			}).catch((error) => {
 					this.popup.error('Consultar', 'Error Inesperado: ' + error);
 			});
+			this.cargartipoDocumentoIdentidad();
+			this.cargarPais();
+			this.cargarMoneda();
+			this.cargarTipoProveedor();
+			this.cargarCiudad();
+	}
+	private cargartipoDocumentoIdentidad(){
+		new services.Operaciones().Consultar(this.WebApi.ws_tipodocumentosidentidad_Consultar)
+			.then((restipodocumentosidentidad) => {
+				if (restipodocumentosidentidad.data._error.error === 0) {
+					this.lsttipodocumentosidentidad = restipodocumentosidentidad.data._data;
+					this.dialog = false;
+				} else {
+					this.popup.error('Consultar', restipodocumentosidentidad.data._error.descripcion);
+				}
+			}).catch((error) => {
+					this.popup.error('Consultar', 'Error Inesperado: ' + error);
+			});
+	}
+	private cargarPais(){
+		new services.Operaciones().Consultar(this.WebApi.ws_pais_Consultar)
+			.then((respais) => {
+				if (respais.data._error.error === 0) {
+					this.lstpais = respais.data._data;
+					this.dialog = false;
+				} else {
+					this.popup.error('Consultar', respais.data._error.descripcion);
+				}
+			}).catch((error) => {
+					this.popup.error('Consultar', 'Error Inesperado: ' + error);
+			});
+	}
+	private cargarMoneda(){
+		new services.Operaciones().Consultar(this.WebApi.ws_monedas_Consultar)
+			.then((resmonedas) => {
+				if (resmonedas.data._error.error === 0) {
+					this.lstmonedas = resmonedas.data._data;
+					this.dialog = false;
+				} else {
+					this.popup.error('Consultar', resmonedas.data._error.descripcion);
+				}
+			}).catch((error) => {
+					this.popup.error('Consultar', 'Error Inesperado: ' + error);
+			});
+	}
+	private cargarTipoProveedor(){
+		new services.Operaciones().Consultar(this.WebApi.ws_tiposproveedor_Consultar)
+			.then((restiposproveedor) => {
+				if (restiposproveedor.data._error.error === 0) {
+					this.lsttiposproveedor = restiposproveedor.data._data;
+					this.dialog = false;
+				} else {
+					this.popup.error('Consultar', restiposproveedor.data._error.descripcion);
+				}
+			}).catch((error) => {
+					this.popup.error('Consultar', 'Error Inesperado: ' + error);
+			});
+	}
+	private cargarCiudad(){
+		new services.Operaciones().Consultar(this.WebApi.ws_ciudades_Consultar)
+		.then((resciudades) => {
+			if (resciudades.data._error.error === 0) {
+				this.lstciudades = resciudades.data._data;
+				this.dialog = false;
+			} else {
+				this.popup.error('Consultar', resciudades.data._error.descripcion);
+			}
+		}).catch((error) => {
+				this.popup.error('Consultar', 'Error Inesperado: ' + error);
+		});
 	}
 	private Insertar(): void {
 		this.proveedores = new services.clase_proveedores();
@@ -115,10 +230,17 @@ export default class AdmProveedoresComponent extends Vue {
 		this.dialog = false;
 	}
 	private Actualizar(data: services.clase_proveedores): void {
-		this.proveedores = data;
-		this.proveedores.fechacreacion = this.FormatDate(Date.now());
+		new services.Operaciones().Buscar(this.WebApi.ws_proveedores_Buscar, data )
+			 .then((resProveedores) => {	
+					 this.lstproveedorescargar= resProveedores.data._data;
+					 this.proveedores = this.lstproveedorescargar[0];
+				 }).catch((err) => {   
+
+				});
 		this.operacion = 'Update';
 		this.dialog = true;
+		// this.proveedores.fechacreacion = this.FormatDate(Date.now());
+
 	}
 	private select_fecha(fecha: string) {
 		return fecha.substr(0, 10);
@@ -126,7 +248,7 @@ export default class AdmProveedoresComponent extends Vue {
 	private Eliminar(data: services.clase_proveedores): void {
 		swal.fire({
 			title: 'Esta seguro de esta operacion?',
-			text: 'Eliminacion de Registro' + data.codigoproveedor,
+			text: 'Eliminacion de Registro ' +'Proveedor '+ data.codigoproveedor,
 			type: 'warning',
 			showCancelButton: true,
 			confirmButtonColor: 'green',
@@ -166,5 +288,71 @@ export default class AdmProveedoresComponent extends Vue {
 			});
 		}
 		});
+	}
+	get lstproveedoresformateados(){
+		return this.lstproveedores.map((proveedores : services.clase_proveedores)=>{
+			return{
+				codigoproveedor: proveedores.codigoproveedor,
+				iddocumentoidentidad: this.formatearDocumentoIdentidad(proveedores.iddocumentoidentidad),
+				numerodocumento: proveedores.numerodocumento,
+				razonsocial: proveedores.razonsocial,
+				direccion: proveedores.direccion,
+				idpais: this.formatearpais(proveedores.idpais),
+				idciudad: this.formatearCiudad(proveedores.idciudad),
+				idmoneda: this.formatearMoneda(proveedores.idmoneda),
+				contacto: proveedores.contacto,
+				telefonos: proveedores.telefonos,
+				fax: proveedores.fax,
+				cuenta: proveedores.cuenta,
+				idtipoproveedor: this.formatearTipoProveedor(proveedores.idtipoproveedor),
+				fechacreacion:proveedores.fechacreacion,
+				codaduana: proveedores.codaduana
+			}
+		})
+	}
+	private formatearpais(idpais : Number){
+		let paisLiteral: string = '';
+			this.lstpais.forEach(function(value){
+				if(value.idpais == idpais){
+					paisLiteral = value.descripcion;
+				}
+			});
+		return paisLiteral;	
+	}
+	private formatearMoneda(idmoneda: Number){
+		let monedaLiteral: string = '';
+			this.lstmonedas.forEach(function(value){
+				if(value.idmoneda == idmoneda){
+					monedaLiteral = value.descripcion;
+				}
+			});
+		return monedaLiteral;	
+	}
+	private formatearCiudad(idciudad: Number){
+		let ciudadLiteral: string = '';
+			this.lstciudades.forEach(function(value){
+				if(value.idciudad == idciudad){
+					ciudadLiteral = value.descripcion;
+				}
+			});
+		return ciudadLiteral;	
+	}
+	private formatearTipoProveedor(idtipoproveedor: Number){
+		let tipoproveedorLiteral: string = '';
+			this.lsttiposproveedor.forEach(function(value){
+				if(value.idtipoproveedor == idtipoproveedor){
+					tipoproveedorLiteral = value.descripcion;
+				}
+			});
+		return tipoproveedorLiteral;	
+	}
+	private formatearDocumentoIdentidad(iddocumentoidentidad: Number){
+		let documentoidentidadLiteral: string = '';
+			this.lsttipodocumentosidentidad.forEach(function(value){
+				if(value.iddocumentoidentidad == iddocumentoidentidad){
+					documentoidentidadLiteral = value.descripcion;
+				}
+			});
+		return documentoidentidadLiteral;	
 	}
 }

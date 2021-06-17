@@ -8,17 +8,19 @@ import helpers from '@/helper';
 
 @Component
 export default class AdmCtasPresupComponent extends Vue {
+	
 	private headers: any[] = [
-		{ text: 'CuentaPresup', align: 'left', sortable: true, value: 'cuentapresup', width: '15%' },
-		{ text: 'nombrecuentapresup', align: 'left', sortable: false, value: 'nombrecuentapresup', width: '15%' },
-		{ text: 'idmoneda', align: 'left', sortable: false, value: 'idmoneda', width: '15%' },
-		{ text: 'nivel', align: 'left', sortable: false, value: 'nivel', width: '15%' },
-		{ text: 'fechacreacion', align: 'left', sortable: false, value: 'fechacreacion', width: '15%' },
-		{ text: 'fechamodificacion', align: 'left', sortable: false, value: 'fechamodificacion', width: '15%' },
-		{ text: 'balancecuenta', align: 'left', sortable: false, value: 'balancecuenta', width: '15%' },
-		{ text: 'cuentaasiento', align: 'left', sortable: false, value: 'cuentaasiento', width: '15%' },
-		{ text: 'grabado', align: 'left', sortable: false, value: 'grabado', width: '15%' },
-		{ text: 'Operaciones', align: 'center', sortable: false, value: 'action', width: '20%' },
+		
+		{ text: 'Cuenta Presup', align: 'left', sortable: true, value: 'cuentapresup', width: '10%' },
+		{ text: 'nombre cuenta presup', align: 'left', sortable: false, value: 'nombrecuentapresup', width: '10%' },
+		{ text: 'moneda', align: 'left', sortable: false, value: 'idmoneda', width: '10%' },
+		// { text: 'nivel', align: 'left', sortable: false, value: 'nivel', width: '10%' },
+		// { text: 'fecha creacion', align: 'left', sortable: false, value: 'fechacreacion', width: '10%' },
+		// { text: 'fecha modificacion', align: 'left', sortable: false, value: 'fechamodificacion', width: '10%' },
+		{ text: 'balance cuenta', align: 'left', sortable: false, value: 'balancecuenta', width: '10%' },
+		{ text: 'cuenta asiento', align: 'left', sortable: false, value: 'cuentaasiento', width: '10%' },
+		{ text: 'grabado', align: 'left', sortable: false, value: 'grabado', width: '10%' },
+		{ text: 'Operaciones', align: 'left', sortable: false, value: 'action', width: '10%' },
 	];
 	// tslint:disable-next-line: variable-name
 	private menu_fechacreacion: boolean = false;
@@ -28,11 +30,20 @@ export default class AdmCtasPresupComponent extends Vue {
 
 	private ctaspresup = new services.clase_ctaspresup();
 	private lstctaspresup: services.clase_ctaspresup[] = [];
+	private lstctaspresupcargar: services.clase_ctaspresup[] = [];
 	private buscarctaspresup = '';
 	private dialog = false;
+	private monedas = new services.clase_monedas();
+	private lstmonedas: services.clase_monedas[] = [];
 	private operacion = '';
 	private helper: helpers = new helpers();
 	private popup = new popup.Swal();
+	private activo = false;
+	private lista=['1', '2','3','4','5', '6'];
+	validacion = [
+		(v: any) => !!v || 'El campo es requerido',
+    (v: any) => !/^\s*$/.test(v) || 'No se permite espacios vacios',
+  ];
 	private FormatDate(data: any) {
 		return moment(data).format('YYYY-MM-DD');
 	}
@@ -68,6 +79,20 @@ export default class AdmCtasPresupComponent extends Vue {
 			}).catch((error) => {
 					this.popup.error('Consultar', 'Error Inesperado: ' + error);
 			});
+			this.cargarMonedas();
+	}
+	private cargarMonedas(){
+		new services.Operaciones().Consultar(this.WebApi.ws_monedas_Consultar)
+			.then((resmonedas) => {
+				if (resmonedas.data._error.error === 0) {
+					this.lstmonedas = resmonedas.data._data;
+					this.dialog = false;
+				} else {
+					this.popup.error('Consultar', resmonedas.data._error.descripcion);
+				}
+			}).catch((error) => {
+					this.popup.error('Consultar', 'Error Inesperado: ' + error);
+			});
 	}
 	private Insertar(): void {
 		this.ctaspresup = new services.clase_ctaspresup();
@@ -77,6 +102,7 @@ export default class AdmCtasPresupComponent extends Vue {
 		this.dialog = true;
 	}
 	private Grabar() {
+		console.log(this.ctaspresup)
 		if (this.operacion === 'Update') {
 			new services.Operaciones().Actualizar(this.WebApi.ws_ctaspresup_Actualizar, this.ctaspresup)
 			.then((result) => {
@@ -112,9 +138,12 @@ export default class AdmCtasPresupComponent extends Vue {
 		this.dialog = false;
 	}
 	private Actualizar(data: services.clase_ctaspresup): void {
-		this.ctaspresup = data;
-		this.ctaspresup.fechacreacion = this.FormatDate(Date.now());
-		this.ctaspresup.fechamodificacion = this.FormatDate(Date.now());
+		new services.Operaciones().Buscar(this.WebApi.ws_ctaspresup_Buscar, data )
+		.then((resCtasPresup) => {	
+				this.lstctaspresupcargar= resCtasPresup.data._data;
+				this.ctaspresup = this.lstctaspresupcargar[0];
+			}).catch((err) => {   
+		});
 		this.operacion = 'Update';
 		this.dialog = true;
 	}
@@ -124,7 +153,7 @@ export default class AdmCtasPresupComponent extends Vue {
 	private Eliminar(data: services.clase_ctaspresup): void {
 		swal.fire({
 			title: 'Esta seguro de esta operacion?',
-			text: 'Eliminacion de Registro' + data.cuentapresup,
+			text: 'Eliminacion de Registro ' + data.nombrecuentapresup,
 			type: 'warning',
 			showCancelButton: true,
 			confirmButtonColor: 'green',
@@ -164,5 +193,30 @@ export default class AdmCtasPresupComponent extends Vue {
 			});
 		}
 		});
+	}
+////////////////////////////////////////////terminar
+	get lstctaspresupformateados(){
+		return this.lstctaspresup.map((ctaspresup : services.clase_ctaspresup)=>{
+			return{
+				cuentapresup: ctaspresup.cuentapresup,
+				nombrecuentapresup: ctaspresup.nombrecuentapresup,
+				idmoneda: this.formatearMoneda(ctaspresup.idmoneda),
+				nivel:ctaspresup.nivel,
+				fechacreacion: ctaspresup.fechacreacion,
+				fechamodificacion:ctaspresup.fechamodificacion,
+				balancecuenta:ctaspresup.balancecuenta,
+				cuentaasiento:ctaspresup.cuentaasiento,
+				grabado:ctaspresup.grabado
+			}
+		})
+	}
+	private formatearMoneda(idmoneda: Number){
+		let monedaLiteral: string = '';
+			this.lstmonedas.forEach(function(value){
+				if(value.idmoneda == idmoneda){
+					monedaLiteral = value.descripcion;
+				}
+			});
+		return monedaLiteral;	
 	}
 }
