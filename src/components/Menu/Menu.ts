@@ -28,7 +28,7 @@ export default class MenuComponent extends Vue {
         new MenuItem('Ctas Presup', 'exit_to_app', '/CtasPresup'), 
         new MenuItem('Sucursales', 'exit_to_app', '/Sucursales'), 
         new MenuItem('Tipo de Pagos', 'exit_to_app', '/TipodePagos'), 
-        new MenuItem('Unidad DeManejo', 'exit_to_app', '/UnidadDeManejo'), 
+        new MenuItem('Unidad De Manejo', 'exit_to_app', '/UnidadDeManejo'), 
         new MenuItem('Tipo Movimiento Inventario', 'exit_to_app', '/TipoMovimientoInventario'), 
     ];
 /////////////////////////////////////compras

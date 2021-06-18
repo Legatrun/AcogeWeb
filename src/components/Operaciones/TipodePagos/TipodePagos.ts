@@ -26,7 +26,6 @@ export default class AdmTipodePagosComponent extends Vue {
 	validacion = [
 		(v: any) => !!v || 'El campo es requerido',
 		(v:any) => (v && v.length<=50) || "No se permite mas de  50 caracteres",
-
         (v: any) => !/^\s*$/.test(v) || 'No se permite espacios vacios',
     ];
 	private FormatDate(data: any) {

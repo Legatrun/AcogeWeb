@@ -1,7 +1,7 @@
 <template>
 	<v-card>
 		<v-toolbar color="primary" style="color:white">
-			<v-toolbar-title>Datos de TipoMovimientoInventario</v-toolbar-title>
+			<v-toolbar-title>Datos de Tipo Movimiento Inventario</v-toolbar-title>
 			<v-divider></v-divider>
 			<v-text-field v-model="buscartipomovimientoinventario"
 					append-icon="search"
@@ -46,7 +46,7 @@
 			<template v-slot:top>
 				<v-tooltip bottom>
 					<template v-slot:activator="{ on }">
-						<v-btn color="accent" v-on="on" @click="Insertar()">Adicionar Nuevo Registro de TipoMovimientoInventario</v-btn>
+						<v-btn color="accent" v-on="on" @click="Insertar()">Adicionar Nuevo Registro de Tipo Movimiento Inventario</v-btn>
 					</template>
 					<span>Adicionar nuevo registro de Tipo Movimiento Inventario</span>
 				</v-tooltip>
@@ -60,37 +60,39 @@
 		<v-dialog v-model="dialog" persistent max-width="50%">
 			<v-card>
 				<v-toolbar style="padding:10px" dark class="primary">
-					<v-toolbar-title>Datos de TipoMovimientoInventario</v-toolbar-title>
+					<v-toolbar-title>Datos de Tipo Movimiento Inventario</v-toolbar-title>
 				</v-toolbar>
 				<v-divider></v-divider>
 				<v-form ref="form" style="padding:10px" v-model="activo">
 					<v-card-text>
 						<v-layout wrap>
+						
 							<template v-if="operacion == 'Insert'">
-								<!-- <v-flex sm12 style="padding: 5px">
+								<v-flex sm6 style="padding: 5px">
 									<v-text-field v-model="tipomovimientoinventario.idtipomovimiento"
-												label="IDTipoMovimiento"
-												hint="Ingrese IDTipoMovimiento"
-												placeholder="IDTipoMovimiento"
+												label="Cod Tipo de Movimiento"
+												hint="Cod Tipo de Movimiento"
+												placeholder="Cod Tipo de Movimiento"
 												clearable
 												persistent-hint
 												required
-												:rules="validacion"
+												:rules="validCod"
 												@input="tipomovimientoinventario.idtipomovimiento = updateText(tipomovimientoinventario.idtipomovimiento)">
 									</v-text-field>
-								</v-flex> -->
+								</v-flex>
 							</template>
 							<template v-else>
-								<!-- <v-flex sm12 style="padding: 5px">
+								<v-flex sm6 style="padding: 5px">
 									<v-text-field v-model="tipomovimientoinventario.idtipomovimiento"
-												label="IDTipoMovimiento"
-												placeholder="IDTipoMovimiento"
+												label="Cod Tipo de Movimiento"
+												placeholder="Cod Tipo de Movimiento"
 												readonly
 												persistent-hint>
 									</v-text-field>
-								</v-flex> -->
+								</v-flex> 
 							</template>
-							<v-flex sm12 style="padding: 5px">
+							
+							<v-flex sm6 style="padding: 5px">
 								<v-text-field v-model="tipomovimientoinventario.descripcion"
 											label="Descripcion"
 											hint="Ingrese Descripcion"

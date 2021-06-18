@@ -10,7 +10,7 @@ import helpers from '@/helper';
 export default class AdmTipoMovimientoInventarioComponent extends Vue {
 	private headers: any[] = [
 		//{ text: 'IDTipoMovimiento', align: 'left', sortable: true, value: 'idtipomovimiento', width: '15%' },
-		{ text: 'descripcion', align: 'left', sortable: false, value: 'descripcion', width: '15%' },
+		{ text: 'Descripcion', align: 'left', sortable: false, value: 'descripcion', width: '15%' },
 		{ text: 'Operaciones', align: 'left', sortable: false, value: 'action', width: '20%' },
 	];
 	private WebApi = new services.Endpoints();
@@ -23,9 +23,17 @@ export default class AdmTipoMovimientoInventarioComponent extends Vue {
 	private helper: helpers = new helpers();
 	private popup = new popup.Swal();
 	private activo = false;
+	validCod =  [
+		(v: any) => !!v || 'El campo es requerido',
+		(v:any) => (v && v.length<=2) || "No se permite mas de  2 caracteres",
+		(v:any) => (/^[0-9]*$/.test(v)) || "No se permite letras caracteres especiales ni espacios vacios",
+        
+    ];
 	validacion = [
 		(v: any) => !!v || 'El campo es requerido',
-    (v: any) => !/^\s*$/.test(v) || 'No se permite espacios vacios',
+		(v:any) => (v && v.length<=50) || "No se permite mas de  50 caracteres",
+		(v:any) => (/^[a-z A-Z0-9-()áéíóú]*$/.test(v)) || "No se permite caracteres especiales",
+        (v: any) => !/^\s*$/.test(v) || 'No se permite espacios vacios',
   ];
 	private FormatDate(data: any) {
 		return moment(data).format('YYYY-MM-DD');

@@ -26,7 +26,7 @@ export default class Admtipo_empleadoComponent extends Vue {
 
 	RuleNombre = [
 		(v:any) => !!v || "El campo es requiredo",
-		(v:any) => (/^[a-z A-Z]*$/.test(v)) || "El campo solo acepta letras"
+		(v:any) => (/^[a-z A-Z]*$/.test(v)) || "No se permite numeros ni caracteres especiales"
 	]
 	private FormatDate(data: any) {
 		return moment(data).format('YYYY-MM-DD');

@@ -1,7 +1,7 @@
 <template>
 	<v-card>
 		<v-toolbar color="primary" style="color:white">
-			<v-toolbar-title>Datos de TiposdeCambio</v-toolbar-title>
+			<v-toolbar-title>Datos de Tipos de Cambio</v-toolbar-title>
 			<v-divider></v-divider>
 			<v-text-field v-model="buscartiposdecambio"
 					append-icon="search"
@@ -36,13 +36,13 @@
 							<template v-slot:activator="{ on }">
 								<v-btn color="success" v-on="on" fab small dark  @click="Actualizar(props.item)"><v-icon>edit</v-icon></v-btn>
 							</template>
-							<span>Modificar Registro de Demo</span>
+							<span>Modificar Registro</span>
 						</v-tooltip>
 						<v-tooltip style="padding-left:10px" bottom>
 							<template v-slot:activator="{ on }" >
 								<v-btn color="error" v-on="on" fab small dark  @click="Eliminar(props.item)"><v-icon>delete</v-icon></v-btn>
 							</template>
-							<span>Eliminar Registro de Demo</span>
+							<span>Eliminar Registro</span>
 						</v-tooltip>
 					</td>
 				</tr>
@@ -50,9 +50,9 @@
 			<template v-slot:top>
 				<v-tooltip bottom>
 					<template v-slot:activator="{ on }">
-						<v-btn color="accent" v-on="on" @click="Insertar()">Adicionar Nuevo Registro de TiposdeCambio</v-btn>
+						<v-btn color="accent" v-on="on" @click="Insertar()">Adicionar Nuevo Registro de Tipos de Cambio</v-btn>
 					</template>
-					<span>Adicionar nuevo registro de cliente</span>
+					<span>Adicionar nuevo registro</span>
 				</v-tooltip>
 			</template>
 			<template v-slot:no-data>
