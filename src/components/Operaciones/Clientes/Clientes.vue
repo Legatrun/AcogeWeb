@@ -116,7 +116,7 @@
 												clearable
 												persistent-hint
 												required
-												:rules="validacion"
+												:rules="ValCodClie"
 												@input="clientes.codigocliente = updateText(clientes.codigocliente)">
 									</v-text-field>
 								</v-flex>
@@ -167,7 +167,7 @@
 											clearable
 											persistent-hint
 											required
-											:rules="validacion"
+											:rules="ValNumDoc"
 											@input="clientes.numerodocumento = updateText(clientes.numerodocumento)">
 								</v-text-field>
 							</v-flex>
@@ -204,7 +204,7 @@
 								v-model="clientes.idciudad"
 								label="Ciudad"
 								:items="lstciudades"
-								item-text="descripcion"
+								:item-text="getItemciudad"
 								item-value="idciudad"
 								:rules="validacion"
 								outlined
@@ -219,7 +219,7 @@
 								v-model="clientes.idzona"
 								label="Zona"
 								:items="lstzonas"
-								item-text="descripcion"
+								:item-text="getItemZonas"
 								item-value="idzona"
 								:rules="validacion"
 								outlined
@@ -263,7 +263,7 @@
 											clearable
 											persistent-hint
 											required
-											:rules="validacion"
+											:rules="ValTel"
 											@input="clientes.telefono = updateText(clientes.telefono)">
 								</v-text-field>
 							</v-flex>
@@ -287,7 +287,7 @@
 											clearable
 											persistent-hint
 											required
-											:rules="validacion"
+											:rules="correosCasilla"
 											@input="clientes.casillacorreo = updateText(clientes.casillacorreo)">
 								</v-text-field>
 							</v-flex>
@@ -299,7 +299,7 @@
 											clearable
 											persistent-hint
 											required
-											:rules="validacion"
+											:rules="VaCuenta"
 											@input="clientes.cuentacontable = updateText(clientes.cuentacontable)">
 								</v-text-field>
 							</v-flex>
@@ -311,7 +311,7 @@
 											clearable
 											persistent-hint
 											required
-											:rules="validacion"
+											:rules="VaCuenta"
 											@input="clientes.cuentacontableanticipos = updateText(clientes.cuentacontableanticipos)">
 								</v-text-field>
 							</v-flex>

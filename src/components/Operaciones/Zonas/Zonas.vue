@@ -89,7 +89,7 @@
 								v-model="zonas.idciudad"
 								label="Ciudad"
 								:items="lstciudades"
-								item-text="descripcion"
+								:item-text="getItemCiudad"
 								item-value="idciudad"
 								:rules="validacion"
 								outlined

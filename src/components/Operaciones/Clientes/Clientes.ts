@@ -12,13 +12,13 @@ export default class AdmClientesComponent extends Vue {
 		//{ text: 'CodigoCliente', align: 'left', sortable: true, value: 'codigocliente', width: '5%' },
 		//{ text: 'codigoclienteprincipal', align: 'left', sortable: false, value: 'codigoclienteprincipal', width: '5%' },
 		//{ text: 'iddocumentoidentidad', align: 'left', sortable: false, value: 'iddocumentoidentidad', width: '5%' },
-		{ text: 'numero documento', align: 'left', sortable: false, value: 'numerodocumento', width: '8%' },
-		{ text: 'razon social', align: 'left', sortable: false, value: 'razonsocial', width: '13%' },
-		{ text: 'pais', align: 'left', sortable: false, value: 'idpais', width: '10%' },
-		{ text: 'ciudad', align: 'left', sortable: false, value: 'idciudad', width: '10%' },
-		{ text: 'zona', align: 'left', sortable: false, value: 'idzona', width: '10%' },
-		{ text: 'tipo cliente', align: 'left', sortable: false, value: 'idtipocliente', width: '10%' },
-		{ text: 'descripcion direccion', align: 'left', sortable: false, value: 'descripciondireccion', width: '15%' },
+		{ text: 'Numero Documento', align: 'left', sortable: false, value: 'numerodocumento', width: '10%' },
+		{ text: 'Razon Social', align: 'left', sortable: false, value: 'razonsocial', width: '13%' },
+		{ text: 'Pais', align: 'left', sortable: false, value: 'idpais', width: '10%' },
+		{ text: 'Ciudad', align: 'left', sortable: false, value: 'idciudad', width: '10%' },
+		{ text: 'Zona', align: 'left', sortable: false, value: 'idzona', width: '10%' },
+		{ text: 'Tipo Cliente', align: 'left', sortable: false, value: 'idtipocliente', width: '10%' },
+		{ text: 'Descripcion direccion', align: 'left', sortable: false, value: 'descripciondireccion', width: '15%' },
 		//{ text: 'telefono', align: 'left', sortable: false, value: 'telefono', width: '5%' },
 		//{ text: 'correoelectronico', align: 'left', sortable: false, value: 'correoelectronico', width: '5%' },
 		//{ text: 'casillacorreo', align: 'left', sortable: false, value: 'casillacorreo', width: '5%' },
@@ -55,7 +55,36 @@ export default class AdmClientesComponent extends Vue {
   ];
 	correosRules = [
 		(v: any) => !!v || 'El campo es requerido',
+		(v:any) => (v && v.length<=30) || "No se permite mas de  30 caracteres",
 		(v: any) => /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(v) || "Ingrese un correo valido",
+
+	];
+	correosCasilla = [
+		(v: any) => !!v || 'El campo es requerido',
+		(v:any) => (v && v.length<=10) || "No se permite mas de  10 caracteres",
+
+	];
+	ValCodClie = [
+		(v:any) => !!v || "El campo es requiredo",
+		(v:any) => (v && v.length<=10) || "No se permite mas de  10 caracteres",
+        (v:any) => (/^[0-9A-Z-]*$/.test(v)) || "No se permiten  carcteres especiales ni espacios vacios"
+	];
+	ValNumDoc = [
+		(v:any) => !!v || "El campo es requiredo",
+		(v:any) => (v && v.length<=15) || "No se permite mas de  15 caracteres",
+        (v:any) => (/^[0-9A-Z-]*$/.test(v)) || "No se permiten  carcteres especiales ni espacios vacios"
+	];
+	ValTel = [
+		(v:any) => !!v || "El campo es requiredo",
+		(v:any) => (v && v.length>=7) || "Tiene que imgresar mas de  7 degitos",
+		(v:any) => (v && v.length<=10) || "No se permite mas de  10 caracteres",
+        (v:any) => (/^[0-9-]*$/.test(v)) || "No se permiten letras,  carcteres especiales ni espacios vacios"
+	];
+	
+	VaCuenta = [
+		(v:any) => !!v || "El campo es requiredo",
+		(v:any) => (v && v.length<=20) || "No se permite mas de  20 caracteres",
+        (v:any) => (/^[0-9-]*$/.test(v)) || "No se permiten letras  carcteres especiales ni espacios vacios"
 	];
 	private FormatDate(data: any) {
 		return moment(data).format('YYYY-MM-DD');
@@ -124,6 +153,9 @@ export default class AdmClientesComponent extends Vue {
 					this.popup.error('Consultar', 'Error Inesperado: ' + error);
 			});
 	}
+	getItemciudad(data : any){
+		return ` ${this.formatearpais(data.idpais) } - ${data.descripcion}`;
+	}
 	private cargarZona(){
 		new services.Operaciones().Consultar(this.WebApi.ws_zonas_Consultar)
 			.then((reszonas) => {
@@ -136,6 +168,9 @@ export default class AdmClientesComponent extends Vue {
 			}).catch((error) => {
 					this.popup.error('Consultar', 'Error Inesperado: ' + error);
 			});
+	}
+	getItemZonas(data : any){
+		return ` ${this.formatearCiudad(data.idciudad) } - ${data.descripcion}`;
 	}
 	private cargarDocumentoIdentidad(){
 		new services.Operaciones().Consultar(this.WebApi.ws_tipodocumentosidentidad_Consultar)
@@ -315,6 +350,7 @@ export default class AdmClientesComponent extends Vue {
 			});
 		return ciudadLiteral;	
 	}
+	
 	private formatearzona(idzona : Number){
 		let zonaLiteral: string = '';
 			this.lstzonas.forEach(function(value){

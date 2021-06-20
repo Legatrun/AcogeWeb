@@ -178,23 +178,8 @@
 									<v-date-picker v-model="empleado.fecha_nac" no-title @input="menu_fecha_nac = false"></v-date-picker>
 								</v-menu>
 							</v-flex>
-							<template v-if="operacion == 'Update'">
-                           <v-flex sm6 style="padding: 5px">
-								<v-text-field v-model="empleado.identificacion"
-								            label="Cedula de Idemtidad"
-											clearable
-											persistent-hint
-											required
-										    :rules="civalidacionUpd"
-											counter
-											maxlength="20"
-											@input="empleado.identificacion = updateText(empleado.identificacion)"
-								>
-								</v-text-field>
-							
-							</v-flex>
-							</template>
-							<template v-else>
+						
+						
                             <v-flex sm6 style="padding: 5px">
 								<v-text-field v-model="empleado.identificacion"
 								            label="Cedula de Idemtidad"
@@ -202,14 +187,13 @@
 											persistent-hint
 											required
 											:rules="validacion"
-											counter
-											maxlength="20"
+											
 											@input="empleado.identificacion = updateText(empleado.identificacion)"
 								>
 								</v-text-field>
 							
 							</v-flex>
-							</template>
+						
 							
 							<v-flex sm6 style="padding: 5px">
 								<v-text-field v-model="empleado.cod_asegurado"

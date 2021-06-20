@@ -80,7 +80,7 @@ export default class AdmempleadoComponent extends Vue {
 	];
 	 validacion = [
 		(v: any) => !!v || 'El campo es requerido',
-       // (v:any) => (v&&v.length >= 6) || "Deberia ingresar minimo 6 caracteres",
+        // (v:any) => (v&&v.length >= 6) || "Deberia ingresar minimo 6 caracteres",
 		//(v:any) => (v&&v.length <= 20) || "Se permite hasta 20 caracteres",	
 		(v:any) => (/^\d{6,10}((\s|[-])[A-Z]{2})?$/.test(v)) || "CI(Ej: 123456-LP)",
 	];

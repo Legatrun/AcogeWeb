@@ -10,9 +10,9 @@ import helpers from '@/helper';
 export default class AdmZonasComponent extends Vue {
 	private headers: any[] = [
 		//{ text: 'IDZona', align: 'left', sortable: true, value: 'idzona', width: '15%' },
-		{ text: 'idpais', align: 'left', sortable: false, value: 'idpais', width: '15%' },
-		{ text: 'idciudad', align: 'left', sortable: false, value: 'idciudad', width: '15%' },
-		{ text: 'descripcion', align: 'left', sortable: false, value: 'descripcion', width: '15%' },
+		{ text: 'Pais', align: 'left', sortable: false, value: 'idpais', width: '15%' },
+		{ text: 'Ciudad', align: 'left', sortable: false, value: 'idciudad', width: '15%' },
+		{ text: 'Descripcion', align: 'left', sortable: false, value: 'descripcion', width: '15%' },
 		{ text: 'Operaciones', align: 'left', sortable: false, value: 'action', width: '20%' },
 	];
 	private WebApi = new services.Endpoints();
@@ -97,6 +97,9 @@ export default class AdmZonasComponent extends Vue {
 			}).catch((error) => {
 					this.popup.error('Consultar', 'Error Inesperado: ' + error);
 			});
+	}
+	getItemCiudad(data : any){
+		return ` ${this.formatearpais(data.idpais) } - ${data.descripcion}`;
 	}
 	private Insertar(): void {
 		this.zonas = new services.clase_zonas();

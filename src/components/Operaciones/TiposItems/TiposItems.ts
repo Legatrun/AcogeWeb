@@ -33,7 +33,7 @@ export default class AdmTiposItemsComponent extends Vue {
 	];
 	validacionSigla = [
 		(v: any) => !!v || 'El campo es requerido',
-		(v:any) => (/^[0-9 A-Z-]*$/.test(v)) || "No se permiten  carcteres especiales",
+		(v:any) => (/^[0-9A-Z-]*$/.test(v)) || "No se permiten  carcteres especiales ni espacios vacios",
 		(v:any) => (v && v.length<=5) || "No se permite mas de  5 caracteres",
 
 	];
