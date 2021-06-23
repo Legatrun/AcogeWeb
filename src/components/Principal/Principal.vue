@@ -1,23 +1,35 @@
 <template>
-    <div>
-        <h4>Hello, world!</h4>
-        <p>Welcome to your new single-page application, built with:</p>
-        <ul>
-            <li><a href="https://get.asp.net/">ASP.NET Core</a> and <a href="https://msdn.microsoft.com/en-us/library/67ef8sbd.aspx">C#</a> for cross-platform server-side code</li>
-            <li><a href="https://vuejs.org/">Vue.js</a> and <a href="http://www.typescriptlang.org/">TypeScript</a> for client-side code</li>
-            <li><a href="https://webpack.github.io/">Webpack</a> for building and bundling client-side resources</li>
-            <li><a href="https://vuetifyjs.com/">Vuetify</a> for layout and styling</li>
-        </ul>
-        <br>
-        <p>To help you get started, we've also set up:</p>
-        <ul>
-            <li><strong>Client-side navigation</strong>. For example, click <em>Counter</em> then <em>Back</em> to return here.</li>
-            <li><strong>Webpack dev middleware</strong>. In development mode, there's no need to run the <code>webpack</code> build tool. Your client-side resources are dynamically built on demand. Updates are available as soon as you modify any file.</li>
-            <li><strong>Hot module replacement</strong>. In development mode, you don't even need to reload the page after making most changes. Within seconds of saving changes to files, your Vue app will be rebuilt and a new instance injected is into the page.</li>
-            <li><strong>Efficient production builds</strong>. In production mode, development-time features are disabled, and the <code>webpack</code> build tool produces minified static CSS and JavaScript files.</li>
-        </ul>
-    </div>
+  <v-card>
+    <v-layout
+      row
+      wrap
+      style="padding-top:20px;padding-right: 20px;padding-left: 20px; text-align:center"
+    >
+      <v-flex xs12>
+        <v-toolbar-title class="text-xs-center">BIENVENIDO(A)</v-toolbar-title>
+        <v-toolbar-title class="text-xs-center" style="text-size:20px;color:#296944"
+          ><h3>SISTEMA ACOGE</h3></v-toolbar-title
+        >
+        <v-toolbar-title class="text-xs-center" style="color:#296944"
+          ><b
+            >GESTIÓN INTEGRAL DE EMPRESAS</b
+          ></v-toolbar-title
+        >
+      </v-flex>
+      <v-flex xs12>
+        <div style="text-align:center; height:50px"></div>
+        <div style="text-align:center; padding:15px 15px 15px 15px">
+          <img
+            src="\images\logo.jpg"
+            style="border-radius:10%"
+            width="400"
+            height="150"
+          />
+        </div>
+        <div style="text-align:center; height:120px"></div>
+      </v-flex>
+    </v-layout>
+  </v-card>
 </template>
-
 
 <script src="./Principal.ts"></script>
