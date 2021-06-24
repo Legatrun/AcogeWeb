@@ -1,7 +1,7 @@
 <template>
 	<v-card>
 		<v-toolbar color="primary" style="color:white">
-			<v-toolbar-title>Datos de AsientosEncabezado</v-toolbar-title>
+			<v-toolbar-title>Encabezados de Asiento</v-toolbar-title>
 			<v-divider></v-divider>
 			<v-text-field v-model="buscarasientosencabezado"
 					append-icon="search"
@@ -37,24 +37,24 @@
 							<template v-slot:activator="{ on }">
 								<v-btn color="success" v-on="on" fab small dark  @click="Actualizar(props.item)"><v-icon>edit</v-icon></v-btn>
 							</template>
-							<span>Modificar Registro de Demo</span>
+							<span>Modificar Registro</span>
 						</v-tooltip>
 						<v-tooltip style="padding-left:10px" bottom>
 							<template v-slot:activator="{ on }" >
 								<v-btn color="error" v-on="on" fab small dark  @click="Eliminar(props.item)"><v-icon>delete</v-icon></v-btn>
 							</template>
-							<span>Eliminar Registro de Demo</span>
+							<span>Eliminar Registro</span>
 						</v-tooltip>
 					</td>
 				</tr>
 			</template>
 			<template v-slot:top>
-				<!-- <v-tooltip bottom>
+				<v-tooltip bottom>
 					<template v-slot:activator="{ on }">
-						<v-btn color="accent" v-on="on" @click="Insertar()">Adicionar Nuevo Registro de AsientosEncabezado</v-btn>
+						<v-btn color="accent" v-on="on" @click="Insertar()">Crear</v-btn>
 					</template>
-					<span>Adicionar nuevo registro de cliente</span>
-				</v-tooltip> -->
+					<span>Crear nuevo encabezado de asiento</span>
+				</v-tooltip>
 			</template>
 			<template v-slot:no-data>
 				<v-alert :value="true" color="warning" icon="warning">
@@ -65,7 +65,7 @@
 		<v-dialog v-model="dialog" persistent max-width="50%">
 			<v-card>
 				<v-toolbar style="padding:10px" dark class="primary">
-					<v-toolbar-title>Datos de AsientosEncabezado</v-toolbar-title>
+					<v-toolbar-title>Datos de Encabezados de Asiento</v-toolbar-title>
 				</v-toolbar>
 				<v-divider></v-divider>
 				<v-form ref="form" style="padding:10px">
