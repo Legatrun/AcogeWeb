@@ -47,7 +47,7 @@
 			<template v-slot:top>
 				<v-tooltip bottom>
 					<template v-slot:activator="{ on }">
-						<v-btn color="gray" v-on="on" @click="Insertar()">Adicionar Nuevo Registro de Almacenes</v-btn> 
+						<v-btn color="gray" v-on="on" @click="Insertar()">CREAR</v-btn> 
 					</template>
 					<span>Adicionar nuevo registro de Almacenes</span>
 				</v-tooltip>
