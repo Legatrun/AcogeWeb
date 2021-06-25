@@ -25,6 +25,7 @@
 			<template slot="item" slot-scope="props">
 				<tr>
 					<td>{{ props.item.descripcion }}</td>
+					<td>{{ props.item.codigoalmacen }}</td>
 					<td>{{ props.item.idtipomovimientoformat }}</td>
 					<td>{{ props.item.idciudadFormat }}</td>
 					<td>{{FormatBoolean(props.item.virtual)  }}</td>
@@ -75,11 +76,12 @@
 					<v-card-text>
 						<v-layout wrap>
 							<template v-if="operacion == 'Insert'">
-								<v-flex sm6 style="padding: 5px">
+								<v-flex sm3 style="padding: 10px">
 									<v-text-field v-model="almacenes.codigoalmacen"
-												label="Codigo Almacen"
-												hint="Ingrese Codigo Almacen"
-												placeholder="Codigo Almacen"
+												label="Código Almacén"
+												hint="Alfanumérico"
+												counter
+												maxlength="5"
 												clearable
 												persistent-hint
 												required
@@ -90,29 +92,28 @@
 								</v-flex>
 							</template>
 							<template v-else>
-								<v-flex sm6 style="padding: 5px">
+								<v-flex sm3 style="padding: 10px">
 									<v-text-field v-model="almacenes.codigoalmacen"
 												label="Codigo Almacen"
-												placeholder="Codigo Almacen"
+												hint="Solo lectura"
 												readonly
 												persistent-hint>
 									</v-text-field>
 								</v-flex>
 							</template>
-							<v-flex sm6 style="padding: 5px">
-								<v-text-field v-model="almacenes.descripcion"
-											label="Descripcion"
-											hint="Ingrese Descripcion"
+							<v-flex sm9 style="padding: 10px">
+								<v-textarea v-model="almacenes.descripcion"
+											label="Nombre del Almacen"
 											placeholder="Descripcion"
 											clearable
 											persistent-hint
 											required
 											:rules="validacion"
-											
+											counter
+											maxlength="70"
 											@input="almacenes.descripcion = updateText(almacenes.descripcion)">
-								</v-text-field>
+								</v-textarea>
 							</v-flex>
-
 							<v-flex sm6 style="padding: 5px">	
 										<v-autocomplete v-model="almacenes.idtipomovimiento"
 												:rules="validacion"

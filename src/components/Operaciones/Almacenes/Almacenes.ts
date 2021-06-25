@@ -9,7 +9,8 @@ import helpers from '@/helper';
 @Component
 export default class AdmAlmacenesComponent extends Vue {
 	private headers: any[] = [
-		{ text: 'Descripcion', align: 'left', sortable: false, value: 'descripcion', width: '15%' },
+		{ text: 'Nombre de Almacén', align: 'left', sortable: false, value: 'descripcion', width: '15%' },
+		{ text: 'Código', align: 'left', sortable: false, value: 'codigoalmacen', width: '15%' },
 		{ text: 'Tipo de Movimiento', align: 'left', sortable: false, value: 'idtipomovimientoformat', width: '15%' },
 		{ text: 'Ciudad', align: 'left', sortable: false, value: 'idciudadFormat', width: '15%' },
 		{ text: 'Virtual', align: 'left', sortable: false, value: 'virtual', width: '15%' },
