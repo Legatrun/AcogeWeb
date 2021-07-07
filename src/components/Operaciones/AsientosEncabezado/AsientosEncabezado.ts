@@ -9,14 +9,14 @@ import helpers from '@/helper';
 @Component
 export default class AdmAsientosEncabezadoComponent extends Vue {
 	private headers: any[] = [
-		{ text: 'IDTipoComprobante', align: 'left', sortable: true, value: 'idtipocomprobante', width: '15%' },
-		{ text: 'NumeroComprobante', align: 'left', sortable: true, value: 'numerocomprobante', width: '15%' },
-		{ text: 'fecha', align: 'left', sortable: false, value: 'fecha', width: '15%' },
-		{ text: 'referencia', align: 'left', sortable: false, value: 'referencia', width: '15%' },
-		{ text: 'glosa', align: 'left', sortable: false, value: 'glosa', width: '15%' },
-		{ text: 'cotizacion', align: 'left', sortable: false, value: 'cotizacion', width: '15%' },
-		{ text: 'codigomodulo', align: 'left', sortable: false, value: 'codigomodulo', width: '15%' },
-		{ text: 'Operaciones', align: 'center', sortable: false, value: 'action', width: '20%' },
+		// { text: 'IDTipoComprobante', align: 'left', sortable: true, value: 'idtipocomprobante', width: '15%' },
+		{ text: 'Número de Comprobante', align: 'left', sortable: true, value: 'numerocomprobante', width: '15%' },
+		{ text: 'Fecha', align: 'left', sortable: true, value: 'fecha', width: '15%' },
+		{ text: 'Referencia', align: 'left', sortable: true, value: 'referencia', width: '15%' },
+		{ text: 'Glosa', align: 'left', sortable: true, value: 'glosa', width: '15%' },
+		{ text: 'Cotizacion', align: 'left', sortable: true, value: 'cotizacion', width: '15%' },
+		{ text: 'Código de módulo', align: 'left', sortable: true, value: 'codigomodulo', width: '15%' },
+		{ text: 'Operaciones', align: 'center', sortable: true, value: 'action', width: '20%' },
 	];
 	// tslint:disable-next-line: variable-name
 	private menu_fecha: boolean = false;

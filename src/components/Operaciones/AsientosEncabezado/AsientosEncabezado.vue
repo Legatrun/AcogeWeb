@@ -25,7 +25,6 @@
 			<template slot="item" slot-scope="props">
 				<tr>
 					<!--<td>{{ helper.showDataDescription(props.item.numerocomprobante,lstAsientosEncabezado, id, descripcion)  }}</td>// Ejemplo de Uso de Helper Para obtener la Descripcion de una Tabla por medio de su Id-->
-					<td>{{ props.item.idtipocomprobante }}</td>
 					<td>{{ props.item.numerocomprobante }}</td>
 					<td>{{ FormatDate(props.item.fecha) }}</td>
 					<td>{{ props.item.referencia }}</td>
