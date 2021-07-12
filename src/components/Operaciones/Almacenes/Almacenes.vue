@@ -66,7 +66,7 @@
 			</template>
 		</v-data-table>
 
-		<v-dialog v-model="dialog" persistent max-width="50%">
+		<v-dialog v-model="dialog" persistent max-width="45%">
 			<v-card>
 				<v-toolbar style="padding:10px" dark class="primary">
 					<v-toolbar-title>Datos de Almacenes</v-toolbar-title>
@@ -75,8 +75,20 @@
 				<v-form ref="form" style="padding:10px" v-model="activo">
 					<v-card-text>
 						<v-layout wrap>
+							<v-flex sm8 style="padding: 10px">
+								<v-textarea v-model="almacenes.descripcion"
+											label="Nombre del Almacén"
+											clearable
+											persistent-hint
+											required
+											:rules="validacion"
+											counter
+											maxlength="70"
+											@input="almacenes.descripcion = updateText(almacenes.descripcion)">
+								</v-textarea>
+							</v-flex>
 							<template v-if="operacion == 'Insert'">
-								<v-flex sm3 style="padding: 10px">
+								<v-flex sm4 style="padding: 10px">
 									<v-text-field v-model="almacenes.codigoalmacen"
 												label="Código Almacén"
 												hint="Alfanumérico"
@@ -92,7 +104,7 @@
 								</v-flex>
 							</template>
 							<template v-else>
-								<v-flex sm3 style="padding: 10px">
+								<v-flex sm4 style="padding: 10px">
 									<v-text-field v-model="almacenes.codigoalmacen"
 												label="Codigo Almacen"
 												hint="Solo lectura"
@@ -101,19 +113,6 @@
 									</v-text-field>
 								</v-flex>
 							</template>
-							<v-flex sm9 style="padding: 10px">
-								<v-textarea v-model="almacenes.descripcion"
-											label="Nombre del Almacen"
-											placeholder="Descripcion"
-											clearable
-											persistent-hint
-											required
-											:rules="validacion"
-											counter
-											maxlength="70"
-											@input="almacenes.descripcion = updateText(almacenes.descripcion)">
-								</v-textarea>
-							</v-flex>
 							<v-flex sm6 style="padding: 5px">	
 										<v-autocomplete v-model="almacenes.idtipomovimiento"
 												:rules="validacion"
@@ -127,7 +126,6 @@
 												@input="almacenes.idtipomovimiento = updateText(almacenes.idtipomovimiento)">
 										</v-autocomplete>
 							</v-flex>
-
 							<v-flex sm6 style="padding: 5px">	
 										<v-autocomplete v-model="almacenes.idciudad"
 												:rules="validacion"

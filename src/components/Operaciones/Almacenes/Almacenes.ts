@@ -2,7 +2,7 @@ import Vue from 'vue';
 import { Component } from 'vue-property-decorator';
 import * as services from '@/services';
 import swal from 'sweetalert2';
-import moment from 'moment';
+import moment, { relativeTimeThreshold } from 'moment';
 import * as popup from '@/popup';
 import helpers from '@/helper';
 
@@ -35,7 +35,8 @@ export default class AdmAlmacenesComponent extends Vue {
 
 	validacion = [
 		(v: any) => !!v || 'El campo es requerido',
-    (v: any) => !/^\s*$/.test(v) || 'No se permite espacios vacios',
+    	(v: any) => !/^\s*$/.test(v) || 'No se permite espacios vacios',
+		
   ];
 	  private FormatDate(data: any) {
 		return moment(data).format('YYYY-MM-DD');
@@ -55,6 +56,11 @@ export default class AdmAlmacenesComponent extends Vue {
 			return Value.toUpperCase();
 		} else {
 			return Value;
+		}
+	}
+	private beforeUpdate(){
+		if(this.almacenes.descripcion != ""){
+			this.almacenes.codigoalmacen = this.almacenes.descripcion.substr(0,5) 
 		}
 	}
 	private mounted() {
@@ -113,6 +119,12 @@ export default class AdmAlmacenesComponent extends Vue {
 		this.dialog = true;
 	}
 	private Grabar() {
+		var esRepetido = this.ValidaRepetido(this.almacenes)
+			if(esRepetido)
+			{
+				this.popup.error('Validación', "Existencia de Almacén con similar Nombre o Código");
+				return;
+			}
 		if (this.operacion === 'Update') {
 			new services.Operaciones().Actualizar(this.WebApi.ws_almacenes_Actualizar, this.almacenes)
 			.then((result) => {
@@ -135,7 +147,7 @@ export default class AdmAlmacenesComponent extends Vue {
 			this.cargar_data();
 			this.dialog = false;
 			} else {
-			this.popup.error('Insertar', result.data.descripcion);
+				this.popup.error('Insertar', result.data.descripcion);
 			}
 		})
 		.catch((error) => {
@@ -241,4 +253,21 @@ export default class AdmAlmacenesComponent extends Vue {
 			});
 		return idtipomovimientoLiteral;	
 	}
+
+	private ValidaRepetido(data: services.clase_almacenes):boolean{
+		var repetido:boolean = false;
+		this.lstalmacenes.forEach((elem: any) => {
+			repetido = true;
+              if (elem.codigoalmacen == data.codigoalmacen){
+					repetido = true
+					return repetido;
+              }
+			  if (elem.descripcion == data.descripcion){
+				repetido = true
+				return repetido;
+		  	  }
+        });
+		return repetido;
+	}
+
 }
