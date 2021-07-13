@@ -22,6 +22,7 @@ export default new Vuetify({
         // botones
         botonCrear: '#74c69d',
         botonAdicional: '#74c69d',
+        botonActualizarTabla: '#74c69d',
       },
       dark: {
         primary: colors.green.lighten3,

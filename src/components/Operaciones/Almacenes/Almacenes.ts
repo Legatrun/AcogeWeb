@@ -32,7 +32,6 @@ export default class AdmAlmacenesComponent extends Vue {
 	private popup = new popup.Swal();
 	private activo = false;
 
-
 	validacion = [
 		(v: any) => !!v || 'El campo es requerido',
     	(v: any) => !/^\s*$/.test(v) || 'No se permite espacios vacios',
@@ -72,10 +71,12 @@ export default class AdmAlmacenesComponent extends Vue {
 	private registroLibre(data: services.clase_almacenes):boolean{
 		var estaLibre:boolean = true;
 		this.lstalmacenes.forEach((elem: any) => {
-            if (elem.codigoalmacen == data.codigoalmacen){
+            if (elem.codigoalmacen == data.codigoalmacen && this.operacion!="Update"){
+				this.popup.error('Validación', "Código en uso");
 				estaLibre = false;
             }
 			if (elem.descripcion == data.descripcion){
+				this.popup.error('Validación', "Nombre en uso");
 				estaLibre = false;
 		  	}
         });
@@ -150,12 +151,11 @@ export default class AdmAlmacenesComponent extends Vue {
 		this.dialog = true;
 	}
 	private Grabar() {
+		if(!this.registroLibre(this.almacenes))
+		{
+			return;
+		}
 		if (this.operacion === 'Update') {
-			if(!this.registroLibre(this.almacenes))
-			{
-				this.popup.error('Validación', "Existencia de Almacén con similar Nombre o Código");
-				return;
-			}
 			new services.Operaciones().Actualizar(this.WebApi.ws_almacenes_Actualizar, this.almacenes)
 			.then((result) => {
 				if (result.data.error === 0) {
@@ -170,11 +170,6 @@ export default class AdmAlmacenesComponent extends Vue {
 			this.popup.error('Actualizar', 'Error Inesperado: ' + error);
 			});
 	} else {
-		if(!this.registroLibre(this.almacenes))
-		{
-			this.popup.error('Validación', "Existencia de Almacén con similar Nombre o Código");
-			return;
-		}
 		new services.Operaciones().Insertar(this.WebApi.ws_almacenes_Insertar, this.almacenes)
 		.then((result) => {
 			if (result.data.error === 0) {
@@ -211,7 +206,7 @@ export default class AdmAlmacenesComponent extends Vue {
 	private Eliminar(data: services.clase_almacenes): void {
 		swal.fire({
 			title: 'Esta seguro de esta operacion?',
-			text: 'Eliminacion de Registro ' + data.descripcion,
+			text: 'Eliminacion de Registro: ' + data.descripcion,
 			type: 'warning',
 			showCancelButton: true,
 			confirmButtonColor: 'green',
