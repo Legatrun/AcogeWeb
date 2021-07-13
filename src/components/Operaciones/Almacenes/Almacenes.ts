@@ -78,7 +78,7 @@ export default class AdmAlmacenesComponent extends Vue {
 					this.lstalmacenes = resalmacenes.data._data;
 					
 					this.dialog = false;
-					console.log(this.lstalmacenes)
+					console.log("rev: " + JSON.stringify(this.lstalmacenes))
 				} else {
 					this.popup.error('Consultar', resalmacenes.data._error.descripcion);
 				}
@@ -224,17 +224,18 @@ export default class AdmAlmacenesComponent extends Vue {
 		this.$router.push({​​​​ path: '/Ciudades' }​​​​);​​​​
 	}
 	//FORMATEO DE LOS ID POR LITERALES EN LISTA PRINCIPAL
-	get lstalmacenesformateados(){
-		return this.lstalmacenes.map((almacenes : services.clase_almacenes)=>{
-			return{
-				codigoalmacen: almacenes.codigoalmacen,
-				descripcion: almacenes.descripcion,
-				idtipomovimientoformat: this.formatearTipoMovimiento(almacenes.idtipomovimiento),
-				idciudadFormat: this.formatearCiudad(almacenes.idciudad),
-				virtual: almacenes.virtual,
-			}
-		})
-	}
+	// get lstalmacenesformateados(){
+	// 	debugger
+	// 	return this.lstalmacenes.map((almacenes : services.clase_almacenes)=>{
+	// 		return{
+	// 			codigoalmacen: almacenes.codigoalmacen,
+	// 			descripcion: almacenes.descripcion,
+	// 			idtipomovimientoformat: this.formatearTipoMovimiento(almacenes.idtipomovimiento),
+	// 			idciudadFormat: this.formatearCiudad(almacenes.idciudad),
+	// 			virtual: almacenes.virtual,
+	// 		}
+	// 	})
+	// }
 	private formatearCiudad(idciudad : Number){
 		let ciudadLiteral: string = '';
 			this.lstciudades.forEach(function(value){
