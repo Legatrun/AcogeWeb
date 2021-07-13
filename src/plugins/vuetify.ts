@@ -19,6 +19,9 @@ export default new Vuetify({
         warning: '#FFFF99',
         menubar: '#E4EDF5',
         textcolor: '#1A237E',
+        // botones
+        botonCrear: '#74c69d',
+        botonAdicional: '#74c69d',
       },
       dark: {
         primary: colors.green.lighten3,
