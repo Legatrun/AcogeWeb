@@ -12,7 +12,7 @@
 		</v-toolbar>
 <v-data-table 	style="padding: 5px"
 						:headers="headers" 
-						:items="lstalmacenesformateados" 
+						:items="lstalmacenes" 
 						:items-per-page="30"
 						:search = "buscaralmacenes" 
 						:footer-props="{
@@ -26,9 +26,9 @@
 				<tr>
 					<td>{{ props.item.descripcion }}</td>
 					<td>{{ props.item.codigoalmacen }}</td>
-					<td>{{ props.item.idtipomovimientoformat }}</td>
-					<td>{{ props.item.idciudadFormat }}</td>
-					<td>{{FormatBoolean(props.item.virtual)  }}</td>
+					<td>{{ formatearTipoMovimiento(props.item.idtipomovimiento) }}</td>
+					<td>{{ formatearCiudad(props.item.idciudad) }}</td>
+					<td>{{ FormatBoolean(props.item.Virtual) }}</td>
 					<td>
 						<v-tooltip bottom>
 							<template v-slot:activator="{ on }">
