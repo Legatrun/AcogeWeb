@@ -51,6 +51,37 @@ export default class AdmAlmacenesComponent extends Vue {
 			return 'NO';
 		}
 	}
+	private formatearCiudad(idciudad : Number){
+		let ciudadLiteral: string = '';
+			this.lstciudades.forEach(function(value){
+				if(value.idciudad == idciudad){
+					ciudadLiteral = value.descripcion;
+				}
+			});
+		return ciudadLiteral;	
+	}
+	private formatearTipoMovimiento(idtipomovimiento : Number){
+		let idtipomovimientoLiteral: string = '';
+			this.lsttipomovimientoinventario.forEach(function(value){
+				if(value.idtipomovimiento == idtipomovimiento){
+					idtipomovimientoLiteral = value.descripcion;
+				}
+			});
+		return idtipomovimientoLiteral;	
+	}
+	private registroLibre(data: services.clase_almacenes):boolean{
+		var estaLibre:boolean = true;
+		this.lstalmacenes.forEach((elem: any) => {
+            if (elem.codigoalmacen == data.codigoalmacen){
+				estaLibre = false;
+            }
+			if (elem.descripcion == data.descripcion){
+				estaLibre = false;
+		  	}
+        });
+		return estaLibre;
+	}
+
 	private updateText(Value: string) {
 		if (Value !== null) {
 			return Value.toUpperCase();
@@ -59,7 +90,7 @@ export default class AdmAlmacenesComponent extends Vue {
 		}
 	}
 	private beforeUpdate(){
-		if(this.almacenes.descripcion != ""){
+		if(this.almacenes.descripcion != "" && this.operacion!="Update"){
 			this.almacenes.codigoalmacen = this.almacenes.descripcion.substr(0,5) 
 		}
 	}
@@ -119,13 +150,12 @@ export default class AdmAlmacenesComponent extends Vue {
 		this.dialog = true;
 	}
 	private Grabar() {
-		var esRepetido = this.ValidaRepetido(this.almacenes)
-			if(esRepetido)
+		if (this.operacion === 'Update') {
+			if(!this.registroLibre(this.almacenes))
 			{
 				this.popup.error('Validación', "Existencia de Almacén con similar Nombre o Código");
 				return;
 			}
-		if (this.operacion === 'Update') {
 			new services.Operaciones().Actualizar(this.WebApi.ws_almacenes_Actualizar, this.almacenes)
 			.then((result) => {
 				if (result.data.error === 0) {
@@ -140,6 +170,11 @@ export default class AdmAlmacenesComponent extends Vue {
 			this.popup.error('Actualizar', 'Error Inesperado: ' + error);
 			});
 	} else {
+		if(!this.registroLibre(this.almacenes))
+		{
+			this.popup.error('Validación', "Existencia de Almacén con similar Nombre o Código");
+			return;
+		}
 		new services.Operaciones().Insertar(this.WebApi.ws_almacenes_Insertar, this.almacenes)
 		.then((result) => {
 			if (result.data.error === 0) {
@@ -235,39 +270,4 @@ export default class AdmAlmacenesComponent extends Vue {
 			}
 		})
 	}
-	private formatearCiudad(idciudad : Number){
-		let ciudadLiteral: string = '';
-			this.lstciudades.forEach(function(value){
-				if(value.idciudad == idciudad){
-					ciudadLiteral = value.descripcion;
-				}
-			});
-		return ciudadLiteral;	
-	}
-	private formatearTipoMovimiento(idtipomovimiento : Number){
-		let idtipomovimientoLiteral: string = '';
-			this.lsttipomovimientoinventario.forEach(function(value){
-				if(value.idtipomovimiento == idtipomovimiento){
-					idtipomovimientoLiteral = value.descripcion;
-				}
-			});
-		return idtipomovimientoLiteral;	
-	}
-
-	private ValidaRepetido(data: services.clase_almacenes):boolean{
-		var repetido:boolean = false;
-		this.lstalmacenes.forEach((elem: any) => {
-			repetido = true;
-              if (elem.codigoalmacen == data.codigoalmacen){
-					repetido = true
-					return repetido;
-              }
-			  if (elem.descripcion == data.descripcion){
-				repetido = true
-				return repetido;
-		  	  }
-        });
-		return repetido;
-	}
-
 }

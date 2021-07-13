@@ -48,15 +48,16 @@
 			<template v-slot:top>
 				<v-tooltip bottom>
 					<template v-slot:activator="{ on }">
-						<v-btn color="gray" v-on="on" @click="Insertar()">CREAR</v-btn> 
+						<v-btn color="botonCrear" dark v-on="on" @click="Insertar()">CREAR ALMACÉN</v-btn> 
 					</template>
-					<span>Adicionar nuevo registro de Almacenes</span>
+					<span>Adicionar Almacén</span>
 				</v-tooltip>
+				<!-- <v-spacer></v-spacer> -->
 				<v-tooltip bottom>
 					<template v-slot:activator="{ on }">
-						<v-btn color="gray" v-on="on" @click="newCiudad()">Adicionar Nueva ciudad</v-btn>
+						<v-btn color="botonAdicional" outlined v-on="on" @click="newCiudad()">Añadir Ciudad</v-btn>
 					</template>
-					<span>Adicionar nuevo registro de ciudad</span>
+					<span>Adicionar Ciudad</span>
 				</v-tooltip>
 			</template>
 			<template v-slot:no-data>
