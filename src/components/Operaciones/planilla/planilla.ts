@@ -115,7 +115,7 @@ export default class AdmplanillaComponent extends Vue {
 	}
 	private Eliminar(data: services.clase_planilla): void {
 		swal.fire({
-			title: 'Esta seguro de esta operacion?',
+			title: '¿Esta seguro de esta operación?',
 			text: 'Eliminar registro' + data.planilla,
 			type: 'warning',
 			showCancelButton: true,

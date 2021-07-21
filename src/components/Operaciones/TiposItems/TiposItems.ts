@@ -123,7 +123,7 @@ export default class AdmTiposItemsComponent extends Vue {
 	}
 	private Eliminar(data: services.clase_tipositems): void {
 		swal.fire({
-			title: 'Esta seguro de esta operacion?',
+			title: '¿Esta seguro de esta operación?',
 			text: 'Eliminacion de Registro ' + data.idtipoitem+'/'+data.descripcion,
 			type: 'warning',
 			showCancelButton: true,

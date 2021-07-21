@@ -257,8 +257,8 @@ export default class AdmClientesComponent extends Vue {
 	}
 	private Eliminar(data: services.clase_clientes): void {
 		swal.fire({
-			title: 'Esta seguro de esta operacion?',
-			text: 'Eliminacion de Registro ' + data.codigocliente,
+			title: '¿Esta seguro de esta operación?',
+			text: 'Eliminación de Registro: ' + data.codigocliente,
 			type: 'warning',
 			showCancelButton: true,
 			confirmButtonColor: 'green',

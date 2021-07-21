@@ -360,7 +360,7 @@ export default class Admempleado_deptoComponent extends Vue {
 	}
 	private Eliminar(data: services.clase_empleado_depto): void {
 		swal.fire({
-			title: 'Esta seguro de esta operacion?',
+			title: '¿Esta seguro de esta operación?',
 			text: 'Eliminacion de Registro' + data.empleado,
 			type: 'warning',
 			showCancelButton: true,

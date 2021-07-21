@@ -114,7 +114,7 @@ export default class Admtipo_haberComponent extends Vue {
 	}
 	private Eliminar(data: services.clase_tipo_haber): void {
 		swal.fire({
-			title: 'Esta seguro de esta operacion?',
+			title: '¿Esta seguro de esta operación?',
 			text: 'Eliminacion de Registro' + data.tipo_haber,
 			type: 'warning',
 			showCancelButton: true,

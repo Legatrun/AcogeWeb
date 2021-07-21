@@ -152,7 +152,7 @@ export default class AdmCtasPresupComponent extends Vue {
 	}
 	private Eliminar(data: services.clase_ctaspresup): void {
 		swal.fire({
-			title: 'Esta seguro de esta operacion?',
+			title: '¿Esta seguro de esta operación?',
 			text: 'Eliminacion de Registro ' + data.nombrecuentapresup,
 			type: 'warning',
 			showCancelButton: true,

@@ -114,7 +114,7 @@ export default class AdmAsientosDetalleComponent extends Vue {
 	}
 	private Eliminar(data: services.clase_asientosdetalle): void {
 		swal.fire({
-			title: 'Esta seguro de esta operacion?',
+			title: '¿Esta seguro de esta operación?',
 			text: 'Eliminacion de Registro' + data.idtipocomprobante + data.numerocomprobante + data.nrolinea,
 			type: 'warning',
 			showCancelButton: true,

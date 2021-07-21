@@ -142,7 +142,7 @@ export default class AdmCuentasComponent extends Vue {
 	}
 	private Eliminar(data: services.clase_cuentas): void {
 		swal.fire({
-			title: 'Esta seguro de esta operacion?',
+			title: '¿Esta seguro de esta operación?',
 			text: 'Eliminacion de Registro ' + data.cuenta +'/'+ data.nombrecuenta,
 			type: 'warning',
 			showCancelButton: true,

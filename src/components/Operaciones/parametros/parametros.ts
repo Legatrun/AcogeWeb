@@ -130,7 +130,7 @@ export default class AdmparametrosComponent extends Vue {
 	}
 	private Eliminar(data: services.clase_parametros): void {
 		swal.fire({
-			title: 'Esta seguro de esta operacion?',
+			title: '¿Esta seguro de esta operación?',
 			text: 'Eliminacion de Registro ' + ' ' + data.mes + ' ' + data.año,
 			type: 'warning',
 			showCancelButton: true,

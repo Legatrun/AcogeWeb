@@ -1,7 +1,7 @@
 <template>
 	<v-card>
 		<v-toolbar color="primary" style="color:white">
-			<v-toolbar-title>Datos de Almacenes</v-toolbar-title>
+			<v-toolbar-title>ALMACENES</v-toolbar-title>
 			<v-divider></v-divider>
 			<v-text-field v-model="buscaralmacenes"
 					append-icon="search"
@@ -34,13 +34,13 @@
 							<template v-slot:activator="{ on }">
 								<v-btn color="success" v-on="on" fab small dark  @click="Actualizar(props.item)"><v-icon>edit</v-icon></v-btn>
 							</template>
-							<span>Modificar Registro </span>
+							<span>Modificar Almacén </span>
 						</v-tooltip>
 						<v-tooltip style="padding-left:10px" bottom>
 							<template v-slot:activator="{ on }" >
 								<v-btn color="error" v-on="on" fab small dark  @click="Eliminar(props.item)"><v-icon>delete</v-icon></v-btn>
 							</template>
-							<span>Eliminar Registro </span>
+							<span>Eliminar Almacén </span>
 						</v-tooltip>
 					</td>
 				</tr>
@@ -72,7 +72,7 @@
 			</template>
 			<span>Actualizar Tabla</span>
 		</v-tooltip>
-		<v-dialog v-model="dialog" persistent max-width="45%">
+		<v-dialog v-model="dialog" persistent max-width="50%">
 			<v-card>
 				<v-toolbar style="padding:10px" dark class="primary">
 					<v-toolbar-title>Datos de Almacenes</v-toolbar-title>
@@ -89,6 +89,7 @@
 											required
 											:rules="validacion"
 											counter
+											outlined
 											maxlength="70"
 											@input="almacenes.descripcion = updateText(almacenes.descripcion)">
 								</v-textarea>
@@ -103,6 +104,7 @@
 												clearable
 												persistent-hint
 												required
+												outlined
 												:rules="validacion"
 												@input="almacenes.codigoalmacen = updateText(almacenes.codigoalmacen)">
 												
@@ -114,7 +116,8 @@
 									<v-text-field v-model="almacenes.codigoalmacen"
 												label="Codigo Almacen"
 												hint="Solo lectura"
-												readonly
+												disabled
+												outlined
 												persistent-hint>
 									</v-text-field>
 								</v-flex>

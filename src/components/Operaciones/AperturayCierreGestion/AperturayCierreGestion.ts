@@ -208,7 +208,7 @@ export default class AdmAperturayCierreGestionComponent extends Vue {
 
 	private Eliminar(data: services.clase_aperturaycierregestion): void {
 		swal.fire({
-			title: 'Esta seguro de esta operacion?',
+			title: '¿Esta seguro de esta operación?',
 			text: 'Eliminacion de Registro ' + data.gestion +'/'+ data.mesformat,
 			type: 'warning',
 			showCancelButton: true,
