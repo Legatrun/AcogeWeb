@@ -12,20 +12,20 @@ export default class AdmClientesComponent extends Vue {
 		//{ text: 'CodigoCliente', align: 'left', sortable: true, value: 'codigocliente', width: '5%' },
 		//{ text: 'codigoclienteprincipal', align: 'left', sortable: false, value: 'codigoclienteprincipal', width: '5%' },
 		//{ text: 'iddocumentoidentidad', align: 'left', sortable: false, value: 'iddocumentoidentidad', width: '5%' },
-		{ text: 'Numero Documento', align: 'left', sortable: false, value: 'numerodocumento', width: '10%' },
-		{ text: 'Razon Social', align: 'left', sortable: false, value: 'razonsocial', width: '13%' },
-		{ text: 'Pais', align: 'left', sortable: false, value: 'idpais', width: '10%' },
-		{ text: 'Ciudad', align: 'left', sortable: false, value: 'idciudad', width: '10%' },
-		{ text: 'Zona', align: 'left', sortable: false, value: 'idzona', width: '10%' },
-		{ text: 'Tipo Cliente', align: 'left', sortable: false, value: 'idtipocliente', width: '10%' },
-		{ text: 'Descripcion direccion', align: 'left', sortable: false, value: 'descripciondireccion', width: '15%' },
+		{ text: 'Número Documento', align: 'left', sortable: true, value: 'numerodocumento', width: '13%' },
+		{ text: 'Razón Social', align: 'left', sortable: true, value: 'razonsocial', width: '13%' },
+		{ text: 'Pais', align: 'left', sortable: true, value: 'idpais', width: '10%' },
+		{ text: 'Ciudad', align: 'left', sortable: true, value: 'idciudad', width: '10%' },
+		{ text: 'Zona', align: 'left', sortable: true, value: 'idzona', width: '10%' },
+		{ text: 'Tipo Cliente', align: 'left', sortable: true, value: 'idtipocliente', width: '10%' },
+		{ text: 'Descripción dirección', align: 'left', sortable: false, value: 'descripciondireccion', width: '15%' },
 		//{ text: 'telefono', align: 'left', sortable: false, value: 'telefono', width: '5%' },
 		//{ text: 'correoelectronico', align: 'left', sortable: false, value: 'correoelectronico', width: '5%' },
 		//{ text: 'casillacorreo', align: 'left', sortable: false, value: 'casillacorreo', width: '5%' },
 		//{ text: 'cuentacontable', align: 'left', sortable: false, value: 'cuentacontable', width: '5%' },
 		//{ text: 'cuentacontableanticipos', align: 'left', sortable: false, value: 'cuentacontableanticipos', width: '5%' },
 		//{ text: 'activo', align: 'left', sortable: false, value: 'activo', width: '5%' },
-		{ text: 'Operaciones', align: 'left', sortable: false, value: 'action', width: '5%' },
+		{ text: 'Operaciones', align: 'left', sortable: false, value: 'action', width: '10%' },
 	];
 	private WebApi = new services.Endpoints();
 
@@ -52,11 +52,11 @@ export default class AdmClientesComponent extends Vue {
 	validacion = [
 		(v: any) => !!v || 'El campo es requerido',
     (v: any) => !/^\s*$/.test(v) || 'No se permite espacios vacios',
-  ];
+  	];
 	correosRules = [
 		(v: any) => !!v || 'El campo es requerido',
 		(v:any) => (v && v.length<=30) || "No se permite mas de  30 caracteres",
-		(v: any) => /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(v) || "Ingrese un correo valido",
+		(v: any) => /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(v) || "Ingrese un correo válido. Ej: ejemplo@ejemplo.com",
 
 	];
 	correosCasilla = [
@@ -80,7 +80,6 @@ export default class AdmClientesComponent extends Vue {
 		(v:any) => (v && v.length<=10) || "No se permite mas de  10 caracteres",
         (v:any) => (/^[0-9-]*$/.test(v)) || "No se permiten letras,  carcteres especiales ni espacios vacios"
 	];
-	
 	VaCuenta = [
 		(v:any) => !!v || "El campo es requiredo",
 		(v:any) => (v && v.length<=20) || "No se permite mas de  20 caracteres",
@@ -204,6 +203,10 @@ export default class AdmClientesComponent extends Vue {
 		this.dialog = true;
 	}
 	private Grabar() {
+		if(!this.registroLibre(this.clientes))
+		{
+			return;
+		}
 		this.clientes.activo = true;
 		if (this.operacion === 'Update') {
 			new services.Operaciones().Actualizar(this.WebApi.ws_clientes_Actualizar, this.clientes)
@@ -368,5 +371,19 @@ export default class AdmClientesComponent extends Vue {
 				}
 			});
 		return tipoclienteLiteral;	
+	}
+	private registroLibre(data: services.clase_clientes):boolean{
+		var estaLibre:boolean = true;
+		this.lstclientes.forEach((elem: any) => {
+            if (elem.codigocliente == data.codigocliente && this.operacion!="Update"){
+				this.popup.error('Validación', "Código de Cliente en uso");
+				estaLibre = false;
+            }
+			if (elem.razonsocial == data.razonsocial){
+				this.popup.error('Validación', "Razón Social en uso");
+				estaLibre = false;
+		  	}
+        });
+		return estaLibre;
 	}
 }
