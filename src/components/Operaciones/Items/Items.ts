@@ -9,7 +9,7 @@ import helpers from '@/helper';
 @Component
 export default class AdmItemsComponent extends Vue {
 	private headers: any[] = [
-		{ text: 'Codigo Item', align: 'left', sortable: true, value: 'codigoitem', width: '5%' },
+		{ text: 'Codigo de Item', align: 'left', sortable: true, value: 'codigoitem', width: '5%' },
 		{ text: 'Modelo nro parte', align: 'left', sortable: false, value: 'modelonroparte', width: '5%' },
 		{ text: 'Descripcion', align: 'left', sortable: false, value: 'descripcion', width: '5%' },
 		//{ text: 'fechacreacion', align: 'left', sortable: false, value: 'fechacreacion', width: '10%' },
@@ -19,9 +19,9 @@ export default class AdmItemsComponent extends Vue {
 		// { text: 'saldo inicial', align: 'left', sortable: false, value: 'saldoinicial', width: '5%' },
 		// { text: 'saldo actual', align: 'left', sortable: false, value: 'saldoactual', width: '5%' },
 		{ text: 'Clase', align: 'left', sortable: false, value: 'idclase', width: '5%' },
-		{ text: 'Tipo Item', align: 'left', sortable: false, value: 'idtipoitem', width: '5%' },
-		{ text: 'Unidad Manejo', align: 'left', sortable: false, value: 'idunidadmanejo', width: '5%' },
-		{ text: 'Item Sup', align: 'left', sortable: false, value: 'codigoitemsup', width: '5%' },
+		{ text: 'Tipo de Item', align: 'left', sortable: false, value: 'idtipoitem', width: '5%' },
+		{ text: 'Unidad de Manejo', align: 'left', sortable: false, value: 'idunidadmanejo', width: '5%' },
+		{ text: 'Item Superior', align: 'left', sortable: false, value: 'codigoitemsup', width: '5%' },
 		{ text: 'Cantidad Minima', align: 'left', sortable: false, value: 'cantidadminima', width: '5%' },
 		{ text: 'Cantidad Maxima', align: 'left', sortable: false, value: 'cantidadmaxima', width: '5%' },
 		{ text: 'Operaciones', align: 'left', sortable: false, value: 'action', width: '10%' },
