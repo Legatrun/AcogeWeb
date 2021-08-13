@@ -206,7 +206,7 @@ export default class AdmempleadoComponent extends Vue {
 	}
 	private Eliminar(data: services.clase_empleado): void {
 		swal.fire({
-			title: 'Esta seguro de esta operacion?',
+			title: '¿Esta seguro de esta operación?',
 			text: 'Eliminacion de Registro ' + data.nombres+ ' ' +data.paterno + ' ' +data.materno,
 			type: 'warning',
 			showCancelButton: true,

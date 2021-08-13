@@ -113,7 +113,7 @@ export default class AdmTiposClienteComponent extends Vue {
 	}
 	private Eliminar(data: services.clase_tiposcliente): void {
 		swal.fire({
-			title: 'Esta seguro de esta operacion?',
+			title: '¿Esta seguro de esta operación?',
 			text: 'Eliminacion de Registro ' + data.idtipocliente+'/'+data.descripcion,
 			type: 'warning',
 			showCancelButton: true,

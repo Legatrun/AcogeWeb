@@ -277,7 +277,7 @@ export default class Admplanilla_descuentosComponent extends Vue {
 
 	private Eliminar(data: services.clase_planilla_descuentos): void {
 		swal.fire({
-			title: 'Esta seguro de esta operacion?',
+			title: '¿Esta seguro de esta operación?',
 			text: 'Eliminacion de Registro' + data.empleado + data.mes + data.año + data.descuento + data.correlativo,
 			type: 'warning',
 			showCancelButton: true,

@@ -117,7 +117,7 @@ export default class AdmFirmasComponent extends Vue {
 	}
 	private Eliminar(data: services.clase_firmas): void {
 		swal.fire({
-			title: 'Esta seguro de esta operacion?',
+			title: '¿Esta seguro de esta operación?',
 			text: 'Eliminacion de Registro',
 			type: 'warning',
 			showCancelButton: true,

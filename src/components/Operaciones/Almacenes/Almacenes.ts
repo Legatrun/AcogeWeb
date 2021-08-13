@@ -205,7 +205,7 @@ export default class AdmAlmacenesComponent extends Vue {
 	}
 	private Eliminar(data: services.clase_almacenes): void {
 		swal.fire({
-			title: 'Esta seguro de esta operacion?',
+			title: '¿Esta seguro de esta operación?',
 			text: 'Eliminacion de Registro: ' + data.descripcion,
 			type: 'warning',
 			showCancelButton: true,

@@ -112,7 +112,7 @@ export default class AdmCorrelativosTiposComprobantesComponent extends Vue {
 	}
 	private Eliminar(data: services.clase_correlativostiposcomprobantes): void {
 		swal.fire({
-			title: 'Esta seguro de esta operacion?',
+			title: '¿Esta seguro de esta operación?',
 			text: 'Eliminacion de Registro' + data.idtipocomprobante + data.anio + data.mes,
 			type: 'warning',
 			showCancelButton: true,

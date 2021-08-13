@@ -4,7 +4,7 @@
 
 	<v-card>
 		<v-toolbar color="primary" style="color:white">
-			<v-toolbar-title>Datos de Clientes</v-toolbar-title>
+			<v-toolbar-title>CLIENTES</v-toolbar-title>
 			<v-divider></v-divider>
 			<v-text-field v-model="buscarclientes"
 					append-icon="search"
@@ -49,13 +49,13 @@
 							<template v-slot:activator="{ on }">
 								<v-btn color="success" v-on="on" fab small dark  @click="Actualizar(props.item)"><v-icon>edit</v-icon></v-btn>
 							</template>
-							<span>Modificar Registro del Cliente</span>
+							<span>Modificar Cliente</span>
 						</v-tooltip>
 						<v-tooltip style="padding-left:10px" bottom>
 							<template v-slot:activator="{ on }" >
 								<v-btn color="error" v-on="on" fab small dark  @click="Eliminar(props.item)"><v-icon>delete</v-icon></v-btn>
 							</template>
-							<span>Eliminar Registro del Cliente</span>
+							<span>Eliminar Cliente</span>
 						</v-tooltip>
 					</td>
 				</tr>
@@ -63,27 +63,27 @@
 			<template v-slot:top>
 				<v-tooltip bottom>
 					<template v-slot:activator="{ on }">
-						<v-btn color="gray" v-on="on" @click="Insertar()">Adicionar Nuevo Registro de Clientes</v-btn>
+						<v-btn color="botonCrear" dark v-on="on" @click="Insertar()">Crear Cliente</v-btn>
 					</template>
-					<span>Adicionar nuevo registro de cliente</span>
+					<span>Adicionar Cliente</span>
 				</v-tooltip>
 				<v-tooltip bottom>
 					<template v-slot:activator="{ on }">
-						<v-btn color="gray" v-on="on" @click="newPais()">Adicionar Nuevo Registro de Pais</v-btn>
+						<v-btn color="botonAdicional" outlined v-on="on" @click="newPais()">Añadir Pais</v-btn>
 					</template>
-					<span>Adicionar nuevo registro de pais</span>
+					<span>Adicionar Pais</span>
 				</v-tooltip>
 				<v-tooltip bottom>
 					<template v-slot:activator="{ on }">
-						<v-btn color="gray" v-on="on" @click="newCiudad()">Adicionar Nuevo Registro de Ciudad</v-btn>
+						<v-btn color="botonAdicional" outlined v-on="on" @click="newCiudad()">Añadir Ciudad</v-btn>
 					</template>
-					<span>Adicionar nuevo registro de ciudad</span>
+					<span>Adicionar Ciudad</span>
 				</v-tooltip>
 				<v-tooltip bottom>
 					<template v-slot:activator="{ on }">
-						<v-btn color="gray" v-on="on" @click="newZona()">Adicionar Nuevo Registro de Zona</v-btn>
+						<v-btn color="botonAdicional" outlined v-on="on" @click="newZona()">Añadir Zona</v-btn>
 					</template>
-					<span>Adicionar nuevo registro de zona</span>
+					<span>Adicionar Zona</span>
 				</v-tooltip>
 				<!-- <v-tooltip bottom>
 					<template v-slot:activator="{ on }">
@@ -98,54 +98,55 @@
 				</v-alert>
 			</template>
 		</v-data-table>
-		<v-dialog v-model="dialog" persistent max-width="50%">
+		<v-dialog v-model="dialog" persistent max-width="70%">
 			<v-card>
 				<v-toolbar style="padding:10px" dark class="primary">
-					<v-toolbar-title>Datos de Clientes</v-toolbar-title>
+					<v-toolbar-title>Datos de Cliente</v-toolbar-title>
 				</v-toolbar>
 				<v-divider></v-divider>
 				<v-form ref="form" style="padding:10px" v-model="activo">
 					<v-card-text>
 						<v-layout wrap>
 							<template v-if="operacion == 'Insert'">
-								<v-flex sm6 style="padding: 5px">
+								<v-flex sm4 style="padding: 5px">
 									<v-text-field v-model="clientes.codigocliente"
-												label="Codigo de Cliente"
-												hint="Ingrese Codigo de Cliente"
-												placeholder="Codigo de Cliente"
+												label="Código de Cliente"
+												hint="Alfanumérico"
 												clearable
 												persistent-hint
 												required
+												outlined
 												:rules="ValCodClie"
+												counter
+												maxlength="10"
 												@input="clientes.codigocliente = updateText(clientes.codigocliente)">
 									</v-text-field>
 								</v-flex>
 							</template>
 							<template v-else>
-								<v-flex sm6 style="padding: 5px">
+								<v-flex sm4 style="padding: 5px">
 									<v-text-field v-model="clientes.codigocliente"
-												label="Codigo de Cliente"
-												placeholder="Codigo de Cliente"
-												readonly
+												label="Código de Cliente"
+												hint="Solo lectura"
+												outlined
+												disabled
 												persistent-hint>
 									</v-text-field>
 								</v-flex>
 							</template>
-							
-							<v-col cols="5" sm="6" class="pa-2">
+							<v-col cols="5" sm="4" class="pa-2">
 								<v-autocomplete
 								v-model="clientes.codigoclienteprincipal"
-								label="Codigo Cliente Principal"
+								label="Código Cliente Principal"
 								:items="lstclientes"
-								item-text="razonsocial"
-								item-value="codigocliente"
+								item-text="codigoclienteprincipal"
+								item-value="codigoclienteprincipal"
 								outlined
 								autocomplete="off"
 								color="#1A237E"
-								
 								></v-autocomplete>
 							</v-col>
-							<v-col cols="5" sm="6" class="pa-2">
+							<v-col cols="5" sm="4" class="pa-2">
 								<v-autocomplete
 								v-model="clientes.iddocumentoidentidad"
 								label="Documento de Identidad"
@@ -156,35 +157,39 @@
 								outlined
 								autocomplete="off"
 								color="#1A237E"
-								@input="clientes.iddocumentoidentidad = updateText(clientes.iddocumentoidentidad)"
 								></v-autocomplete>
 							</v-col>
-							<v-flex sm6 style="padding: 5px">
+							<v-flex sm4 style="padding: 5px">
 								<v-text-field v-model="clientes.numerodocumento"
-											label="Numero de Documento"
-											hint="Ingrese Numero de Documento"
-											placeholder="Numero de Documento"
+											label="Número de Documento"
+											hint="Alfanumérico. Ej: 1087393 LP"
 											clearable
 											persistent-hint
 											required
 											:rules="ValNumDoc"
+											counter
+											outlined
+											maxlength="15"
+											type="number"
 											@input="clientes.numerodocumento = updateText(clientes.numerodocumento)">
 								</v-text-field>
 							</v-flex>
+							<v-spacer></v-spacer>
 							<v-flex sm6 style="padding: 5px">
 								<v-text-field v-model="clientes.razonsocial"
 											label="Razon Social"
-											hint="Ingrese Razon Social"
-											placeholder="Razon Social"
+											hint="Nombre de la Empresa"
 											clearable
 											persistent-hint
 											required
 											:rules="validacion"
+											counter
+											outlined
+											maxlength="100"
 											@input="clientes.razonsocial = updateText(clientes.razonsocial)">
 								</v-text-field>
 							</v-flex>
-							
-							<v-col cols="5" sm="6" class="pa-2">
+							<v-col cols="5" sm="4" class="pa-2">
 								<v-autocomplete
 								v-model="clientes.idpais"
 								label="Pais"
@@ -198,8 +203,7 @@
 								@input="clientes.idpais = updateText(clientes.idpais)"
 								></v-autocomplete>
 							</v-col>
-						
-							<v-col cols="5" sm="6" class="pa-2">
+							<v-col cols="5" sm="4" class="pa-2">
 								<v-autocomplete
 								v-model="clientes.idciudad"
 								label="Ciudad"
@@ -213,8 +217,7 @@
 								@input="clientes.idciudad = updateText(clientes.idciudad)"
 								></v-autocomplete>
 							</v-col>
-							
-							<v-col cols="5" sm="6" class="pa-2">
+							<v-col cols="5" sm="4" class="pa-2">
 								<v-autocomplete
 								v-model="clientes.idzona"
 								label="Zona"
@@ -228,8 +231,21 @@
 								@input="clientes.idzona = updateText(clientes.idzona)"
 								></v-autocomplete>
 							</v-col>
-							
-								<v-col cols="5" sm="6" class="pa-2">
+							<v-flex sm6 style="padding: 5px">
+								<v-textarea v-model="clientes.descripciondireccion"
+											label="Dirección"
+											hint="Avenida/Calle/Pasaje/Número"
+											outlined
+											clearable
+											persistent-hint
+											required
+											:rules="validacion"
+											counter
+											maxlength="70"
+											@input="clientes.descripciondireccion = updateText(clientes.descripciondireccion)">
+								</v-textarea>
+							</v-flex>
+							<v-col cols="5" sm="6" class="pa-2">
 								<v-autocomplete
 								v-model="clientes.idtipocliente"
 								label="Tipo Cliente"
@@ -243,75 +259,74 @@
 								@input="clientes.idtipocliente = updateText(clientes.idtipocliente)"
 								></v-autocomplete>
 							</v-col>
-							<v-flex sm12 style="padding: 5px">
-								<v-text-field v-model="clientes.descripciondireccion"
-											label="Direccion"
-											hint="Ingrese Direccion"
-											placeholder="Direccion"
-											clearable
-											persistent-hint
-											required
-											:rules="validacion"
-											@input="clientes.descripciondireccion = updateText(clientes.descripciondireccion)">
-								</v-text-field>
-							</v-flex>
-							<v-flex sm6 style="padding: 5px">
+							<v-flex sm4 style="padding: 5px">
 								<v-text-field v-model="clientes.telefono"
 											label="Telefono"
-											hint="Ingrese Telefono"
-											placeholder="Telefono"
+											hint="Teléfono fijo o Celular"
 											clearable
 											persistent-hint
 											required
+											outlined
 											:rules="ValTel"
-											@input="clientes.telefono = updateText(clientes.telefono)">
+											@input="clientes.telefono = updateText(clientes.telefono)"
+											counter
+											maxlength="15"
+											>
 								</v-text-field>
 							</v-flex>
-							<v-flex sm6 style="padding: 5px">
+							<v-flex sm4 style="padding: 5px">
 								<v-text-field v-model="clientes.correoelectronico"
-											label="Correo Electronico"
-											hint="Ingrese Correo Electronico"
-											placeholder="Correo Electronico"
+											label="Correo Electrónico"
+											hint="Ej: ejemplo@ejemplo.com"
 											clearable
 											persistent-hint
 											required
+											outlined
 											:rules="correosRules"
+											counter
+											maxlength="30"
 										>
 								</v-text-field>
 							</v-flex>
-							<v-flex sm6 style="padding: 5px">
+							<v-flex sm4 style="padding: 5px">
 								<v-text-field v-model="clientes.casillacorreo"
-											label="Casilla Correo"
-											hint="Ingrese Casilla Correo"
-											placeholder="Casilla Correo"
+											label="Casilla de Correo"
+											hint="Número de Casilla"
 											clearable
 											persistent-hint
 											required
+											outlined
 											:rules="correosCasilla"
+											counter
+											maxlength="10"
 											@input="clientes.casillacorreo = updateText(clientes.casillacorreo)">
 								</v-text-field>
 							</v-flex>
 							<v-flex sm6 style="padding: 5px">
 								<v-text-field v-model="clientes.cuentacontable"
 											label="Cuenta Contable"
-											hint="Ingrese CuentaContable"
-											placeholder="Cuenta Contable"
+											hint=""
 											clearable
 											persistent-hint
 											required
+											outlined
 											:rules="VaCuenta"
+											counter
+											maxlength="20"
 											@input="clientes.cuentacontable = updateText(clientes.cuentacontable)">
 								</v-text-field>
 							</v-flex>
 							<v-flex sm6 style="padding: 5px">
 								<v-text-field v-model="clientes.cuentacontableanticipos"
 											label="Cuenta Contable Anticipos"
-											hint="Ingrese Cuenta Contable Anticipos"
-											placeholder="Cuenta Contable Anticipos"
+											hint=""
 											clearable
 											persistent-hint
 											required
+											outlined
 											:rules="VaCuenta"
+											counter
+											maxlength="20"
 											@input="clientes.cuentacontableanticipos = updateText(clientes.cuentacontableanticipos)">
 								</v-text-field>
 							</v-flex>

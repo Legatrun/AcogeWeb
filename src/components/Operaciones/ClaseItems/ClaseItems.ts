@@ -131,7 +131,7 @@ export default class AdmClaseItemsComponent extends Vue {
 	}
 	private Eliminar(data: services.clase_claseitems): void {
 		swal.fire({
-			title: 'Esta seguro de esta operacion?',
+			title: '¿Esta seguro de esta operación?',
 			text: 'Eliminacion de Registro ' + data.descripcion,
 			type: 'warning',
 			showCancelButton: true,

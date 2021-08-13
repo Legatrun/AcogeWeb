@@ -114,7 +114,7 @@ export default class Admtipo_empleadoComponent extends Vue {
 	}
 	private Eliminar(data: services.clase_tipo_empleado): void {
 		swal.fire({
-			title: 'Esta seguro de esta operacion?',
+			title: '¿Esta seguro de esta operación?',
 			text: 'Eliminar' + ' ' + data.nombre,
 			type: 'warning',
 			showCancelButton: true,

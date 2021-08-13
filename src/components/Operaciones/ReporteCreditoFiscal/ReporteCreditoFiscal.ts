@@ -213,7 +213,7 @@ export default class AdmReporteCreditoFiscalComponent extends Vue {
 	}
 	private Eliminar(data: services.clase_reportecreditofiscal): void {
 		swal.fire({
-			title: 'Esta seguro de esta operacion?',
+			title: '¿Esta seguro de esta operación?',
 			text: 'Eliminacion de Registro',
 			type: 'warning',
 			showCancelButton: true,

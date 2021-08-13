@@ -247,7 +247,7 @@ export default class AdmProveedoresComponent extends Vue {
 	}
 	private Eliminar(data: services.clase_proveedores): void {
 		swal.fire({
-			title: 'Esta seguro de esta operacion?',
+			title: '¿Esta seguro de esta operación?',
 			text: 'Eliminacion de Registro ' +'Proveedor '+ data.codigoproveedor,
 			type: 'warning',
 			showCancelButton: true,

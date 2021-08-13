@@ -264,7 +264,7 @@ export default class Admplanilla_haberesComponent extends Vue {
 	}
 	private Eliminar(data: services.clase_planilla_haberes): void {
 		swal.fire({
-			title: 'Esta seguro de esta operacion?',
+			title: '¿Esta seguro de esta operación?',
 			text: 'Eliminacion de Registro' + data.empleado + data.mes + data.año + data.haber + data.correlativo,
 			type: 'warning',
 			showCancelButton: true,

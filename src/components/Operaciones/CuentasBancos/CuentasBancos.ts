@@ -168,7 +168,7 @@ saldoRules = [
 	}
 	private Eliminar(data: services.clase_cuentasbancos): void {
 		swal.fire({
-			title: 'Esta seguro de esta operacion?',
+			title: '¿Esta seguro de esta operación?',
 			text: 'Eliminacion de Registro ' + data.idbanco +'/'+ data.nrocuenta,
 			type: 'warning',
 			showCancelButton: true,

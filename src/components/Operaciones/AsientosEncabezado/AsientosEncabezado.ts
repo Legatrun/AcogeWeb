@@ -117,7 +117,7 @@ export default class AdmAsientosEncabezadoComponent extends Vue {
 	}
 	private Eliminar(data: services.clase_asientosencabezado): void {
 		swal.fire({
-			title: 'Esta seguro de esta operacion?',
+			title: '¿Esta seguro de esta operación?',
 			text: 'Eliminacion de Registro' + data.idtipocomprobante + data.numerocomprobante,
 			type: 'warning',
 			showCancelButton: true,

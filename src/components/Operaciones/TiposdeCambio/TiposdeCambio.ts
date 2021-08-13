@@ -112,7 +112,7 @@ export default class AdmTiposdeCambioComponent extends Vue {
 	}
 	private Eliminar(data: services.clase_tiposdecambio): void {
 		swal.fire({
-			title: 'Esta seguro de esta operacion?',
+			title: '¿Esta seguro de esta operación?',
 			text: 'Eliminacion de Registro' + data.fecha,
 			type: 'warning',
 			showCancelButton: true,

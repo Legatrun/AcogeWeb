@@ -117,7 +117,7 @@ export default class AdmjerarquiaComponent extends Vue {
 	}
 	private Eliminar(data: services.clase_jerarquia): void {
 		swal.fire({
-			title: 'Esta seguro de esta operacion?',
+			title: '¿Esta seguro de esta operación?',
 			text: 'Eliminacion de Registro ' + data.nombre,
 			type: 'warning',
 			showCancelButton: true,
