@@ -173,7 +173,8 @@
 							
 							<v-flex sm12 style="padding: 5px">
 								<v-col cols="7" sm="5">
-									<p class="text-sm-left"><b>Ingresa Inventario: </b></p> <v-switch  v-model="claseitems.ingresainventario" color="custom"  :label="`Estado: ${claseitems.ingresainventario ? 'Si' : 'No'}`"> </v-switch>
+									<p class="text-sm-left"><b>Ingresa Inventario: </b></p>
+									<v-switch  v-model="claseitems.ingresainventario" color="success"  :label="`Estado: ${claseitems.ingresainventario ? 'Si' : 'No'}`"> </v-switch>
 									</v-col>
 							</v-flex>
 						</v-layout>
