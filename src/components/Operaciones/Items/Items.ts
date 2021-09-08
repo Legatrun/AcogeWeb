@@ -110,10 +110,10 @@ export default class AdmItemsComponent extends Vue {
 					this.lstclaseitems = resclaseitems.data._data;
 					this.dialog = false;
 				} else {
-					this.popup.error('Consultar', resclaseitems.data._error.descripcion);
+					this.popup.error('Consultar1', resclaseitems.data._error.descripcion);
 				}
 			}).catch((error) => {
-					this.popup.error('Consultar', 'Error Inesperado: ' + error);
+					this.popup.error('Consultar2', 'Error Inesperado: ' + error);
 			});
 	}
 	private cargartipoItem(){
@@ -123,10 +123,10 @@ export default class AdmItemsComponent extends Vue {
 					this.lsttipositems = restipositems.data._data;
 					this.dialog = false;
 				} else {
-					this.popup.error('Consultar', restipositems.data._error.descripcion);
+					this.popup.error('Consultar3', restipositems.data._error.descripcion);
 				}
 			}).catch((error) => {
-					this.popup.error('Consultar', 'Error Inesperado: ' + error);
+					this.popup.error('Consultar4', 'Error Inesperado: ' + error);
 			});
 	}
 	private cargarUnidadManejo(){
@@ -136,10 +136,10 @@ export default class AdmItemsComponent extends Vue {
 					this.lstunidaddemanejo = resunidaddemanejo.data._data;
 					this.dialog = false;
 				} else {
-					this.popup.error('Consultar', resunidaddemanejo.data._error.descripcion);
+					this.popup.error('Consultar5', resunidaddemanejo.data._error.descripcion);
 				}
 			}).catch((error) => {
-					this.popup.error('Consultar', 'Error Inesperado: ' + error);
+					this.popup.error('Consultar6', 'Error Inesperado: ' + error);
 			});
 	}
 	private Insertar(): void {
