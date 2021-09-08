@@ -119,30 +119,33 @@
 								</v-text-field>
 							</v-flex>
 							<v-flex sm6 style="padding: 5px">
-								<v-text-field v-model="claseitems.cuentaventa"
+								<v-autocomplete v-model="claseitems.cuentaventa"
 											label="Cuenta Venta"
-											hint="Ingrese Cuenta Venta"
+											hint="Seleccione la Cuenta Venta"
 											clearable
 											persistent-hint
 											required
-											maxlength="17"
-											counter
+											:items="lstcuentas"
+											item-text="cuenta"
+											item-value="cuenta"
 											:rules="CuentasRules"
-											@input="claseitems.cuentaventa = updateText(claseitems.cuentaventa)">
-								</v-text-field>
+											>
+								</v-autocomplete>
 							</v-flex>
 							<v-flex sm6 style="padding: 5px">
-								<v-text-field v-model="claseitems.cuentacosto"
+								<v-autocomplete v-model="claseitems.cuentacosto"
 											label="Cuenta Costo"
 											hint="Ingrese Cuenta Costo"
 											clearable
 											persistent-hint
 											required
-											maxlength="17"
 											counter
+											:items="lstcuentas"
+											item-text="cuenta"
+											item-value="cuenta"
 											:rules="CuentasRules"
-											@input="claseitems.cuentacosto = updateText(claseitems.cuentacosto)">
-								</v-text-field>
+											>
+								</v-autocomplete>
 							</v-flex>
 							<v-flex sm6 style="padding: 5px">
 								<v-text-field v-model="claseitems.cuentagasto"

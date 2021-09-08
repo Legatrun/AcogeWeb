@@ -23,6 +23,7 @@ export default class AdmClaseItemsComponent extends Vue {
 
 	private claseitems = new services.clase_claseitems();
 	private lstclaseitems: services.clase_claseitems[] = [];
+	private lstcuentas: services.clase_cuentas[] = [];
 	private buscarclaseitems = '';
 	private dialog = false;
 	private operacion = '';
@@ -35,8 +36,8 @@ export default class AdmClaseItemsComponent extends Vue {
   ];
    CuentasRules = [
 	(v: any) => !!v || "El campo es requerido",
-	(v:any) => (v && v.length<=20) || "No se permite mas de  20 caracteres",
-	(v: any) => (/^[0-9 ,-]*$/.test(v)) || "El campo sólo permite números y '-' como caracter especial",
+	// (v:any) => (v && v.length<=20) || "No se permite mas de  20 caracteres",
+	// (v: any) => (/^[0-9 ,-]*$/.test(v)) || "El campo sólo permite números y '-' como caracter especial",
   ]; 
 
    siglarules = [
@@ -64,6 +65,7 @@ export default class AdmClaseItemsComponent extends Vue {
 	}
 	private mounted() {
 		this.cargar_data();
+		this.CargarCuentas();
 	}
 	private cargar_data() {
 		if (this.$store.state.auth !== true) {​​​​
@@ -76,6 +78,20 @@ export default class AdmClaseItemsComponent extends Vue {
 					this.dialog = false;
 				} else {
 					this.popup.error('Consultar', resclaseitems.data._error.descripcion);
+				}
+			}).catch((error) => {
+					this.popup.error('Consultar', 'Error Inesperado: ' + error);
+			});
+	}
+
+	private CargarCuentas(){
+		new services.Operaciones().Consultar(this.WebApi.ws_cuentas_Consultar)
+			.then((rescuentas) => {
+				if (rescuentas.data._error.error === 0) {
+					this.lstcuentas = rescuentas.data._data;
+					console.log("Cuentas cargadas: "+JSON.stringify(this.lstcuentas))
+				} else {
+					this.popup.error('Consultar', rescuentas.data._error.descripcion);
 				}
 			}).catch((error) => {
 					this.popup.error('Consultar', 'Error Inesperado: ' + error);
