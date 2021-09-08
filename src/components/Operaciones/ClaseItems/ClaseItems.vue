@@ -100,7 +100,6 @@
 								<v-text-field v-model="claseitems.descripcion"
 											label="Descripcion"
 											hint="Ingrese Descripcion"
-											placeholder="Descripcion"
 											clearable
 											persistent-hint
 											required
@@ -112,7 +111,6 @@
 								<v-text-field v-model="claseitems.sigla"
 											label="Sigla"
 											hint="Ingrese Sigla"
-											placeholder="Sigla"
 											clearable
 											persistent-hint
 											required
@@ -124,7 +122,6 @@
 								<v-text-field v-model="claseitems.cuentaventa"
 											label="Cuenta Venta"
 											hint="Ingrese Cuenta Venta"
-											placeholder="CuentaVenta"
 											clearable
 											persistent-hint
 											required
@@ -136,9 +133,8 @@
 							</v-flex>
 							<v-flex sm6 style="padding: 5px">
 								<v-text-field v-model="claseitems.cuentacosto"
-											label="CuentaCosto"
+											label="Cuenta Costo"
 											hint="Ingrese Cuenta Costo"
-											placeholder="CuentaCosto"
 											clearable
 											persistent-hint
 											required
@@ -150,9 +146,8 @@
 							</v-flex>
 							<v-flex sm6 style="padding: 5px">
 								<v-text-field v-model="claseitems.cuentagasto"
-											label="CuentaGasto"
+											label="Cuenta Gasto"
 											hint="Ingrese Cuenta Gasto"
-											placeholder="CuentaGasto"
 											clearable
 											persistent-hint
 											required
@@ -164,9 +159,8 @@
 							</v-flex>
 							<v-flex sm6 style="padding: 5px">
 								<v-text-field v-model="claseitems.cuentainventario"
-											label="CuentaInventario"
+											label="Cuenta Inventario"
 											hint="Ingrese Cuenta Inventario"
-											placeholder="CuentaInventario"
 											clearable
 											persistent-hint
 											required
