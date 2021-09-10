@@ -82,6 +82,12 @@ export default class AdmProveedoresComponent extends Vue {
 		(v: any) => !!v || 'El campo es requerido',
 		(v:any) => (v && v.length<=3) || "No se permite mas de  3 caracteres",
 	];
+	private beforeUpdate(){
+		// if(this.proveedores.idpais != undefined){
+		// 	console.log("pais: ",JSON.stringify(this.proveedores.idpais))
+		// 	this.cargarCiudad()
+		// }
+    }
 	private FormatDate(data: any) {
 		return moment(data).format('YYYY-MM-DD');
 	}
@@ -101,6 +107,11 @@ export default class AdmProveedoresComponent extends Vue {
 	}
 	private mounted() {
 		this.cargar_data();
+		this.cargarCiudad();
+		this.cargartipoDocumentoIdentidad();
+		this.cargarPais();
+		this.cargarMoneda();
+		this.cargarTipoProveedor();
 	}
 	private cargar_data() {
 		if (this.$store.state.auth !== true) {​​​​
@@ -117,11 +128,7 @@ export default class AdmProveedoresComponent extends Vue {
 			}).catch((error) => {
 					this.popup.error('Consultar', 'Error Inesperado: ' + error);
 			});
-			this.cargartipoDocumentoIdentidad();
-			this.cargarPais();
-			this.cargarMoneda();
-			this.cargarTipoProveedor();
-			this.cargarCiudad();
+			
 	}
 	private cargartipoDocumentoIdentidad(){
 		new services.Operaciones().Consultar(this.WebApi.ws_tipodocumentosidentidad_Consultar)
@@ -176,17 +183,34 @@ export default class AdmProveedoresComponent extends Vue {
 			});
 	}
 	private cargarCiudad(){
-		new services.Operaciones().Consultar(this.WebApi.ws_ciudades_Consultar)
-		.then((resciudades) => {
-			if (resciudades.data._error.error === 0) {
-				this.lstciudades = resciudades.data._data;
-				this.dialog = false;
-			} else {
-				this.popup.error('Consultar', resciudades.data._error.descripcion);
-			}
-		}).catch((error) => {
-				this.popup.error('Consultar', 'Error Inesperado: ' + error);
-		});
+		console.log("pais:", JSON.stringify(this.proveedores.idpais))
+		if(this.proveedores.idpais === undefined){
+			new services.Operaciones().Consultar(this.WebApi.ws_ciudades_Consultar)
+			.then((resciudades) => {
+				if (resciudades.data._error.error === 0) {
+					this.lstciudades = resciudades.data._data;
+					// this.dialog = false;
+				} else {
+					this.popup.error('Consultar', resciudades.data._error.descripcion);
+				}
+			}).catch((error) => {
+					this.popup.error('Consultar', 'Error Inesperado: ' + error);
+			});
+		} else if(this.proveedores.idpais != undefined){
+			console.log("pais:", JSON.stringify(this.proveedores.idpais))
+			this.ciudades.idpais = this.proveedores.idpais
+			new services.Operaciones().Buscar(this.WebApi.ws_ciudades_Filtradas, this.ciudades)
+			.then((resciudades) => {
+				if (resciudades.data._error.error === 0) {
+					this.lstciudades = resciudades.data._data;
+					// this.dialog = false;
+				} else {
+					this.popup.error('Consultar', resciudades.data._error.descripcion);
+				}
+			}).catch((error) => {
+					this.popup.error('Consultar', 'Error Inesperado: ' + error);
+			});
+		}
 	}
 	private Insertar(): void {
 		this.proveedores = new services.clase_proveedores();

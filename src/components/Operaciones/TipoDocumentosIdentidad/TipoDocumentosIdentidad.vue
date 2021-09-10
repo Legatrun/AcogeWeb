@@ -91,6 +91,8 @@
 											hint="Ingrese Sigla"
 											placeholder="Sigla"
 											clearable
+											counter
+											maxlength="10"
 											persistent-hint
 											required
 											:rules="validacion"

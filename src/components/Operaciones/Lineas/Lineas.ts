@@ -18,6 +18,7 @@ export default class AdmLineasComponent extends Vue {
 
 	private lineas = new services.clase_lineas();
 	private lstlineas: services.clase_lineas[] = [];
+	private lstcuentas: services.clase_cuentas[] = [];
 	private buscarlineas = '';
 	private dialog = false;
 	private operacion = '';
@@ -51,6 +52,7 @@ export default class AdmLineasComponent extends Vue {
 	}
 	private mounted() {
 		this.cargar_data();
+		this.CargarCuentas();
 	}
 	private cargar_data() {
 		if (this.$store.state.auth !== true) {​​​​
@@ -63,6 +65,19 @@ export default class AdmLineasComponent extends Vue {
 					this.dialog = false;
 				} else {
 					this.popup.error('Consultar', reslineas.data._error.descripcion);
+				}
+			}).catch((error) => {
+					this.popup.error('Consultar', 'Error Inesperado: ' + error);
+			});
+	}
+	private CargarCuentas(){
+		new services.Operaciones().Consultar(this.WebApi.ws_cuentas_Consultar)
+			.then((rescuentas) => {
+				if (rescuentas.data._error.error === 0) {
+					this.lstcuentas = rescuentas.data._data;
+					console.log("Cuentas cargadas: "+JSON.stringify(this.lstcuentas))
+				} else {
+					this.popup.error('Consultar', rescuentas.data._error.descripcion);
 				}
 			}).catch((error) => {
 					this.popup.error('Consultar', 'Error Inesperado: ' + error);

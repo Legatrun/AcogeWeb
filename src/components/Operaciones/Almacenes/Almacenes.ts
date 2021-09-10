@@ -151,10 +151,10 @@ export default class AdmAlmacenesComponent extends Vue {
 		this.dialog = true;
 	}
 	private Grabar() {
-		if(!this.registroLibre(this.almacenes))
-		{
-			return;
-		}
+		// if(!this.registroLibre(this.almacenes))
+		// {
+		// 	return;
+		// }
 		if (this.operacion === 'Update') {
 			new services.Operaciones().Actualizar(this.WebApi.ws_almacenes_Actualizar, this.almacenes)
 			.then((result) => {

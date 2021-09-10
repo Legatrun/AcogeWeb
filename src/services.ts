@@ -24,6 +24,7 @@ export class Endpoints {
 	public ws_cajas_Actualizar: string = $store.state.server + 'Api/cajas/Actualizar';
 	public ws_cajas_Eliminar: string = $store.state.server + 'Api/cajas/Eliminar';
 	public ws_ciudades_Consultar: string = $store.state.server + 'Api/ciudades/Consultar';
+	public ws_ciudades_Filtradas: string = $store.state.server + 'Api/ciudades/ConsultarFilter';
 	public ws_ciudades_Buscar: string = $store.state.server + 'Api/ciudades/Buscar';
 	public ws_ciudades_Insertar: string = $store.state.server + 'Api/ciudades/Insertar';
 	public ws_ciudades_Actualizar: string = $store.state.server + 'Api/ciudades/Actualizar';

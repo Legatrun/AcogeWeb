@@ -166,6 +166,7 @@
 								autocomplete="off"
 								color="#1A237E"
 								@input="proveedores.idpais = updateText(proveedores.idpais)"
+								@change="cargarCiudad()"
 								></v-autocomplete>
 							</v-col>
 							<v-col cols="5" sm="6" class="pa-2">

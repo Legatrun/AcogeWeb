@@ -99,7 +99,6 @@
 							<v-flex sm6 style="padding: 5px">
 								<v-text-field v-model="claseitems.descripcion"
 											label="Descripcion"
-											hint="Ingrese Descripcion"
 											clearable
 											persistent-hint
 											required
@@ -110,7 +109,6 @@
 							<v-flex sm6 style="padding: 5px">
 								<v-text-field v-model="claseitems.sigla"
 											label="Sigla"
-											hint="Ingrese Sigla"
 											clearable
 											persistent-hint
 											required
@@ -121,7 +119,7 @@
 							<v-flex sm6 style="padding: 5px">
 								<v-autocomplete v-model="claseitems.cuentaventa"
 											label="Cuenta Venta"
-											hint="Seleccione la Cuenta Venta"
+											hint="Seleccione la cuenta"
 											clearable
 											persistent-hint
 											required
@@ -135,11 +133,10 @@
 							<v-flex sm6 style="padding: 5px">
 								<v-autocomplete v-model="claseitems.cuentacosto"
 											label="Cuenta Costo"
-											hint="Ingrese Cuenta Costo"
+											hint="Seleccione la cuenta"
 											clearable
 											persistent-hint
 											required
-											counter
 											:items="lstcuentas"
 											item-text="cuenta"
 											item-value="cuenta"
@@ -148,30 +145,32 @@
 								</v-autocomplete>
 							</v-flex>
 							<v-flex sm6 style="padding: 5px">
-								<v-text-field v-model="claseitems.cuentagasto"
+								<v-autocomplete v-model="claseitems.cuentagasto"
 											label="Cuenta Gasto"
-											hint="Ingrese Cuenta Gasto"
+											hint="Seleccione la cuenta"
 											clearable
 											persistent-hint
 											required
-											maxlength="17"
-											counter
+											:items="lstcuentas"
+											item-text="cuenta"
+											item-value="cuenta"
 											:rules="CuentasRules"
 											@input="claseitems.cuentagasto = updateText(claseitems.cuentagasto)">
-								</v-text-field>
+								</v-autocomplete>
 							</v-flex>
 							<v-flex sm6 style="padding: 5px">
-								<v-text-field v-model="claseitems.cuentainventario"
+								<v-autocomplete v-model="claseitems.cuentainventario"
 											label="Cuenta Inventario"
-											hint="Ingrese Cuenta Inventario"
+											hint="Seleccione la cuenta"
 											clearable
 											persistent-hint
 											required
-											maxlength="17"
-											counter
+											:items="lstcuentas"
+											item-text="cuenta"
+											item-value="cuenta"
 											:rules="CuentasRules"
 											@input="claseitems.cuentainventario = updateText(claseitems.cuentainventario)">
-								</v-text-field>
+								</v-autocomplete>
 							</v-flex>
 							
 							<v-flex sm12 style="padding: 5px">

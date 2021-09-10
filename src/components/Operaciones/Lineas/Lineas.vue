@@ -85,18 +85,18 @@
 								</v-text-field>
 							</v-flex>
 							<v-flex sm6 style="padding: 5px">
-								<v-text-field v-model="lineas.cuenta"
+								<v-autocomplete v-model="lineas.cuenta"
 											label="Cuenta"
 											hint="Ingrese Cuenta"
-											placeholder="Cuenta"
 											clearable
 											persistent-hint
 											required
+											:items="lstcuentas"
+											item-text="cuenta"
+											item-value="cuenta"
 											:rules="cuentasrules"
-											maxlength = "20"
-											counter
 											@input="lineas.cuenta = updateText(lineas.cuenta)">
-								</v-text-field>
+								</v-autocomplete>
 							</v-flex>
 						</v-layout>
 					</v-card-text>

@@ -185,7 +185,6 @@ export default class AdmItemsComponent extends Vue {
 		this.dialog = false;
 	}
 	private Actualizar(data: services.clase_items): void {
-
 		new services.Operaciones().Buscar(this.WebApi.ws_items_Buscar, data )
 			 .then((resBanco) => {	
 					 this.lstclaseitemscargar= resBanco.data._data;
@@ -196,8 +195,6 @@ export default class AdmItemsComponent extends Vue {
 		this.dialog = true;
 		this.items.fechacreacion = this.FormatDate(Date.now());
 		this.items.fechaultimomovimiento = this.FormatDate(Date.now());
-		this.operacion = 'Update';
-		this.dialog = true;
 	}
 	private select_fecha(fecha: string) {
 		return fecha.substr(0, 10);

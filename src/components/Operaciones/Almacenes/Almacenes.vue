@@ -88,8 +88,8 @@
 											persistent-hint
 											required
 											:rules="validacion"
-											counter
 											outlined
+											counter
 											maxlength="70"
 											@input="almacenes.descripcion = updateText(almacenes.descripcion)">
 								</v-textarea>
