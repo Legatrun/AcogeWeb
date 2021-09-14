@@ -188,7 +188,7 @@ export default class AdmCorrelativosTiposComprobantesComponent extends Vue {
 		new services.Operaciones().Insertar(this.WebApi.ws_tiposcomprobantes_Insertar, this.tiposcomprobantes)
 		.then((result) => {
 			if (result.data._error.error === 0) {
-			this.popup.success('Insertar', 'ok');
+			this.popup.success('Insertar', 'Inserción exitosa');
 			this.cargar_dataTipoComp();
 			this.tiposcomprobantes.idtipocomprobante = result.data._data[0].idtipocomprobante;	
 			this.correlativostiposcomprobantes.idtipocomprobante = this.tiposcomprobantes.idtipocomprobante;
@@ -199,7 +199,7 @@ export default class AdmCorrelativosTiposComprobantesComponent extends Vue {
 			}
 		})
 		.catch((error) => {
-			this.popup.error('Insertar', 'Error Inesperado: ' + error);
+			this.popup.error('Insertar', 'Los campos no pueden estar vacios');
 			console.log(error)
 			});
 		}

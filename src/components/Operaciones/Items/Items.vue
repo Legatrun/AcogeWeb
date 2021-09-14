@@ -59,7 +59,7 @@
 			<template v-slot:top>
 				<v-tooltip bottom>
 					<template v-slot:activator="{ on }">
-						<v-btn color="gray" v-on="on" @click="Insertar()">Adicionar Nuevo Registro de Items</v-btn>
+						<v-btn color="botonCrear" dark v-on="on" @click="Insertar()">Adicionar Registro de Items</v-btn>
 					</template>
 					<span>Adicionar nuevo registro de Item</span>
 				</v-tooltip>
@@ -70,6 +70,12 @@
 				</v-alert>
 			</template>
 		</v-data-table>
+		<v-tooltip bottom>
+			<template v-slot:activator="{ on }">
+				<v-btn color="botonActualizarTabla" dark fab small v-on="on" @click="cargar_data()"><v-icon>update</v-icon></v-btn>
+			</template>
+			<span>Actualizar Tabla</span>
+		</v-tooltip>
 		<v-dialog v-model="dialog" persistent max-width="50%">
 			<v-card>
 				<v-toolbar style="padding:10px" dark class="primary">
@@ -83,8 +89,6 @@
 								<v-flex sm6 style="padding: 5px">
 									<v-text-field v-model="items.codigoitem"
 												label="Codigo de Item"
-												hint="Ingrese Codigo de Item"
-												placeholder="Codigo de Item"
 												clearable
 												persistent-hint
 												required
@@ -97,7 +101,6 @@
 								<v-flex sm6 style="padding: 5px">
 									<v-text-field v-model="items.codigoitem"
 												label="Codigo de Item"
-												placeholder="Codigo de Item"
 												readonly
 												persistent-hint>
 									</v-text-field>
@@ -106,8 +109,6 @@
 							<v-flex sm6 style="padding: 5px">
 								<v-text-field v-model="items.modelonroparte"
 											label="Modelo Nro Parte"
-											hint="Ingrese Modelo Nro Parte"
-											placeholder="Modelo Nro Parte"
 											clearable
 											persistent-hint
 											required
@@ -118,8 +119,6 @@
 							<v-flex sm12 style="padding: 5px">
 								<v-text-field v-model="items.descripcion"
 											label="Descripcion"
-											hint="Ingrese Descripcion"
-											placeholder="Descripcion"
 											clearable
 											persistent-hint
 											required
@@ -141,7 +140,6 @@
 										<v-text-field
 											v-model="items.fechacreacion"
 											label="Ingrese fecha de creacion"
-											hint="Ingrese fecha de creacion"
 											persistent-hint
 											prepend-icon="event"
 											v-on="on">
@@ -164,7 +162,6 @@
 										<v-text-field
 											v-model="items.fechaultimomovimiento"
 											label="Ingrese fecha ultimo movimiento"
-											hint="Ingrese fecha ultimo movimiento"
 											persistent-hint
 											prepend-icon="event"
 											v-on="on">
@@ -176,8 +173,6 @@
 							<v-flex sm6 style="padding: 5px">
 								<v-text-field v-model="items.costoinicial"
 											label="Costo Inicial"
-											hint="Ingrese Costo Inicial"
-											placeholder="Costo Inicial"
 											clearable
 											persistent-hint
 											required
@@ -188,8 +183,6 @@
 							<v-flex sm6 style="padding: 5px">
 								<v-text-field v-model="items.costoactual"
 											label="Costo Actual"
-											hint="Ingrese Costo Actual"
-											placeholder="Costo Actual"
 											clearable
 											persistent-hint
 											required
@@ -200,8 +193,6 @@
 							<v-flex sm6 style="padding: 5px">
 								<v-text-field v-model="items.saldoinicial"
 											label="Saldo Inicial"
-											hint="Ingrese Saldo Inicial"
-											placeholder="Saldo Inicial"
 											clearable
 											persistent-hint
 											required
@@ -213,8 +204,6 @@
 							<v-flex sm6 style="padding: 5px">
 								<v-text-field v-model="items.saldoactual"
 											label="Saldo Actual"
-											hint="Ingrese Saldo Actual"
-											placeholder="Saldo Actual"
 											clearable
 											persistent-hint
 											required
@@ -281,8 +270,6 @@
 							<v-flex sm6 style="padding: 5px">
 								<v-text-field v-model="items.cantidadminima"
 											label="Cantidad Minima"
-											hint="Ingrese Cantidad Minima"
-											placeholder="Cantidad Minima"
 											clearable
 											persistent-hint
 											required
@@ -294,8 +281,6 @@
 							<v-flex sm6 style="padding: 5px">
 								<v-text-field v-model="items.cantidadmaxima"
 											label="Cantidad Maxima"
-											hint="Ingrese Cantidad Maxima"
-											placeholder="Cantidad Maxima"
 											clearable
 											persistent-hint
 											required

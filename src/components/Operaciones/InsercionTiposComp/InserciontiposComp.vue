@@ -54,8 +54,6 @@
 							<v-flex sm6 style="padding: 5px">
 								<v-text-field v-model="tiposcomprobantes.descripcion"
 											label="Descripcion"
-											hint="Ingrese Descripcion"
-											placeholder="Descripcion"
 											clearable
 											persistent-hint
 											required
@@ -65,8 +63,6 @@
 							<v-flex sm6 style="padding: 5px">
 								<v-text-field v-model="tiposcomprobantes.sigla"
 											label="Sigla"
-											hint="Ingrese Sigla"
-											placeholder="Sigla"
 											clearable
 											persistent-hint
 											required
@@ -89,11 +85,21 @@
 							<v-flex sm4 style="padding: 5px">
 								<h4 class="mb-0">Automatico:</h4>
 								<v-switch v-model="tiposcomprobantes.automatico"
-									color="indigo"
-									hint="Seleccione Automatico"
-									label="tiposcomprobantes.Automatico"></v-switch>
+									color="success"
+									:label="`Estado: ${tiposcomprobantes.automatico ? 'Si' : 'No'}`"
+									>
+								</v-switch>
 							</v-flex>
-							
+							<!-- <v-flex sm4 style="padding: 5px">
+								<v-col cols="7" sm="5">
+									<p class="text-sm-left"><b>Automatico: </b></p>
+									<v-switch 
+										v-model="claseitems.ingresainventario"
+										color="success"
+										:label="`Estado: ${claseitems.ingresainventario ? 'Si' : 'No'}`">
+									</v-switch>
+								</v-col>
+							</v-flex> -->
 							
 						</v-layout>
 					</v-card-text>
@@ -133,8 +139,6 @@
 								<v-flex sm6 style="padding: 5px">
 									<v-text-field v-model="correlativostiposcomprobantes.anio"
 												label="Año"
-												hint="Ingrese Año"
-												placeholder="Año"
 												clearable
 												persistent-hint
 												required
@@ -169,8 +173,6 @@
 								<v-flex sm6 style="padding: 5px">
 									<v-text-field v-model="correlativostiposcomprobantes.anio"
 												label="Año"
-												placeholder="Año"
-												
 												persistent-hint>
 									</v-text-field>
 								</v-flex>
@@ -189,8 +191,6 @@
 							<v-flex sm12 style="padding: 5px">
 								<v-text-field v-model="correlativostiposcomprobantes.correlativo"
 											label="Correlativo"
-											hint="Ingrese Correlativo"
-											placeholder="Correlativo"
 											clearable
 											persistent-hint
 											required

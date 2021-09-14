@@ -85,6 +85,7 @@ export default class AdmItemsComponent extends Vue {
 		this.cargar_data();
 	}
 	private cargar_data() {
+		console.log("Se actualizo")
 		if (this.$store.state.auth !== true) {​​​​
 			this.$router.push({​​​​ path: '/Login' }​​​​);​​​​
 		}

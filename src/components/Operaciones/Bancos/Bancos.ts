@@ -10,11 +10,11 @@ import helpers from '@/helper';
 export default class AdmBancosComponent extends Vue {
 	private headers: any[] = [
 		//{ text: 'IDBanco', align: 'left', sortable: true, value: 'idbanco', width: '15%' },
-		{ text: 'nit', align: 'left', sortable: false, value: 'nit', width: '15%' },
-		{ text: 'descripcion', align: 'left', sortable: false, value: 'descripcion', width: '15%' },
-		{ text: 'bancopropio', align: 'left', sortable: false, value: 'bancopropio', width: '15%' },
-		{ text: 'idpais', align: 'left', sortable: false, value: 'idpais', width: '15%' },
-		{ text: 'idciudad', align: 'left', sortable: false, value: 'idciudad', width: '15%' },
+		{ text: 'Nit', align: 'left', sortable: false, value: 'nit', width: '15%' },
+		{ text: 'Descripcion', align: 'left', sortable: false, value: 'descripcion', width: '15%' },
+		{ text: 'Banco propio', align: 'left', sortable: false, value: 'bancopropio', width: '15%' },
+		{ text: 'Pais', align: 'left', sortable: false, value: 'idpais', width: '15%' },
+		{ text: 'Ciudad', align: 'left', sortable: false, value: 'idciudad', width: '15%' },
 		{ text: 'Operaciones', align: 'center', sortable: false, value: 'action', width: '20%' },
 	];
 	private WebApi = new services.Endpoints();

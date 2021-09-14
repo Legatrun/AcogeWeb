@@ -9,7 +9,7 @@ import helpers from '@/helper';
 @Component
 export default class AdmProveedoresComponent extends Vue {
 	private headers: any[] = [
-		{ text: 'CodigoProveedor', align: 'left', sortable: true, value: 'codigoproveedor', width: '5%' },
+		{ text: 'Codigo Proveedor', align: 'left', sortable: true, value: 'codigoproveedor', width: '5%' },
 		{ text: 'Documento Identidad', align: 'left', sortable: false, value: 'iddocumentoidentidad', width: '5%' },
 		{ text: 'Numero Documento', align: 'left', sortable: false, value: 'numerodocumento', width: '5%' },
 		{ text: 'Razon Social', align: 'left', sortable: false, value: 'razonsocial', width: '5%' },

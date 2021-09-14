@@ -49,13 +49,13 @@
 			<template v-slot:top>
 				<v-tooltip bottom>
 					<template v-slot:activator="{ on }">
-						<v-btn color="gray" v-on="on" @click="Insertar()">Adicionar Nuevo Registro de Ciudades</v-btn>
+						<v-btn color="botonCrear" dark v-on="on" @click="Insertar()">Añadir Ciudad</v-btn>
 					</template>
 					<span>Adicionar nuevo registro de Ciudad</span>
 				</v-tooltip>
 				<v-tooltip bottom>
 					<template v-slot:activator="{ on }">
-						<v-btn color="gray" v-on="on" @click="newMoneda()">Adicionar Nuevo Registro Monedas</v-btn>
+						<v-btn color="botonAdicional" outlined v-on="on" @click="newMoneda()">Añadir Moneda</v-btn>
 					</template>
 					<span>Adicionar nuevo registro de Moneda</span>
 				</v-tooltip>
@@ -66,6 +66,12 @@
 				</v-alert>
 			</template>
 		</v-data-table>
+		<v-tooltip bottom>
+			<template v-slot:activator="{ on }">
+				<v-btn color="botonActualizarTabla" dark fab small v-on="on" @click="cargar_data()"><v-icon>update</v-icon></v-btn>
+			</template>
+			<span>Actualizar Tabla</span>
+		</v-tooltip>
 		<v-dialog v-model="dialog" persistent max-width="50%">
 			<v-card>
 				<v-toolbar style="padding:10px" dark class="primary">
