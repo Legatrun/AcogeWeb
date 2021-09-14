@@ -13,14 +13,14 @@
       
       <!-- Compras -->
       <v-list-group
-        :value="true"
+        :value="false"
         prepend-icon="mdi-account-circle"
       >
         <template v-slot:activator>
           <v-list-item-title>Compras</v-list-item-title>
         </template>
         <v-list-group
-          :value="true"
+          :value="false"
           no-action
           sub-group
         >
@@ -80,14 +80,14 @@
       </v-list-group>
       <!-- Inventarios -->
        <v-list-group
-        :value="true"
+        :value="false"
         prepend-icon="mdi-account-circle"
       >
         <template v-slot:activator>
           <v-list-item-title>Inventarios</v-list-item-title>
         </template>
         <v-list-group
-          :value="true"
+          :value="false"
           no-action
           sub-group
         >
@@ -148,14 +148,14 @@
 
        <!-- Ctas por Cobrar -->
        <v-list-group
-        :value="true"
+        :value="false"
         prepend-icon="mdi-account-circle"
       >
         <template v-slot:activator>
           <v-list-item-title>Cuentas por Cobrar</v-list-item-title>
         </template>
         <v-list-group
-          :value="true"
+          :value="false"
           no-action
           sub-group
         >
@@ -171,7 +171,7 @@
           </v-list-item>
 <!-- Parametros Cuentas por Cobrar -->
 <v-list-group
-          :value="true"
+          :value="false"
           no-action
           sub-group
         >
@@ -189,7 +189,7 @@
         </v-list-group>
 <!-- Bancos -->
 <v-list-group
-          :value="true"
+          :value="false"
           no-action
           sub-group
         >
@@ -250,14 +250,14 @@
       </v-list-group>
        <!-- Contabilidad -->
        <v-list-group
-        :value="true"
+        :value="false"
         prepend-icon="mdi-account-circle"
       >
         <template v-slot:activator>
           <v-list-item-title>Contabilidad</v-list-item-title>
         </template>
         <v-list-group
-          :value="true"
+          :value="false"
           no-action
           sub-group
         >
@@ -319,14 +319,14 @@
 
       <!-- Parametros Generales -->
        <v-list-group
-        :value="true"
+        :value="false"
         prepend-icon="mdi-account-circle"
       >
         <template v-slot:activator>
           <v-list-item-title>Parametros Generales</v-list-item-title>
         </template>
         <v-list-group
-          :value="true"
+          :value="false"
           no-action
           sub-group
         >
@@ -387,14 +387,14 @@
 
       <!-- Ctas por Cobrar -->
        <v-list-group
-        :value="true"
+        :value="false"
         prepend-icon="mdi-account-circle"
       >
         <template v-slot:activator>
           <v-list-item-title>RRHH</v-list-item-title>
         </template>
         <v-list-group
-          :value="true"
+          :value="false"
           no-action
           sub-group
         >
@@ -456,14 +456,14 @@
 
 <!-- >Tesoreria -->
        <v-list-group
-        :value="true"
+        :value="false"
         prepend-icon="mdi-account-circle"
       >
         <template v-slot:activator>
           <v-list-item-title>Tesoreria</v-list-item-title>
         </template>
         <v-list-group
-          :value="true"
+          :value="false"
           no-action
           sub-group
         >
