@@ -9,7 +9,7 @@
           <v-list-item-title style="font-size:1.2em" >{{ item.title }}</v-list-item-title>
         </v-list-item-content>
       </v-list-item>
-<v-list>
+  <v-list>
       
       <!-- Compras -->
       <v-list-group
@@ -521,11 +521,8 @@
           </v-list-item>
         </v-list-group>
       </v-list-group>
-    </v-list>   
-
-
-
-
+    </v-list>
+    <v-list> 
       <v-list-item v-for="item in menuSalir" :key="item.title" @click="Logout()">
         <v-list-item-icon>
           <v-icon>{{ item.icon }}</v-icon>

@@ -54,9 +54,9 @@
                                 </v-form>
                             </v-card-text>
                             <v-card-actions style="justify-content: center">
-                                <v-btn color="success" style="width: 32.5%" @click="ingresar">Ingresar</v-btn>
-                                <v-btn color="error" style="width: 32.5%" @click="cancelar">Cancelar</v-btn>
-                                <v-btn color="accent" style="width: 32.5%" @click="reset">Limpiar</v-btn>
+                                <v-btn color="success" :loading='loading' style="width: 32.5%" @click="ingresar()">Ingresar</v-btn>
+                                <v-btn color="error" style="width: 32.5%" @click="cancelar()">Cancelar</v-btn>
+                                <v-btn color="accent" style="width: 32.5%" @click="reset()">Limpiar</v-btn>
                             </v-card-actions>
                         </v-card>
                     </v-flex>

@@ -25,6 +25,7 @@ export default class LoginComponent extends Vue {
     public showPassword: boolean = false;
     public dominio: boolean = false;
     public loginResponse: any = [];
+    public loading: boolean = false;
     // ** Reglas */
     public requiredRule: any = [];
     // ** Métodos */
@@ -59,23 +60,37 @@ export default class LoginComponent extends Vue {
         if (this.login.usuario === '' || this.login.password === '') {
             this.popup.error('Campos Incompletos', 'Llene ambos campos por favor');
         } else {
-            this.$store.commit('login', true);
-            this.$router.push({ path: '/Principal' });
+            if(this.loading){
+                return
+            }
+            // this.$store.commit('login', true);
+            // this.$router.push({ path: '/Principal' });
             this.objcrypt = new crypto();
             this.cryptedLogin = new services.ClaseAutenticacion();
             this.cryptedLogin.usuario = this.objcrypt.EncryptAES(this.login.usuario.toString());
             this.cryptedLogin.password = this.objcrypt.EncryptAES(this.login.password.toString());
             this.WebApiAuth = this.WebApiLoginBd;
+            this.loading = true;
             if (this.dominio) {
                 this.WebApiAuth = this.WebApiLoginAd;
             }
             new services.Operaciones().Login(this.WebApiAuth, this.cryptedLogin)
             .then((res) => {
-                if (res.data.error === -3) {
-                    this.popup.error('Error en la Autenticación', 'Sin conexión al Dominio');
+                console.log(res)
+                this.loading = false;
+                if (res.data._error.error === -1) {
+                    this.popup.error('Error en la Autenticación', res.data._error.descripcion);
                     return;
                 }
-                if (res.data.error === 0) {
+                if (res.data._error.error === -4) {
+                    this.popup.error('Error en la Autenticación de dominio', res.data._error.descripcion);
+                    return;
+                }
+                if (res.data._error.error === -3) {
+                    this.popup.error('Error en la Autenticación de dominio', res.data._error.descripcion);
+                    return;
+                }
+                if (res.data._error.error === 0) {
                     
                     if (res.data.length !== 0
                         && this.login.usuario.trim() !== '' && this.login.password.trim() !== '') {
@@ -92,6 +107,7 @@ export default class LoginComponent extends Vue {
             })
             .catch((err) => {
                 this.popup.error('Error en la Autenticación', err.response.data);
+                this.loading = false;
             });
         }
     }
