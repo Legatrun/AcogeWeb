@@ -37,6 +37,14 @@
 											Obtener Credito Fiscal
 										</v-btn>
 									</v-flex>
+									<v-flex sm1.5 style="padding: 10px">
+										<v-tooltip bottom>
+											<template v-slot:activator="{ on }">
+												<v-btn color="botonActualizarTabla" dark fab small v-on="on" @click="cargar_data()"><v-icon>update</v-icon></v-btn>
+											</template>
+											<span>Actualizar Tabla</span>
+										</v-tooltip>
+									</v-flex>
 								</v-row>
 							</v-container>
 						</v-form>

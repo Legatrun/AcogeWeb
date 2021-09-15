@@ -115,6 +115,8 @@
 							<v-flex sm6 style="padding: 5px">
 								<v-text-field v-model="claseitems.sigla"
 											label="Sigla"
+											counter
+											maxlength="5"
 											clearable
 											persistent-hint
 											required

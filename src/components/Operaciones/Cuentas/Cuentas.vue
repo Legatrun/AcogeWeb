@@ -87,8 +87,6 @@
 								<v-flex sm12 style="padding: 5px">
 									<v-text-field v-model="cuentas.cuenta"
 												label="Cuenta"
-												hint="Ingrese Cuenta"
-												placeholder="Cuenta"
 												clearable
 												persistent-hint
 												required
@@ -110,8 +108,6 @@
 							<v-flex sm12 style="padding: 5px">
 								<v-text-field v-model="cuentas.nombrecuenta"
 											label="NombreCuenta"
-											hint="Ingrese NombreCuenta"
-											placeholder="NombreCuenta"
 											clearable
 											persistent-hint
 											required
@@ -135,9 +131,8 @@
 							</v-col>
 							<v-flex sm12 style="padding: 5px">
 								<v-text-field v-model="cuentas.nivel"
+											type="number"
 											label="Nivel"
-											hint="Ingrese Nivel"
-											placeholder="Nivel"
 											clearable
 											persistent-hint
 											required
@@ -146,17 +141,16 @@
 								</v-text-field>
 							</v-flex>
 							<v-flex sm4 style="padding: 5px">
-								<h4 class="mb-0">CuentaAsiento:</h4>
+								<h4 class="mb-0">Cuenta Asiento:</h4>
 								<v-switch v-model="cuentas.cuentaasiento"
 									color="indigo"
-									hint="Seleccione CuentaAsiento"
-									label="cuentas.CuentaAsiento"></v-switch>
+									>
+									</v-switch>
 							</v-flex>
 							<v-flex sm12 style="padding: 5px">
-								<v-text-field v-model="cuentas.cuentasumar"
-											label="CuentaSumar"
-											hint="Ingrese CuentaSumar"
-											placeholder="CuentaSumar"
+								<v-text-field v-model.number="cuentas.cuentasumar"
+											type="number"
+											label="Cuenta Sumar"
 											clearable
 											persistent-hint
 											required
@@ -165,10 +159,9 @@
 								</v-text-field>
 							</v-flex>
 							<v-flex sm12 style="padding: 5px">
-								<v-text-field v-model="cuentas.activopasivo"
-											label="ActivoPasivo"
-											hint="Ingrese ActivoPasivo"
-											placeholder="ActivoPasivo"
+								<v-text-field v-model.number="cuentas.activopasivo"
+											type="number"
+											label="Activo Pasivo"
 											clearable
 											persistent-hint
 											required

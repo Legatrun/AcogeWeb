@@ -13,7 +13,7 @@ export default class AdmMonedasComponent extends Vue {
 		{ text: 'descripcion', align: 'left', sortable: false, value: 'descripcion', width: '15%' },
 		{ text: 'sigla', align: 'left', sortable: false, value: 'sigla', width: '15%' },
 		{ text: 'monedalocal', align: 'left', sortable: false, value: 'monedalocal', width: '15%' },
-		{ text: 'Operaciones', align: 'left', sortable: false, value: 'action', width: '20%' },
+		{ text: 'Operaciones', align: 'left', sortable: false, value: 'action', width: '5%' },
 	];
 	private WebApi = new services.Endpoints();
 

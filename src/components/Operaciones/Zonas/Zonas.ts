@@ -13,7 +13,7 @@ export default class AdmZonasComponent extends Vue {
 		{ text: 'Pais', align: 'left', sortable: false, value: 'idpais', width: '15%' },
 		{ text: 'Ciudad', align: 'left', sortable: false, value: 'idciudad', width: '15%' },
 		{ text: 'Descripcion', align: 'left', sortable: false, value: 'descripcion', width: '15%' },
-		{ text: 'Operaciones', align: 'left', sortable: false, value: 'action', width: '20%' },
+		{ text: 'Operaciones', align: 'left', sortable: false, value: 'action', width: '5%' },
 	];
 	private WebApi = new services.Endpoints();
 

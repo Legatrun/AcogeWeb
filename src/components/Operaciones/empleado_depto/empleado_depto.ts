@@ -11,7 +11,7 @@ export default class Admempleado_deptoComponent extends Vue {
 	private headers: any[] = [
 	//	{ text: 'Empleado', align: 'left', sortable: true, value: 'empleado', width: '15%' },
 		{ text: 'Departamento', align: 'left', sortable: false, value: 'departamento', width: '15%' },
-		{ text: 'Cargo', align: 'left', sortable: false, value: 'cargo', width: '15%' },
+		{ text: 'Cargo', align: 'left', sortable: false, value: 'cargo', width: '10%' },
 		{ text: 'Haber basico', align: 'left', sortable: false, value: 'haber_basico', width: '10%' },
 		{ text: 'Quincena', align: 'left', sortable: false, value: 'quincena', width: '10%' },
 		{ text: 'Fecha ingreso', align: 'left', sortable: false, value: 'fecha_ingreso', width: '15%' },

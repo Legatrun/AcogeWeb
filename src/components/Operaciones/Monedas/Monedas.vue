@@ -48,7 +48,7 @@
 			<template v-slot:top>
 				<v-tooltip bottom>
 					<template v-slot:activator="{ on }">
-						<v-btn color="botonCrear" darks v-on="on" @click="Insertar()">Añadir Moneda</v-btn>
+						<v-btn color="botonCrear" dark v-on="on" @click="Insertar()">Añadir Moneda</v-btn>
 					</template>
 					<span>Adicionar nuevo registro de Monedas</span>
 				</v-tooltip>

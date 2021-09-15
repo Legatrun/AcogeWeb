@@ -171,11 +171,18 @@
 								></v-autocomplete>
 							</v-col>
 								<v-flex sm6 style="padding: 5px">
-									<v-text-field v-model="correlativostiposcomprobantes.anio"
+									<v-text-field v-model.number="correlativostiposcomprobantes.anio"
 												label="Año"
-												persistent-hint>
+												persistent-hint
+												type="number"
+												counter
+												maxlength="4"
+												clearable
+												outlined
+												>
 									</v-text-field>
 								</v-flex>
+
 							
 								<!-- <v-col cols="5" sm="6" class="pa-2">	
 										<v-autocomplete v-model="correlativostiposcomprobantes.mes"
@@ -186,7 +193,7 @@
 												autocomplete="off"
 												color="#1A237E">
 										</v-autocomplete>
-							</v-col> -->
+								</v-col> -->
 							</template>
 							<v-flex sm12 style="padding: 5px">
 								<v-text-field v-model="correlativostiposcomprobantes.correlativo"

@@ -11,7 +11,7 @@ export default class AdmCorrelativosTiposComprobantesComponent extends Vue {
 		{ text: 'Año', align: 'left', sortable: true, value: 'anio', width: '15%' },
 		{ text: 'Mes', align: 'left', sortable: true, value: 'mes', width: '15%' },
 		{ text: 'Correlativo', align: 'left', sortable: false, value: 'correlativo', width: '15%' },
-		{ text: 'Operaciones', align: 'center', sortable: false, value: 'action', width: '20%' },
+		{ text: 'Operaciones', align: 'center', sortable: false, value: 'action', width: '5%' },
 	];
 	private WebApi = new services.Endpoints;
 

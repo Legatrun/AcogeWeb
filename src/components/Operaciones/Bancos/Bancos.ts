@@ -93,17 +93,44 @@ export default class AdmBancosComponent extends Vue {
 			});
 	}
 	private cargarCiudad(){
-		new services.Operaciones().Consultar(this.WebApi.ws_ciudades_Consultar)
+		// new services.Operaciones().Consultar(this.WebApi.ws_ciudades_Consultar)
+		// 	.then((resciudades) => {
+		// 		if (resciudades.data._error.error === 0) {
+		// 			this.lstciudades = resciudades.data._data;
+		// 			// this.dialog = false;
+		// 		} else {
+		// 			this.popup.error('Consultar', resciudades.data._error.descripcion);
+		// 		}
+		// 	}).catch((error) => {
+		// 			this.popup.error('Consultar', 'Error Inesperado: ' + error);
+		// 	});
+		if(this.bancos.idpais === undefined){
+			new services.Operaciones().Consultar(this.WebApi.ws_ciudades_Consultar)
 			.then((resciudades) => {
 				if (resciudades.data._error.error === 0) {
 					this.lstciudades = resciudades.data._data;
-					this.dialog = false;
+					// this.dialog = false;
 				} else {
 					this.popup.error('Consultar', resciudades.data._error.descripcion);
 				}
 			}).catch((error) => {
 					this.popup.error('Consultar', 'Error Inesperado: ' + error);
 			});
+		} else if(this.bancos.idpais != undefined){
+			console.log("pais:", JSON.stringify(this.bancos.idpais))
+			this.ciudades.idpais = this.bancos.idpais
+			new services.Operaciones().Buscar(this.WebApi.ws_ciudades_Filtradas, this.ciudades)
+			.then((resciudades) => {
+				if (resciudades.data._error.error === 0) {
+					this.lstciudades = resciudades.data._data;
+					// this.dialog = false;
+				} else {
+					this.popup.error('Consultar', resciudades.data._error.descripcion);
+				}
+			}).catch((error) => {
+					this.popup.error('Consultar', 'Error Inesperado: ' + error);
+			});
+		}
 	}
 	private Insertar(): void {
 		this.bancos = new services.clase_bancos();

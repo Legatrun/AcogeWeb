@@ -122,8 +122,6 @@
 							<v-flex sm6 style="padding: 5px">
 								<v-text-field v-model="ciudades.descripcion"
 											label="Nombre de la Ciudad"
-											hint="Ingrese Nombre de la ciudad"
-											placeholder="Nombre de la Ciudad"
 											clearable
 											persistent-hint
 											required
@@ -134,8 +132,8 @@
 							<v-flex sm6 style="padding: 5px">
 								<v-text-field v-model="ciudades.sigla"
 											label="Sigla"
-											hint="Ingrese Sigla"
-											placeholder="Sigla"
+											counter
+											maxlength="5"
 											clearable
 											persistent-hint
 											required

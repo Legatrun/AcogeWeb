@@ -10,11 +10,11 @@ import helpers from '@/helper';
 export default class AdmTiposdeCambioComponent extends Vue {
 	private headers: any[] = [
 		{ text: 'Fecha', align: 'left', sortable: true, value: 'fecha', width: '15%' },
-		{ text: 'idmonedaorigen', align: 'left', sortable: false, value: 'idmonedaorigen', width: '15%' },
-		{ text: 'idmonedadestino', align: 'left', sortable: false, value: 'idmonedadestino', width: '15%' },
-		{ text: 'cotizacionoficial', align: 'left', sortable: false, value: 'cotizacionoficial', width: '15%' },
-		{ text: 'cotizacioncompra', align: 'left', sortable: false, value: 'cotizacioncompra', width: '15%' },
-		{ text: 'cotizacionventa', align: 'left', sortable: false, value: 'cotizacionventa', width: '15%' },
+		{ text: 'Moneda Origen', align: 'left', sortable: false, value: 'idmonedaorigen', width: '15%' },
+		{ text: 'Moneda Destino', align: 'left', sortable: false, value: 'idmonedadestino', width: '15%' },
+		{ text: 'Cotizacion Oficial', align: 'left', sortable: false, value: 'cotizacionoficial', width: '15%' },
+		{ text: 'Cotizacion Compra', align: 'left', sortable: false, value: 'cotizacioncompra', width: '15%' },
+		{ text: 'Cotizacion Venta', align: 'left', sortable: false, value: 'cotizacionventa', width: '15%' },
 		{ text: 'Operaciones', align: 'center', sortable: false, value: 'action', width: '20%' },
 	];
 	private WebApi = new services.Endpoints();

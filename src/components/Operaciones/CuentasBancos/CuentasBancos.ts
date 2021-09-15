@@ -9,12 +9,12 @@ import helpers from '@/helper';
 @Component
 export default class AdmCuentasBancosComponent extends Vue {
 	private headers: any[] = [
-		{ text: 'IDBanco', align: 'left', sortable: true, value: 'idbanco', width: '15%' },
-		{ text: 'NroCuenta', align: 'left', sortable: true, value: 'nrocuenta', width: '15%' },
-		{ text: 'idmoneda', align: 'left', sortable: false, value: 'idmoneda', width: '15%' },
-		{ text: 'saldoactual', align: 'left', sortable: false, value: 'saldoactual', width: '15%' },
-		{ text: 'cuentacontable', align: 'left', sortable: false, value: 'cuentacontable', width: '15%' },
-		{ text: 'fechaapertura', align: 'left', sortable: false, value: 'fechaapertura', width: '15%' },
+		{ text: 'Banco', align: 'left', sortable: true, value: 'idbanco', width: '15%' },
+		{ text: 'Nro Cuenta', align: 'left', sortable: true, value: 'nrocuenta', width: '15%' },
+		{ text: 'Moneda', align: 'left', sortable: false, value: 'idmoneda', width: '15%' },
+		{ text: 'Saldo Actual', align: 'left', sortable: false, value: 'saldoactual', width: '15%' },
+		{ text: 'Cuenta Contable', align: 'left', sortable: false, value: 'cuentacontable', width: '15%' },
+		{ text: 'Fecha Apertura', align: 'left', sortable: false, value: 'fechaapertura', width: '15%' },
 		{ text: 'Operaciones', align: 'left', sortable: false, value: 'action', width: '20%' },
 	];
 	// tslint:disable-next-line: variable-name

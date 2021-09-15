@@ -116,8 +116,6 @@
 							<v-flex sm6 style="padding: 5px">
 								<v-text-field v-model="bancos.nit"
 											label="NIT"
-											hint="Ingrese NIT"
-											placeholder="NIT"
 											clearable
 											persistent-hint
 											required
@@ -129,8 +127,6 @@
 							<v-flex sm6 style="padding: 5px">
 								<v-text-field v-model="bancos.descripcion"
 											label="Descripcion"
-											hint="Ingrese Descripcion"
-											placeholder="Descripcion"
 											clearable
 											persistent-hint
 											required
@@ -150,6 +146,7 @@
 								outlined
 								autocomplete="off"
 								color="#1A237E"
+								@change="cargarCiudad()"
 								></v-autocomplete>
 							</v-col>
 							<v-col cols="6" sm="4" class="pa-2">

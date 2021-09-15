@@ -10,11 +10,11 @@ import helpers from '@/helper';
 export default class AdmCiudadesComponent extends Vue {
 	private headers: any[] = [
 		//{ text: 'IDCiudad', align: 'left', sortable: true, value: 'idciudad', width: '15%' },
-		{ text: 'idpais', align: 'left', sortable: false, value: 'idpais', width: '15%' },
-		{ text: 'descripcion', align: 'left', sortable: false, value: 'descripcion', width: '15%' },
-		{ text: 'sigla', align: 'left', sortable: false, value: 'sigla', width: '15%' },
-		{ text: 'idmoneda', align: 'left', sortable: false, value: 'idmoneda', width: '15%' },
-		{ text: 'Operaciones', align: 'left', sortable: false, value: 'action', width: '20%' },
+		{ text: 'País', align: 'left', sortable: false, value: 'idpais', width: '15%' },
+		{ text: 'Descripción', align: 'left', sortable: false, value: 'descripcion', width: '15%' },
+		{ text: 'Sigla', align: 'left', sortable: false, value: 'sigla', width: '15%' },
+		{ text: 'Moneda', align: 'left', sortable: false, value: 'idmoneda', width: '15%' },
+		{ text: 'Operaciones', align: 'left', sortable: false, value: 'action', width: '5%' },
 	];
 	private WebApi = new services.Endpoints();
 

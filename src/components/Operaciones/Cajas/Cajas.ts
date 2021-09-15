@@ -10,10 +10,10 @@ import helpers from '@/helper';
 export default class AdmCajasComponent extends Vue {
 	private headers: any[] = [
 		//{ text: 'IDCaja', align: 'left', sortable: true, value: 'idcaja', width: '15%' },
-		{ text: 'descripcion', align: 'left', sortable: false, value: 'descripcion', width: '15%' },
-		{ text: 'cuenta', align: 'left', sortable: false, value: 'cuenta', width: '15%' },
-		{ text: 'monto', align: 'left', sortable: false, value: 'monto', width: '15%' },
-		{ text: 'idmoneda', align: 'left', sortable: false, value: 'idmoneda', width: '15%' },
+		{ text: 'Descripcion', align: 'left', sortable: false, value: 'descripcion', width: '15%' },
+		{ text: 'Cuenta', align: 'left', sortable: false, value: 'cuenta', width: '15%' },
+		{ text: 'Monto', align: 'left', sortable: false, value: 'monto', width: '15%' },
+		{ text: 'Moneda', align: 'left', sortable: false, value: 'idmoneda', width: '15%' },
 		{ text: 'Operaciones', align: 'left', sortable: false, value: 'action', width: '20%' },
 	];
 	private WebApi = new services.Endpoints();
