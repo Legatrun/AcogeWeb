@@ -750,6 +750,10 @@ export class clase_empresa {
 	public estado !: boolean;
 }
 
+export class nivel{
+	public numeronivel!:number;
+}
+
 // tslint:disable-next-line: max-classes-per-file class-name
 export class Operaciones {
 	public Login(url: string, objeto: any) {

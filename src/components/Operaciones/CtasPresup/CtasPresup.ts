@@ -39,7 +39,13 @@ export default class AdmCtasPresupComponent extends Vue {
 	private helper: helpers = new helpers();
 	private popup = new popup.Swal();
 	private activo = false;
-	private lista=['1', '2','3','4','5', '6'];
+	private niveles: services.nivel[] = [];
+	private objnivel = new services.nivel();
+	private objnivel2 = new services.nivel();
+	private objnivel3 = new services.nivel();
+	private objnivel4 = new services.nivel();
+	private objnivel5 = new services.nivel();
+	private objnivel6 = new services.nivel();
 	validacion = [
 		(v: any) => !!v || 'El campo es requerido',
     (v: any) => !/^\s*$/.test(v) || 'No se permite espacios vacios',
@@ -80,6 +86,7 @@ export default class AdmCtasPresupComponent extends Vue {
 					this.popup.error('Consultar', 'Error Inesperado: ' + error);
 			});
 			this.cargarMonedas();
+			this.cargarNiveles();
 	}
 	private cargarMonedas(){
 		new services.Operaciones().Consultar(this.WebApi.ws_monedas_Consultar)
@@ -93,6 +100,20 @@ export default class AdmCtasPresupComponent extends Vue {
 			}).catch((error) => {
 					this.popup.error('Consultar', 'Error Inesperado: ' + error);
 			});
+	}
+	private cargarNiveles(){
+		this.objnivel.numeronivel = 1;
+		this.objnivel2.numeronivel = 2;
+		this.objnivel3.numeronivel = 3;
+		this.objnivel4.numeronivel = 4;
+		this.objnivel5.numeronivel = 5;
+		this.objnivel6.numeronivel = 6;
+		this.niveles[0] = this.objnivel;
+		this.niveles[1] = this.objnivel2;
+		this.niveles[2] = this.objnivel3;
+		this.niveles[3] = this.objnivel4;
+		this.niveles[4] = this.objnivel5;
+		this.niveles[5] = this.objnivel6;
 	}
 	private Insertar(): void {
 		this.ctaspresup = new services.clase_ctaspresup();

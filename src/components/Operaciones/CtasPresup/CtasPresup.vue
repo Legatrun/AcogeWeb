@@ -124,9 +124,9 @@
 								<v-autocomplete
 								v-model="ctaspresup.nivel"
 								label="Nivel"
-								:items="lista"
-								item-text="descripcion"
-								item-value="idmoneda"
+								:items="niveles"
+								item-text="numeronivel"
+								item-value="numeronivel"
 								:rules="validacion"
 								outlined
 								autocomplete="off"
