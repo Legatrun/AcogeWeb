@@ -164,7 +164,14 @@
 							</v-col>
 							<v-flex sm12 style="padding: 5px">
 								<v-col cols="7" sm="5">
-									<p class="text-sm-left"><b>Banco Propio: </b></p> <v-switch  v-model="BancoPropio" color="custom"  :label="`Estado: ${BancoPropio ? 'Si' : 'No'}`"> </v-switch>
+									<p class="text-sm-left"><b>Banco Propio: </b></p>
+									<v-switch
+									v-model="BancoPropio"
+									color="success"
+									:label="`Estado: ${BancoPropio ? 'Si' : 'No'}`"
+									>
+
+									</v-switch>
 									</v-col>
 							</v-flex>
 						</v-layout>

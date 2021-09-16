@@ -115,7 +115,6 @@
 								<v-flex sm4 style="padding: 10px">
 									<v-text-field v-model="almacenes.codigoalmacen"
 												label="Codigo Almacen"
-												hint="Solo lectura"
 												disabled
 												outlined
 												persistent-hint>
@@ -152,8 +151,9 @@
 								<h4 class="mb-0 ">Virtual:</h4>
 								<v-switch v-model="almacenes.virtual"
 									color="success"
-                                    :label="`Estado: ${almacenes.virtual ? 'Si' : 'No Virtual'}`"
-									></v-switch>
+                                    :label="`Estado: ${almacenes.virtual ? 'Si' : 'No'}`"
+									>
+								</v-switch>
 							</v-flex>
 
 						

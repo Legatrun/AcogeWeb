@@ -93,10 +93,9 @@
 							</v-col>
 
 								<v-flex sm6 style="padding: 5px">
-									<v-text-field v-model="cuentasbancos.nrocuenta"
-												label="NroCuenta"
-												hint="Ingrese NroCuenta"
-												placeholder="NroCuenta"
+									<v-text-field v-model.number="cuentasbancos.nrocuenta"
+												type="number"
+												label="Nro de Cuenta"
 												clearable
 												persistent-hint
 												required
@@ -105,7 +104,7 @@
 									</v-text-field>
 								</v-flex>
 							</template>
-							<template v-else>
+							<!-- <template v-else>
 								<v-col cols="5" sm="6" class="pa-2">
 								<v-autocomplete
 								v-model="cuentasbancos.idbanco"
@@ -122,12 +121,11 @@
 								<v-flex sm6 style="padding: 5px">
 									<v-text-field v-model="cuentasbancos.nrocuenta"
 												label="Nro de Cuenta"
-												placeholder="Nro de Cuenta"
 												readonly
 												persistent-hint>
 									</v-text-field>
 								</v-flex>
-							</template>
+							</template> -->
 							<v-col cols="5" sm="6" class="pa-2">
 								<v-autocomplete
 								v-model="cuentasbancos.idmoneda"
@@ -143,10 +141,9 @@
 							</v-col>
 							<v-flex sm6 style="padding: 5px" >
 								<v-text-field 
-											v-model="cuentasbancos.saldoactual"
+											v-model.number="cuentasbancos.saldoactual"
+											type="number"
 											label="Saldo Actual"
-											hint="Ingrese Saldo Actual"
-											placeholder="Saldo Actual"
 											clearable
 											persistent-hint
 											required
@@ -155,10 +152,9 @@
 								</v-text-field>
 							</v-flex>
 							<v-flex sm6 style="padding: 5px">
-								<v-text-field v-model="cuentasbancos.cuentacontable"
+								<v-text-field v-model.number="cuentasbancos.cuentacontable"
 											label="Cuenta Contable"
-											hint="Ingrese Cuenta Contable"
-											placeholder="Cuenta Contable"
+											type="number"
 											clearable
 											persistent-hint
 											required
@@ -180,7 +176,6 @@
 										<v-text-field
 											v-model="cuentasbancos.fechaapertura"
 											label="Ingrese fecha apertura"
-											hint="Ingrese fecha apertura"
 											persistent-hint
 											prepend-icon="event"
 											v-on="on">

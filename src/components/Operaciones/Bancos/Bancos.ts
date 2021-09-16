@@ -15,7 +15,7 @@ export default class AdmBancosComponent extends Vue {
 		{ text: 'Banco propio', align: 'left', sortable: false, value: 'bancopropio', width: '15%' },
 		{ text: 'Pais', align: 'left', sortable: false, value: 'idpais', width: '15%' },
 		{ text: 'Ciudad', align: 'left', sortable: false, value: 'idciudad', width: '15%' },
-		{ text: 'Operaciones', align: 'center', sortable: false, value: 'action', width: '20%' },
+		{ text: 'Operaciones', align: 'center', sortable: false, value: 'action', width: '7%' },
 	];
 	private WebApi = new services.Endpoints();
 

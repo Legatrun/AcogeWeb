@@ -89,7 +89,7 @@ export default class AdmClaseItemsComponent extends Vue {
 			.then((rescuentas) => {
 				if (rescuentas.data._error.error === 0) {
 					this.lstcuentas = rescuentas.data._data;
-					console.log("Cuentas cargadas: "+JSON.stringify(this.lstcuentas))
+					// console.log("Cuentas cargadas: "+JSON.stringify(this.lstcuentas))
 				} else {
 					this.popup.error('Consultar', rescuentas.data._error.descripcion);
 				}
@@ -138,7 +138,14 @@ export default class AdmClaseItemsComponent extends Vue {
 		this.dialog = false;
 	}
 	private Actualizar(data: services.clase_claseitems): void {
-		this.claseitems = data;
+		new services.Operaciones().Buscar(this.WebApi.ws_claseitems_Buscar, data )
+			 .then((resClase) => {	
+					console.log("data", JSON.stringify(resClase))
+					 this.lstclaseitems= resClase.data._data;
+					 this.claseitems = this.lstclaseitems[0];
+				 }).catch((err) => {   
+				});
+		// this.claseitems = data;
 		this.operacion = 'Update';
 		this.dialog = true;
 	}

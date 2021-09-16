@@ -107,7 +107,7 @@
 							</template>
 							<v-flex sm12 style="padding: 5px">
 								<v-text-field v-model="cuentas.nombrecuenta"
-											label="NombreCuenta"
+											label="Nombre Cuenta"
 											clearable
 											persistent-hint
 											required
@@ -136,6 +136,7 @@
 											clearable
 											persistent-hint
 											required
+											@change="validarDigito"
 											:rules="validacion"
 											@input="cuentas.nivel = updateText(cuentas.nivel)">
 								</v-text-field>

@@ -87,6 +87,11 @@ export default class AdmCuentasComponent extends Vue {
 					this.popup.error('Consultar', 'Error Inesperado: ' + error);
 			});
 	}
+	private validarDigito():void{
+		if(this.cuentas.nivel % 1 != 0){
+			this.popup.error('Número invalido', 'El nivel no puede tener decimales')
+		}
+	}
 	private Insertar(): void {
 		this.cuentas = new services.clase_cuentas();
 		this.operacion = 'Insert';
