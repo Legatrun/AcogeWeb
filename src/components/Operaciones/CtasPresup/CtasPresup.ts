@@ -139,9 +139,13 @@ export default class AdmCtasPresupComponent extends Vue {
 	}
 	private Actualizar(data: services.clase_ctaspresup): void {
 		new services.Operaciones().Buscar(this.WebApi.ws_ctaspresup_Buscar, data )
-		.then((resCtasPresup) => {	
-				this.lstctaspresupcargar= resCtasPresup.data._data;
-				this.ctaspresup = this.lstctaspresupcargar[0];
+		.then((resCtasPresup) => {
+			console.log("respuesta", resCtasPresup)
+			this.lstctaspresupcargar= resCtasPresup.data._data;
+			this.ctaspresup = this.lstctaspresupcargar[0];
+			this.ctaspresup.fechacreacion = this.FormatDate(this.ctaspresup.fechacreacion);
+			this.ctaspresup.fechamodificacion = this.FormatDate(this.ctaspresup.fechamodificacion);
+			// this.ctaspresup.nivel = this.lstctaspresupcargar[0].nivel
 			}).catch((err) => {   
 		});
 		this.operacion = 'Update';
