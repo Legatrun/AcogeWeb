@@ -10,14 +10,14 @@ import helpers from '@/helper';
 export default class AdmSucursalesComponent extends Vue {
 	private headers: any[] = [
 		//{ text: 'IDSucursal', align: 'left', sortable: true, value: 'idsucursal', width: '10%' },
-		{ text: 'idempresa', align: 'left', sortable: false, value: 'idempresa', width: '10%' },
-		{ text: 'idzona', align: 'left', sortable: false, value: 'idzona', width: '10%' },
-		{ text: 'nombre', align: 'left', sortable: false, value: 'nombre', width: '10%' },
-		{ text: 'direccion', align: 'left', sortable: false, value: 'direccion', width: '10%' },
-		{ text: 'numero', align: 'left', sortable: false, value: 'numero', width: '10%' },
-		{ text: 'telefonos', align: 'left', sortable: false, value: 'telefonos', width: '10%' },
-		{ text: 'email', align: 'left', sortable: false, value: 'email', width: '10%' },
-		{ text: 'codigopostal', align: 'left', sortable: false, value: 'codigopostal', width: '10%' },
+		{ text: 'Empresa', align: 'left', sortable: false, value: 'idempresa', width: '10%' },
+		{ text: 'Zona', align: 'left', sortable: false, value: 'idzona', width: '10%' },
+		{ text: 'Nombre', align: 'left', sortable: false, value: 'nombre', width: '10%' },
+		{ text: 'Dirección', align: 'left', sortable: false, value: 'direccion', width: '10%' },
+		{ text: 'Número', align: 'left', sortable: false, value: 'numero', width: '10%' },
+		{ text: 'Teléfonos', align: 'left', sortable: false, value: 'telefonos', width: '10%' },
+		{ text: 'Email', align: 'left', sortable: false, value: 'email', width: '10%' },
+		{ text: 'Código Postal', align: 'left', sortable: false, value: 'codigopostal', width: '10%' },
 		{ text: 'Operaciones', align: 'left', sortable: false, value: 'action', width: '10%' },
 	];
 	private WebApi = new services.Endpoints();
@@ -131,6 +131,7 @@ export default class AdmSucursalesComponent extends Vue {
 			this.popup.error('Actualizar', 'Error Inesperado: ' + error);
 			});
 	} else {
+		console.log("insertando con exito")
 		new services.Operaciones().Insertar(this.WebApi.ws_sucursales_Insertar, this.sucursales)
 		.then((result) => {
 			if (result.data.error === 0) {

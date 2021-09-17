@@ -83,8 +83,6 @@
 							<v-flex sm12 style="padding: 5px">
 								<v-text-field v-model="monedas.descripcion"
 											label="Descripcion"
-											hint="Ingrese Descripcion"
-											placeholder="Descripcion"
 											clearable
 											persistent-hint
 											required
@@ -95,8 +93,6 @@
 							<v-flex sm6 style="padding: 5px">
 								<v-text-field v-model="monedas.sigla"
 											label="Sigla"
-											hint="Ingrese Sigla"
-											placeholder="Sigla"
 											clearable
 											persistent-hint
 											required
@@ -107,7 +103,7 @@
 							
 							<v-flex sm6 style="padding: 5px">
 								<v-col cols="7" sm="5">
-									<p class="text-sm-left"><b>Moneda Local: </b></p> <v-switch  v-model="monedas.monedalocal" color="custom"  :label="`Estado: ${monedas.monedalocal ? 'Si' : 'No'}`"> </v-switch>
+									<p class="text-sm-left"><b>Moneda Local: </b></p> <v-switch  v-model="monedas.monedalocal" color="success"  :label="`Estado: ${monedas.monedalocal ? 'Si' : 'No'}`"> </v-switch>
 									</v-col>
 							</v-flex>
 						</v-layout>

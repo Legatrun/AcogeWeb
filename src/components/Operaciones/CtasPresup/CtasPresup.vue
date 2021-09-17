@@ -75,7 +75,8 @@
 						<v-layout wrap>
 							<template v-if="operacion == 'Insert'">
 								<v-flex sm6 style="padding: 5px">
-									<v-text-field v-model="ctaspresup.cuentapresup"
+									<v-text-field v-model.number="ctaspresup.cuentapresup"
+												type="number"
 												label="Cuenta de Presupuesto"
 												clearable
 												persistent-hint

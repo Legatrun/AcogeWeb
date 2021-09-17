@@ -146,7 +146,7 @@ export default class AdmCtasPresupComponent extends Vue {
 			this.cargar_data();
 			this.dialog = false;
 			} else {
-			this.popup.error('Insertar', result.data.descripcion);
+			this.popup.error('Insertar', 'Registro duplicado');
 			}
 		})
 		.catch((error) => {

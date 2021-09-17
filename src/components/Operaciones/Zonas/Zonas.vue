@@ -86,6 +86,7 @@
 								outlined
 								autocomplete="off"
 								color="#1A237E"
+								@change="cargarCiudad()"
 								@input="zonas.idpais = updateText(zonas.idpais)"
 								></v-autocomplete>
 							</v-col>

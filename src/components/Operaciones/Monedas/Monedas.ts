@@ -10,9 +10,9 @@ import helpers from '@/helper';
 export default class AdmMonedasComponent extends Vue {
 	private headers: any[] = [
 		//{ text: 'IDMoneda', align: 'left', sortable: true, value: 'idmoneda', width: '15%' },
-		{ text: 'descripcion', align: 'left', sortable: false, value: 'descripcion', width: '15%' },
-		{ text: 'sigla', align: 'left', sortable: false, value: 'sigla', width: '15%' },
-		{ text: 'monedalocal', align: 'left', sortable: false, value: 'monedalocal', width: '15%' },
+		{ text: 'Descripcion', align: 'left', sortable: false, value: 'descripcion', width: '15%' },
+		{ text: 'Sigla', align: 'left', sortable: false, value: 'sigla', width: '15%' },
+		{ text: 'Moneda Local', align: 'left', sortable: false, value: 'monedalocal', width: '15%' },
 		{ text: 'Operaciones', align: 'left', sortable: false, value: 'action', width: '5%' },
 	];
 	private WebApi = new services.Endpoints();

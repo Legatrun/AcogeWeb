@@ -86,17 +86,32 @@ export default class AdmZonasComponent extends Vue {
 			});
 	}
 	private cargarCiudad(){
-		new services.Operaciones().Consultar(this.WebApi.ws_ciudades_Consultar)
+		if(this.zonas.idpais === undefined){
+			new services.Operaciones().Consultar(this.WebApi.ws_ciudades_Consultar)
 			.then((resciudades) => {
 				if (resciudades.data._error.error === 0) {
 					this.lstciudades = resciudades.data._data;
-					this.dialog = false;
+					// this.dialog = false;
 				} else {
 					this.popup.error('Consultar', resciudades.data._error.descripcion);
 				}
 			}).catch((error) => {
 					this.popup.error('Consultar', 'Error Inesperado: ' + error);
 			});
+		} else if(this.zonas.idpais != undefined){
+			this.ciudades.idpais = this.zonas.idpais
+			new services.Operaciones().Buscar(this.WebApi.ws_ciudades_Filtradas, this.ciudades)
+			.then((resciudades) => {
+				if (resciudades.data._error.error === 0) {
+					this.lstciudades = resciudades.data._data;
+					// this.dialog = false;
+				} else {
+					this.popup.error('Consultar', resciudades.data._error.descripcion);
+				}
+			}).catch((error) => {
+					this.popup.error('Consultar', 'Error Inesperado: ' + error);
+			});
+		}
 	}
 	getItemCiudad(data : any){
 		return ` ${this.formatearpais(data.idpais) } - ${data.descripcion}`;
