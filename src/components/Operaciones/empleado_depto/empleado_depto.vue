@@ -203,7 +203,7 @@
 										<v-text-field
 											v-model="empleado_depto.fecha_quinquenio"
 											label="Fecha quinquenio"
-                      disabled
+                     						disabled
 											persistent-hint
 											prepend-icon="event"
 											v-on="on">
@@ -283,17 +283,17 @@
 							
 							</v-flex>
 							<v-flex sm4 style="padding: 5px">
-								<h4 class="mb-0">Estado empleado dpto:</h4>
+								<h4 class="mb-0">Estado empleado departamento:</h4>
 								<v-switch v-model="empleado_depto.estado"
-									color="grem"
-                  :label="`: ${empleado_depto.estado ? 'Si' : 'No'}`"></v-switch>
+									color="success"
+                  					:label="`: ${empleado_depto.estado ? 'Si' : 'No'}`"></v-switch>
 							</v-flex>
 
 							<v-flex sm4 style="padding: 5px">
 								<h4 class="mb-0">Envio email:</h4>
 								<v-switch v-model="empleado_depto.envio_email"
-									color="grem"
-                  :label="`: ${empleado_depto.envio_email ? 'Si' : 'No'}`"></v-switch>
+									color="success"
+                  					:label="`: ${empleado_depto.envio_email ? 'Si' : 'No'}`"></v-switch>
 							</v-flex>
               <v-flex sm4 style="padding: 5px">
                 <v-text-field v-model="empleado_depto.saldo_anterior_iva"

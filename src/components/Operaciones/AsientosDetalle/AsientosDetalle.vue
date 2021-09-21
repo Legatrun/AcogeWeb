@@ -50,12 +50,12 @@
 				</tr>
 			</template>
 			<template v-slot:top>
-				<!-- <v-tooltip bottom>
+				<v-tooltip bottom>
 					<template v-slot:activator="{ on }">
-						<v-btn color="accent" v-on="on" @click="Insertar()">Adicionar Nuevo Registro de AsientosDetalle</v-btn>
+						<v-btn color="botonCrear" v-on="on" @click="Insertar()">Crear Asientos Detalle</v-btn>
 					</template>
 					<span>Adicionar nuevo registro de cliente</span>
-				</v-tooltip> -->
+				</v-tooltip>
 			</template>
 			<template v-slot:no-data>
 				<v-alert :value="true" color="warning" icon="warning">
@@ -73,33 +73,27 @@
 					<v-card-text>
 						<v-layout wrap>
 							<template v-if="operacion == 'Insert'">
-								<v-flex sm12 style="padding: 5px">
+								<v-flex sm6 style="padding: 5px">
 									<v-text-field v-model="asientosdetalle.idtipocomprobante"
-												label="IDTipoComprobante"
-												hint="Ingrese IDTipoComprobante"
-												placeholder="IDTipoComprobante"
+												label="Tipo de Comprobante"
 												clearable
 												persistent-hint
 												required
 												@input="asientosdetalle.idtipocomprobante = updateText(asientosdetalle.idtipocomprobante)">
 									</v-text-field>
 								</v-flex>
-								<v-flex sm12 style="padding: 5px">
+								<v-flex sm6 style="padding: 5px">
 									<v-text-field v-model="asientosdetalle.numerocomprobante"
-												label="NumeroComprobante"
-												hint="Ingrese NumeroComprobante"
-												placeholder="NumeroComprobante"
+												label="Numero de Comprobante"
 												clearable
 												persistent-hint
 												required
 												@input="asientosdetalle.numerocomprobante = updateText(asientosdetalle.numerocomprobante)">
 									</v-text-field>
 								</v-flex>
-								<v-flex sm12 style="padding: 5px">
+								<v-flex sm6 style="padding: 5px">
 									<v-text-field v-model="asientosdetalle.nrolinea"
-												label="NroLinea"
-												hint="Ingrese NroLinea"
-												placeholder="NroLinea"
+												label="Nro de Linea"
 												clearable
 												persistent-hint
 												required
@@ -108,80 +102,80 @@
 								</v-flex>
 							</template>
 							<template v-else>
-								<v-flex sm12 style="padding: 5px">
+								<v-flex sm6 style="padding: 5px">
 									<v-text-field v-model="asientosdetalle.idtipocomprobante"
-												label="IDTipoComprobante"
-												placeholder="IDTipoComprobante"
+												label="Tipo de Comprobante"
 												readonly
 												persistent-hint>
 									</v-text-field>
 								</v-flex>
-								<v-flex sm12 style="padding: 5px">
+								<v-flex sm6 style="padding: 5px">
 									<v-text-field v-model="asientosdetalle.numerocomprobante"
-												label="NumeroComprobante"
-												placeholder="NumeroComprobante"
+												label="Numero de Comprobante"
 												readonly
 												persistent-hint>
 									</v-text-field>
 								</v-flex>
-								<v-flex sm12 style="padding: 5px">
+								<v-flex sm6 style="padding: 5px">
 									<v-text-field v-model="asientosdetalle.nrolinea"
-												label="NroLinea"
-												placeholder="NroLinea"
+												label="Nro de Linea"
 												readonly
 												persistent-hint>
 									</v-text-field>
 								</v-flex>
 							</template>
-							<v-flex sm12 style="padding: 5px">
+							<!-- <v-flex sm6 style="padding: 5px">
 								<v-text-field v-model="asientosdetalle.cuenta"
 											label="Cuenta"
-											hint="Ingrese Cuenta"
-											placeholder="Cuenta"
 											clearable
 											persistent-hint
 											required
 											@input="asientosdetalle.cuenta = updateText(asientosdetalle.cuenta)">
 								</v-text-field>
+							</v-flex> -->
+							<v-flex sm6 style="padding: 5px">
+								<v-autocomplete v-model="asientosdetalle.cuenta"
+											label="Cuenta"
+											clearable
+											required
+											outlined
+											:items="lstcuentas"
+											item-text="cuenta"
+											item-value="cuenta"
+											:rules="CuentasRules"
+											>
+								</v-autocomplete>
 							</v-flex>
-							<v-flex sm12 style="padding: 5px">
+							<v-flex sm6 style="padding: 5px">
 								<v-text-field v-model="asientosdetalle.glosadetalle"
-											label="GlosaDetalle"
-											hint="Ingrese GlosaDetalle"
-											placeholder="GlosaDetalle"
+											label="Glosa Detalle"
 											clearable
 											persistent-hint
 											required
 											@input="asientosdetalle.glosadetalle = updateText(asientosdetalle.glosadetalle)">
 								</v-text-field>
 							</v-flex>
-							<v-flex sm12 style="padding: 5px">
+							<v-flex sm6 style="padding: 5px">
 								<v-text-field v-model="asientosdetalle.tipomov"
-											label="TipoMov"
-											hint="Ingrese TipoMov"
-											placeholder="TipoMov"
+											label="Tipo de Movimiento"
 											clearable
 											persistent-hint
 											required
 											@input="asientosdetalle.tipomov = updateText(asientosdetalle.tipomov)">
 								</v-text-field>
 							</v-flex>
-							<v-flex sm12 style="padding: 5px">
+							<v-flex sm6 style="padding: 5px">
 								<v-text-field v-model="asientosdetalle.montobs"
-											label="MontoBs"
-											hint="Ingrese MontoBs"
-											placeholder="MontoBs"
+											label="Monto en Bs"
 											clearable
 											persistent-hint
 											required
 											@input="asientosdetalle.montobs = updateText(asientosdetalle.montobs)">
 								</v-text-field>
 							</v-flex>
-							<v-flex sm12 style="padding: 5px">
+							<v-flex sm6 style="padding: 5px">
 								<v-text-field v-model="asientosdetalle.montosus"
-											label="MontoSus"
-											hint="Ingrese MontoSus"
-											placeholder="MontoSus"
+											label="Monto en Sus"
 											clearable
 											persistent-hint
 											required

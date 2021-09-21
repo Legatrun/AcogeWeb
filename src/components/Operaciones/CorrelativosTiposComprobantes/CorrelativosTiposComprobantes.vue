@@ -85,24 +85,20 @@
 												@input="correlativostiposcomprobantes.idtipocomprobante = updateText(correlativostiposcomprobantes.idtipocomprobante)">
 									</v-text-field>
 								</v-flex> -->
-								<v-flex sm12 style="padding: 5px">
+								<v-flex sm6 style="padding: 5px">
 									<v-text-field v-model="correlativostiposcomprobantes.anio"
-												label="Anio"
-												hint="Ingrese Anio"
-												placeholder="Anio"
+												label="Año"
 												clearable
 												persistent-hint
 												required
 												@input="correlativostiposcomprobantes.anio = updateText(correlativostiposcomprobantes.anio)">
 									</v-text-field>
 								</v-flex>
-								<v-flex sm12 style="padding: 5px">
+								<v-flex sm6 style="padding: 5px">
 									<v-text-field v-model="correlativostiposcomprobantes.mes"
 												label="Mes"
-												hint="Ingrese Mes"
-												placeholder="Mes"
 												clearable
-												persistent-hint
+												outlined
 												required
 												@input="correlativostiposcomprobantes.mes = updateText(correlativostiposcomprobantes.mes)">
 									</v-text-field>
@@ -119,8 +115,7 @@
 								</v-flex> -->
 								<v-flex sm6 style="padding: 5px">
 									<v-text-field v-model="correlativostiposcomprobantes.anio"
-												label="Anio"
-												placeholder="Anio"
+												label="Año"
 												readonly
 												persistent-hint>
 									</v-text-field>
@@ -128,7 +123,6 @@
 								<v-flex sm6 style="padding: 5px">
 									<v-text-field v-model="correlativostiposcomprobantes.mes"
 												label="Mes"
-												placeholder="Mes"
 												readonly
 												persistent-hint>
 									</v-text-field>
@@ -137,10 +131,7 @@
 							<v-flex sm6 style="padding: 5px">
 								<v-text-field v-model="correlativostiposcomprobantes.correlativo"
 											label="Correlativo"
-											hint="Ingrese Correlativo"
-											placeholder="Correlativo"
 											clearable
-											persistent-hint
 											required
 											@input="correlativostiposcomprobantes.correlativo = updateText(correlativostiposcomprobantes.correlativo)">
 								</v-text-field>

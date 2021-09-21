@@ -1,7 +1,7 @@
 <template>
 	<v-card>
 		<v-toolbar color="primary" style="color:white">
-			<v-toolbar-title>Datos de TiposComprobantes</v-toolbar-title>
+			<v-toolbar-title>Tipos de Comprobantes</v-toolbar-title>
 			<v-divider></v-divider>
 			<v-text-field v-model="buscartiposcomprobantes"
 					append-icon="search"
@@ -48,7 +48,7 @@
 			<template v-slot:top>
 				<v-tooltip bottom>
 					<template v-slot:activator="{ on }">
-						<v-btn color="botonCrear" dark v-on="on" @click="Insertar()">Añadir Tipo de Comprobante</v-btn>
+						<v-btn color="botonCrear" dark v-on="on" @click="Insertar()"><v-icon left>mdi-plus</v-icon>Añadir Tipo de Comprobante</v-btn>
 					</template>
 					<span>Adicionar nuevo registro de cliente</span>
 				</v-tooltip>
@@ -68,18 +68,16 @@
 		<v-dialog v-model="dialog" persistent max-width="50%">
 			<v-card>
 				<v-toolbar style="padding:10px" dark class="primary">
-					<v-toolbar-title>Datos de TiposComprobantes</v-toolbar-title>
+					<v-toolbar-title>Tipos de Comprobantes</v-toolbar-title>
 				</v-toolbar>
 				<v-divider></v-divider>
 				<v-form ref="form" style="padding:10px">
 					<v-card-text>
 						<v-layout wrap>
 							<template v-if="operacion == 'Insert'">
-								<v-flex sm12 style="padding: 5px">
+								<v-flex sm6 style="padding: 5px">
 									<v-text-field v-model="tiposcomprobantes.idtipocomprobante"
-												label="IDTipoComprobante"
-												hint="Ingrese IDTipoComprobante"
-												placeholder="IDTipoComprobante"
+												label="Tipo Comprobante"
 												clearable
 												persistent-hint
 												required
@@ -88,31 +86,26 @@
 								</v-flex>
 							</template>
 							<template v-else>
-								<v-flex sm12 style="padding: 5px">
+								<v-flex sm6 style="padding: 5px">
 									<v-text-field v-model="tiposcomprobantes.idtipocomprobante"
-												label="IDTipoComprobante"
-												placeholder="IDTipoComprobante"
+												label="Tipo Comprobante"
 												readonly
 												persistent-hint>
 									</v-text-field>
 								</v-flex>
 							</template>
-							<v-flex sm12 style="padding: 5px">
+							<v-flex sm6 style="padding: 5px">
 								<v-text-field v-model="tiposcomprobantes.descripcion"
 											label="Descripcion"
-											hint="Ingrese Descripcion"
-											placeholder="Descripcion"
 											clearable
 											persistent-hint
 											required
 											@input="tiposcomprobantes.descripcion = updateText(tiposcomprobantes.descripcion)">
 								</v-text-field>
 							</v-flex>
-							<v-flex sm12 style="padding: 5px">
+							<v-flex sm6 style="padding: 5px">
 								<v-text-field v-model="tiposcomprobantes.sigla"
 											label="Sigla"
-											hint="Ingrese Sigla"
-											placeholder="Sigla"
 											clearable
 											persistent-hint
 											required
@@ -123,20 +116,31 @@
 								<h4 class="mb-0">Automatico:</h4>
 								<v-switch v-model="tiposcomprobantes.automatico"
 									color="indigo"
-									hint="Seleccione Automatico"
-									label="tiposcomprobantes.Automatico"></v-switch>
+									:label="`Estado: ${tiposcomprobantes.automatico ? 'Si' : 'No'}`"
+									>
+									</v-switch>
 							</v-flex>
-							<v-flex sm12 style="padding: 5px">
+							<!-- <v-flex sm6 style="padding: 5px">
 								<v-text-field v-model="tiposcomprobantes.idsucursal"
-											label="IDSucursal"
-											hint="Ingrese IDSucursal"
-											placeholder="IDSucursal"
+											label="Sucursal"
 											clearable
 											persistent-hint
 											required
 											@input="tiposcomprobantes.idsucursal = updateText(tiposcomprobantes.idsucursal)">
 								</v-text-field>
-							</v-flex>
+							</v-flex> -->
+							<v-col cols="6" sm6 class="pa-5">
+								<v-autocomplete
+								v-model="tiposcomprobantes.idsucursal"
+								label="Sucursal"
+								:items="lstsucursales"
+								item-text="nombre"
+								item-value="idsucursal"
+								outlined
+								autocomplete="off"
+								color="#1A237E"
+								></v-autocomplete>
+							</v-col>
 						</v-layout>
 					</v-card-text>
 				</v-form>

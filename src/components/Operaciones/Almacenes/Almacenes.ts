@@ -177,11 +177,11 @@ export default class AdmAlmacenesComponent extends Vue {
 			this.cargar_data();
 			this.dialog = false;
 			} else {
-				this.popup.error('Insertar', result.data.descripcion);
+				this.popup.error('Insertar1', result.data.descripcion);
 			}
 		})
 		.catch((error) => {
-			this.popup.error('Insertar', 'Error Inesperado: ' + error);
+			this.popup.error('Insertar2', 'Error Inesperado: ' + error);
 			});
 		}
 	}

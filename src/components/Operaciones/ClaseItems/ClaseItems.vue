@@ -128,8 +128,8 @@
 								<v-autocomplete v-model="claseitems.cuentaventa"
 											label="Cuenta Venta"
 											clearable
-											persistent-hint
 											required
+											outlined
 											:items="lstcuentas"
 											item-text="cuenta"
 											item-value="cuenta"
@@ -140,8 +140,8 @@
 							<v-flex sm6 style="padding: 5px">
 								<v-autocomplete v-model="claseitems.cuentacosto"
 											label="Cuenta Costo"
+											outlined
 											clearable
-											persistent-hint
 											required
 											:items="lstcuentas"
 											item-text="cuenta"
@@ -153,8 +153,8 @@
 							<v-flex sm6 style="padding: 5px">
 								<v-autocomplete v-model="claseitems.cuentagasto"
 											label="Cuenta Gasto"
+											outlined
 											clearable
-											persistent-hint
 											required
 											:items="lstcuentas"
 											item-text="cuenta"
@@ -166,8 +166,8 @@
 							<v-flex sm6 style="padding: 5px">
 								<v-autocomplete v-model="claseitems.cuentainventario"
 											label="Cuenta Inventario"
+											outlined
 											clearable
-											persistent-hint
 											required
 											:items="lstcuentas"
 											item-text="cuenta"

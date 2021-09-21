@@ -18,9 +18,11 @@ export default class AdmTiposdeCambioComponent extends Vue {
 		{ text: 'Operaciones', align: 'center', sortable: false, value: 'action', width: '20%' },
 	];
 	private WebApi = new services.Endpoints();
-
+	private menu_fechacreacion: boolean = false;
 	private tiposdecambio = new services.clase_tiposdecambio();
 	private lsttiposdecambio: services.clase_tiposdecambio[] = [];
+	private lstmonedas: services.clase_monedas[] = [];
+	private monedas = new services.clase_monedas();
 	private buscartiposdecambio = '';
 	private dialog = false;
 	private operacion = '';
@@ -45,6 +47,7 @@ export default class AdmTiposdeCambioComponent extends Vue {
 	}
 	private mounted() {
 		this.cargar_data();
+		this.cargarMoneda();
 	}
 	private cargar_data() {
 		if (this.$store.state.auth !== true) {​​​​
@@ -57,6 +60,19 @@ export default class AdmTiposdeCambioComponent extends Vue {
 					this.dialog = false;
 				} else {
 					this.popup.error('Consultar', restiposdecambio.data._error.descripcion);
+				}
+			}).catch((error) => {
+					this.popup.error('Consultar', 'Error Inesperado: ' + error);
+			});
+	}
+	private cargarMoneda(){
+		new services.Operaciones().Consultar(this.WebApi.ws_monedas_Consultar)
+			.then((resmonedas) => {
+				if (resmonedas.data._error.error === 0) {
+					this.lstmonedas = resmonedas.data._data;
+					this.dialog = false;
+				} else {
+					this.popup.error('Consultar', resmonedas.data._error.descripcion);
 				}
 			}).catch((error) => {
 					this.popup.error('Consultar', 'Error Inesperado: ' + error);
@@ -109,6 +125,15 @@ export default class AdmTiposdeCambioComponent extends Vue {
 	}
 	private select_fecha(fecha: string) {
 		return fecha.substr(0, 10);
+	}
+	private formatearMoneda(idmoneda: Number){
+		let monedaLiteral: string = '';
+			this.lstmonedas.forEach(function(value){
+				if(value.idmoneda == idmoneda){
+					monedaLiteral = value.descripcion;
+				}
+			});
+		return monedaLiteral;	
 	}
 	private Eliminar(data: services.clase_tiposdecambio): void {
 		swal.fire({

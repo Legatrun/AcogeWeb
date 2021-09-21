@@ -9,15 +9,15 @@ import helpers from '@/helper';
 @Component
 export default class AdmAsientosDetalleComponent extends Vue {
 	private headers: any[] = [
-		{ text: 'IDTipoComprobante', align: 'left', sortable: true, value: 'idtipocomprobante', width: '15%' },
-		{ text: 'NumeroComprobante', align: 'left', sortable: true, value: 'numerocomprobante', width: '15%' },
-		{ text: 'NroLinea', align: 'left', sortable: true, value: 'nrolinea', width: '15%' },
-		{ text: 'cuenta', align: 'left', sortable: false, value: 'cuenta', width: '15%' },
-		{ text: 'glosadetalle', align: 'left', sortable: false, value: 'glosadetalle', width: '15%' },
-		{ text: 'tipomov', align: 'left', sortable: false, value: 'tipomov', width: '15%' },
-		{ text: 'montobs', align: 'left', sortable: false, value: 'montobs', width: '15%' },
-		{ text: 'montosus', align: 'left', sortable: false, value: 'montosus', width: '15%' },
-		{ text: 'Operaciones', align: 'center', sortable: false, value: 'action', width: '20%' },
+		{ text: 'Tipo de Comprobante', align: 'left', sortable: true, value: 'idtipocomprobante', width: '10%' },
+		{ text: 'Numero de Comprobante', align: 'left', sortable: true, value: 'numerocomprobante', width: '10%' },
+		{ text: 'Nro de Linea', align: 'left', sortable: true, value: 'nrolinea', width: '10%' },
+		{ text: 'Cuenta', align: 'left', sortable: false, value: 'cuenta', width: '10%' },
+		{ text: 'Glosa de detalle', align: 'left', sortable: false, value: 'glosadetalle', width: '10%' },
+		{ text: 'Tipo de movimiento', align: 'left', sortable: false, value: 'tipomov', width: '10%' },
+		{ text: 'Monto en Bs', align: 'left', sortable: false, value: 'montobs', width: '10%' },
+		{ text: 'Monto en Sus', align: 'left', sortable: false, value: 'montosus', width: '10%' },
+		{ text: 'Operaciones', align: 'center', sortable: false, value: 'action', width: '10%' },
 	];
 	private WebApi = new services.Endpoints();
 
@@ -28,6 +28,12 @@ export default class AdmAsientosDetalleComponent extends Vue {
 	private operacion = '';
 	private helper: helpers = new helpers();
 	private popup = new popup.Swal();
+	private lstcuentas: services.clase_cuentas[] = [];
+	CuentasRules = [
+		(v: any) => !!v || "El campo es requerido",
+		// (v:any) => (v && v.length<=20) || "No se permite mas de  20 caracteres",
+		// (v: any) => (/^[0-9 ,-]*$/.test(v)) || "El campo sólo permite números y '-' como caracter especial",
+	  ]; 
 	private FormatDate(data: any) {
 		return moment(data).format('YYYY-MM-DD');
 	}
@@ -47,6 +53,7 @@ export default class AdmAsientosDetalleComponent extends Vue {
 	}
 	private mounted() {
 		this.cargar_data();
+		this.CargarCuentas();
 	}
 	private cargar_data() {
 		if (this.$store.state.auth !== true) {​​​​
@@ -59,6 +66,19 @@ export default class AdmAsientosDetalleComponent extends Vue {
 					this.dialog = false;
 				} else {
 					this.popup.error('Consultar', resasientosdetalle.data._error.descripcion);
+				}
+			}).catch((error) => {
+					this.popup.error('Consultar', 'Error Inesperado: ' + error);
+			});
+	}
+	private CargarCuentas(){
+		new services.Operaciones().Consultar(this.WebApi.ws_cuentas_Consultar)
+			.then((rescuentas) => {
+				if (rescuentas.data._error.error === 0) {
+					this.lstcuentas = rescuentas.data._data;
+					// console.log("Cuentas cargadas: "+JSON.stringify(this.lstcuentas))
+				} else {
+					this.popup.error('Consultar', rescuentas.data._error.descripcion);
 				}
 			}).catch((error) => {
 					this.popup.error('Consultar', 'Error Inesperado: ' + error);

@@ -76,7 +76,6 @@
 								:items="lstsucursales"
 								item-text="nombre"
 								item-value="idsucursal"
-								:rules="validacion"
 								outlined
 								autocomplete="off"
 								color="#1A237E"

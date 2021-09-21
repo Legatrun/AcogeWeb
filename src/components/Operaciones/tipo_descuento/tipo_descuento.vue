@@ -73,8 +73,6 @@
 											persistent-hint
                     						:rules="RulNombre"
 											required
-											counter
-											maxlength="20"
 											@input="tipo_descuento.nombre = updateText(tipo_descuento.nombre)">
 								</v-text-field>
 							</v-flex>

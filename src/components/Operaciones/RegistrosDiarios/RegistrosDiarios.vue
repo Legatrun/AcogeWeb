@@ -117,9 +117,8 @@
 							<v-flex sm2 class="hidden-xs-only" style="padding: 5px">
 							<v-text-field
 											v-model="tiposdecambio.cotizacionoficial"
-											label="Tipo Cambio: "
-											persistent-hint
-											readonly>
+											label="Tipo de Cambio:"
+											>
 										</v-text-field>
 							</v-flex>
 							<v-col cols="5" sm="3" class="pa-2">
@@ -138,8 +137,6 @@
 								<v-text-field 
 											label="Numero de Comprobante"
 											v-model="asientosencabezado.numerocomprobante"
-											
-											persistent-hint
 											outlined
 											>
 								</v-text-field>
@@ -184,7 +181,6 @@
 								<v-text-field 
 											label="Nombre de la Cuenta: "
 											v-model="cuentas.nombrecuenta"
-											placeholder="Nombre de la Cuenta"
 											persistent-hint
 											outlined
 											clearable>
@@ -200,7 +196,6 @@
 							<v-flex sm4 style="padding: 5px">
 									<v-text-field v-model="cuentas.cuenta"
 												label="Cuenta "
-												placeholder="Cuenta "
 												persistent-hint
 												outlined
 												color="blue"
@@ -217,7 +212,6 @@
 								<v-text-field 
 											label="Glosa Detalle: "
 											v-model="asientosdetalle.glosadetalle"
-											placeholder="Glosa Detalle"
 											persistent-hint
 											outlined
 											clearable>
@@ -233,7 +227,6 @@
 								<v-text-field 
 											label="Debe Monto Bs: "
 											v-model="asientosencabezado.referencia"
-											placeholder="Debe Monto Bs"
 											persistent-hint
 											outlined
 											clearable
@@ -244,7 +237,6 @@
 								<v-text-field 
 											label="Debe Monto Sus: "
 											v-model="asientosencabezado.referencia"
-											placeholder="Debe Monto Sus"
 											persistent-hint
 											outlined
 											clearable
@@ -258,7 +250,6 @@
 								<v-text-field 
 											label="Haber Monto Bs: "
 											v-model="asientosencabezado.referencia"
-											placeholder="Haber Monto Bs"
 											persistent-hint
 											outlined
 											clearable
@@ -269,7 +260,6 @@
 								<v-text-field 
 											label="Haber Monto Sus: "
 											v-model="asientosencabezado.referencia"
-											placeholder="Haber Monto Sus"
 											persistent-hint
 											outlined
 											clearable
@@ -297,7 +287,6 @@
 								v-model="asientosencabezado.glosa"
 								name="input-7-1"
 								label="Glosa General"
-								hint="Glosa General"
 								no-resize
 								color="primary"
 								height="180"
@@ -309,7 +298,6 @@
 											value="S/MODULO"
 											readonly
 											label="Mod. Procedencia: "
-											placeholder="Mod. Procedencia: "
 											persistent-hint
 											outlined
 											color="blue"
@@ -327,10 +315,9 @@
 							<v-flex sm4 style="padding: 5px">
 									<v-text-field 
 											label="Debe Bs: "
-											placeholder="Debe Bs "
-											persistent-hint
 											outlined
 											clearable
+											type="number"
 											>
 								</v-text-field>
 
@@ -338,11 +325,9 @@
 									<v-flex sm4 style="padding: 5px">
 								<v-text-field 
 											label="Debe Sus: "
-											hint=" "
-											placeholder="Debe Sus: "
-											persistent-hint
 											outlined
 											color="blue"
+											type="number"
 											>
 								</v-text-field>
 							</v-flex>
@@ -352,11 +337,9 @@
 									<v-flex sm4 style="padding: 5px">
 								<v-text-field 
 											label="Haber Bs: "
-											hint=" "
-											placeholder="Haber Bs: "
-											persistent-hint
 											outlined
 											color="blue"
+											type="number"
 											>
 								</v-text-field>
 							</v-flex>
@@ -364,11 +347,9 @@
 									<v-flex sm4 style="padding: 5px">
 								<v-text-field 
 											label="Haber Sus: "
-											hint=" "
-											placeholder="Haber Sus: "
-											persistent-hint
 											outlined
 											color="blue"
+											type="number"
 											>
 								</v-text-field>
 							</v-flex>
@@ -379,11 +360,9 @@
 							<v-flex sm4 style="padding: 5px">
 								<v-text-field 
 											label="Ajuste Bs: "
-											hint=" "
-											placeholder="Ajuste Bs: "
-											persistent-hint
 											outlined
 											color="red"
+											type="number"
 											>
 								</v-text-field>
 							</v-flex>
@@ -391,11 +370,9 @@
 							<v-flex sm4 style="padding: 5px">
 								<v-text-field 
 											label="Ajuste Sus: "
-											hint=" "
-											placeholder="Ajuste Sus"
-											persistent-hint
 											outlined
 											color="red"
+											type="number"
 											>
 								</v-text-field>
 							</v-flex>

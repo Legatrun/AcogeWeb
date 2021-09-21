@@ -26,8 +26,8 @@
 				<tr>
 					<!--<td>{{ helper.showDataDescription(props.item.fecha,lstTiposdeCambio, id, descripcion)  }}</td>// Ejemplo de Uso de Helper Para obtener la Descripcion de una Tabla por medio de su Id-->
 					<td>{{ FormatDate(props.item.fecha) }}</td>
-					<td>{{ props.item.idmonedaorigen }}</td>
-					<td>{{ props.item.idmonedadestino }}</td>
+					<td>{{ formatearMoneda(props.item.idmonedaorigen) }}</td>
+					<td>{{ formatearMoneda(props.item.idmonedadestino) }}</td>
 					<td>{{ props.item.cotizacionoficial }}</td>
 					<td>{{ props.item.cotizacioncompra }}</td>
 					<td>{{ props.item.cotizacionventa }}</td>
@@ -76,78 +76,110 @@
 				<v-form ref="form" style="padding:10px">
 					<v-card-text>
 						<v-layout wrap>
-							<template v-if="operacion == 'Insert'">
-								<v-flex sm12 style="padding: 5px">
+							<!-- v-if="operacion == 'Insert'" -->
+							<template >
+								<v-flex sm6 class="hidden-xs-only" style="padding: 5px">
+									<v-menu
+										ref="menu_fechacreacion"
+											v-model="menu_fechacreacion"
+											:close-on-content-click="false"
+											transition="scale-transition"
+											offset-y
+											full-width
+											max-width="290px"
+											min-width="290px">
+										<template v-slot:activator="{ on }">
+											<v-text-field
+												v-model="tiposdecambio.fecha"
+												label="Fecha de creacion"
+												prepend-icon="event"
+												v-on="on">
+											</v-text-field>
+										</template>
+										<v-date-picker v-model="tiposdecambio.fecha" no-title @input="menu_fechacreacion = false"></v-date-picker>
+									</v-menu>
+								</v-flex>
+								<!-- <v-flex sm6 style="padding: 5px">
 									<v-text-field v-model="tiposdecambio.fecha"
 												label="Fecha"
-												hint="Ingrese Fecha"
-												placeholder="Fecha"
 												clearable
-												persistent-hint
 												required
 												@input="tiposdecambio.fecha = updateText(tiposdecambio.fecha)">
 									</v-text-field>
-								</v-flex>
+								</v-flex> -->
 							</template>
-							<template v-else>
-								<v-flex sm12 style="padding: 5px">
+							<!-- <template v-else>
+								<v-flex sm6 style="padding: 5px">
 									<v-text-field v-model="tiposdecambio.fecha"
 												label="Fecha"
-												placeholder="Fecha"
 												readonly
-												persistent-hint>
+												>
 									</v-text-field>
 								</v-flex>
-							</template>
-							<v-flex sm12 style="padding: 5px">
-								<v-text-field v-model="tiposdecambio.idmonedaorigen"
-											label="IDMonedaOrigen"
-											hint="Ingrese IDMonedaOrigen"
-											placeholder="IDMonedaOrigen"
+							</template> -->
+							<v-flex sm6 style="padding: 5px">
+								<!-- <v-text-field v-model="tiposdecambio.idmonedaorigen"
+											label="Moneda de Origen"
 											clearable
 											persistent-hint
 											required
 											@input="tiposdecambio.idmonedaorigen = updateText(tiposdecambio.idmonedaorigen)">
-								</v-text-field>
+								</v-text-field> -->
+								<v-autocomplete
+								v-model="tiposdecambio.idmonedaorigen"
+								label="Moneda de origen"
+								:items="lstmonedas"
+								item-text="descripcion"
+								item-value="idmoneda"
+								:rules="validacion"
+								outlined
+								autocomplete="off"
+								color="#1A237E"
+								@input="proveedores.idmoneda = updateText(proveedores.idmoneda)"
+								></v-autocomplete>
 							</v-flex>
-							<v-flex sm12 style="padding: 5px">
-								<v-text-field v-model="tiposdecambio.idmonedadestino"
-											label="IDMonedaDestino"
-											hint="Ingrese IDMonedaDestino"
-											placeholder="IDMonedaDestino"
+							<v-flex sm6 style="padding: 5px">
+								<!-- <v-text-field v-model="tiposdecambio.idmonedadestino"
+											label="Moneda Destino"
 											clearable
 											persistent-hint
 											required
 											@input="tiposdecambio.idmonedadestino = updateText(tiposdecambio.idmonedadestino)">
-								</v-text-field>
+								</v-text-field> -->
+								<v-autocomplete
+								v-model="tiposdecambio.idmonedadestino"
+								label="Moneda de destino"
+								:items="lstmonedas"
+								item-text="descripcion"
+								item-value="idmoneda"
+								:rules="validacion"
+								outlined
+								autocomplete="off"
+								color="#1A237E"
+								@input="tiposdecambio.idmonedadestino = updateText(tiposdecambio.idmonedadestino)"
+								></v-autocomplete>
 							</v-flex>
-							<v-flex sm12 style="padding: 5px">
+							<v-flex sm6 style="padding: 5px">
 								<v-text-field v-model="tiposdecambio.cotizacionoficial"
-											label="CotizacionOficial"
-											hint="Ingrese CotizacionOficial"
-											placeholder="CotizacionOficial"
+											label="Cotizacion Oficial"
 											clearable
 											persistent-hint
 											required
 											@input="tiposdecambio.cotizacionoficial = updateText(tiposdecambio.cotizacionoficial)">
 								</v-text-field>
 							</v-flex>
-							<v-flex sm12 style="padding: 5px">
+							<v-flex sm6 style="padding: 5px">
 								<v-text-field v-model="tiposdecambio.cotizacioncompra"
-											label="CotizacionCompra"
-											hint="Ingrese CotizacionCompra"
-											placeholder="CotizacionCompra"
+											label="Cotizacion Compra"
 											clearable
 											persistent-hint
 											required
 											@input="tiposdecambio.cotizacioncompra = updateText(tiposdecambio.cotizacioncompra)">
 								</v-text-field>
 							</v-flex>
-							<v-flex sm12 style="padding: 5px">
+							<v-flex sm6 style="padding: 5px">
 								<v-text-field v-model="tiposdecambio.cotizacionventa"
-											label="CotizacionVenta"
-											hint="Ingrese CotizacionVenta"
-											placeholder="CotizacionVenta"
+											label="Cotizacion Venta"
 											clearable
 											persistent-hint
 											required

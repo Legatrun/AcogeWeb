@@ -59,7 +59,7 @@
 			<template v-slot:top>
 				<v-tooltip bottom>
 					<template v-slot:activator="{ on }">
-						<v-btn color="botonCrear" dark v-on="on" @click="Insertar()">Adicionar Registro de Items</v-btn>
+						<v-btn color="botonCrear" dark v-on="on" @click="Insertar()"><v-icon left>mdi-plus</v-icon>Añadir Item</v-btn>
 					</template>
 					<span>Adicionar nuevo registro de Item</span>
 				</v-tooltip>
@@ -89,6 +89,9 @@
 								<v-flex sm6 style="padding: 5px">
 									<v-text-field v-model="items.codigoitem"
 												label="Codigo de Item"
+												hint="Acepta alfanuméricos"
+												counter
+												maxlength="5"
 												clearable
 												persistent-hint
 												required
@@ -109,6 +112,7 @@
 							<v-flex sm6 style="padding: 5px">
 								<v-text-field v-model="items.modelonroparte"
 											label="Modelo Nro Parte"
+											hint="Acepta alfanuméricos"
 											clearable
 											persistent-hint
 											required
@@ -119,6 +123,8 @@
 							<v-flex sm12 style="padding: 5px">
 								<v-text-field v-model="items.descripcion"
 											label="Descripcion"
+											counter
+											maxlength=100
 											clearable
 											persistent-hint
 											required
@@ -171,7 +177,8 @@
 								</v-menu>
 							</v-flex>
 							<v-flex sm6 style="padding: 5px">
-								<v-text-field v-model="items.costoinicial"
+								<v-text-field v-model.number="items.costoinicial"
+											type="number"
 											label="Costo Inicial"
 											clearable
 											persistent-hint
@@ -181,8 +188,9 @@
 								</v-text-field>
 							</v-flex>
 							<v-flex sm6 style="padding: 5px">
-								<v-text-field v-model="items.costoactual"
+								<v-text-field v-model.number="items.costoactual"
 											label="Costo Actual"
+											type="number"
 											clearable
 											persistent-hint
 											required
@@ -191,8 +199,9 @@
 								</v-text-field>
 							</v-flex>
 							<v-flex sm6 style="padding: 5px">
-								<v-text-field v-model="items.saldoinicial"
+								<v-text-field v-model.number="items.saldoinicial"
 											label="Saldo Inicial"
+											type="number"
 											clearable
 											persistent-hint
 											required
@@ -202,8 +211,9 @@
 								</v-text-field>
 							</v-flex>
 							<v-flex sm6 style="padding: 5px">
-								<v-text-field v-model="items.saldoactual"
+								<v-text-field v-model.number="items.saldoactual"
 											label="Saldo Actual"
+											type="number"
 											clearable
 											persistent-hint
 											required
@@ -268,8 +278,9 @@
 								></v-autocomplete>
 							</v-col>
 							<v-flex sm6 style="padding: 5px">
-								<v-text-field v-model="items.cantidadminima"
+								<v-text-field v-model.number="items.cantidadminima"
 											label="Cantidad Minima"
+											type="number"
 											clearable
 											persistent-hint
 											required
@@ -279,8 +290,9 @@
 								</v-text-field>
 							</v-flex>
 							<v-flex sm6 style="padding: 5px">
-								<v-text-field v-model="items.cantidadmaxima"
+								<v-text-field v-model.number="items.cantidadmaxima"
 											label="Cantidad Maxima"
+											type="number"
 											clearable
 											persistent-hint
 											required

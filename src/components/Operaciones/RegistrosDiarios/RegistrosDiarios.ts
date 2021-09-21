@@ -92,6 +92,9 @@ export default class RegistrosDiariosComponent extends Vue {
 			return Value;
 		}
 	}
+	private convertirASus(){
+
+	}
 	private mounted() {
 		this.cargar_data();
 	}

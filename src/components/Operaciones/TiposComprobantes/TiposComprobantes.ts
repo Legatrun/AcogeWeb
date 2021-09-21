@@ -9,11 +9,11 @@ import * as popup from '@/popup';
 export default class AdmTiposComprobantesComponent extends Vue {
 	private headers: any[] = [
 		// { text: 'IDTipoComprobante', align: 'left', sortable: true, value: 'idtipocomprobante', width: '15%' },
-		{ text: 'descripcion', align: 'left', sortable: false, value: 'descripcion', width: '15%' },
-		{ text: 'sigla', align: 'left', sortable: false, value: 'sigla', width: '15%' },
-		{ text: 'automatico', align: 'left', sortable: false, value: 'automatico', width: '15%' },
-		{ text: 'idsucursal', align: 'left', sortable: false, value: 'idsucursal', width: '15%' },
-		{ text: 'Operaciones', align: 'center', sortable: false, value: 'action', width: '20%' },
+		{ text: 'Descripcion', align: 'left', sortable: false, value: 'descripcion', width: '15%' },
+		{ text: 'Sigla', align: 'left', sortable: false, value: 'sigla', width: '15%' },
+		{ text: 'Automatico', align: 'left', sortable: false, value: 'automatico', width: '15%' },
+		{ text: 'Sucursal', align: 'left', sortable: false, value: 'idsucursal', width: '15%' },
+		{ text: 'Operaciones', align: 'center', sortable: false, value: 'action', width: '5%' },
 	];
 	private WebApi = new services.Endpoints;
 
