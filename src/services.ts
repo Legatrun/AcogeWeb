@@ -739,6 +739,7 @@ export class clase_zonas {
 	public descripcion!: string;
 }
 
+// tslint:disable-next-line: max-classes-per-file class-name
 export class clase_empresa {
 	public idempresa !: number;
 	public idpais !: number;
@@ -750,8 +751,20 @@ export class clase_empresa {
 	public estado !: boolean;
 }
 
+// tslint:disable-next-line: max-classes-per-file class-name
 export class nivel{
 	public numeronivel!:number;
+}
+
+export class mes{
+	public numero!:number;
+	public nombre!:string;
+
+	constructor(_numero:number, _nombre:string) {
+		this.numero = _numero;
+		this.nombre = _nombre;
+
+    }	
 }
 
 // tslint:disable-next-line: max-classes-per-file class-name

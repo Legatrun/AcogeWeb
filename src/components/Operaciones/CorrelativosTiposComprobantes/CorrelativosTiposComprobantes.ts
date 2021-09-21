@@ -4,6 +4,7 @@ import * as services from '../../../services';
 import swal from 'sweetalert2';
 import moment from 'moment';
 import * as popup from '@/popup';
+import * as helper from '@/helper';
 @Component
 export default class AdmCorrelativosTiposComprobantesComponent extends Vue {
 	private headers: any[] = [
@@ -17,8 +18,10 @@ export default class AdmCorrelativosTiposComprobantesComponent extends Vue {
 
 	private correlativostiposcomprobantes = new services.clase_correlativostiposcomprobantes();
 	private lstcorrelativostiposcomprobantes: services.clase_correlativostiposcomprobantes[] = [];
+	private lstMeses: services.mes[] = [];
+	private helperObj = new helper.default();
 	private buscarcorrelativostiposcomprobantes = '';
-	private lstMeses =['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
+	// private lstMeses =['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
 	private dialog = false;
 	private operacion = '';
 	private popup = new popup.Swal();
@@ -39,6 +42,7 @@ export default class AdmCorrelativosTiposComprobantesComponent extends Vue {
 			return Value;
 		}
 	}
+
 	private mounted() {
 		this.cargar_data();
 	}
@@ -61,6 +65,7 @@ export default class AdmCorrelativosTiposComprobantesComponent extends Vue {
 	}
 	private Insertar(): void {
 		this.correlativostiposcomprobantes = new services.clase_correlativostiposcomprobantes();
+		this.lstMeses = this.helperObj.RetornaListaMeses();
 		this.operacion = 'Insert';
 		this.dialog = true;
 	}

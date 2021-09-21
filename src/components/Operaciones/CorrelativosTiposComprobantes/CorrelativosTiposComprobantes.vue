@@ -95,13 +95,16 @@
 									</v-text-field>
 								</v-flex>
 								<v-flex sm6 style="padding: 5px">
-									<v-text-field v-model="correlativostiposcomprobantes.mes"
+									<v-autocomplete v-model="correlativostiposcomprobantes.mes"
 												label="Mes"
+												:items="lstMeses"
+												item-text="nombre"
+												item-value="numero"
 												clearable
 												outlined
 												required
 												@input="correlativostiposcomprobantes.mes = updateText(correlativostiposcomprobantes.mes)">
-									</v-text-field>
+									</v-autocomplete>
 								</v-flex>
 							</template>
 							<template v-else>
