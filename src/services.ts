@@ -767,6 +767,14 @@ export class mes{
     }	
 }
 
+export class valorMoneda{
+	public dolar!:number;
+
+	constructor() {
+		this.dolar = 6.96
+    }	
+}
+
 // tslint:disable-next-line: max-classes-per-file class-name
 export class Operaciones {
 	public Login(url: string, objeto: any) {

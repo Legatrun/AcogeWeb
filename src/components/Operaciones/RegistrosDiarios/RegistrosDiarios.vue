@@ -313,17 +313,20 @@
 								<v-layout wrap>
 									&nbsp;&nbsp;&nbsp;&nbsp;
 							<v-flex sm4 style="padding: 5px">
-									<v-text-field 
+									<v-text-field
+											v-model="debeBolivianos" 
 											label="Debe Bs: "
 											outlined
 											clearable
 											type="number"
+											@input="valorDebe"
 											>
 								</v-text-field>
 
 							</v-flex>
-									<v-flex sm4 style="padding: 5px">
-								<v-text-field 
+									<v-flex sm6 style="padding: 5px">
+								<v-text-field
+											v-model="debeDolar"  
 											label="Debe Sus: "
 											outlined
 											color="blue"
@@ -335,17 +338,20 @@
 								<v-layout wrap>
 									&nbsp;&nbsp;&nbsp;&nbsp;
 									<v-flex sm4 style="padding: 5px">
-								<v-text-field 
+								<v-text-field
+											v-model="haberBolivianos" 
 											label="Haber Bs: "
 											outlined
 											color="blue"
 											type="number"
+											@input="valorHaber"
 											>
 								</v-text-field>
 							</v-flex>
 									<!-- <p><b>Haber Sus: </b> </p> -->
-									<v-flex sm4 style="padding: 5px">
+									<v-flex sm6 style="padding: 5px">
 								<v-text-field 
+											v-model="haberDolares"
 											label="Haber Sus: "
 											outlined
 											color="blue"
@@ -359,16 +365,19 @@
 									&nbsp;&nbsp;&nbsp;&nbsp;
 							<v-flex sm4 style="padding: 5px">
 								<v-text-field 
+											v-model="ajusteBolivianos"
 											label="Ajuste Bs: "
 											outlined
 											color="red"
 											type="number"
+											@input="valorAjuste"
 											>
 								</v-text-field>
 							</v-flex>
 									<!-- <p><b>Ajuste Sus: </b> </p> -->
-							<v-flex sm4 style="padding: 5px">
+							<v-flex sm6 style="padding: 5px">
 								<v-text-field 
+											v-model="ajusteDolar"
 											label="Ajuste Sus: "
 											outlined
 											color="red"

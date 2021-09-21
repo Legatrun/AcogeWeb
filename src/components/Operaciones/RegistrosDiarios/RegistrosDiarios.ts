@@ -54,6 +54,7 @@ export default class RegistrosDiariosComponent extends Vue {
 	private lstasientosdetalle: services.clase_asientosdetalle[] = [];
 	private tiposcomprobantes = new services.clase_tiposcomprobantes();
 	private lsttiposcomprobantes: services.clase_tiposcomprobantes[] = [];
+	private valorMoneda = new services.valorMoneda();
 	private buscarmonedas = '';
 	private dialog = false;
 	private operacion = '';
@@ -66,6 +67,12 @@ export default class RegistrosDiariosComponent extends Vue {
 	private numeroComprobante = '';
 	private buscarasientosencabezado = '';
 	private dialogAsientos= false;
+	private debeBolivianos = 0;
+	private debeDolar = 0;
+	private haberBolivianos = 0;
+	private haberDolares=0;
+	private ajusteBolivianos=0;
+	private ajusteDolar=0;
     private lstComprobante =['Diario', 'Compras', 'Ingresos', 'Ingresos Santa Cruz']
 	validacion = [
 		(v: any) => !!v || 'El campo es requerido',
@@ -92,8 +99,17 @@ export default class RegistrosDiariosComponent extends Vue {
 			return Value;
 		}
 	}
-	private convertirASus(){
-
+	private valorDebe(){
+		let valorCalculado = this.debeBolivianos/this.valorMoneda.dolar
+		this.debeDolar = valorCalculado
+	}
+	private valorHaber(){
+		let valorCalculado = this.haberBolivianos/this.valorMoneda.dolar
+		this.haberDolares = valorCalculado
+	}
+	private valorAjuste(){
+		let valorCalculado = this.ajusteBolivianos/this.valorMoneda.dolar
+		this.ajusteDolar = valorCalculado
 	}
 	private mounted() {
 		this.cargar_data();
