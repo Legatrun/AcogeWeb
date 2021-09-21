@@ -38,5 +38,34 @@ export default class Filter {
 		lstMeses.push(objDic);
 
 		return lstMeses;
-	} 
+	}
+	public RetornaListaAnios(){
+		let obj2020 = new services.anio(2020);
+		let obj2021 = new services.anio(2021);
+		let obj2022 = new services.anio(2022);
+		let obj2023 = new services.anio(2023);
+		let obj2024 = new services.anio(2024);
+		let obj2025 = new services.anio(2025);
+		let obj2026 = new services.anio(2026);
+		let obj2027 = new services.anio(2027);
+		let obj2028 = new services.anio(2028);
+		let obj2029 = new services.anio(2029);
+		let obj2030 = new services.anio(2030);
+		let obj2031 = new services.anio(2031);
+		let lstAnios: services.anio[] = [];
+		lstAnios.push(obj2020);
+		lstAnios.push(obj2021);
+		lstAnios.push(obj2022);
+		lstAnios.push(obj2023);
+		lstAnios.push(obj2024);
+		lstAnios.push(obj2025);
+		lstAnios.push(obj2026);
+		lstAnios.push(obj2027);
+		lstAnios.push(obj2028);
+		lstAnios.push(obj2029);
+		lstAnios.push(obj2030);
+		lstAnios.push(obj2031);
+
+		return lstAnios;
+	}  
 }

@@ -8,7 +8,7 @@ import * as helper from '@/helper';
 @Component
 export default class AdmCorrelativosTiposComprobantesComponent extends Vue {
 	private headers: any[] = [
-		//{ text: 'IDTipoComprobante', align: 'left', sortable: true, value: 'idtipocomprobante', width: '15%' },
+		{ text: 'Tipo de Comprobante', align: 'left', sortable: true, value: 'idtipocomprobante', width: '15%' },
 		{ text: 'Año', align: 'left', sortable: true, value: 'anio', width: '15%' },
 		{ text: 'Mes', align: 'left', sortable: true, value: 'mes', width: '15%' },
 		{ text: 'Correlativo', align: 'left', sortable: false, value: 'correlativo', width: '15%' },
@@ -19,6 +19,7 @@ export default class AdmCorrelativosTiposComprobantesComponent extends Vue {
 	private correlativostiposcomprobantes = new services.clase_correlativostiposcomprobantes();
 	private lstcorrelativostiposcomprobantes: services.clase_correlativostiposcomprobantes[] = [];
 	private lstMeses: services.mes[] = [];
+	private lstAnios: services.anio[] = [];
 	private helperObj = new helper.default();
 	private buscarcorrelativostiposcomprobantes = '';
 	// private lstMeses =['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
@@ -66,6 +67,7 @@ export default class AdmCorrelativosTiposComprobantesComponent extends Vue {
 	private Insertar(): void {
 		this.correlativostiposcomprobantes = new services.clase_correlativostiposcomprobantes();
 		this.lstMeses = this.helperObj.RetornaListaMeses();
+		this.lstAnios = this.helperObj.RetornaListaAnios();
 		this.operacion = 'Insert';
 		this.dialog = true;
 	}
@@ -74,6 +76,7 @@ export default class AdmCorrelativosTiposComprobantesComponent extends Vue {
 	}
 	private Grabar() {
 		if (this.operacion === 'Update') {
+			console.log("operacion actualizar")
 			new services.Operaciones().Actualizar(this.WebApi.ws_correlativostiposcomprobantes_Actualizar, this.correlativostiposcomprobantes)
 			.then((result) => {
 				if (result.data.error === 0) {
@@ -88,6 +91,8 @@ export default class AdmCorrelativosTiposComprobantesComponent extends Vue {
 			this.popup.error('Actualizar', 'Error Inesperado: ' + error);
 			});
 	} else {
+		console.log("operacion insertar")
+		// this.correlativostiposcomprobantes.idtipocomprobante = 1
 		new services.Operaciones().Insertar(this.WebApi.ws_correlativostiposcomprobantes_Insertar, this.correlativostiposcomprobantes)
 		.then((result) => {
 			if (result.data.error === 0) {

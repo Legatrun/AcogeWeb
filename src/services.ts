@@ -767,6 +767,14 @@ export class mes{
     }	
 }
 
+export class anio{
+	public numero!:number;
+
+	constructor(_numero:number) {
+		this.numero = _numero;
+    }	
+}
+
 export class valorMoneda{
 	public dolar!:number;
 
