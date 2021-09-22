@@ -19,7 +19,7 @@ export default class AppComponent extends Vue {
   private objcryptServer = new crypto();
   private encryptServer = '';
   private decryptServer = '';
-  private version = '2.1.11';
+  private version = '2.1.12';
   public Login() {
     this.$router.push({ path: '/Login' });
   }
